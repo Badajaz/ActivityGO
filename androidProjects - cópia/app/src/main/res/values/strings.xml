@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">ActivityGO</string>
+    <string name="FirstNameText">First Name</string>
+    <string name="LastNameText">Last Name</string>
+    <string name="EmailSignUp">Email</string>
+    <string name="WeightSignUp">Weight</string>
+    <string name="HeightSignUp">Height</string>
+    <string name="PasswordSignUp">Password</string>
+    <string name="nav_run">Run</string>
+    <string name="nav_bicepe">Chalenges</string>
+    <string name="nav_achievements">Achievements</string>
+    <string name="nav_rankings">Rankings</string>
+    <string name="nav_groups">Groups</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
