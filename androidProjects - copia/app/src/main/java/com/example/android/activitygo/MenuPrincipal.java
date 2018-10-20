@@ -43,8 +43,15 @@ public class MenuPrincipal extends AppCompatActivity {
                             SelectedFragment = new RunFragment();
                             FragmentManager fm = getFragmentManager();
                             FragmentTransaction ft = fm.beginTransaction();
-                            ft.add(R.id.fragment_container,  SelectedFragment);
+                            ft.replace(R.id.fragment_container,  SelectedFragment);
                             ft.commit();
+                            break;
+                        case R.id.chalengeItem:
+                            SelectedFragment = new ChalengeFragment();
+                            FragmentManager fman = getFragmentManager();
+                            FragmentTransaction ftra = fman.beginTransaction();
+                            ftra.replace(R.id.fragment_container,  SelectedFragment);
+                            ftra.commit();
                             break;
                     }
                     FragmentManager fm = getFragmentManager();
