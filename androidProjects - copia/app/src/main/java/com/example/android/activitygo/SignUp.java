@@ -17,8 +17,6 @@ public class SignUp extends AppCompatActivity {
     public void paginaToolbar(View view){
         Intent intent = new Intent(this, MenuPrincipal.class);
         startActivity(intent);
-
-
     }
 
 
