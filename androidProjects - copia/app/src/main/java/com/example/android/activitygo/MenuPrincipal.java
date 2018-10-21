@@ -28,7 +28,7 @@ public class MenuPrincipal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_principal);
 
-        SelectedFragment = new RunFragment();
+        SelectedFragment = new RunMenuInicial();
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.add(R.id.fragment_container,  SelectedFragment);
@@ -47,7 +47,7 @@ public class MenuPrincipal extends AppCompatActivity {
                     Fragment SelectedFragment = null;
                     switch (menuItem.getItemId()){
                         case R.id.runIntem:
-                            SelectedFragment = new RunFragment();
+                            SelectedFragment = new RunMenuInicial();
                             FragmentManager fm = getFragmentManager();
                             FragmentTransaction ft = fm.beginTransaction();
                             ft.replace(R.id.fragment_container,  SelectedFragment);
