@@ -16,6 +16,19 @@ import android.widget.Toast;
  */
 public class RunEstatisticsFragment extends Fragment {
 
+    private TextView err;
+    private String strtext;
+    private TextView duracaoValueView;
+    private String duracaoValue;
+    private TextView dataView;
+    private TextView dateView;
+    private String dataValue;
+    private String date;
+    private String distancia;
+    private TextView distanciaView;
+    private String distance;
+    private TextView distanceView;
+
 
     public RunEstatisticsFragment() {
         // Required empty public constructor
@@ -25,17 +38,44 @@ public class RunEstatisticsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View v =  inflater.inflate(R.layout.fragment_run_estatistics, container, false);
+        strtext = getArguments().getString("CID");
+        err = (TextView)v.findViewById(R.id.duracaoEst);
 
-        String strtext = getArguments().getString("CID");
-        Toast.makeText(getActivity(), strtext,
-                Toast.LENGTH_LONG).show();
-        //TextView err = (TextView)getView().findViewById(R.id.duracaoEst);
-        //err.setText(strtext);
-        return inflater.inflate(R.layout.fragment_run_estatistics, container, false);
+        duracaoValue = getArguments().getString("Duração");
+        duracaoValueView = (TextView)v.findViewById(R.id.duracaoValue);
+
+        dataValue = getArguments().getString("data");
+        dataView = (TextView)v.findViewById(R.id.dataLabel);
+
+        date = getArguments().getString("date");
+        dateView = (TextView)v.findViewById(R.id.dataValue);
+
+        distancia = getArguments().getString("distancia");
+        distanciaView = (TextView)v.findViewById(R.id.distanciaLabel);
+
+        distance = getArguments().getString("distance");
+        distanceView = (TextView)v.findViewById(R.id.distanciaValue);
 
 
+
+
+
+        return v;
 
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        err.setText(strtext);
+        duracaoValueView.setText(duracaoValue);
+        dataView.setText(dataValue);
+        dateView.setText(date);
+        distanciaView.setText(distancia);
+        distanceView.setText(distance);
+
+
+    }
 }

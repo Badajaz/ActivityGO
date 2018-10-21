@@ -39,31 +39,39 @@ public class RunFragment extends Fragment {
             public void onClick(View v){
                 /*T*/
                 TextView tv2 = (TextView) getView().findViewById(R.id.duracaoTextView);
+                TextView tv2V = (TextView) getView().findViewById(R.id.FirstValueDuration);
+                TextView data = (TextView) getView().findViewById(R.id.dataTextView);
+                TextView dataV = (TextView) getView().findViewById(R.id.firstValueData);
+                TextView distancia = (TextView) getView().findViewById(R.id.distanciaTextView);
+                TextView distance = (TextView) getView().findViewById(R.id.firstValueDistance);
+
+
+
                 String duracao = tv2.getText().toString();
+                String duracaoValue = tv2V.getText().toString();
+                String dataValue = data.getText().toString();
+                String dataVal = dataV.getText().toString();
+                String distanciaV = distancia.getText().toString();
+                String distanciaVal = distance.getText().toString();
+
+
                 Fragment fr=new RunEstatisticsFragment();
                 FragmentManager fm=getFragmentManager();
                 android.app.FragmentTransaction ft=fm.beginTransaction();
                 Bundle args = new Bundle();
+
                 args.putString("CID", duracao);
+                args.putString("Duração", duracaoValue);
+                args.putString("data", dataValue);
+                args.putString("date", dataVal);
+                args.putString("distancia", distanciaV);
+                args.putString("distance", distanciaVal);
+
                 fr.setArguments(args);
                 ft.replace(R.id.fragment_container, fr);
                 ft.commit();
 
 
-
-
-
-/*
-                Toast.makeText(getActivity(), duracao,
-                        Toast.LENGTH_LONG).show();
-                //TextView err = (TextView)getView().findViewById(R.id.DuracaoEstatistica);
-                //err.setText(duracao);
-                Fragment SelectedFragment = new RunEstatisticsFragment();
-                FragmentManager fm = getFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(R.id.fragment_container,  SelectedFragment);
-                ft.commit();
-*/
             }
         });
 
