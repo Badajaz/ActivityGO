@@ -53,6 +53,7 @@ public class MenuPrincipal extends AppCompatActivity {
                             ftra.replace(R.id.fragment_container,  SelectedFragment);
                             ftra.commit();
                             break;
+
                     }
                     FragmentManager fm = getFragmentManager();
                     FragmentTransaction ft = fm.beginTransaction();

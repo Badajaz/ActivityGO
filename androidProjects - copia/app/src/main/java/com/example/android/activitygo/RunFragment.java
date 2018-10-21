@@ -1,5 +1,7 @@
 package com.example.android.activitygo;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -11,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -34,23 +37,38 @@ public class RunFragment extends Fragment {
         firstLineButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Bundle extras = new Bundle();
-                showRunStats(v, extras);
+                /*T*/
+                TextView tv2 = (TextView) getView().findViewById(R.id.duracaoTextView);
+                String duracao = tv2.getText().toString();
+                Fragment fr=new RunEstatisticsFragment();
+                FragmentManager fm=getFragmentManager();
+                android.app.FragmentTransaction ft=fm.beginTransaction();
+                Bundle args = new Bundle();
+                args.putString("CID", duracao);
+                fr.setArguments(args);
+                ft.replace(R.id.fragment_container, fr);
+                ft.commit();
+
+
+
+
+
+/*
+                Toast.makeText(getActivity(), duracao,
+                        Toast.LENGTH_LONG).show();
+                //TextView err = (TextView)getView().findViewById(R.id.DuracaoEstatistica);
+                //err.setText(duracao);
+                Fragment SelectedFragment = new RunEstatisticsFragment();
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.fragment_container,  SelectedFragment);
+                ft.commit();
+*/
             }
         });
 
         return v;
     }
 
-    public void showRunStats(View view, Bundle extras){
-        Intent intent = new Intent(getActivity().getApplicationContext(), EstatisticasActivity.class);
-        //TextView tv1 = (TextView) view.findViewById(R.id.dataTextView);
-        //TextView tv2 = (TextView) view.findViewById(R.id.duracaoTextView);
-        //TextView tv3 = (TextView) view.findViewById(R.id.distanciaTextView);
-        //extras.putString("data", tv1.getText().toString());
-        //extras.putString("duracao", tv2.getText().toString());
-        //extras.putString("distancia", tv3.getText().toString());
-        //intent.putExtra("data", tv1.getText().toString());
-        startActivity(intent);
-    }
+
 }
