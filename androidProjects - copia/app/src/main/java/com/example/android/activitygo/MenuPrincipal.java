@@ -27,6 +27,13 @@ public class MenuPrincipal extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_principal);
+
+        SelectedFragment = new RunFragment();
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.add(R.id.fragment_container,  SelectedFragment);
+        ft.commit();
+
         BottomNavigationView mMainNav = findViewById(R.id.NavBar);
         mMainNav.setOnNavigationItemSelectedListener(navListener);
 
