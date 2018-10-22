@@ -61,6 +61,14 @@ public class MenuPrincipal extends AppCompatActivity {
                             ftra.commit();
                             break;
 
+                        case R.id.achievementItem:
+                            SelectedFragment = new AchievementsFragment();
+                            FragmentManager fmanager = getFragmentManager();
+                            FragmentTransaction ftransaction = fmanager.beginTransaction();
+                            ftransaction.replace(R.id.fragment_container,  SelectedFragment);
+                            ftransaction.commit();
+                            break;
+
                     }
                     FragmentManager fm = getFragmentManager();
                     FragmentTransaction ft = fm.beginTransaction();
