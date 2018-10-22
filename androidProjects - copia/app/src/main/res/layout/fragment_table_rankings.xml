@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:stretchColumns="1">
+    <TableRow>
+        <TextView
+            android:text="Classificações"
+            android:gravity="center"
+            android:padding="3dip"
+            android:background="#ffffff"/>
+        <TextView
+            android:text="Nome"
+            android:gravity="center"
+            android:padding="3dip" />
+        <TextView
+            android:text="Pts"
+            android:gravity="center"
+            android:padding="3dip" />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:text="1º"
+            android:gravity="center"
+            android:padding="3dip" />
+        <TextView
+            android:text="Gonçalo"
+            android:gravity="center"
+            android:padding="3dip" />
+        <TextView
+            android:text="300"
+            android:gravity="center"
+            android:padding="3dip" />
+    </TableRow>
+</TableLayout>

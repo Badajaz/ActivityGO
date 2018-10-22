@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RankingsFragment"
+    android:background="#329d92">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <Button
+        android:id="@+id/buttonCorridaGeral"
+        android:layout_width="176dp"
+        android:layout_height="120dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="62dp"
+        android:text="Geral Corrida"
+        android:gravity="top"
+        android:drawableRight="@drawable/run"/>
+
+    <Button
+        android:id="@+id/buttonCorridaGrupo"
+        android:layout_width="168dp"
+        android:layout_height="121dp"
+        android:layout_alignBottom="@+id/buttonCorridaGeral"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="-2dp"
+        android:text="Grupo Corrida"
+        android:gravity="top"
+        android:drawableRight="@drawable/groupdois"/>
+
+
+    <Button
+        android:id="@+id/buttonCiclismoGeral"
+        android:layout_width="176dp"
+        android:layout_height="120dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="228dp"
+        android:drawableRight="@drawable/cycling"
+        android:gravity="top"
+        android:text="Geral Ciclismo" />
+
+    <Button
+        android:id="@+id/buttonCiclismoGrupo"
+        android:layout_width="168dp"
+        android:layout_height="121dp"
+        android:layout_alignBottom="@+id/buttonCiclismoGeral"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="-2dp"
+        android:text="Grupo Ciclismo"
+        android:gravity="top"
+        android:drawableRight="@drawable/cyclinggroup"/>
+
+
+
+
+</RelativeLayout>
