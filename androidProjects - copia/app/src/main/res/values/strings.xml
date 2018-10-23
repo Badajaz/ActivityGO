@@ -22,6 +22,8 @@
 
     <string name="QueroRegistar">Quero Registar-me!</string>
 
+    <string name="HistoricoCorridas">Histórico de Corridas</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

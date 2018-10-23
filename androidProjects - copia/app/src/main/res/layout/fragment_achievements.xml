@@ -19,13 +19,39 @@
 
     <ImageView
         android:id="@+id/medalha2km"
-        android:layout_width="124dp"
-        android:layout_height="46dp"
+        android:layout_width="123dp"
+        android:layout_height="133dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="214dp"
-        android:layout_marginTop="70dp"
-        android:src="@drawable/medal_icon_icons" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="203dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="85dp"
+        android:src="@drawable/medal_icon_icons3" />
+
+    <ImageView
+        android:id="@+id/medalha2km2"
+        android:layout_width="182dp"
+        android:layout_height="177dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="243dp"
+        android:layout_marginEnd="201dp"
+        android:src="@drawable/medal_icon_icons3" />
+
+    <ImageView
+        android:id="@+id/medalha2km3"
+        android:layout_width="123dp"
+        android:layout_height="133dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="239dp"
+        android:layout_marginTop="244dp"
+        android:layout_marginEnd="49dp"
+        android:src="@drawable/medal_icon_icons3" />
 
     <TextView
         android:id="@+id/melhorkm"
@@ -43,7 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="236dp"
-        android:layout_marginTop="130dp"
+        android:layout_marginStart="255dp"
+        android:layout_marginTop="126dp"
         android:text="Melhores 2km" />
 </RelativeLayout>
