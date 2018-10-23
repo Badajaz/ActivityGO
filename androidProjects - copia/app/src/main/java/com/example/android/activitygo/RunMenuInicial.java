@@ -30,7 +30,8 @@ public class RunMenuInicial extends Fragment {
                 Fragment SelectedFragment = new RunFragment();
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(R.id.fragment_container,  SelectedFragment);
+                ft.replace(R.id.fragment_container,  SelectedFragment,"RunMenuInicial");
+                ft.addToBackStack("RunFragment");
                 ft.commit();
             }
         });

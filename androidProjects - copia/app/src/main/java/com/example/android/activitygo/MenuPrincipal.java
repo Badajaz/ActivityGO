@@ -35,7 +35,8 @@ public class MenuPrincipal extends AppCompatActivity {
         SelectedFragment = new RunMenuInicial();
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.add(R.id.fragment_container, SelectedFragment);
+        ft.add(R.id.fragment_container, SelectedFragment,"RunFragment");
+        //ft.addToBackStack("RunFragment");
         ft.commit();
 
         toolbarCima = (Toolbar) findViewById(R.id.toolbar);
@@ -124,6 +125,9 @@ public class MenuPrincipal extends AppCompatActivity {
                 ftSettings.replace(R.id.fragment_container, SelectedFragment);
                 ftSettings.commit();
                 break;
+
+            case R.id.BackButton:
+                getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
         return true;
     }
