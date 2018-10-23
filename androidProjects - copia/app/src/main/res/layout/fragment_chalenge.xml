@@ -21,15 +21,17 @@
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
                 android:gravity="center"
-                android:text="Daily Challenge"
+                android:text="Desafios Corrida"
+                android:layout_gravity="center_horizontal"
                 android:textSize="30sp" />
 
             <CheckBox
                 android:id="@+id/checkBox21"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
                 android:clickable="false"
                 android:text="Run 2km" />
@@ -38,7 +40,7 @@
                 android:id="@+id/checkBox5"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
                 android:clickable="false"
                 android:text="Run 5km" />
@@ -47,14 +49,87 @@
                 android:id="@+id/checkBox2"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
                 android:clickable="false"
                 android:text="Run 10km" />
 
+            <TextView
+                android:id="@+id/textViewChallenge2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:text="Desafios Caminhada"
+                android:layout_gravity="center_horizontal"
+                android:textSize="30sp" />
+
+            <CheckBox
+                android:id="@+id/checkBoxCaminhada1"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:clickable="false"
+                android:text="Andar 2km" />
+
+            <CheckBox
+                android:id="@+id/checkBoxCaminhada2"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:clickable="false"
+                android:text="Andar 10km" />
+
+            <CheckBox
+                android:id="@+id/checkBoxCaminhada3"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:clickable="false"
+                android:text="Andar 20km" />
+
+            <TextView
+                android:id="@+id/textViewCiclismo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:text="Desafios Ciclismo"
+                android:layout_gravity="center_horizontal"
+                android:textSize="30sp" />
+
+            <CheckBox
+                android:id="@+id/checkBoxCiclismo1"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:clickable="false"
+                android:text="Correr 25km" />
+
+            <CheckBox
+                android:id="@+id/checkBoxCiclismo2"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:clickable="false"
+                android:text="Correr 30km" />
+
+            <CheckBox
+                android:id="@+id/checkBoxCiclismo3"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:clickable="false"
+                android:text="Correr 120km" />
 
         </LinearLayout>
+
     </ScrollView>
 
 </FrameLayout>
-
