@@ -7,9 +7,11 @@ import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.Switch;
@@ -20,6 +22,8 @@ public class MenuPrincipal extends AppCompatActivity {
     private BottomNavigationView mMainNav;
     private Fragment SelectedFragment;
     private Toolbar myToolbar;
+    private Toolbar toolbarCima;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,16 @@ public class MenuPrincipal extends AppCompatActivity {
         ft.add(R.id.fragment_container, SelectedFragment);
         ft.commit();
 
+        toolbarCima = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbarCima);
+        getSupportActionBar().setTitle("ActivityGO");
+
+
+        /*
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setIcon(R.mipmap.ic_launcher);
+        */
         BottomNavigationView mMainNav = findViewById(R.id.NavBar);
         mMainNav.setOnNavigationItemSelectedListener(navListener);
 
@@ -91,4 +105,10 @@ public class MenuPrincipal extends AppCompatActivity {
                 }
             };
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main,menu);
+        return true;
+    }
 }

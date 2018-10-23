@@ -7,6 +7,15 @@
     android:background="#329d92"
     tools:context="com.example.android.activitygo.MenuPrincipal">
 
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ff6666"
+        android:minHeight="?attr/actionBarSize"
+        android:id="@+id/toolbar"
+        ></android.support.v7.widget.Toolbar>
+
+
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/NavBar"
         android:layout_width="match_parent"
@@ -24,6 +33,10 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="0dp"/>
+
+
+
+
 
 </RelativeLayout>
 
