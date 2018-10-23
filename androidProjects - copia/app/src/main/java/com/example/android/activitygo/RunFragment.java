@@ -22,7 +22,22 @@ import org.w3c.dom.Text;
  */
 public class RunFragment extends Fragment {
 
-    Button firstLineButton;
+    private Button firstLineButton;
+    private TextView tv2;
+    private TextView tv2V;
+    private TextView data;
+    private TextView dataV;
+    private TextView distancia;
+    private TextView distance;
+
+    private String duracao;
+    private String duracaoValue;
+    private String dataValue;
+    private String dataVal;
+    private String distanciaV;
+    private String distanciaVal;
+
+
     public RunFragment() {
         // Required empty public constructor
     }
@@ -34,30 +49,27 @@ public class RunFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_run, container, false);
 
         firstLineButton = (Button) v.findViewById(R.id.plusButtonLine1);
-        firstLineButton.setOnClickListener(new View.OnClickListener(){
+        firstLineButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 /*T*/
-                TextView tv2 = (TextView) getView().findViewById(R.id.duracaoTextView);
-                TextView tv2V = (TextView) getView().findViewById(R.id.FirstValueDuration);
-                TextView data = (TextView) getView().findViewById(R.id.dataTextView);
-                TextView dataV = (TextView) getView().findViewById(R.id.firstValueData);
-                TextView distancia = (TextView) getView().findViewById(R.id.distanciaTextView);
-                TextView distance = (TextView) getView().findViewById(R.id.firstValueDistance);
+                tv2 = (TextView) getView().findViewById(R.id.duracaoTextView);
+                tv2V = (TextView) getView().findViewById(R.id.FirstValueDuration);
+                data = (TextView) getView().findViewById(R.id.dataTextView);
+                dataV = (TextView) getView().findViewById(R.id.firstValueData);
+                distancia = (TextView) getView().findViewById(R.id.distanciaTextView);
+                distance = (TextView) getView().findViewById(R.id.firstValueDistance);
 
+                duracao = tv2.getText().toString();
+                duracaoValue = tv2V.getText().toString();
+                dataValue = data.getText().toString();
+                dataVal = dataV.getText().toString();
+                distanciaV = distancia.getText().toString();
+                distanciaVal = distance.getText().toString();
 
-
-                String duracao = tv2.getText().toString();
-                String duracaoValue = tv2V.getText().toString();
-                String dataValue = data.getText().toString();
-                String dataVal = dataV.getText().toString();
-                String distanciaV = distancia.getText().toString();
-                String distanciaVal = distance.getText().toString();
-
-
-                Fragment fr=new RunEstatisticsFragment();
-                FragmentManager fm=getFragmentManager();
-                android.app.FragmentTransaction ft=fm.beginTransaction();
+                Fragment fr = new RunEstatisticsFragment();
+                FragmentManager fm = getFragmentManager();
+                android.app.FragmentTransaction ft = fm.beginTransaction();
                 Bundle args = new Bundle();
 
                 args.putString("CID", duracao);
@@ -70,13 +82,8 @@ public class RunFragment extends Fragment {
                 fr.setArguments(args);
                 ft.replace(R.id.fragment_container, fr);
                 ft.commit();
-
-
             }
         });
-
         return v;
     }
-
-
 }

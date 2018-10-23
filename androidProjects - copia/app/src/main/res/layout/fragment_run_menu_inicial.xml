@@ -5,8 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".RunMenuInicial">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <Button
         android:id="@+id/buttonHistorial"
         android:layout_width="wrap_content"

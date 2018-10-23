@@ -15,13 +15,11 @@ import android.widget.FrameLayout;
 import android.widget.Switch;
 import android.widget.Toast;
 
-
 public class MenuPrincipal extends AppCompatActivity {
 
-     private BottomNavigationView mMainNav;
-     private Fragment SelectedFragment;
-
-
+    private BottomNavigationView mMainNav;
+    private Fragment SelectedFragment;
+    private Toolbar myToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +29,11 @@ public class MenuPrincipal extends AppCompatActivity {
         SelectedFragment = new RunMenuInicial();
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.add(R.id.fragment_container,  SelectedFragment);
+        ft.add(R.id.fragment_container, SelectedFragment);
         ft.commit();
 
         BottomNavigationView mMainNav = findViewById(R.id.NavBar);
         mMainNav.setOnNavigationItemSelectedListener(navListener);
-
 
     }
 
@@ -45,19 +42,19 @@ public class MenuPrincipal extends AppCompatActivity {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                     Fragment SelectedFragment = null;
-                    switch (menuItem.getItemId()){
+                    switch (menuItem.getItemId()) {
                         case R.id.runIntem:
                             SelectedFragment = new RunMenuInicial();
                             FragmentManager fm = getFragmentManager();
                             FragmentTransaction ft = fm.beginTransaction();
-                            ft.replace(R.id.fragment_container,  SelectedFragment);
+                            ft.replace(R.id.fragment_container, SelectedFragment);
                             ft.commit();
                             break;
                         case R.id.chalengeItem:
                             SelectedFragment = new ChalengeFragment();
                             FragmentManager fman = getFragmentManager();
                             FragmentTransaction ftra = fman.beginTransaction();
-                            ftra.replace(R.id.fragment_container,  SelectedFragment);
+                            ftra.replace(R.id.fragment_container, SelectedFragment);
                             ftra.commit();
                             break;
 
@@ -65,7 +62,7 @@ public class MenuPrincipal extends AppCompatActivity {
                             SelectedFragment = new AchievementsFragment();
                             FragmentManager fmanager = getFragmentManager();
                             FragmentTransaction ftransaction = fmanager.beginTransaction();
-                            ftransaction.replace(R.id.fragment_container,  SelectedFragment);
+                            ftransaction.replace(R.id.fragment_container, SelectedFragment);
                             ftransaction.commit();
                             break;
 
@@ -73,7 +70,7 @@ public class MenuPrincipal extends AppCompatActivity {
                             SelectedFragment = new RankingsFragment();
                             FragmentManager fmanag = getFragmentManager();
                             FragmentTransaction ftransactio = fmanag.beginTransaction();
-                            ftransactio.replace(R.id.fragment_container,  SelectedFragment);
+                            ftransactio.replace(R.id.fragment_container, SelectedFragment);
                             ftransactio.commit();
                             break;
 
@@ -81,7 +78,7 @@ public class MenuPrincipal extends AppCompatActivity {
                             SelectedFragment = new GroupFragment();
                             FragmentManager fmana = getFragmentManager();
                             FragmentTransaction ftransacti = fmana.beginTransaction();
-                            ftransacti.replace(R.id.fragment_container,  SelectedFragment);
+                            ftransacti.replace(R.id.fragment_container, SelectedFragment);
                             ftransacti.commit();
                             break;
 

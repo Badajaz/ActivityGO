@@ -1,16 +1,24 @@
 <resources>
     <string name="app_name">ActivityGO</string>
-    <string name="FirstNameText">First Name</string>
-    <string name="LastNameText">Last Name</string>
-    <string name="EmailSignUp">Email</string>
-    <string name="WeightSignUp">Weight</string>
-    <string name="HeightSignUp">Height</string>
-    <string name="PasswordSignUp">Password</string>
+    <string name="FirstNameText">"  "Primeiro Nome</string>
+    <string name="LastNameText">"  "Apelido</string>
+    <string name="EmailSignUp">"  "Email</string>
+    <string name="WeightSignUp">"  "Peso</string>
+    <string name="HeightSignUp">"  "Altura</string>
+    <string name="PasswordSignUp">"  "Password</string>
     <string name="nav_run">Run</string>
-    <string name="nav_bicepe">Chalenges</string>
+    <string name="nav_bicepe">Challenges</string>
     <string name="nav_achievements">Achievements</string>
     <string name="nav_rankings">Rankings</string>
     <string name="nav_groups">Groups</string>
+
+    <string name="NomeGrupo">"  "Nome do Grupo</string>
+    <string name="DescricaoGrupo">"  "Descrição</string>
+    <string name="DesportoGrupo">"  "Desporto</string>
+
+    <string name="Data">Data</string>
+    <string name="Duracao">Duração</string>
+    <string name="Distancia">Distância</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

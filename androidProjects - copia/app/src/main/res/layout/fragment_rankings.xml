@@ -3,10 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RankingsFragment"
-    android:background="#329d92">
-
-    <!-- TODO: Update blank fragment layout -->
+    android:background="#329d92"
+    tools:context=".RankingsFragment">
 
     <Button
         android:id="@+id/buttonCorridaGeral"
@@ -16,9 +14,9 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="14dp"
         android:layout_marginTop="62dp"
-        android:text="Geral Corrida"
+        android:drawableRight="@drawable/run"
         android:gravity="top"
-        android:drawableRight="@drawable/run"/>
+        android:text="Geral Corrida" />
 
     <Button
         android:id="@+id/buttonCorridaGrupo"
@@ -28,10 +26,9 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="18dp"
         android:layout_marginBottom="-2dp"
-        android:text="Grupo Corrida"
+        android:drawableRight="@drawable/groupdois"
         android:gravity="top"
-        android:drawableRight="@drawable/groupdois"/>
-
+        android:text="Grupo Corrida" />
 
     <Button
         android:id="@+id/buttonCiclismoGeral"
@@ -53,11 +50,9 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="18dp"
         android:layout_marginBottom="-2dp"
-        android:text="Grupo Ciclismo"
+        android:drawableRight="@drawable/cyclinggroup"
         android:gravity="top"
-        android:drawableRight="@drawable/cyclinggroup"/>
-
-
+        android:text="Grupo Ciclismo" />
 
 
 </RelativeLayout>

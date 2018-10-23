@@ -1,6 +1,5 @@
 package com.example.android.activitygo;
 
-
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
@@ -10,21 +9,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-
 /**
  * A simple {@link Fragment} subclass.
  */
 public class RankingsFragment extends Fragment {
 
-
     public RankingsFragment() {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        getActivity().setTitle("Rankings");
 
         View v = inflater.inflate(R.layout.fragment_rankings, container, false);
         Button corridaGeral = (Button) v.findViewById(R.id.buttonCorridaGeral);
@@ -38,10 +36,6 @@ public class RankingsFragment extends Fragment {
                 ft.commit();
             }
         });
-
-
-
         return v;
     }
-
 }

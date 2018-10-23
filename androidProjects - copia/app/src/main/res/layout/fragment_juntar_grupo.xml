@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".JuntarGrupoFragment"
-    android:background="#329d92">
-
+    android:background="#329d92"
+    tools:context=".JuntarGrupoFragment">
 
     <TextView
         android:id="@+id/textViewPesquisar"

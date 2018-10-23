@@ -1,6 +1,5 @@
 package com.example.android.activitygo;
 
-
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
@@ -10,17 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-
 /**
  * A simple {@link Fragment} subclass.
  */
 public class RunMenuInicial extends Fragment {
 
-
     public RunMenuInicial() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,8 +37,4 @@ public class RunMenuInicial extends Fragment {
 
         return v;
     }
-
-/*
-
-  */
 }

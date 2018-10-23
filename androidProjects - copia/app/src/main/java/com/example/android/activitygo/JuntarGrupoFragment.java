@@ -1,6 +1,5 @@
 package com.example.android.activitygo;
 
-
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
@@ -12,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -22,7 +20,6 @@ public class JuntarGrupoFragment extends Fragment {
     public JuntarGrupoFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,9 +37,6 @@ public class JuntarGrupoFragment extends Fragment {
                 myAwesomeTextView.setText(message);
             }
         });
-
-
-
         return v;
     }
 

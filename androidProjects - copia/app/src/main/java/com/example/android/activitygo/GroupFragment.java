@@ -1,6 +1,5 @@
 package com.example.android.activitygo;
 
-
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
@@ -10,21 +9,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-
 /**
  * A simple {@link Fragment} subclass.
  */
 public class GroupFragment extends Fragment {
 
-
     public GroupFragment() {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        getActivity().setTitle("Grupos");
+
         View v = inflater.inflate(R.layout.fragment_group, container, false);
         Button criargrupo = (Button) v.findViewById(R.id.buttonCriarGrupo);
         Button juntargrupo = (Button) v.findViewById(R.id.buttonJuntarGrupo);
@@ -51,11 +50,6 @@ public class GroupFragment extends Fragment {
             }
         });
 
-
-
         return v;
-
-
     }
-
 }

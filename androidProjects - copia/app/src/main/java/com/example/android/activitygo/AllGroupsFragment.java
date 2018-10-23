@@ -9,19 +9,16 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AchievementsFragment extends Fragment {
+public class AllGroupsFragment extends Fragment {
 
-    public AchievementsFragment() {
+    public AllGroupsFragment() {
         // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        getActivity().setTitle("Conquistas");
-
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_achievements, container, false);
+        return inflater.inflate(R.layout.fragment_all_groups, container, false);
     }
 }

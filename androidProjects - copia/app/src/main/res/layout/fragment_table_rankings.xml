@@ -2,35 +2,88 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:stretchColumns="1">
+    android:stretchColumns="0,1,2"
+    android:background="#329d92">
+
     <TableRow>
+
         <TextView
+            android:background="#80000000"
+            android:gravity="center"
+            android:padding="10dip"
             android:text="Classificações"
-            android:gravity="center"
-            android:padding="3dip"
-            android:background="#ffffff"/>
+            android:textColor="@color/whiteLetters"
+            android:textStyle="bold"/>
+
         <TextView
+            android:gravity="center"
+            android:background="#80000000"
+            android:padding="10dip"
             android:text="Nome"
-            android:gravity="center"
-            android:padding="3dip" />
+            android:textColor="@color/whiteLetters"
+            android:textStyle="bold"/>
+
         <TextView
-            android:text="Pts"
             android:gravity="center"
-            android:padding="3dip" />
+            android:background="#80000000"
+            android:padding="10dip"
+            android:text="Pontos"
+            android:textColor="@color/whiteLetters"
+            android:textStyle="bold"/>
     </TableRow>
 
     <TableRow>
+
         <TextView
-            android:text="1º"
             android:gravity="center"
-            android:padding="3dip" />
+            android:padding="10dip"
+            android:text="1º" />
+
         <TextView
-            android:text="Gonçalo"
             android:gravity="center"
-            android:padding="3dip" />
+            android:padding="10dip"
+            android:text="Gonçalo" />
+
         <TextView
-            android:text="300"
             android:gravity="center"
-            android:padding="3dip" />
+            android:padding="10dip"
+            android:text="300" />
+    </TableRow>
+
+    <TableRow
+        android:background="@color/otherBackgroundTableRow">
+
+        <TextView
+            android:gravity="center"
+            android:padding="10dip"
+            android:text="2º" />
+
+        <TextView
+            android:gravity="center"
+            android:padding="10dip"
+            android:text="Toy" />
+
+        <TextView
+            android:gravity="center"
+            android:padding="10dip"
+            android:text="299" />
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:gravity="center"
+            android:padding="10dip"
+            android:text="3º" />
+
+        <TextView
+            android:gravity="center"
+            android:padding="10dip"
+            android:text="Maria Leal" />
+
+        <TextView
+            android:gravity="center"
+            android:padding="10dip"
+            android:text="1" />
     </TableRow>
 </TableLayout>

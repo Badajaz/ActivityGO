@@ -4,10 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AchievementsFragment"
-    android:background="#329d92">
-
-    <!-- TODO: Update blank fragment layout -->
+    android:background="#329d92"
+    tools:context=".AchievementsFragment">
 
     <ImageView
         android:id="@+id/medalha1km"

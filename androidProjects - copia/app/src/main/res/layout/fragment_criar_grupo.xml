@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".CriarGrupoFragment"
-    android:background="#329d92">
-
+    android:background="#329d92"
+    tools:context=".CriarGrupoFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -26,41 +25,68 @@
             android:gravity="top|center"
             android:orientation="vertical">
 
-
             <EditText
                 android:id="@+id/NomeGrupo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="56dp"
+                android:layout_width="200dp"
+                android:layout_height="55dp"
+                android:layout_marginStart="-75dp"
+                android:layout_marginTop="55dp"
+                android:background="#ffffff"
                 android:ems="10"
-                android:hint="Nome do Grupo"
+                android:fontFamily="sans-serif"
+                android:hint="@string/NomeGrupo"
                 android:inputType="textPersonName"
+                android:textSize="20sp"
+                android:typeface="sans"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
                 android:id="@+id/Descricao"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_width="200dp"
+                android:layout_height="55dp"
+                android:layout_marginStart="-75dp"
                 android:layout_marginTop="16dp"
+                android:background="#ffffff"
                 android:ems="10"
-                android:hint="Descrição"
+                android:fontFamily="sans-serif"
+                android:hint="@string/DescricaoGrupo"
                 android:inputType="textPersonName"
+                android:textColor="@color/whiteLetters"
+                android:textSize="20sp"
+                android:typeface="sans"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/FirstNameText" />
+
+            <EditText
+                android:id="@+id/DesportoEscolhido"
+                android:layout_width="200dp"
+                android:layout_height="55dp"
+                android:layout_marginStart="-75dp"
+                android:layout_marginTop="16dp"
+                android:background="#ffffff"
+                android:ems="10"
+                android:fontFamily="sans-serif"
+                android:hint="@string/DesportoGrupo"
+                android:inputType="textPersonName"
+                android:textColor="@color/whiteLetters"
+                android:textSize="20sp"
+                android:typeface="sans"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/FirstNameText" />
 
             <Button
                 android:id="@+id/buttonCriar"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="200dp"
-                android:text="Criar" />
-
+                android:layout_height="55dp"
+                android:layout_marginStart="130dp"
+                android:layout_marginTop="-55dp"
+                android:background="@drawable/button_border"
+                android:text="Criar"
+                android:textColor="@color/whiteLetters"
+                android:textSize="17dp" />
 
         </LinearLayout>
     </ScrollView>
-
 
 </RelativeLayout>
