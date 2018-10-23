@@ -87,7 +87,7 @@ public class MenuPrincipal extends AppCompatActivity {
                             SelectedFragment = new RankingsFragment();
                             FragmentManager fmanag = getFragmentManager();
                             FragmentTransaction ftransactio = fmanag.beginTransaction();
-                            ftransactio.replace(R.id.fragment_container, SelectedFragment);
+                            ftransactio.replace(R.id.fragment_container, SelectedFragment,"Ranking Item");
                             ftransactio.commit();
                             break;
 
@@ -95,7 +95,7 @@ public class MenuPrincipal extends AppCompatActivity {
                             SelectedFragment = new GroupFragment();
                             FragmentManager fmana = getFragmentManager();
                             FragmentTransaction ftransacti = fmana.beginTransaction();
-                            ftransacti.replace(R.id.fragment_container, SelectedFragment);
+                            ftransacti.replace(R.id.fragment_container, SelectedFragment,"GroupFragment");
                             ftransacti.commit();
                             break;
 
@@ -112,8 +112,23 @@ public class MenuPrincipal extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main,menu);
+        Fragment whichFragment=getCurrentFragment();//getVisible method return current visible fragment
+        String shareVisible= whichFragment.getClass().toString();
+
+        if(shareVisible.equals(RunFragment.class.toString())){
+            MenuItem item = menu.findItem(R.id.BackButton);
+            item.setVisible(false);
+        }
         return true;
     }
+
+    Fragment getCurrentFragment()
+    {
+        FragmentManager fmana = getFragmentManager();
+        Fragment currentFragment = fmana.findFragmentById(R.id.fragment_container);
+        return currentFragment;
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){

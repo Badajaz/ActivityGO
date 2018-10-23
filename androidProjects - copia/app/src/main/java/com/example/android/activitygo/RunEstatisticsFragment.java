@@ -38,6 +38,8 @@ public class RunEstatisticsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_run_estatistics, container, false);
+
+
         strtext = getArguments().getString("CID");
         err = (TextView) v.findViewById(R.id.duracaoEst);
 

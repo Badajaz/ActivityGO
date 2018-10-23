@@ -32,7 +32,8 @@ public class RankingsFragment extends Fragment {
                 Fragment SelectedFragment = new TableRankingsFragment();
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(R.id.fragment_container,  SelectedFragment);
+                ft.replace(R.id.fragment_container,  SelectedFragment,"TableRankingsFragment");
+                ft.addToBackStack("RankingsFragment");
                 ft.commit();
             }
         });
