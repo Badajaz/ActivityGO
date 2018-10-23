@@ -7,5 +7,6 @@
     <color name="whiteLetters">#ffffff</color>
     <color name="otherBackgroundTableRow">#298178</color>
     <color name="hintWhiteColor">#ffffff</color>
+    <color name="hintBlackColor">#000000</color>
 
 </resources>

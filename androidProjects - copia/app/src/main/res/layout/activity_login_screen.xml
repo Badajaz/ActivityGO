@@ -4,13 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#4ab046"
+    android:background="#90EE90"
     tools:context=".LoginScreen">
+
+    <!--
+    springgreen	#00FF7F
+    mediumspringgreen	#00FA9A
+    lightgreen	#90EE90 (atual)
+    palegreen	#98FB98
+    mediumseagreen	#3CB371
+    lightseagreen	#20B2AA
+    -->
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:layout_height="150dp"/>
+        android:layout_height="150dp" />
 
     <EditText
         android:id="@+id/usernameText"
@@ -22,7 +31,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/edit_text_shape"
+        android:backgroundTint="#008577"
         android:ems="10"
         android:hint="  Username"
         android:inputType="text|textPersonName"
@@ -45,7 +54,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/edit_text_shape"
+        android:backgroundTint="#008577"
         android:ems="10"
         android:hint="  Password"
         android:inputType="textPassword|textWebPassword|numberPassword"
@@ -68,13 +77,14 @@
         android:background="@drawable/edit_text_shape"
         android:onClick="fazerLogin"
         android:text="LOGIN"
-        android:textColor="#ffffff"
-        android:textSize="16sp"
+        android:textColor="#000000"
+        android:textSize="19sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordText"
-        app:layout_constraintVertical_bias="0.13" />
+        app:layout_constraintVertical_bias="0.245" />
 
     <Button
         android:id="@+id/criarContaButton"
@@ -87,13 +97,14 @@
         android:background="@drawable/button_border"
         android:fontFamily="sans-serif"
         android:onClick="criarConta"
-        android:text="Criar Conta"
-        android:textColor="#ffffff"
-        android:textSize="23sp"
+        android:text="@string/QueroRegistar"
+        android:textColor="#000000"
+        android:textSize="19sp"
         android:typeface="sans"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonLogin"
-        app:layout_constraintVertical_bias="0.398" />
+        app:layout_constraintVertical_bias="0.132" />
 </android.support.constraint.ConstraintLayout>
