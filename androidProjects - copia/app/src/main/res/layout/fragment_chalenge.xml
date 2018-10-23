@@ -19,12 +19,14 @@
 
             <TextView
                 android:id="@+id/textView2"
-                android:layout_width="match_parent"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="30dp"
+                android:background="@drawable/edit_text_shape"
                 android:gravity="center"
                 android:text="Desafios Corrida"
-                android:layout_gravity="center_horizontal"
+                android:textColor="@color/whiteLetters"
                 android:textSize="30sp" />
 
             <CheckBox
@@ -56,12 +58,14 @@
 
             <TextView
                 android:id="@+id/textViewChallenge2"
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="30dp"
+                android:background="@drawable/edit_text_shape"
                 android:gravity="center"
                 android:text="Desafios Caminhada"
-                android:layout_gravity="center_horizontal"
+                android:textColor="@color/whiteLetters"
                 android:textSize="30sp" />
 
             <CheckBox
@@ -93,12 +97,14 @@
 
             <TextView
                 android:id="@+id/textViewCiclismo"
-                android:layout_width="match_parent"
+                android:layout_width="260dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="30dp"
+                android:background="@drawable/edit_text_shape"
                 android:gravity="center"
                 android:text="Desafios Ciclismo"
-                android:layout_gravity="center_horizontal"
+                android:textColor="@color/whiteLetters"
                 android:textSize="30sp" />
 
             <CheckBox

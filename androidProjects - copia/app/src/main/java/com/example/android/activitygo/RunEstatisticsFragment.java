@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -26,6 +28,7 @@ public class RunEstatisticsFragment extends Fragment {
     private TextView distanciaView;
     private String distance;
     private TextView distanceView;
+    private TextView caloriasTV;
 
     public RunEstatisticsFragment() {
         // Required empty public constructor
@@ -52,6 +55,9 @@ public class RunEstatisticsFragment extends Fragment {
 
         distance = getArguments().getString("distance");
         distanceView = (TextView)v.findViewById(R.id.distanciaValue);
+
+        caloriasTV = (TextView) v.findViewById(R.id.caloriasValue);
+        caloriasTV.setText("12345");
 
         return v;
     }
