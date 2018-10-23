@@ -3,7 +3,9 @@ package com.example.android.activitygo;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.ClipData;
+import android.content.Intent;
 import android.graphics.Color;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.app.Fragment;
@@ -109,6 +111,20 @@ public class MenuPrincipal extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch(item.getItemId()){
+            case R.id.Settings:
+                SelectedFragment = new SettingsFragment();
+                FragmentManager fmSettings = getFragmentManager();
+                FragmentTransaction ftSettings = fmSettings.beginTransaction();
+                ftSettings.replace(R.id.fragment_container, SelectedFragment);
+                ftSettings.commit();
+                break;
+        }
         return true;
     }
 }
