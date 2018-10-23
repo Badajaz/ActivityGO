@@ -37,27 +37,27 @@ public class RunEstatisticsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v =  inflater.inflate(R.layout.fragment_run_estatistics, container, false);
+        View v = inflater.inflate(R.layout.fragment_run_estatistics, container, false);
         strtext = getArguments().getString("CID");
-        err = (TextView)v.findViewById(R.id.duracaoEst);
+        err = (TextView) v.findViewById(R.id.duracaoEst);
 
         duracaoValue = getArguments().getString("Duração");
-        duracaoValueView = (TextView)v.findViewById(R.id.duracaoValue);
+        duracaoValueView = (TextView) v.findViewById(R.id.duracaoValue);
 
         dataValue = getArguments().getString("data");
-        dataView = (TextView)v.findViewById(R.id.dataLabel);
+        dataView = (TextView) v.findViewById(R.id.dataLabel);
 
         date = getArguments().getString("date");
-        dateView = (TextView)v.findViewById(R.id.dataValue);
+        dateView = (TextView) v.findViewById(R.id.dataValue);
 
         distancia = getArguments().getString("distancia");
-        distanciaView = (TextView)v.findViewById(R.id.distanciaLabel);
+        distanciaView = (TextView) v.findViewById(R.id.distanciaLabel);
 
         distance = getArguments().getString("distance");
-        distanceView = (TextView)v.findViewById(R.id.distanciaValue);
+        distanceView = (TextView) v.findViewById(R.id.distanciaValue);
 
         caloriasTV = (TextView) v.findViewById(R.id.caloriasValue);
-        caloriasTV.setText("12345");
+        caloriasTV.setText("50 kcal");
 
         return v;
     }
@@ -71,4 +71,5 @@ public class RunEstatisticsFragment extends Fragment {
         dateView.setText(date);
         distanciaView.setText(distancia);
         distanceView.setText(distance);
-    }}
+    }
+}

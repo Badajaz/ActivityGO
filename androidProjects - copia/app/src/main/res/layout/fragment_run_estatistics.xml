@@ -141,6 +141,7 @@
         android:layout_marginTop="286dp"
         android:layout_marginEnd="2dp"
         android:background="@drawable/edit_text_shape"
+        android:fontFamily="sans-serif"
         android:text="Batimentos Cardíacos"
         android:textAlignment="center"
         android:textSize="25sp"
@@ -159,6 +160,21 @@
         android:text="180 bpm"
         android:textAlignment="center"
         android:textSize="25sp"
+        android:typeface="sans" />
+
+    <Button
+        android:id="@+id/buttonCriarGrupo"
+        android:layout_width="176dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="286dp"
+        android:layout_marginEnd="117dp"
+        android:background="@drawable/edit_text_shape"
+        android:text="Percurso:"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="25sp"
+        android:textStyle="bold"
         android:typeface="sans" />
 
 </RelativeLayout>

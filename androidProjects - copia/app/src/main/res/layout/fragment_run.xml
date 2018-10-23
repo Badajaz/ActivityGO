@@ -87,7 +87,7 @@
                 android:layout_height="match_parent"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
-                android:text="30:05"
+                android:text="15:00"
                 android:textAlignment="center"
                 android:textSize="14sp"
                 android:typeface="sans" />
