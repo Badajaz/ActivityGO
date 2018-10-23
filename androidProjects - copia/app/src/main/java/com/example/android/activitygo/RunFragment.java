@@ -80,7 +80,8 @@ public class RunFragment extends Fragment {
                 args.putString("distance", distanciaVal);
 
                 fr.setArguments(args);
-                ft.replace(R.id.fragment_container, fr);
+                ft.replace(R.id.fragment_container, fr,"RunEstatisticsFragment");
+                ft.addToBackStack("RunMenuInicial");
                 ft.commit();
             }
         });

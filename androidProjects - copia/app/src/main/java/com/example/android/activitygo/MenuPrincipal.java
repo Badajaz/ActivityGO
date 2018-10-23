@@ -127,7 +127,7 @@ public class MenuPrincipal extends AppCompatActivity {
                 break;
 
             case R.id.BackButton:
-                getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                getFragmentManager().popBackStack();
         }
         return true;
     }
