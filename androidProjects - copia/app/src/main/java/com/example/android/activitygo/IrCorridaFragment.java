@@ -28,7 +28,7 @@ public class IrCorridaFragment extends Fragment {
        start.setOnClickListener(new View.OnClickListener() {
 
            public void onClick(View v) {
-               Fragment SelectedFragment = new IrCorridaEasy();
+               Fragment SelectedFragment = new StartCorridaFragment();
                FragmentManager fm = getFragmentManager();
                FragmentTransaction ft = fm.beginTransaction();
                ft.replace(R.id.fragment_container,  SelectedFragment,"IrCorridaEasy");
