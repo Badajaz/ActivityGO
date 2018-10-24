@@ -5,7 +5,9 @@
     <string name="EmailSignUp">"  "Email</string>
     <string name="WeightSignUp">"  "Peso</string>
     <string name="HeightSignUp">"  "Altura</string>
-    <string name="PasswordSignUp">"  "Password</string>
+    <string name="PasswordSignUp">"  "Palavra-passe</string>
+    <string name="reTypePasswordSignUp">"  "Confirme a palavra-passe</string>
+    <string name="GeneroSignUp">"  "Género</string>
     <string name="nav_run">Run</string>
     <string name="nav_bicepe">Challenges</string>
     <string name="nav_achievements">Achievements</string>

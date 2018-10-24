@@ -55,6 +55,22 @@
                 app:layout_constraintTop_toBottomOf="@+id/FirstNameText" />
 
             <EditText
+                android:id="@+id/genero"
+                android:layout_width="200dp"
+                android:layout_height="55dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/edit_text_shape2"
+                android:ems="10"
+                android:fontFamily="sans-serif"
+                android:hint="@string/GeneroSignUp"
+                android:inputType="textPersonName"
+                android:textSize="16sp"
+                android:typeface="sans"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/FirstNameText" />
+
+            <EditText
                 android:id="@+id/EmailText"
                 android:layout_width="200dp"
                 android:layout_height="55dp"
@@ -112,6 +128,22 @@
                 android:ems="10"
                 android:fontFamily="sans-serif"
                 android:hint="@string/PasswordSignUp"
+                android:inputType="textPassword"
+                android:textSize="16sp"
+                android:typeface="sans"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/HeightText" />
+
+            <EditText
+                android:id="@+id/reTypePasswordText"
+                android:layout_width="200dp"
+                android:layout_height="55dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/edit_text_shape2"
+                android:ems="10"
+                android:fontFamily="sans-serif"
+                android:hint="@string/reTypePasswordSignUp"
                 android:inputType="textPassword"
                 android:textSize="16sp"
                 android:typeface="sans"

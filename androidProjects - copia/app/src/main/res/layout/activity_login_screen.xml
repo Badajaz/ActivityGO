@@ -34,6 +34,7 @@
         android:backgroundTint="#ffffff"
         android:ems="10"
         android:hint="  Nome de utilizador"
+        android:drawableLeft="@drawable/user_icon"
         android:inputType="text|textPersonName"
         android:textSize="16sp"
         android:typeface="sans"
