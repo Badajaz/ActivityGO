@@ -8,12 +8,11 @@
     tools:context="com.example.android.activitygo.MenuPrincipal">
 
     <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#329d92"
-        android:minHeight="?attr/actionBarSize"
-        android:id="@+id/toolbar"
-        ></android.support.v7.widget.Toolbar>
+        android:minHeight="?attr/actionBarSize"></android.support.v7.widget.Toolbar>
 
 
     <android.support.design.widget.BottomNavigationView
@@ -34,10 +33,6 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="56dp" />
-
-
-
-
 
 </RelativeLayout>
 
