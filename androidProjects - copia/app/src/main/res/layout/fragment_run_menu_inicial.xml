@@ -68,7 +68,7 @@
         android:textColor="#ffffff"
         android:textSize="23sp"
         android:typeface="sans"
-        android:drawableRight="@drawable/bicepe"/>
+        android:drawableRight="@drawable/bicepeDois"/>
 
     <TextView
         android:id="@+id/calendario"
