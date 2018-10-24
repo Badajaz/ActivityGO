@@ -3,6 +3,7 @@ package com.example.android.activitygo;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -39,6 +40,8 @@ public class RunEstatisticsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_run_estatistics, container, false);
 
+        MenuItem item = getView().findViewById(R.id.BackButton);
+        item.setVisible(false);
 
         strtext = getArguments().getString("CID");
         err = (TextView) v.findViewById(R.id.duracaoEst);

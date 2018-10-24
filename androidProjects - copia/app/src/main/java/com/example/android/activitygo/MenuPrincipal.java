@@ -5,8 +5,10 @@ import android.app.FragmentTransaction;
 import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
 import android.app.Fragment;
 import android.support.v7.app.ActionBar;
@@ -18,6 +20,8 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.Switch;
 import android.widget.Toast;
+
+import java.util.List;
 
 public class MenuPrincipal extends AppCompatActivity {
 
@@ -71,7 +75,7 @@ public class MenuPrincipal extends AppCompatActivity {
                             SelectedFragment = new ChalengeFragment();
                             FragmentManager fman = getFragmentManager();
                             FragmentTransaction ftra = fman.beginTransaction();
-                            ftra.replace(R.id.fragment_container, SelectedFragment);
+                            ftra.replace(R.id.fragment_container, SelectedFragment,"ChalengeFragment");
                             ftra.commit();
                             break;
 
@@ -109,24 +113,34 @@ public class MenuPrincipal extends AppCompatActivity {
             };
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main,menu);
-        Fragment whichFragment=getCurrentFragment();//getVisible method return current visible fragment
-        String shareVisible= whichFragment.getClass().toString();
-
-        if(shareVisible.equals(RunFragment.class.toString())){
+        Fragment whichFragment=getVisibleFragment();
+        /*
+        if(whichFragment.getTag().toString().equals("RunFragment")){
             MenuItem item = menu.findItem(R.id.BackButton);
             item.setVisible(false);
-        }
+        }else{
+            MenuItem item = menu.findItem(R.id.BackButton);
+            item.setVisible(true);
+        }*/
+
         return true;
     }
 
-    Fragment getCurrentFragment()
-    {
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private Fragment getVisibleFragment() {
         FragmentManager fmana = getFragmentManager();
-        Fragment currentFragment = fmana.findFragmentById(R.id.fragment_container);
-        return currentFragment;
+        //FragmentManager fragmentManager = MenuPrincipal.this.getSupportFragmentManager();
+        List<Fragment> fragments = fmana.getFragments();
+        for (Fragment fragment : fragments) {
+            if (fragment != null && fragment.isVisible())
+                return fragment;
+        }
+        return null;
     }
 
 
