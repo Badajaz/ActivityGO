@@ -4,11 +4,13 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,12 +40,18 @@ public class CriarGrupoFragment extends Fragment {
         criarGrupo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment SelectedFragment = new CriarGrupoFragment();
+
+                Toast toast = Toast.makeText(getActivity(), "O Seu grupo foi criado!",
+                        Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 800);
+                toast.show();
+
+                /* Fragment SelectedFragment = new CriarGrupoFragment();
                 FragmentManager fmCriarGrupoFragment = getFragmentManager();
                 FragmentTransaction ftCriarGrupoFragment = fmCriarGrupoFragment.beginTransaction();
                 ftCriarGrupoFragment.replace(R.id.fragment_container, SelectedFragment);
 
-                ftCriarGrupoFragment.commit();
+                ftCriarGrupoFragment.commit();*/
             }
         });
         return v;

@@ -36,7 +36,7 @@
                 android:fontFamily="sans-serif"
                 android:hint="@string/NomeGrupo"
                 android:inputType="textPersonName"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:typeface="sans"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -53,7 +53,7 @@
                 android:hint="@string/DescricaoGrupo"
                 android:inputType="textPersonName"
                 android:textColor="@color/whiteLetters"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:typeface="sans"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/FirstNameText" />
@@ -70,7 +70,7 @@
                 android:hint="@string/DesportoGrupo"
                 android:inputType="textPersonName"
                 android:textColor="@color/whiteLetters"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:typeface="sans"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/FirstNameText" />
@@ -84,7 +84,7 @@
                 android:background="@drawable/button_border"
                 android:text="Criar"
                 android:textColor="@color/whiteLetters"
-                android:textSize="17dp" />
+                android:textSize="16sp" />
 
         </LinearLayout>
     </ScrollView>

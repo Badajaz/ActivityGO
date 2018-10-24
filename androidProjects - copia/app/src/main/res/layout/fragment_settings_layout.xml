@@ -32,7 +32,7 @@
                 android:text="  Definições de Perfil: "
                 android:textAlignment="viewStart"
                 android:textColor="#000000"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:typeface="sans" />
 
             <TextView
@@ -52,7 +52,7 @@
                 android:text="  Alterar Perfil"
                 android:textAlignment="viewStart"
                 android:textColor="#000000"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:typeface="sans" />
 
@@ -73,7 +73,7 @@
                 android:text="  Alterar Medidas"
                 android:textAlignment="viewStart"
                 android:textColor="#000000"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:typeface="sans" />
 
@@ -94,7 +94,7 @@
                 android:text="  Alterar Email"
                 android:textAlignment="viewStart"
                 android:textColor="#000000"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:typeface="sans" />
 
@@ -115,7 +115,7 @@
                 android:text="  Definições de Notificações: "
                 android:textAlignment="viewStart"
                 android:textColor="#000000"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:typeface="sans" />
 
             <TextView
@@ -135,7 +135,7 @@
                 android:text="  Alterar Notificações"
                 android:textAlignment="viewStart"
                 android:textColor="#000000"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:typeface="sans" />
 
@@ -156,7 +156,7 @@
                 android:text="  Desativar Notificações"
                 android:textAlignment="viewStart"
                 android:textColor="#000000"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:typeface="sans" />
 
@@ -177,7 +177,7 @@
                 android:text="  Definições Gerais:"
                 android:textAlignment="viewStart"
                 android:textColor="#000000"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:typeface="sans" />
 
             <TextView
@@ -197,7 +197,7 @@
                 android:text="  Centro de Ajuda"
                 android:textAlignment="viewStart"
                 android:textColor="#000000"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:typeface="sans" />
 
@@ -218,7 +218,7 @@
                 android:text="  Calendário"
                 android:textAlignment="viewStart"
                 android:textColor="#000000"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:typeface="sans" />
 
@@ -239,7 +239,7 @@
                 android:text="  Contactos Importantes"
                 android:textAlignment="viewStart"
                 android:textColor="#000000"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:typeface="sans" />
 
@@ -260,7 +260,7 @@
                 android:text="  FAQS"
                 android:textAlignment="viewStart"
                 android:textColor="#000000"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:typeface="sans" />
 
@@ -278,7 +278,7 @@
                 android:text="  Night Mode"
                 android:textAlignment="viewStart"
                 android:textColor="#000000"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:typeface="sans" />
 
@@ -299,7 +299,7 @@
                 android:text="  Conta:"
                 android:textAlignment="viewStart"
                 android:textColor="#000000"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:typeface="sans" />
 
             <TextView
@@ -319,7 +319,7 @@
                 android:text="  Terminar Sessão?"
                 android:textAlignment="viewStart"
                 android:textColor="#000000"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:typeface="sans" />
         </LinearLayout>

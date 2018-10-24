@@ -28,7 +28,7 @@
                 android:gravity="center"
                 android:text="Desafios Corrida"
                 android:textColor="@color/whiteLetters"
-                android:textSize="30sp" />
+                android:textSize="20sp" />
 
             <CheckBox
                 android:id="@+id/checkBox21"
@@ -59,7 +59,7 @@
 
             <TextView
                 android:id="@+id/textViewChallenge2"
-                android:layout_width="300dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="30dp"
@@ -67,7 +67,7 @@
                 android:gravity="center"
                 android:text="Desafios Caminhada"
                 android:textColor="@color/whiteLetters"
-                android:textSize="30sp" />
+                android:textSize="20sp" />
 
             <CheckBox
                 android:id="@+id/checkBoxCaminhada1"
@@ -98,7 +98,7 @@
 
             <TextView
                 android:id="@+id/textViewCiclismo"
-                android:layout_width="260dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="30dp"
@@ -106,7 +106,7 @@
                 android:gravity="center"
                 android:text="Desafios Ciclismo"
                 android:textColor="@color/whiteLetters"
-                android:textSize="30sp" />
+                android:textSize="20sp" />
 
             <CheckBox
                 android:id="@+id/checkBoxCiclismo1"

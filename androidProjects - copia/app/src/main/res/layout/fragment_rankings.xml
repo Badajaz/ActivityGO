@@ -19,7 +19,7 @@
         android:drawableRight="@drawable/run"
         android:gravity="left|top"
         android:text="Geral Corrida 1/20"
-        android:textSize="20dp" />
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/buttonCorridaGrupo"
@@ -34,7 +34,7 @@
         android:drawableRight="@drawable/groupdois"
         android:gravity="left|top"
         android:text="Grupo Corrida 3/10"
-        android:textSize="20dp" />
+        android:textSize="18sp"  />
 
     <Button
         android:id="@+id/buttonCiclismoGeral"
@@ -49,7 +49,7 @@
         android:drawableRight="@drawable/cycling"
         android:gravity="left|top"
         android:text="Geral Ciclismo 1/25"
-        android:textSize="20dp" />
+        android:textSize="18sp"  />
 
     <Button
         android:id="@+id/buttonCiclismoGrupo"
@@ -64,6 +64,6 @@
         android:drawableRight="@drawable/cyclinggroup"
         android:gravity="left|top"
         android:text="Grupo Ciclismo 2/10"
-        android:textSize="20dp" />
+        android:textSize="18sp"  />
 
 </RelativeLayout>
