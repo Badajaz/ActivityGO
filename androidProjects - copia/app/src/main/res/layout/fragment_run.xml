@@ -24,25 +24,25 @@
 
             <TextView
                 android:id="@+id/dataTextView"
-                android:text="@string/Data"
                 android:fontFamily="sans-serif"
-                android:textAlignment="center"
                 android:gravity="center"
                 android:padding="10dip"
+                android:text="@string/Data"
+                android:textAlignment="center"
                 android:textColor="@color/whiteLetters"
-                android:textStyle="bold"
-                android:textSize="20sp"/>
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/duracaoTextView"
-                android:text="@string/Duracao"
                 android:fontFamily="sans-serif"
-                android:textAlignment="center"
                 android:gravity="center"
                 android:padding="10dip"
+                android:text="@string/Duracao"
+                android:textAlignment="center"
                 android:textColor="@color/whiteLetters"
-                android:textStyle="bold"
-                android:textSize="20sp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/distanciaTextView"
@@ -50,9 +50,8 @@
                 android:gravity="center"
                 android:padding="10dip"
                 android:text="@string/Distancia"
-                android:textAlignment="textStart"
                 android:textColor="@color/whiteLetters"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
         </TableRow>
 
@@ -66,36 +65,33 @@
 
             <TextView
                 android:id="@+id/firstValueData"
-                android:text="10/01/2018"
                 android:fontFamily="sans-serif"
-                android:textAlignment="center"
                 android:gravity="center"
                 android:padding="20dip"
-                android:textColor="#000"
-                android:textStyle="bold"
-                android:textSize="20sp"/>
+                android:text="10/01/2018"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/FirstValueDuration"
-                android:text="15:00"
                 android:fontFamily="sans-serif"
-                android:textAlignment="center"
                 android:gravity="center"
                 android:padding="20dip"
-                android:textColor="#000"
-                android:textStyle="bold"
-                android:textSize="20sp"/>
+                android:text="15:00"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/firstValueDistance"
-                android:text="30km"
                 android:fontFamily="sans-serif"
-                android:textAlignment="center"
                 android:gravity="center"
                 android:padding="20dip"
-                android:textColor="#000"
-                android:textStyle="bold"
-                android:textSize="20sp" />
+                android:text="30km"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="16sp" />
 
         </TableRow>
 
@@ -109,36 +105,33 @@
 
             <TextView
                 android:id="@+id/secondValueData"
-                android:text="02/01/2018"
                 android:fontFamily="sans-serif"
-                android:textAlignment="center"
                 android:gravity="center"
                 android:padding="20dip"
-                android:textColor="#000"
-                android:textStyle="bold"
-                android:textSize="20sp" />
+                android:text="02/01/2018"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/secondValueDuration"
-                android:text="23:05"
                 android:fontFamily="sans-serif"
-                android:textAlignment="center"
                 android:gravity="center"
                 android:padding="20dip"
-                android:textColor="#000"
-                android:textStyle="bold"
-                android:textSize="20sp" />
+                android:text="23:05"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/secondValueDistance"
-                android:text="15km"
                 android:fontFamily="sans-serif"
-                android:textAlignment="center"
                 android:gravity="center"
                 android:padding="20dip"
-                android:textColor="#000"
-                android:textStyle="bold"
-                android:textSize="20sp"/>
+                android:text="15km"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="16sp" />
 
         </TableRow>
     </TableLayout>
@@ -149,11 +142,11 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/myTable"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="47dp"
         android:layout_marginEnd="15dp"
+        android:background="@drawable/button_states"
         android:text="+"
         android:textAlignment="center"
-        android:background="@drawable/edit_text_shape"
         android:textSize="30sp" />
 
     <Button
@@ -162,9 +155,9 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/myTable"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="121dp"
+        android:layout_marginTop="110dp"
         android:layout_marginEnd="14dp"
-        android:background="@drawable/edit_text_shape"
+        android:background="@drawable/button_states"
         android:text="+"
         android:textAlignment="center"
         android:textSize="30sp" />

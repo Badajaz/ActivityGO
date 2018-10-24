@@ -65,7 +65,6 @@
         android:fontFamily="sans-serif"
         android:gravity="center"
         android:text="  Novos desafios:"
-        android:textAlignment="textStart"
         android:textColor="#ffffff"
         android:textSize="16sp"
         android:typeface="sans" />
