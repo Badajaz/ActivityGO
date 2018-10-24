@@ -21,9 +21,9 @@
 
     <Button
         android:id="@+id/StartRun"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="140dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="120dp"
         android:layout_marginTop="300dp"
         android:background="@drawable/button_states"
         android:drawableStart="@drawable/pause"
@@ -31,9 +31,9 @@
 
     <Button
         android:id="@+id/StopRun"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="205dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="210dp"
         android:layout_marginTop="300dp"
         android:background="@drawable/button_states"
         android:drawableStart="@drawable/play"
