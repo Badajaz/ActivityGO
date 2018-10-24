@@ -3,6 +3,7 @@ package com.example.android.activitygo;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.ClipData;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -26,7 +27,7 @@ public class RunMenuInicial extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_run_menu_inicial, container, false);
 
-        Button historial = (Button) v.findViewById(R.id.buttonHistorial);
+        final Button historial = (Button) v.findViewById(R.id.buttonHistorial);
         Button irCorrida = (Button) v.findViewById(R.id.buttonIrCorrida);
 
 

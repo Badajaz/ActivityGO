@@ -46,12 +46,6 @@ public class CriarGrupoFragment extends Fragment {
                 toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 800);
                 toast.show();
 
-                /* Fragment SelectedFragment = new CriarGrupoFragment();
-                FragmentManager fmCriarGrupoFragment = getFragmentManager();
-                FragmentTransaction ftCriarGrupoFragment = fmCriarGrupoFragment.beginTransaction();
-                ftCriarGrupoFragment.replace(R.id.fragment_container, SelectedFragment);
-
-                ftCriarGrupoFragment.commit();*/
             }
         });
         return v;
