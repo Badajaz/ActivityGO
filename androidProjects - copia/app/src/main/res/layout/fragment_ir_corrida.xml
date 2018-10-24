@@ -7,8 +7,6 @@
     android:background="#329d92"
     android:layout_marginBottom="50dp">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <ToggleButton
         android:id="@+id/toggleButton3"
         android:layout_width="178dp"
@@ -19,9 +17,9 @@
         android:layout_marginStart="105dp"
         android:layout_marginTop="14dp"
         android:layout_marginEnd="101dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="@drawable/edit_text_shape"
         android:textOff="Medium 5KM"
-        android:textOn="Letting go  off Easy! 200 Points" />
+        android:textOn="Letting go off easy! 200 Points!" />
 
     <ToggleButton
         android:id="@+id/toggleButton4"
@@ -33,9 +31,9 @@
         android:layout_marginStart="107dp"
         android:layout_marginTop="19dp"
         android:layout_marginEnd="99dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="@drawable/edit_text_shape"
         android:textOff="Hard 7KM"
-        android:textOn="It's a Hard's day's life! 500 Points" />
+        android:textOn="It's a Hard day's life! 500 Points!" />
 
     <ToggleButton
         android:id="@+id/toggleButton2"
@@ -47,9 +45,9 @@
         android:layout_marginStart="103dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="103dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="@drawable/edit_text_shape"
         android:textOff="Easy 2KM"
-        android:textOn="Let's Go Easy! 100 Points" />
+        android:textOn="Let's Go Easy! 100 Points!" />
 
     <Button
         android:id="@+id/buttonStart"
