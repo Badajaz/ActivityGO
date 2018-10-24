@@ -35,6 +35,7 @@ public class TextViewJuntarFragment extends Fragment {
 
         plus = (Button) v.findViewById(R.id.JoinGroup);
         minus = (Button) v.findViewById(R.id.LeaveGroup);
+        minus.setVisibility(v.GONE);
         plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
