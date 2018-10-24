@@ -41,6 +41,7 @@
         android:layout_marginStart="14dp"
         android:layout_marginTop="228dp"
         android:drawableRight="@drawable/cycling"
+        android:layout_alignParentLeft="true"
         android:gravity="top"
         android:text="Geral Ciclismo" />
 
@@ -51,10 +52,10 @@
         android:layout_alignBottom="@+id/buttonCiclismoGeral"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="18dp"
+        android:layout_alignParentRight="true"
         android:layout_marginBottom="-2dp"
         android:drawableRight="@drawable/cyclinggroup"
         android:gravity="top"
         android:text="Grupo Ciclismo" />
-
 
 </RelativeLayout>
