@@ -19,8 +19,8 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="160dp"
-            android:layout_height="120dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:layout_marginStart="41dp"
@@ -44,12 +44,12 @@
 
         <TextView
             android:id="@+id/melhorPrimeiroKmCaminhada"
-            android:layout_width="223dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/PrimeiroKmCaminhada"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="7dp"
+            android:layout_marginEnd="15dp"
             android:fontFamily="sans-serif"
             android:gravity="center"
             android:text="Melhor primeiro km:"

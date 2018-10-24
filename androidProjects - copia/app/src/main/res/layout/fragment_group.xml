@@ -3,35 +3,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GroupFragment"
-    android:background="#329d92">
+    android:background="#329d92"
+    tools:context=".GroupFragment">
 
     <Button
         android:id="@+id/buttonCriarGrupo"
-        android:layout_width="176dp"
-        android:layout_height="120dp"
+        android:layout_width="250dp"
+        android:layout_height="150dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="118dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="73dp"
+        android:layout_marginEnd="73dp"
         android:layout_marginTop="75dp"
-        android:layout_marginEnd="117dp"
+        android:background="@drawable/edit_text_shape"
         android:drawableRight="@drawable/run"
-        android:gravity="top"
-        android:text="Criar Grupo" />
+        android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:text="Criar Grupo"
+        android:textColor="#ffffff"
+        android:textSize="16sp"
+        android:typeface="sans" />
 
     <Button
         android:id="@+id/buttonJuntarGrupo"
-        android:layout_width="176dp"
-        android:layout_height="120dp"
+        android:layout_width="250dp"
+        android:layout_height="150dp"
         android:layout_alignBottom="@+id/buttonCriarGrupo"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="118dp"
-        android:layout_marginEnd="117dp"
-        android:layout_marginBottom="-247dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="73dp"
+        android:layout_marginEnd="73dp"
+        android:layout_marginBottom="-200dp"
+        android:background="@drawable/edit_text_shape"
         android:drawableRight="@drawable/groupdois"
-        android:gravity="top"
-        android:text="Juntar Grupo" />
+        android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:text="Juntar Grupo"
+        android:textColor="#ffffff"
+        android:textSize="16sp"
+        android:typeface="sans" />
 
 </RelativeLayout>
