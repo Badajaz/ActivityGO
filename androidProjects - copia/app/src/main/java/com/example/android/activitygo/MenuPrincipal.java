@@ -113,11 +113,21 @@ public class MenuPrincipal extends AppCompatActivity {
             };
 
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main,menu);
-        Fragment whichFragment=getVisibleFragment();
+        Fragment currentFragment = getFragmentManager().findFragmentById(R.id.fragment_container);
+       // Fragment page = getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":" + ViewPager.getCurrentItem());
+
+        if (currentFragment.isVisible() && (currentFragment instanceof  RunMenuInicial)) {
+            //MenuItem item = menu.findItem(R.id.BackButton);
+            //item.setVisible(false);
+        }
+
+
+
+        // Fragment whichFragment=getVisibleFragment();
         /*
         if(whichFragment.getTag().toString().equals("RunFragment")){
             MenuItem item = menu.findItem(R.id.BackButton);
