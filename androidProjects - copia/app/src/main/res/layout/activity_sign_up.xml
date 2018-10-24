@@ -54,7 +54,35 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/FirstNameText" />
 
-            <EditText
+
+            <TextView
+                android:id="@+id/Genero"
+                android:layout_width="300dp"
+                android:layout_height="55dp"
+                android:gravity="center"
+                android:layout_marginTop="15dp"
+                android:text="Genero:"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <CheckBox
+                android:id="@+id/Masculino"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:gravity="center"
+                android:text="Masculino" />
+
+            <CheckBox
+                android:id="@+id/Feminino"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Feminino" />
+
+
+
+            <!--<EditText
                 android:id="@+id/genero"
                 android:layout_width="200dp"
                 android:layout_height="55dp"
@@ -68,7 +96,7 @@
                 android:textSize="16sp"
                 android:typeface="sans"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/FirstNameText" />
+                app:layout_constraintTop_toBottomOf="@+id/FirstNameText" />-->
 
             <EditText
                 android:id="@+id/EmailText"
