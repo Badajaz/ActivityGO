@@ -40,8 +40,8 @@ public class RunEstatisticsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_run_estatistics, container, false);
 
-        MenuItem item = getView().findViewById(R.id.BackButton);
-        item.setVisible(false);
+        //MenuItem item = getView().findViewById(R.id.BackButton);
+        //item.setVisible(false);
 
         strtext = getArguments().getString("CID");
         err = (TextView) v.findViewById(R.id.duracaoEst);
