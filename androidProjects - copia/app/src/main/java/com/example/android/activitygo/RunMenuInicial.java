@@ -27,6 +27,7 @@ public class RunMenuInicial extends Fragment {
         View v = inflater.inflate(R.layout.fragment_run_menu_inicial, container, false);
 
         Button historial = (Button) v.findViewById(R.id.buttonHistorial);
+        Button irCorrida = (Button) v.findViewById(R.id.buttonIrCorrida);
 
 
         historial.setOnClickListener(new View.OnClickListener() {
@@ -41,10 +42,23 @@ public class RunMenuInicial extends Fragment {
             }
         });
 
+        irCorrida.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment SelectedFragment = new IrCorridaFragment();
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.fragment_container,  SelectedFragment,"RunMenuInicial");
+                ft.addToBackStack("RunFragment");
+                ft.commit();
+
+            }
+        });
+
         return v;
     }
 
-    
+
 
 
 }
