@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
-                android:clickable="false"
+                android:clickable="true"
                 android:text="Run 2km" />
 
             <CheckBox
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
-                android:clickable="false"
+                android:clickable="true"
                 android:text="Run 5km" />
 
             <CheckBox
@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
-                android:clickable="false"
+                android:clickable="true"
                 android:text="Run 10km" />
 
             <TextView
@@ -77,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
-                android:clickable="false"
+                android:clickable="true"
                 android:text="Andar 2km" />
 
             <CheckBox
@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
-                android:clickable="false"
+                android:clickable="true"
                 android:text="Andar 10km" />
 
             <CheckBox
@@ -95,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
-                android:clickable="false"
+                android:clickable="true"
                 android:text="Andar 20km" />
 
             <TextView
@@ -116,7 +116,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
-                android:clickable="false"
+                android:clickable="true"
                 android:text="Correr 25km" />
 
             <CheckBox
@@ -125,7 +125,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
-                android:clickable="false"
+                android:clickable="true"
                 android:text="Correr 30km" />
 
             <CheckBox
@@ -134,7 +134,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
-                android:clickable="false"
+                android:clickable="true"
                 android:text="Correr 120km" />
 
         </LinearLayout>
