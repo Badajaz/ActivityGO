@@ -54,6 +54,7 @@
         android:layout_marginBottom="8dp"
         android:backgroundTint="#ffffff"
         android:ems="10"
+        android:drawableLeft="@drawable/lock_icon"
         android:hint="  Palavra-chave"
         android:inputType="textPassword"
         android:textSize="16sp"

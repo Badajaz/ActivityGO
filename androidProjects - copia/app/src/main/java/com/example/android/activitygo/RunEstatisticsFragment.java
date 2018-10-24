@@ -29,7 +29,7 @@ public class RunEstatisticsFragment extends Fragment {
     private TextView distanciaView;
     private String distance;
     private TextView distanceView;
-    private TextView caloriasTV;
+    //private TextView caloriasTV;
 
     public RunEstatisticsFragment() {
         // Required empty public constructor
@@ -61,8 +61,8 @@ public class RunEstatisticsFragment extends Fragment {
         distance = getArguments().getString("distance");
         distanceView = (TextView) v.findViewById(R.id.distanciaValue);
 
-        caloriasTV = (TextView) v.findViewById(R.id.caloriasValue);
-        caloriasTV.setText("50 kcal");
+        //caloriasTV = (TextView) v.findViewById(R.id.caloriasValue);
+        //caloriasTV.setText("50 kcal");
 
         return v;
     }
