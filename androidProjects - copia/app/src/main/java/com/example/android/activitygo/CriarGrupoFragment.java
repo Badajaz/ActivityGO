@@ -42,7 +42,7 @@ public class CriarGrupoFragment extends Fragment {
             public void onClick(View v) {
 
                 Toast toast = Toast.makeText(getActivity(), "O seu grupo foi criado!",
-                        Toast.LENGTH_LONG);
+                        Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 800);
                 toast.show();
 

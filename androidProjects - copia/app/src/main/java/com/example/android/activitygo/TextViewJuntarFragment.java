@@ -2,6 +2,7 @@ package com.example.android.activitygo;
 
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -102,7 +103,6 @@ public class TextViewJuntarFragment extends Fragment {
             b.setHeight(55);
             b.setTextSize(20);
             b.setGravity(Gravity.CENTER);
-            b.setBackground(Drawable.createFromPath("@drawable/edit_text_shape"));
             b.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT));
             b.setText(sText);
