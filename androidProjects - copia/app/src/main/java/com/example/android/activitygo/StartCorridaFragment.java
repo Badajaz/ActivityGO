@@ -41,6 +41,7 @@ public class StartCorridaFragment extends Fragment {
         Button Stop = (Button) v.findViewById(R.id.StopRun);
         Button Start = (Button) v.findViewById(R.id.StartRun);
         chronometer = v.findViewById(R.id.chronometer);
+        
 
 
         Start.setOnClickListener(new View.OnClickListener() {
