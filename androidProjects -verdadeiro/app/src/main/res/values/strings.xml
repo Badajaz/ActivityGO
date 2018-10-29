@@ -4,7 +4,7 @@
     <string name="LastNameText">"  "Apelido</string>
     <string name="EmailSignUp">"  "Email</string>
     <string name="WeightSignUp">"  "Peso</string>
-    <string name="HeightSignUp">"  "Altura</string>
+    <string name="HeightSignUp">"  "Altura (cm)</string>
     <string name="PasswordSignUp">"  "Palavra-passe</string>
     <string name="reTypePasswordSignUp">"  "Confirme a palavra-passe</string>
     <string name="GeneroSignUp">"  "Género</string>

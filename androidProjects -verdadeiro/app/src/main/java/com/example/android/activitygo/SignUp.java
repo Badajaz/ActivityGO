@@ -20,6 +20,7 @@ public class SignUp extends AppCompatActivity {
     private TextView pesoUser;
     private TextView alturaUser;
     private TextView passwordUser;
+    private TextView dataNascimento;
 
     private String firstName;
     private String secondName;
@@ -29,6 +30,7 @@ public class SignUp extends AppCompatActivity {
     private String password;
     private TextView confirmaPasswordUser;
     private String confirmaPassword;
+    private String dataNascimentoStr;
 
 
     private CheckBox masculino;
@@ -48,9 +50,6 @@ public class SignUp extends AppCompatActivity {
     private ArrayList<CheckBox> checkboxes = new ArrayList<CheckBox>();
 
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,16 +63,14 @@ public class SignUp extends AppCompatActivity {
         alturaUser = (TextView) findViewById(R.id.HeightText);
         passwordUser = (TextView) findViewById(R.id.PasswordText);
         confirmaPasswordUser = (TextView) findViewById(R.id.reTypePasswordText);
+        dataNascimento = (TextView) findViewById(R.id.DataNascimento);
 
         masculino = (CheckBox) findViewById(R.id.Masculino);
         feminino = (CheckBox) findViewById(R.id.Feminino);
         caminhada = (CheckBox) findViewById(R.id.caminhada);
         corrida = (CheckBox) findViewById(R.id.corrida);
         futebol = (CheckBox) findViewById(R.id.futebol);
-        ciclismo  = (CheckBox) findViewById(R.id.ciclismo);
-
-
-
+        ciclismo = (CheckBox) findViewById(R.id.ciclismo);
 
 
         Button criar = (Button) findViewById(R.id.button2);
@@ -93,14 +90,14 @@ public class SignUp extends AppCompatActivity {
 
                 password = passwordUser.getText().toString();
                 confirmaPassword = confirmaPasswordUser.getText().toString();
-
+                dataNascimentoStr = dataNascimento.getText().toString();
 
 
                 if (password.equals(confirmaPassword) && !password.equals("") && !firstName.equals("") &&
                         !secondName.equals("") && !email.equals("") && !peso.equals("") && !altura.equals("") &&
                         peso.matches("^[0-9][0-9]{2,3}$") && altura.matches("^[0-9][0-9]{2,3}$") &&
-                        ((masculinoChecked == 1 && femininoChecked == 0)||(masculinoChecked == 0 && femininoChecked == 1)) &&
-                        isAnyItemCheck()) {
+                        ((masculinoChecked == 1 && femininoChecked == 0) || (masculinoChecked == 0 && femininoChecked == 1)) &&
+                        isAnyItemCheck() && !dataNascimentoStr.equals("")) {
 
                     Intent intent = new Intent(getApplicationContext(), MenuPrincipal.class);
                     startActivity(intent);
@@ -142,20 +139,19 @@ public class SignUp extends AppCompatActivity {
                         alturaUser.setError("Não tem os digitos certos");
                     }
 
-
                     if (!password.equals(confirmaPassword)) {
                         passwordUser.setError("As passwords não são iguais");
                         confirmaPasswordUser.setError("As passwords não são iguais");
                     }
 
-                    if (masculinoChecked == 0 && femininoChecked == 0){
+                    if (masculinoChecked == 0 && femininoChecked == 0) {
                         masculino.setError("Não selecionou a caixa");
                         masculino.requestFocus();
                         feminino.setError("Não selecionou a caixa");
                         feminino.requestFocus();
                     }
 
-                    if (isAnyItemCheck() == false){
+                    if (isAnyItemCheck() == false) {
                         caminhada.setError("Não selecionou nenhuma caixa");
                         caminhada.requestFocus();
                         corrida.setError("Não selecionou nenhuma a caixa");
@@ -166,18 +162,9 @@ public class SignUp extends AppCompatActivity {
                         ciclismo.requestFocus();
                     }
 
-
-
                 }
             }
-        });
-
-
-
-
-
-
-/*
+        });/*
         Bundle args = new Bundle();
 
         args.putString("firstName", firstName);
@@ -189,56 +176,42 @@ public class SignUp extends AppCompatActivity {
 */
     }
 
-
-    public void getMasculinoItem(View v){
+    public void getMasculinoItem(View v) {
         masculinoChecked = 1;
 
     }
 
-    public void getFemininoItem(View v){
+    public void getFemininoItem(View v) {
         femininoChecked = 1;
     }
 
-
-
-    public void getCaminhadaItem(View v){
+    public void getCaminhadaItem(View v) {
         caminhadaChecked = 1;
         caminhada = (CheckBox) findViewById(R.id.caminhada);
         checkboxes.add(caminhada);
     }
 
-
-    public void getCorridaItem(View v){
+    public void getCorridaItem(View v) {
         corridaChecked = 1;
         checkboxes.add(corrida);
     }
 
-
-    public void getFutebolItem(View v){
+    public void getFutebolItem(View v) {
         futebolChecked = 1;
         checkboxes.add(futebol);
-
     }
 
-
-    public void getCiclismoItem(View v){
+    public void getCiclismoItem(View v) {
         ciclismoChecked = 1;
         checkboxes.add(ciclismo);
-
     }
 
-
-    public boolean isAnyItemCheck(){
-        for (CheckBox checkBox: checkboxes){
-            if (checkBox.isChecked()){
+    public boolean isAnyItemCheck() {
+        for (CheckBox checkBox : checkboxes) {
+            if (checkBox.isChecked()) {
                 return true;
             }
         }
         return false;
     }
-
-
-
-
-
 }
