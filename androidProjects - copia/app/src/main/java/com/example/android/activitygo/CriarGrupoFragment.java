@@ -20,6 +20,8 @@ public class CriarGrupoFragment extends Fragment {
     private Button criarGrupo;
     private String txtPesquisa;
     private Bundle bundle;
+    private String descricaoTxt;
+    private String desportoTxt;
 
     public CriarGrupoFragment() {
         // Required empty public constructor
@@ -33,18 +35,31 @@ public class CriarGrupoFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_criar_grupo, container, false);
-        EditText txt = v.findViewById(R.id.NomeGrupo);
-        txtPesquisa = txt.getText().toString();
+
 
         criarGrupo = (Button) v.findViewById(R.id.buttonCriar);
+        final EditText nomeGrupo = (EditText) v.findViewById(R.id.NomeCriarGrupo);
+        final EditText descricao = (EditText) v.findViewById(R.id.Descricao);
+        final EditText desporto = (EditText) v.findViewById(R.id.DesportoEscolhido);
+
+
         criarGrupo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Toast toast = Toast.makeText(getActivity(), "O seu grupo foi criado!",
+                txtPesquisa = nomeGrupo.getText().toString();
+                descricaoTxt = descricao.getText().toString();
+                desportoTxt = desporto.getText().toString();
+                Toast toast = Toast.makeText(getActivity(), "O seu grupo " +txtPesquisa+" foi criado!",
                         Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 800);
+                toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 800);
                 toast.show();
+
+               /* Fragment fragment = new JuntarGrupoFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("DA_LHE", "DEU CRL");
+                fragment.setArguments(bundle);
+                */
 
             }
         });

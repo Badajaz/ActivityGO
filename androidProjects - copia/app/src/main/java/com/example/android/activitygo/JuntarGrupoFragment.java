@@ -33,9 +33,16 @@ public class JuntarGrupoFragment extends Fragment {
         final EditText txtDescription = v.findViewById(R.id.NomeGrupo);
 
 
+
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                /*String strtext = getArguments().getString("DA_LHE");
+                if (strtext.equals(null)) {
+                    Toast toast = Toast.makeText(getActivity(), "deu shit", Toast.LENGTH_SHORT);
+                }*/
+
                 message = txtDescription.getText().toString();
                 //Toast.makeText(getActivity(), message,
                         //Toast.LENGTH_LONG).show();

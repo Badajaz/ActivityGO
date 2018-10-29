@@ -239,7 +239,6 @@
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/button_border"
                 android:fontFamily="sans-serif"
-                android:onClick="paginaToolbar"
                 android:text="Criar Conta"
                 android:textColor="#ffffff"
                 android:textSize="16sp"
