@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 public class SignUp extends AppCompatActivity {
 
     private TextView firstNameUser;
@@ -16,6 +18,7 @@ public class SignUp extends AppCompatActivity {
     private TextView pesoUser;
     private TextView alturaUser;
     private TextView passwordUser;
+    private TextView dataNascimento;
 
     private String firstName;
     private String secondName;
@@ -25,6 +28,7 @@ public class SignUp extends AppCompatActivity {
     private String password;
     private TextView confirmaPasswordUser;
     private String confirmaPassword;
+    private String dataNascimentoStr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,13 +43,7 @@ public class SignUp extends AppCompatActivity {
         alturaUser = (TextView) findViewById(R.id.HeightText);
         passwordUser = (TextView) findViewById(R.id.PasswordText);
         confirmaPasswordUser = (TextView) findViewById(R.id.reTypePasswordText);
-
-
-
-
-
-
-
+        dataNascimento = (TextView) findViewById(R.id.dataNascimento);
 
         Button criar = (Button) findViewById(R.id.button2);
 
@@ -64,9 +62,10 @@ public class SignUp extends AppCompatActivity {
 
                     password = passwordUser.getText().toString();
                     confirmaPassword = confirmaPasswordUser.getText().toString();
+                    dataNascimentoStr = dataNascimento.getText().toString();
 
                     if (password.equals(confirmaPassword) && !password.equals("") && !firstName.equals("") &&
-                            !secondName.equals("") && !email.equals("") && !peso.equals("") && !altura.equals("") && peso.matches("^[0-9]{2,3}$") && altura.matches("^[0-9]{2,3}$")) {
+                            !secondName.equals("") && !email.equals("") && !peso.equals("") && !altura.equals("") && peso.matches("^[0-9]{2,3}$") && altura.matches("^[0-9]{2,3}$") && !dataNascimento.equals("")) {
                         Intent intent = new Intent(getApplicationContext(), MenuPrincipal.class);
                         startActivity(intent);
                     }else{
