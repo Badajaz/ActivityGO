@@ -41,11 +41,11 @@ public class SignUp extends AppCompatActivity {
         confirmaPasswordUser = (TextView) findViewById(R.id.reTypePasswordText);
 
 
-        firstName = firstNameUser.getText().toString();
-        secondName = secondNameUser.getText().toString();
-        email = emailUser.getText().toString();
-        peso = pesoUser.getText().toString();
-        altura = alturaUser.getText().toString();
+
+
+
+
+
 
         Button criar = (Button) findViewById(R.id.button2);
 
@@ -53,14 +53,56 @@ public class SignUp extends AppCompatActivity {
                 @Override
 
                 public void onClick(View v) {
+                    firstName = firstNameUser.getText().toString();
+                    secondName = secondNameUser.getText().toString();
+                    email = emailUser.getText().toString();
+
+                    //TODO /*validar o facto de ser um número*/
+                    peso = pesoUser.getText().toString();
+                    //TODO /*validar o facto de ser um número e decidir se vai ser em cm ou m*/
+                    altura = alturaUser.getText().toString();
+
                     password = passwordUser.getText().toString();
                     confirmaPassword = confirmaPasswordUser.getText().toString();
-                    if (password.equals(confirmaPassword)) {
+
+                    if (password.equals(confirmaPassword) && !password.equals("") && !firstName.equals("") &&
+                            !secondName.equals("") && !email.equals("") && !peso.equals("") && !altura.equals("") && peso.matches("^[0-9]{2,3}$") && altura.matches("^[0-9]{2,3}$")) {
                         Intent intent = new Intent(getApplicationContext(), MenuPrincipal.class);
                         startActivity(intent);
                     }else{
-                        Toast.makeText(getBaseContext(), "Palavras passes nao são iguais",
-                                Toast.LENGTH_SHORT).show();
+
+                        if (firstName.equals("")){
+                            firstNameUser.setError("O  Primeiro nome não foi preenchido");
+                        }
+
+                        if (secondName.equals("")){
+                            secondNameUser.setError("O  segundo nome não foi preenchido");
+                        }
+
+                        if (email.equals("")){
+                            emailUser.setError("O email não foi preenchido");
+                        }
+
+                        if (peso.equals("")){
+                            pesoUser.setError("O peso não foi preenchido");
+                        }
+
+                        if (altura.equals("")){
+                            alturaUser.setError("A altura não foi preenchida");
+                        }
+
+                        if (password.equals("")){
+                            passwordUser.setError("A password não foi preenchida");
+                        }
+
+                        if (confirmaPassword.equals("")){
+                            confirmaPasswordUser.setError("A confirmação não foi preenchida");
+                        }
+
+                        if (!password.equals(confirmaPassword)){
+                            passwordUser.setError("As passwords não são iguais");
+                            confirmaPasswordUser.setError("As passwords não são iguais");
+                        }
                     }
                 }
             });
