@@ -7,6 +7,15 @@
     android:background="#329d92"
     tools:context=".LoginScreen">
 
+    <!--
+    springgreen	#00FF7F
+    mediumspringgreen	#00FA9A
+    lightgreen	#90EE90 (atual)
+    palegreen	#98FB98
+    mediumseagreen	#3CB371
+    lightseagreen	#20B2AA
+    -->
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
@@ -14,7 +23,7 @@
 
     <EditText
         android:id="@+id/usernameText"
-        android:layout_width="250dp"
+        android:layout_width="200dp"
         android:layout_height="55dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
@@ -22,10 +31,10 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/round_edittext_states"
-        android:drawableLeft="@drawable/user_icon"
+        android:backgroundTint="#ffffff"
         android:ems="10"
         android:hint="  Nome de utilizador"
+        android:drawableLeft="@drawable/user_icon"
         android:inputType="text|textPersonName"
         android:textSize="16sp"
         android:typeface="sans"
@@ -38,15 +47,15 @@
 
     <EditText
         android:id="@+id/passwordText"
-        android:layout_width="250dp"
+        android:layout_width="200dp"
         android:layout_height="55dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/button_border"
-        android:drawableLeft="@drawable/lock_icon"
+        android:backgroundTint="#ffffff"
         android:ems="10"
+        android:drawableLeft="@drawable/lock_icon"
         android:hint="  Palavra-chave"
         android:inputType="textPassword"
         android:textSize="16sp"
@@ -59,14 +68,13 @@
 
     <Button
         android:id="@+id/buttonLogin"
-        android:layout_width="250dp"
+        android:layout_width="200dp"
         android:layout_height="55dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="7dp"
         android:background="@drawable/button_border"
-        android:onClick="fazerLogin"
         android:text="LOGIN"
         android:textColor="#000000"
         android:textSize="16sp"
@@ -80,7 +88,7 @@
 
     <Button
         android:id="@+id/criarContaButton"
-        android:layout_width="250dp"
+        android:layout_width="200dp"
         android:layout_height="55dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="40dp"
