@@ -46,6 +46,9 @@ public class SignUp extends AppCompatActivity {
     private int futebolChecked = 0;
     private int ciclismoChecked = 0;
     private ArrayList<CheckBox> checkboxes = new ArrayList<CheckBox>();
+    private ArrayList<String> userProfile = new ArrayList<>();
+
+    public int alreadyRegister = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,9 +101,40 @@ public class SignUp extends AppCompatActivity {
                         ((masculinoChecked == 1 && femininoChecked == 0) || (masculinoChecked == 0 && femininoChecked == 1)) &&
                         isAnyItemCheck() && !dataNascimentoStr.equals("") && !paisUserStr.equals("")) {
 
+                    userProfile.add(secondName);
+                    userProfile.add(email);
+                    userProfile.add(peso);
+                    userProfile.add(altura);
+                    userProfile.add(password);
+                    userProfile.add(dataNascimentoStr);
+                    userProfile.add(paisUserStr);
+                    if (masculinoChecked == 1){
+                        userProfile.add(masculino.getText().toString());
+                    }
+                    if (femininoChecked == 1){
+                        userProfile.add(feminino.getText().toString());
+                    }
+                    if (caminhadaChecked == 1){
+                        userProfile.add(caminhada.getText().toString());
+                    }
+                    if (corridaChecked == 1){
+                        userProfile.add(corrida.getText().toString());
+                    }
+                    if (ciclismoChecked == 1){
+                        userProfile.add(ciclismo.getText().toString());
+                    }
+
+                    if (futebolChecked == 1){
+                        userProfile.add(futebol.getText().toString());
+                    }
+
+                    alreadyRegister = 1;
+
+
                     Intent intent = new Intent(getBaseContext(), LoginScreen.class);
-                    intent.putExtra("EXTRA_SESSION_ID", firstName);
-                    intent.putExtra("PASSWORD", password);
+                    intent.putExtra("FIRSTNAME",firstName);
+                    intent.putExtra("PASSWORD",password);
+                    intent.putExtra("USERPROFILE",userProfile);
                     startActivity(intent);
                 } else {
 
@@ -219,4 +253,5 @@ public class SignUp extends AppCompatActivity {
         }
         return false;
     }
+
 }
