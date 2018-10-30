@@ -26,9 +26,12 @@ public class RunMenuInicial extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_run_menu_inicial, container, false);
+
         ((MenuPrincipal) getActivity()).getSupportActionBar().setTitle("Activity GO:");
+
         final Button historial = (Button) v.findViewById(R.id.buttonHistorial);
         Button irCorrida = (Button) v.findViewById(R.id.buttonIrCorrida);
+        Button meusGrupos = (Button) v.findViewById(R.id.buttonMeusGrupos);
 
         historial.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +54,19 @@ public class RunMenuInicial extends Fragment {
                 ft.replace(R.id.fragment_container,  SelectedFragment,"RunMenuInicial");
                 ft.addToBackStack("RunFragment");
                 ft.commit();
+
+            }
+        });
+
+        meusGrupos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment SelectedFragmentMeusGrupos = new MyGroupsFragment();
+                FragmentManager fmMeusGrupos = getFragmentManager();
+                FragmentTransaction ftMeusGrupos = fmMeusGrupos.beginTransaction();
+                ftMeusGrupos.replace(R.id.fragment_container,  SelectedFragmentMeusGrupos,"RunMenuInicial");
+                ftMeusGrupos.addToBackStack("RunFragment");
+                ftMeusGrupos.commit();
 
             }
         });

@@ -27,6 +27,7 @@ public class GroupFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_group, container, false);
         Button criargrupo = (Button) v.findViewById(R.id.buttonCriarGrupo);
         Button juntargrupo = (Button) v.findViewById(R.id.buttonJuntarGrupo);
+        Button myGroups = (Button) v.findViewById(R.id.buttonMyGroups);
 
         juntargrupo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +50,18 @@ public class GroupFragment extends Fragment {
                 ft.replace(R.id.fragment_container,  SelectedFragment,"CriarGrupoFragment");
                 ft.addToBackStack("GroupFragment");
                 ft.commit();
+            }
+        });
+
+        myGroups.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment myGroupsSelectedFragment = new MyGroupsFragment();
+                FragmentManager fmMyGroups = getFragmentManager();
+                FragmentTransaction ftMyGroups = fmMyGroups.beginTransaction();
+                ftMyGroups.replace(R.id.fragment_container,  myGroupsSelectedFragment,"CriarGrupoFragment");
+                ftMyGroups.addToBackStack("GroupFragment");
+                ftMyGroups.commit();
             }
         });
 

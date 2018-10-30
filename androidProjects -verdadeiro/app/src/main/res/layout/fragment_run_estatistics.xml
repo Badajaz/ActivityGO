@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,8 +14,10 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:layout_weight="1"
         android:background="@drawable/edit_text_shape"
         android:drawableEnd="@drawable/calendar_icon2"
@@ -22,22 +25,31 @@
         android:text="TextView"
         android:textAlignment="center"
         android:textSize="20sp"
-        android:typeface="sans" />
+        android:typeface="sans"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.039" />
 
     <TextView
         android:id="@+id/dataValue"
         android:layout_width="120dp"
         android:layout_height="44dp"
         android:layout_alignBottom="@+id/dataLabel"
-        android:layout_marginStart="30dp"
-        android:layout_marginBottom="20dp"
         android:background="@drawable/edit_text_shape4"
         android:fontFamily="sans-serif"
         android:gravity="center"
         android:text="TextView"
         android:textAlignment="center"
         android:textSize="18sp"
-        android:typeface="sans" />
+        android:typeface="sans"
+        app:layout_constraintBottom_toBottomOf="@+id/dataLabel"
+        app:layout_constraintEnd_toEndOf="@+id/dataLabel"
+        app:layout_constraintHorizontal_bias="0.266"
+        app:layout_constraintStart_toStartOf="@+id/dataLabel"
+        app:layout_constraintTop_toTopOf="@+id/dataLabel"
+        app:layout_constraintVertical_bias="0.782" />
 
     <TextView
         android:id="@+id/duracaoEst"
@@ -46,10 +58,10 @@
         android:layout_alignTop="@+id/duracaoValue"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="-33dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="72dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/edit_text_shape"
         android:drawableEnd="@drawable/clock_background"
         android:fontFamily="sans-serif"
@@ -57,7 +69,12 @@
         android:text="TextView"
         android:textAlignment="center"
         android:textSize="20sp"
-        android:typeface="sans" />
+        android:typeface="sans"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dataLabel"
+        app:layout_constraintVertical_bias="0.057" />
 
     <TextView
         android:id="@+id/duracaoValue"
@@ -65,16 +82,19 @@
         android:layout_height="44dp"
         android:layout_alignStart="@+id/dataValue"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="137dp"
-        android:layout_marginBottom="20dp"
         android:background="@drawable/edit_text_shape4"
         android:fontFamily="sans-serif"
         android:gravity="center"
         android:text="TextView"
         android:textAlignment="center"
         android:textSize="18sp"
-        android:typeface="sans" />
+        android:typeface="sans"
+        app:layout_constraintBottom_toBottomOf="@+id/duracaoEst"
+        app:layout_constraintEnd_toEndOf="@+id/duracaoEst"
+        app:layout_constraintHorizontal_bias="0.266"
+        app:layout_constraintStart_toStartOf="@+id/duracaoEst"
+        app:layout_constraintTop_toTopOf="@+id/duracaoEst"
+        app:layout_constraintVertical_bias="0.804" />
 
     <TextView
         android:id="@+id/distanciaLabel"
@@ -83,10 +103,10 @@
         android:layout_alignEnd="@+id/dataLabel"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="208dp"
-        android:layout_marginEnd="2dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/edit_text_shape"
         android:drawableEnd="@drawable/distance_ruler"
         android:fontFamily="sans-serif"
@@ -94,38 +114,54 @@
         android:text="TextView"
         android:textAlignment="center"
         android:textSize="20sp"
-        android:typeface="sans" />
+        android:typeface="sans"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/duracaoEst"
+        app:layout_constraintVertical_bias="0.057" />
 
     <TextView
         android:id="@+id/distanciaValue"
         android:layout_width="120dp"
         android:layout_height="44dp"
         android:layout_alignBottom="@+id/distanciaLabel"
-        android:layout_marginStart="28dp"
-        android:layout_marginBottom="20dp"
         android:background="@drawable/edit_text_shape4"
         android:fontFamily="sans-serif"
         android:gravity="center"
         android:text="TextView"
         android:textAlignment="center"
         android:textSize="18sp"
-        android:typeface="sans" />
+        android:typeface="sans"
+        app:layout_constraintBottom_toBottomOf="@+id/distanciaLabel"
+        app:layout_constraintEnd_toEndOf="@+id/distanciaLabel"
+        app:layout_constraintHorizontal_bias="0.266"
+        app:layout_constraintStart_toStartOf="@+id/distanciaLabel"
+        app:layout_constraintTop_toTopOf="@+id/distanciaLabel"
+        app:layout_constraintVertical_bias="0.739" />
 
     <Button
         android:id="@+id/buttonCriarGrupo"
         android:layout_width="300dp"
         android:layout_height="90dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="11dp"
-        android:layout_marginTop="310dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/edit_text_shape"
         android:drawableEnd="@drawable/route_orange_icon"
         android:fontFamily="sans-serif"
         android:gravity="top"
         android:text="Ver o meu percurso:"
+        android:textAllCaps="false"
         android:textAlignment="center"
         android:textSize="20sp"
-        android:typeface="sans" />
+        android:typeface="sans"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/distanciaLabel"
+        app:layout_constraintVertical_bias="0.094" />
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

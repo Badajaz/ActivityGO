@@ -9,17 +9,20 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ChalengeFragment extends Fragment {
+public class MyGroupsFragment extends Fragment {
 
-    public ChalengeFragment() {
+
+    public MyGroupsFragment() {
         // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ((MenuPrincipal) getActivity()).getSupportActionBar().setTitle("Desafios:");
-        View v = inflater.inflate(R.layout.fragment_chalenge, container, false);
+        // Inflate the layout for this fragment
+        ((MenuPrincipal) getActivity()).getSupportActionBar().setTitle("Os meus grupos:");
+
+        View v = inflater.inflate(R.layout.fragment_my_groups, container, false);
         return v;
     }
 }
