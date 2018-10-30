@@ -7,8 +7,6 @@
     android:background="#329d92"
     tools:context=".AchievementsFragment">
 
-    <!-- Por alguma razão esta layout tem de começar aqui
-    ou então é comida pela página e fica desaparecida-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"

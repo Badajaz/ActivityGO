@@ -26,10 +26,9 @@ public class RunMenuInicial extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_run_menu_inicial, container, false);
-
+        ((MenuPrincipal) getActivity()).getSupportActionBar().setTitle("Activity GO:");
         final Button historial = (Button) v.findViewById(R.id.buttonHistorial);
         Button irCorrida = (Button) v.findViewById(R.id.buttonIrCorrida);
-
 
         historial.setOnClickListener(new View.OnClickListener() {
             @Override

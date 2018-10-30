@@ -1,14 +1,12 @@
 package com.example.android.activitygo;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -21,6 +19,7 @@ public class SignUp extends AppCompatActivity {
     private TextView alturaUser;
     private TextView passwordUser;
     private TextView dataNascimento;
+    private TextView paisUser;
 
     private String firstName;
     private String secondName;
@@ -31,7 +30,7 @@ public class SignUp extends AppCompatActivity {
     private TextView confirmaPasswordUser;
     private String confirmaPassword;
     private String dataNascimentoStr;
-
+    private String paisUserStr;
 
     private CheckBox masculino;
     private CheckBox feminino;
@@ -40,7 +39,6 @@ public class SignUp extends AppCompatActivity {
     private CheckBox futebol;
     private CheckBox ciclismo;
 
-
     private int masculinoChecked = 0;
     private int femininoChecked = 0;
     private int corridaChecked = 0;
@@ -48,7 +46,6 @@ public class SignUp extends AppCompatActivity {
     private int futebolChecked = 0;
     private int ciclismoChecked = 0;
     private ArrayList<CheckBox> checkboxes = new ArrayList<CheckBox>();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +61,7 @@ public class SignUp extends AppCompatActivity {
         passwordUser = (TextView) findViewById(R.id.PasswordText);
         confirmaPasswordUser = (TextView) findViewById(R.id.reTypePasswordText);
         dataNascimento = (TextView) findViewById(R.id.DataNascimento);
+        paisUser = (TextView) findViewById(R.id.paisUser);
 
         masculino = (CheckBox) findViewById(R.id.Masculino);
         feminino = (CheckBox) findViewById(R.id.Feminino);
@@ -71,7 +69,6 @@ public class SignUp extends AppCompatActivity {
         corrida = (CheckBox) findViewById(R.id.corrida);
         futebol = (CheckBox) findViewById(R.id.futebol);
         ciclismo = (CheckBox) findViewById(R.id.ciclismo);
-
 
         Button criar = (Button) findViewById(R.id.button2);
 
@@ -91,24 +88,25 @@ public class SignUp extends AppCompatActivity {
                 password = passwordUser.getText().toString();
                 confirmaPassword = confirmaPasswordUser.getText().toString();
                 dataNascimentoStr = dataNascimento.getText().toString();
+                paisUserStr = paisUser.getText().toString();
 
 
                 if (password.equals(confirmaPassword) && !password.equals("") && !firstName.equals("") &&
                         !secondName.equals("") && !email.equals("") && !peso.equals("") && !altura.equals("") &&
                         peso.matches("^[0-9][0-9]{2,3}$") && altura.matches("^[0-9][0-9]{2,3}$") &&
                         ((masculinoChecked == 1 && femininoChecked == 0) || (masculinoChecked == 0 && femininoChecked == 1)) &&
-                        isAnyItemCheck() && !dataNascimentoStr.equals("")) {
+                        isAnyItemCheck() && !dataNascimentoStr.equals("") && !paisUserStr.equals("")) {
 
                     Intent intent = new Intent(getApplicationContext(), MenuPrincipal.class);
                     startActivity(intent);
                 } else {
 
                     if (firstName.equals("")) {
-                        firstNameUser.setError("O  Primeiro nome não foi preenchido");
+                        firstNameUser.setError("O Primeiro nome não foi preenchido");
                     }
 
                     if (secondName.equals("")) {
-                        secondNameUser.setError("O  segundo nome não foi preenchido");
+                        secondNameUser.setError("O apelido não foi preenchido");
                     }
 
                     if (email.equals("")) {
@@ -160,6 +158,10 @@ public class SignUp extends AppCompatActivity {
                         futebol.requestFocus();
                         ciclismo.setError("Não selecionou nenhuma a caixa");
                         ciclismo.requestFocus();
+                    }
+
+                    if (paisUser.equals("")) {
+                        firstNameUser.setError("O País não foi preenchido");
                     }
 
                 }

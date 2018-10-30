@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#329d92"
-        android:minHeight="?attr/actionBarSize"></android.support.v7.widget.Toolbar>
+        android:minHeight="?attr/actionBarSize" />
 
 
     <android.support.design.widget.BottomNavigationView
@@ -23,12 +23,12 @@
         android:layout_alignParentBottom="true"
         android:background="#DCDCDC"
         app:labelVisibilityMode="unlabeled"
-        app:menu="@menu/nav_items"></android.support.design.widget.BottomNavigationView>
+        app:menu="@menu/nav_items" />
 
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="454dp"
+        android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"

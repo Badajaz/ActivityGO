@@ -19,7 +19,7 @@ public class ChalengeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        getActivity().setTitle("Desafios");
+        ((MenuPrincipal) getActivity()).getSupportActionBar().setTitle("Desafios:");
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_chalenge, container, false);

@@ -22,7 +22,7 @@ public class RankingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        getActivity().setTitle("Rankings");
+        ((MenuPrincipal) getActivity()).getSupportActionBar().setTitle("Rankings:");
 
         View v = inflater.inflate(R.layout.fragment_rankings, container, false);
         Button corridaGeral = (Button) v.findViewById(R.id.buttonCorridaGeral);
