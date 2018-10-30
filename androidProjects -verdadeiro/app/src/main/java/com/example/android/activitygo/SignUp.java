@@ -76,6 +76,7 @@ public class SignUp extends AppCompatActivity {
             @Override
 
             public void onClick(View v) {
+
                 firstName = firstNameUser.getText().toString();
                 secondName = secondNameUser.getText().toString();
                 email = emailUser.getText().toString();
@@ -93,11 +94,13 @@ public class SignUp extends AppCompatActivity {
 
                 if (password.equals(confirmaPassword) && !password.equals("") && !firstName.equals("") &&
                         !secondName.equals("") && !email.equals("") && !peso.equals("") && !altura.equals("") &&
-                        peso.matches("^[0-9][0-9]{2,3}$") && altura.matches("^[0-9][0-9]{2,3}$") &&
+                        peso.matches("[1-9]\\d{1,2}") && altura.matches("^[1-9]\\d{1,2}") &&
                         ((masculinoChecked == 1 && femininoChecked == 0) || (masculinoChecked == 0 && femininoChecked == 1)) &&
                         isAnyItemCheck() && !dataNascimentoStr.equals("") && !paisUserStr.equals("")) {
 
-                    Intent intent = new Intent(getApplicationContext(), MenuPrincipal.class);
+                    Intent intent = new Intent(getBaseContext(), LoginScreen.class);
+                    intent.putExtra("EXTRA_SESSION_ID", firstName);
+                    intent.putExtra("PASSWORD", password);
                     startActivity(intent);
                 } else {
 
@@ -129,11 +132,11 @@ public class SignUp extends AppCompatActivity {
                         confirmaPasswordUser.setError("A confirmação não foi preenchida");
                     }
 
-                    if (!peso.matches("^[0-9][0-9]{2,3}$")) {
+                    if (!peso.matches("^[1-9]\\d{1,2}")) {
                         pesoUser.setError("Não tem os digitos certos");
                     }
 
-                    if (!altura.matches("^[0-9][0-9]{2,3}$")) {
+                    if (!altura.matches("^[1-9]\\d{1,2}")) {
                         alturaUser.setError("Não tem os digitos certos");
                     }
 
