@@ -14,6 +14,7 @@ public class SignUp extends AppCompatActivity {
 
     private TextView firstNameUser;
     private TextView secondNameUser;
+    private TextView username;
     private TextView emailUser;
     private TextView pesoUser;
     private TextView alturaUser;
@@ -23,6 +24,7 @@ public class SignUp extends AppCompatActivity {
 
     private String firstName;
     private String secondName;
+    private String usernameStr;
     private String email;
     private String peso;
     private String altura;
@@ -58,6 +60,7 @@ public class SignUp extends AppCompatActivity {
         // Preparar para guardar os valores
         firstNameUser = (TextView) findViewById(R.id.FirstNameText);
         secondNameUser = (TextView) findViewById(R.id.LastNameText);
+        username = (TextView) findViewById(R.id.username);
         emailUser = (TextView) findViewById(R.id.EmailText);
         pesoUser = (TextView) findViewById(R.id.WeightText);
         alturaUser = (TextView) findViewById(R.id.HeightText);
@@ -81,6 +84,7 @@ public class SignUp extends AppCompatActivity {
             public void onClick(View v) {
 
                 firstName = firstNameUser.getText().toString();
+                usernameStr = username.getText().toString();
                 secondName = secondNameUser.getText().toString();
                 email = emailUser.getText().toString();
 
@@ -94,50 +98,50 @@ public class SignUp extends AppCompatActivity {
                 dataNascimentoStr = dataNascimento.getText().toString();
                 paisUserStr = paisUser.getText().toString();
 
-
                 if (password.equals(confirmaPassword) && !password.equals("") && !firstName.equals("") &&
-                        !secondName.equals("") && !email.equals("") && !peso.equals("") && !altura.equals("") &&
+                        !secondName.equals("") && !usernameStr.equals("") && !email.equals("") && !peso.equals("") && !altura.equals("") &&
                         peso.matches("[1-9]\\d{1,2}") && altura.matches("^[1-9]\\d{1,2}") &&
                         ((masculinoChecked == 1 && femininoChecked == 0) || (masculinoChecked == 0 && femininoChecked == 1)) &&
                         isAnyItemCheck() && !dataNascimentoStr.equals("") && !paisUserStr.equals("")) {
 
+                    userProfile.add(firstName);
                     userProfile.add(secondName);
+                    userProfile.add(usernameStr);
                     userProfile.add(email);
                     userProfile.add(peso);
                     userProfile.add(altura);
                     userProfile.add(password);
                     userProfile.add(dataNascimentoStr);
                     userProfile.add(paisUserStr);
-                    if (masculinoChecked == 1){
+                    if (masculinoChecked == 1) {
                         userProfile.add(masculino.getText().toString());
                     }
-                    if (femininoChecked == 1){
+                    if (femininoChecked == 1) {
                         userProfile.add(feminino.getText().toString());
                     }
-                    if (caminhadaChecked == 1){
+                    if (caminhadaChecked == 1) {
                         userProfile.add(caminhada.getText().toString());
                     }
-                    if (corridaChecked == 1){
+                    if (corridaChecked == 1) {
                         userProfile.add(corrida.getText().toString());
                     }
-                    if (ciclismoChecked == 1){
+                    if (ciclismoChecked == 1) {
                         userProfile.add(ciclismo.getText().toString());
                     }
-
-                    if (futebolChecked == 1){
+                    if (futebolChecked == 1) {
                         userProfile.add(futebol.getText().toString());
                     }
 
+                    // para confirmar que está registado
                     alreadyRegister = 1;
 
-
                     Intent intent = new Intent(getBaseContext(), LoginScreen.class);
-                    intent.putExtra("FIRSTNAME",firstName);
-                    intent.putExtra("PASSWORD",password);
-                    intent.putExtra("USERPROFILE",userProfile);
+                    intent.putExtra("USERNAME", usernameStr);
+                    intent.putExtra("PASSWORD", password);
+                    intent.putExtra("USERPROFILE", userProfile);
+                    intent.putExtra("ALREADYREGISTER", alreadyRegister);
                     startActivity(intent);
                 } else {
-
                     if (firstName.equals("")) {
                         firstNameUser.setError("O Primeiro nome não foi preenchido");
                     }
@@ -203,21 +207,11 @@ public class SignUp extends AppCompatActivity {
 
                 }
             }
-        });/*
-        Bundle args = new Bundle();
-
-        args.putString("firstName", firstName);
-        args.putString("secondName", secondName);
-        args.putString("email", email);
-        args.putString("peso", peso);
-        args.putString("altura", altura);
-        args.putString("password", password);
-*/
+        });
     }
 
     public void getMasculinoItem(View v) {
         masculinoChecked = 1;
-
     }
 
     public void getFemininoItem(View v) {
@@ -253,5 +247,4 @@ public class SignUp extends AppCompatActivity {
         }
         return false;
     }
-
 }

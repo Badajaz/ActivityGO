@@ -3,6 +3,7 @@ package com.example.android.activitygo;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -21,6 +22,7 @@ import android.widget.FrameLayout;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MenuPrincipal extends AppCompatActivity {
@@ -29,12 +31,17 @@ public class MenuPrincipal extends AppCompatActivity {
     private Fragment SelectedFragment;
     private Toolbar myToolbar;
     private Toolbar toolbarCima;
-
+    private ArrayList<String> profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_principal);
+
+        profile = (ArrayList<String>) getIntent().getSerializableExtra("USERPROFILE");
+        if(profile != null) {
+            Toast.makeText(getApplicationContext(), "PROFILE != NULL", Toast.LENGTH_LONG).show();
+        }
 
         SelectedFragment = new RunMenuInicial();
         FragmentManager fm = getFragmentManager();
