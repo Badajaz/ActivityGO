@@ -8,9 +8,6 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class AchievementsFragment extends Fragment {
 
     public AchievementsFragment() {
@@ -22,16 +19,8 @@ public class AchievementsFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         ((MenuPrincipal) getActivity()).getSupportActionBar().setTitle("Conquistas:");
-
+        View v = inflater.inflate(R.layout.fragment_achievements, container, false);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_achievements, container, false);
+        return v;
     }
-
-    /*
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
-        menuInflater.inflate(R.menu.menu_main,menu);
-        super.onCreateOptionsMenu(menu,menuInflater);
-    }
-    */
 }

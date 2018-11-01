@@ -1,10 +1,10 @@
 package com.example.android.activitygo;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,8 +46,8 @@ public class GroupFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                 Intent intent = new Intent(v.getContext(), GroupTab.class);
-                 startActivity(intent);
+                Intent intent = new Intent(v.getContext(), GroupTab.class);
+                startActivity(intent);
                 /*Fragment SelectedFragment = new CriarGrupoFragment();
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
@@ -63,7 +63,7 @@ public class GroupFragment extends Fragment {
                 Fragment myGroupsSelectedFragment = new MyGroupsFragment();
                 FragmentManager fmMyGroups = getFragmentManager();
                 FragmentTransaction ftMyGroups = fmMyGroups.beginTransaction();
-                ftMyGroups.replace(R.id.fragment_container,  myGroupsSelectedFragment,"CriarGrupoFragment");
+                ftMyGroups.replace(R.id.fragment_container, myGroupsSelectedFragment, "CriarGrupoFragment");
                 ftMyGroups.addToBackStack("GroupFragment");
                 ftMyGroups.commit();
             }

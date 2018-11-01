@@ -154,7 +154,7 @@
                 android:typeface="sans"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/WeightText" />
-            
+
             <TextView
                 android:id="@+id/informacaoPrivada"
                 android:layout_width="300dp"
