@@ -2,6 +2,7 @@ package com.example.android.activitygo;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -32,24 +33,27 @@ public class GroupFragment extends Fragment {
         juntargrupo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment SelectedFragment = new JuntarGrupoFragment();
+               /* Fragment SelectedFragment = new JuntarGrupoFragment();
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 ft.replace(R.id.fragment_container,  SelectedFragment,"JuntarGrupoFragment");
                 ft.addToBackStack("GroupFragment");
-                ft.commit();
+                ft.commit();*/
             }
         });
 
         criargrupo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment SelectedFragment = new CriarGrupoFragment();
+
+                 Intent intent = new Intent(v.getContext(), GroupTab.class);
+                 startActivity(intent);
+                /*Fragment SelectedFragment = new CriarGrupoFragment();
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 ft.replace(R.id.fragment_container,  SelectedFragment,"CriarGrupoFragment");
                 ft.addToBackStack("GroupFragment");
-                ft.commit();
+                ft.commit();*/
             }
         });
 

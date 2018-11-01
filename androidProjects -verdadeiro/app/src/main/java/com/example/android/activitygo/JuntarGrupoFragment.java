@@ -3,7 +3,7 @@ package com.example.android.activitygo;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +12,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 /**
  * A simple {@link Fragment} subclass.
  */
-public class JuntarGrupoFragment extends Fragment {
+public class JuntarGrupoFragment extends android.support.v4.app.Fragment {
+
+
+    private static final String TAG = "CriarGrupo";
 
     private String message;
     private Bundle bundle;
@@ -51,9 +55,9 @@ public class JuntarGrupoFragment extends Fragment {
 
                // TextView myAwesomeTextView = v.findViewById(R.id.textViewPesquisar);
                 //myAwesomeTextView.setText(message);
+
                 Fragment SelectedFragment = new TextViewJuntarFragment();
-                FragmentManager man = getFragmentManager();
-                FragmentTransaction tran = man.beginTransaction();
+                android.support.v4.app.FragmentTransaction tran = getFragmentManager().beginTransaction();
                 tran.replace(R.id.frame_test, SelectedFragment);
                 SelectedFragment.setArguments(bundle);
                 tran.commit();

@@ -3,7 +3,7 @@ package com.example.android.activitygo;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +15,10 @@ import android.widget.Toast;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CriarGrupoFragment extends Fragment {
+public class CriarGrupoFragment extends android.support.v4.app.Fragment {
+
+
+    private static final String TAG = "juntarGrupo";
 
     private Button criarGrupo;
     private String txtPesquisa;
