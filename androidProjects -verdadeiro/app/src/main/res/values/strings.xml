@@ -13,6 +13,7 @@
     <string name="nav_achievements">Achievements</string>
     <string name="nav_rankings">Rankings</string>
     <string name="nav_groups">Groups</string>
+    <string name="conquistas">Conquistas: </string>
 
     <string name="NomeGrupo">"  "Nome do Grupo</string>
     <string name="DescricaoGrupo">"  "Descrição</string>

@@ -95,7 +95,7 @@
         android:onClick="criarConta"
         android:text="@string/QueroRegistar"
         android:textColor="#ffffff"
-        android:textSize="35sp"
+        android:textSize="30sp"
         android:typeface="sans"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -3,6 +3,7 @@ package com.example.android.activitygo;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -31,9 +32,6 @@ public class MenuPrincipal extends AppCompatActivity {
         setContentView(R.layout.activity_menu_principal);
 
         profile = (ArrayList<String>) getIntent().getSerializableExtra("USERPROFILE");
-        if (profile != null) {
-            Toast.makeText(getApplicationContext(), "PROFILE != NULL", Toast.LENGTH_LONG).show();
-        }
 
         SelectedFragment = new RunMenuInicial();
         FragmentManager fm = getFragmentManager();
@@ -46,12 +44,6 @@ public class MenuPrincipal extends AppCompatActivity {
         setSupportActionBar(toolbarCima);
         getSupportActionBar().setTitle("ActivityGO");
 
-
-        /*
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setIcon(R.mipmap.ic_launcher);
-        */
         BottomNavigationView mMainNav = findViewById(R.id.NavBar);
         mMainNav.setOnNavigationItemSelectedListener(navListener);
 
@@ -79,12 +71,16 @@ public class MenuPrincipal extends AppCompatActivity {
                             break;
 
                         case R.id.achievementItem:
-                            SelectedFragment = new AchievementsFragment();
+                            /*SelectedFragment = new AchievementsFragment();
                             FragmentManager fmanager = getFragmentManager();
                             FragmentTransaction ftransaction = fmanager.beginTransaction();
                             ftransaction.replace(R.id.fragment_container, SelectedFragment);
                             ftransaction.commit();
-                            break;
+                            break;*/
+
+                            // chamar tab das achievements
+                            Intent intent = new Intent(getApplicationContext(), AchievementsTab.class);
+                            startActivity(intent);
 
                         case R.id.RankingItem:
                             SelectedFragment = new RankingsFragment();
