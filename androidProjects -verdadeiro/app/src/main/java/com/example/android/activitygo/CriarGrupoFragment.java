@@ -63,7 +63,6 @@ public class CriarGrupoFragment extends android.support.v4.app.Fragment {
                 bundle.putString("DA_LHE", "DEU CRL");
                 fragment.setArguments(bundle);
                 */
-
             }
         });
         return v;
