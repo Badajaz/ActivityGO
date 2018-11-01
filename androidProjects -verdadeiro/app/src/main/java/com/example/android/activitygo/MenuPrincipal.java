@@ -1,25 +1,17 @@
 package com.example.android.activitygo;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.ClipData;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
-import android.provider.Settings;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
-import android.app.Fragment;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.FrameLayout;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -39,14 +31,14 @@ public class MenuPrincipal extends AppCompatActivity {
         setContentView(R.layout.activity_menu_principal);
 
         profile = (ArrayList<String>) getIntent().getSerializableExtra("USERPROFILE");
-        if(profile != null) {
+        if (profile != null) {
             Toast.makeText(getApplicationContext(), "PROFILE != NULL", Toast.LENGTH_LONG).show();
         }
 
         SelectedFragment = new RunMenuInicial();
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.add(R.id.fragment_container, SelectedFragment,"RunFragment");
+        ft.add(R.id.fragment_container, SelectedFragment, "RunFragment");
         //ft.addToBackStack("RunFragment");
         ft.commit();
 
@@ -82,7 +74,7 @@ public class MenuPrincipal extends AppCompatActivity {
                             SelectedFragment = new ChalengeFragment();
                             FragmentManager fman = getFragmentManager();
                             FragmentTransaction ftra = fman.beginTransaction();
-                            ftra.replace(R.id.fragment_container, SelectedFragment,"ChalengeFragment");
+                            ftra.replace(R.id.fragment_container, SelectedFragment, "ChalengeFragment");
                             ftra.commit();
                             break;
 
@@ -98,7 +90,7 @@ public class MenuPrincipal extends AppCompatActivity {
                             SelectedFragment = new RankingsFragment();
                             FragmentManager fmanag = getFragmentManager();
                             FragmentTransaction ftransactio = fmanag.beginTransaction();
-                            ftransactio.replace(R.id.fragment_container, SelectedFragment,"Ranking Item");
+                            ftransactio.replace(R.id.fragment_container, SelectedFragment, "Ranking Item");
                             ftransactio.commit();
                             break;
 
@@ -106,7 +98,7 @@ public class MenuPrincipal extends AppCompatActivity {
                             SelectedFragment = new GroupFragment();
                             FragmentManager fmana = getFragmentManager();
                             FragmentTransaction ftransacti = fmana.beginTransaction();
-                            ftransacti.replace(R.id.fragment_container, SelectedFragment,"GroupFragment");
+                            ftransacti.replace(R.id.fragment_container, SelectedFragment, "GroupFragment");
                             ftransacti.commit();
                             break;
 
@@ -120,18 +112,16 @@ public class MenuPrincipal extends AppCompatActivity {
             };
 
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main,menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         Fragment currentFragment = getFragmentManager().findFragmentById(R.id.fragment_container);
-       // Fragment page = getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":" + ViewPager.getCurrentItem());
+        // Fragment page = getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":" + ViewPager.getCurrentItem());
 
-        if (currentFragment.isVisible() && (currentFragment instanceof  RunMenuInicial)) {
+        if (currentFragment.isVisible() && (currentFragment instanceof RunMenuInicial)) {
             //MenuItem item = menu.findItem(R.id.BackButton);
             //item.setVisible(false);
         }
-
 
 
         // Fragment whichFragment=getVisibleFragment();
@@ -162,19 +152,32 @@ public class MenuPrincipal extends AppCompatActivity {
 
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch(item.getItemId()){
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
             case R.id.Settings:
                 SelectedFragment = new SettingsFragment();
                 FragmentManager fmSettings = getFragmentManager();
                 FragmentTransaction ftSettings = fmSettings.beginTransaction();
                 ftSettings.replace(R.id.fragment_container, SelectedFragment);
                 ftSettings.commit();
+
+                Bundle bundle = new Bundle();
+                bundle.putString("FIRSTNAME", profile.get(0));
+                bundle.putString("LASTNAME", profile.get(1));
+                ChangeProfileFragment cpf = new ChangeProfileFragment();
+                // bundle.putStringArrayList("USERPROFILE", profile);
+                //bundle.putSerializable("USERPROFILE", profile);
+                cpf.setArguments(bundle);
+
                 break;
 
             case R.id.BackButton:
                 getFragmentManager().popBackStack();
         }
         return true;
+    }
+
+    public ArrayList<String> getProfile(){
+        return this.profile;
     }
 }
