@@ -43,6 +43,9 @@ public class MenuPrincipal extends AppCompatActivity {
         toolbarCima = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbarCima);
         getSupportActionBar().setTitle("ActivityGO");
+        String iniciais= ""+profile.get(0).charAt(0)+profile.get(1).charAt(0);
+        getSupportActionBar().setSubtitle(iniciais);
+
 
         BottomNavigationView mMainNav = findViewById(R.id.NavBar);
         mMainNav.setOnNavigationItemSelectedListener(navListener);

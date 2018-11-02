@@ -1,5 +1,6 @@
 package com.example.android.activitygo;
 
+import android.app.FragmentTransaction;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -18,12 +19,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class GroupTab extends AppCompatActivity {
 
     private SectionsPageAdapter mSectionsPageAdapter;
     private ViewPager mViewPager;
-
+    public static String nomeGrupo;
+    private static FragmentManager fm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,16 +44,13 @@ public class GroupTab extends AppCompatActivity {
 
     }
 
+
     private void setupviewPager(ViewPager viewPager){
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
         adapter.addFragment(new CriarGrupoFragment(),"Criar Grupo");
         adapter.addFragment(new JuntarGrupoFragment(),"Juntar Grupo");
         viewPager.setAdapter(adapter);
     }
-
-
-
-
 
 
 }

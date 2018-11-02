@@ -60,12 +60,12 @@ public class GroupFragment extends Fragment {
         myGroups.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment myGroupsSelectedFragment = new MyGroupsFragment();
+                /*Fragment myGroupsSelectedFragment = new MyGroupsFragment();
                 FragmentManager fmMyGroups = getFragmentManager();
                 FragmentTransaction ftMyGroups = fmMyGroups.beginTransaction();
                 ftMyGroups.replace(R.id.fragment_container, myGroupsSelectedFragment, "CriarGrupoFragment");
                 ftMyGroups.addToBackStack("GroupFragment");
-                ftMyGroups.commit();
+                ftMyGroups.commit();*/
             }
         });
 

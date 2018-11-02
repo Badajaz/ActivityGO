@@ -3,6 +3,7 @@ package com.example.android.activitygo;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +20,7 @@ import android.widget.Toast;
 public class JuntarGrupoFragment extends android.support.v4.app.Fragment {
 
 
-    private static final String TAG = "CriarGrupo";
+    private static final String TAG = "JuntarGrupo";
 
     private String message;
     private Bundle bundle;
@@ -40,10 +41,10 @@ public class JuntarGrupoFragment extends android.support.v4.app.Fragment {
 
 
 
+
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
 
 
 
@@ -65,5 +66,6 @@ public class JuntarGrupoFragment extends android.support.v4.app.Fragment {
         });
         return v;
     }
+
 
 }

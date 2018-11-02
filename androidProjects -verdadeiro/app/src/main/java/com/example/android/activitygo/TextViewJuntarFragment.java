@@ -46,7 +46,7 @@ public class TextViewJuntarFragment extends Fragment {
         LinearLayout linearLayout = (LinearLayout)v.findViewById(R.id.layoutResultados);
 
 
-        if (resultados.equals("")){
+        if (text.equals("")){
             createTextView("Não Existem resultados", getContext(), linearLayout);
         }else{
             for (int i = 0 ;i < resultadosArray.length;i++)

@@ -3,6 +3,7 @@ package com.example.android.activitygo;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -18,7 +19,9 @@ import android.widget.Toast;
 public class CriarGrupoFragment extends android.support.v4.app.Fragment {
 
 
-    private static final String TAG = "juntarGrupo";
+
+    private static final String TAG = "CriarGrupo";
+
 
     private Button criarGrupo;
     private String txtPesquisa;
@@ -29,6 +32,9 @@ public class CriarGrupoFragment extends android.support.v4.app.Fragment {
     public CriarGrupoFragment() {
         // Required empty public constructor
     }
+
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,6 +59,8 @@ public class CriarGrupoFragment extends android.support.v4.app.Fragment {
                 txtPesquisa = nomeGrupo.getText().toString();
                 descricaoTxt = descricao.getText().toString();
                 desportoTxt = desporto.getText().toString();
+
+
                 Toast toast = Toast.makeText(getActivity(), "O seu grupo " +txtPesquisa+" foi criado!",
                         Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 800);
@@ -66,5 +74,9 @@ public class CriarGrupoFragment extends android.support.v4.app.Fragment {
             }
         });
         return v;
+
+
+
     }
+
 }

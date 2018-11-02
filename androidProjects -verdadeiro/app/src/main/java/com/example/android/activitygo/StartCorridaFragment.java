@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 
 /**
@@ -41,7 +42,7 @@ public class StartCorridaFragment extends Fragment {
         Button Stop = (Button) v.findViewById(R.id.StopRun);
         Button Start = (Button) v.findViewById(R.id.StartRun);
         chronometer = v.findViewById(R.id.chronometer);
-        
+
 
 
         Start.setOnClickListener(new View.OnClickListener() {

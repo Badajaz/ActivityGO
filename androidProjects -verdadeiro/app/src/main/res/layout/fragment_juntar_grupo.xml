@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/JuntarGroups"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#329d92"
@@ -49,8 +50,8 @@
         android:layout_alignParentEnd="true"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="16dp"
-        android:text="Procurar"
         android:background="@drawable/button_border"
+        android:text="Procurar"
         app:layout_constraintBaseline_toBaselineOf="@+id/NomeGrupo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/NomeGrupo" />
