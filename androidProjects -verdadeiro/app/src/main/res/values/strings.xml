@@ -32,4 +32,11 @@
     <string name="title_activity_group_tab">GroupTab</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
+
+    <string-array name = "contactosImportantes">
+        <item>Contactos Importantes</item>
+        <item>Emergências: 112</item>
+        <item>PSP Lisboa: 111222333</item>
+        <item>Inem Lisboa: 111222333</item>
+    </string-array>
 </resources>

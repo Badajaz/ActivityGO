@@ -34,11 +34,11 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
                 android:background="#329d92"
-                android:text="  Perfil:"
-                android:textStyle="bold"
                 android:ems="10"
+                android:text="  Perfil:"
                 android:textColor="#000000"
                 android:textSize="16sp"
+                android:textStyle="bold"
                 android:typeface="sans" />
 
             <Button
@@ -61,17 +61,17 @@
                 android:typeface="sans" />
 
             <Button
-                android:id="@+id/alterarMedidas"
+                android:id="@+id/alterarDesportos"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="-10dp"
-                android:textAllCaps="false"
                 android:background="@color/otherBackgroundTableRow"
                 android:ems="10"
                 android:gravity="center"
-                android:text="  Alterar Medidas"
+                android:text="  Alterar Desportos"
                 android:textAlignment="viewStart"
+                android:textAllCaps="false"
                 android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -94,11 +94,11 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
                 android:background="@color/otherBackgroundTableRow"
-                android:text="  Notificações:"
-                android:textStyle="bold"
                 android:ems="10"
+                android:text="  Notificações:"
                 android:textColor="#000000"
                 android:textSize="16sp"
+                android:textStyle="bold"
                 android:typeface="sans" />
 
             <TextView
@@ -109,10 +109,10 @@
                 android:layout_marginTop="0dp"
                 android:layout_marginBottom="8dp"
                 android:background="@color/otherBackgroundTableRow"
+                android:drawableLeft="@drawable/notification_icon"
                 android:ems="10"
                 android:gravity="center"
                 android:text="  Alterar Notificações"
-                android:drawableLeft="@drawable/notification_icon"
                 android:textAlignment="viewStart"
                 android:textColor="#000000"
                 android:textSize="16sp"
@@ -126,10 +126,10 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="-10dp"
                 android:background="#329d92"
+                android:drawableLeft="@drawable/notification_icon"
                 android:ems="10"
                 android:gravity="center"
                 android:text="  Desativar Notificações"
-                android:drawableLeft="@drawable/notification_icon"
                 android:textAlignment="viewStart"
                 android:textColor="#000000"
                 android:textSize="16sp"
@@ -153,50 +153,47 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
                 android:background="@color/otherBackgroundTableRow"
-                android:text="  Definições Gerais:"
-                android:textStyle="bold"
                 android:ems="10"
+                android:text="  Definições Gerais:"
                 android:textColor="#000000"
                 android:textSize="16sp"
+                android:textStyle="bold"
                 android:typeface="sans" />
 
-            <TextView
-                android:id="@+id/centroDeAjuda"
+            <Spinner
+                android:id="@+id/contactosImportantesSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="0dp"
+                android:background="#329d92"
+                android:ems="10"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:typeface="sans" />
+
+            <Button
+                android:id="@+id/calendario"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="0dp"
                 android:layout_marginBottom="8dp"
-                android:background="@color/otherBackgroundTableRow"
-                android:drawableLeft="@drawable/help_icon"
-                android:ems="10"
-                android:gravity="center"
-                android:text="  Centro de Ajuda"
-                android:textAlignment="viewStart"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:typeface="sans" />
-
-            <TextView
-                android:id="@+id/calendario"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="-10dp"
-                android:layout_marginBottom="8dp"
                 android:background="#329d92"
+                android:drawableLeft="@drawable/calendar_icon"
                 android:ems="10"
                 android:gravity="center"
                 android:text="  Calendário"
                 android:textAlignment="viewStart"
-                android:drawableLeft="@drawable/calendar_icon"
+                android:textAllCaps="false"
                 android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:typeface="sans" />
 
-            <TextView
+            <Button
                 android:id="@+id/contactosImportantes"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
@@ -204,17 +201,18 @@
                 android:layout_marginTop="-10dp"
                 android:layout_marginBottom="8dp"
                 android:background="@color/otherBackgroundTableRow"
+                android:drawableLeft="@drawable/important_contacts"
                 android:ems="10"
                 android:gravity="center"
                 android:text="  Contactos Importantes"
-                android:drawableLeft="@drawable/important_contacts"
                 android:textAlignment="viewStart"
+                android:textAllCaps="false"
                 android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:typeface="sans" />
 
-            <TextView
+            <Button
                 android:id="@+id/faqs"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
@@ -222,11 +220,12 @@
                 android:layout_marginTop="-10dp"
                 android:layout_marginBottom="8dp"
                 android:background="#329d92"
+                android:drawableLeft="@drawable/faqs_icon"
                 android:ems="10"
                 android:gravity="center"
                 android:text="  FAQS"
                 android:textAlignment="viewStart"
-                android:drawableLeft="@drawable/faqs_icon"
+                android:textAllCaps="false"
                 android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -247,10 +246,10 @@
                 android:typeface="sans" />
 
             <TextView
-            android:id="@+id/BarraCinzenta2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-                android:background="#D3D3D3"/>
+                android:id="@+id/BarraCinzenta2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#D3D3D3" />
 
             <TextView
                 android:id="@+id/definicoesConta"
@@ -259,12 +258,12 @@
                 android:layout_gravity="center_horizontal"
                 android:background="@color/otherBackgroundTableRow"
                 android:ems="10"
-                android:text="  Conta:"
-                android:textStyle="bold"
                 android:gravity="center"
+                android:text="  Conta:"
                 android:textAlignment="viewStart"
                 android:textColor="#000000"
                 android:textSize="16sp"
+                android:textStyle="bold"
                 android:typeface="sans" />
 
             <TextView
