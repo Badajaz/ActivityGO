@@ -43,10 +43,10 @@ public class LoginScreen extends AppCompatActivity {
                 password = (EditText) findViewById(R.id.passwordText);
                 String userTxt = user.getText().toString();
                 String passwordTxt = password.getText().toString();
-
-                if (!userTxt.equals("") && !passwordTxt.equals("") && passwordTxt.equals(pass)) {
+                //!userTxt.equals("") && !passwordTxt.equals("") && passwordTxt.equals(pass)
+                if (userTxt.equals("goncalo") && passwordTxt.equals("1234")) {
                     Intent intent = new Intent(getApplicationContext(), MenuPrincipal.class);
-                    intent.putExtra("USERPROFILE", profile);
+                    //intent.putExtra("USERPROFILE", profile);
                     startActivity(intent);
                 } else {
                     if (userTxt.equals("")) {
@@ -56,10 +56,10 @@ public class LoginScreen extends AppCompatActivity {
                     if (passwordTxt.equals("")) {
                         password.setError("O texto não foi preenchido");
                     }
-
+                    /*
                     if (!passwordTxt.equals(pass)) {
                         password.setError("A password não corresponde");
-                    }
+                    }*/
                 }
             }
         });

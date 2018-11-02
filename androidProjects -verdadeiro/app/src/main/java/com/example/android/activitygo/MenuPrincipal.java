@@ -31,7 +31,7 @@ public class MenuPrincipal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_principal);
 
-        profile = (ArrayList<String>) getIntent().getSerializableExtra("USERPROFILE");
+       // profile = (ArrayList<String>) getIntent().getSerializableExtra("USERPROFILE");
 
         SelectedFragment = new RunMenuInicial();
         FragmentManager fm = getFragmentManager();
@@ -43,8 +43,8 @@ public class MenuPrincipal extends AppCompatActivity {
         toolbarCima = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbarCima);
         getSupportActionBar().setTitle("ActivityGO");
-        String iniciais= ""+profile.get(0).charAt(0)+profile.get(1).charAt(0);
-        getSupportActionBar().setSubtitle(iniciais);
+       // String iniciais= ""+profile.get(0).charAt(0)+profile.get(1).charAt(0);
+        //getSupportActionBar().setSubtitle(iniciais);
 
 
         BottomNavigationView mMainNav = findViewById(R.id.NavBar);
@@ -160,13 +160,13 @@ public class MenuPrincipal extends AppCompatActivity {
                 ftSettings.replace(R.id.fragment_container, SelectedFragment);
                 ftSettings.commit();
 
-                Bundle bundle = new Bundle();
-                bundle.putString("FIRSTNAME", profile.get(0));
-                bundle.putString("LASTNAME", profile.get(1));
-                ChangeProfileFragment cpf = new ChangeProfileFragment();
+                //Bundle bundle = new Bundle();
+                //bundle.putString("FIRSTNAME", profile.get(0));
+                //bundle.putString("LASTNAME", profile.get(1));
+                //ChangeProfileFragment cpf = new ChangeProfileFragment();
                 // bundle.putStringArrayList("USERPROFILE", profile);
                 //bundle.putSerializable("USERPROFILE", profile);
-                cpf.setArguments(bundle);
+                //cpf.setArguments(bundle);
 
                 break;
 
