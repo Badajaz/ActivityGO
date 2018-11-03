@@ -39,20 +39,15 @@ public class JuntarGrupoFragment extends android.support.v4.app.Fragment {
         Button search = (Button) v.findViewById(R.id.buttonSearch);
         final EditText txtDescription = v.findViewById(R.id.NomeGrupo);
 
-
-
-
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-
                 message = txtDescription.getText().toString();
                 //Toast.makeText(getActivity(), message,
                         //Toast.LENGTH_LONG).show();
                 bundle = new Bundle();
                 bundle.putString("Pesquisa", message);
+                txtDescription.getText().clear();
 
                // TextView myAwesomeTextView = v.findViewById(R.id.textViewPesquisar);
                 //myAwesomeTextView.setText(message);
@@ -66,6 +61,4 @@ public class JuntarGrupoFragment extends android.support.v4.app.Fragment {
         });
         return v;
     }
-
-
 }

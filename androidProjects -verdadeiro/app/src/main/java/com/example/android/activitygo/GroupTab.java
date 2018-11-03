@@ -35,15 +35,17 @@ public class GroupTab extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_tab);
 
+        int defaultValue = 0;
+        int page = getIntent().getIntExtra("One", defaultValue);
+
         mSectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.container);
         setupviewPager(mViewPager);
+        mViewPager.setCurrentItem(page);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-
     }
-
 
     private void setupviewPager(ViewPager viewPager){
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
@@ -51,6 +53,4 @@ public class GroupTab extends AppCompatActivity {
         adapter.addFragment(new JuntarGrupoFragment(),"Juntar Grupo");
         viewPager.setAdapter(adapter);
     }
-
-
 }

@@ -15,6 +15,7 @@ import android.widget.Button;
  */
 public class GroupFragment extends Fragment {
 
+    private int page;
     public GroupFragment() {
         // Required empty public constructor
     }
@@ -33,6 +34,10 @@ public class GroupFragment extends Fragment {
         juntargrupo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                page = 2;
+                Intent intent = new Intent(v.getContext(), GroupTab.class);
+                intent.putExtra("One", page);
+                startActivity(intent);
                /* Fragment SelectedFragment = new JuntarGrupoFragment();
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
@@ -45,8 +50,9 @@ public class GroupFragment extends Fragment {
         criargrupo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                page = 1;
                 Intent intent = new Intent(v.getContext(), GroupTab.class);
+                intent.putExtra("Two", page);
                 startActivity(intent);
                 /*Fragment SelectedFragment = new CriarGrupoFragment();
                 FragmentManager fm = getFragmentManager();
@@ -60,12 +66,12 @@ public class GroupFragment extends Fragment {
         myGroups.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Fragment myGroupsSelectedFragment = new MyGroupsFragment();
+                Fragment myGroupsSelectedFragment = new MyGroupsFragment();
                 FragmentManager fmMyGroups = getFragmentManager();
                 FragmentTransaction ftMyGroups = fmMyGroups.beginTransaction();
                 ftMyGroups.replace(R.id.fragment_container, myGroupsSelectedFragment, "CriarGrupoFragment");
                 ftMyGroups.addToBackStack("GroupFragment");
-                ftMyGroups.commit();*/
+                ftMyGroups.commit();
             }
         });
 
