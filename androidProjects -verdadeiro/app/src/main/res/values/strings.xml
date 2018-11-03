@@ -39,4 +39,12 @@
         <item>PSP Lisboa: 111222333</item>
         <item>Inem Lisboa: 111222333</item>
     </string-array>
+
+    <string-array name = "faqs">
+        <item>FAQS</item>
+        <item>Como posso alterar o meu perfil?</item>
+        <item>Como posso eliminar a minha conta?</item>
+        <item>Como posso alterar os meus desportos favoritos?</item>
+        <item>Onde posso tirar mais dúvidas?</item>
+    </string-array>
 </resources>

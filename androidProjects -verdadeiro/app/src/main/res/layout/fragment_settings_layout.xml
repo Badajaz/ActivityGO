@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,9 +10,10 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="10dp">
 
-        <LinearLayout
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -20,35 +22,46 @@
                 android:id="@+id/definicoesPerfil"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="8dp"
                 android:background="#D3D3D3"
                 android:ems="10"
                 android:gravity="center"
                 android:textAlignment="viewStart"
                 android:textColor="#000000"
                 android:textSize="16sp"
-                android:typeface="sans" />
+                android:typeface="sans"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/definicoesPerfil2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="8dp"
                 android:background="#329d92"
                 android:ems="10"
                 android:text="  Perfil:"
                 android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:typeface="sans" />
+                android:typeface="sans"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/definicoesPerfil"
+                app:layout_constraintVertical_bias="0.0" />
 
             <Button
                 android:id="@+id/alterarPerfil"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="0dp"
-                android:layout_marginBottom="8dp"
-                android:background="#329d92"
+                android:background="#329d77"
                 android:drawableLeft="@drawable/user_icon"
                 android:ems="10"
                 android:gravity="center"
@@ -58,15 +71,21 @@
                 android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:typeface="sans" />
+                android:typeface="sans"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/definicoesPerfil2"
+                app:layout_constraintVertical_bias="0.0" />
 
             <Button
                 android:id="@+id/alterarDesportos"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="-10dp"
-                android:background="@color/otherBackgroundTableRow"
+                android:layout_marginBottom="8dp"
+                android:background="#329d77"
                 android:ems="10"
                 android:gravity="center"
                 android:text="  Alterar Desportos"
@@ -75,7 +94,13 @@
                 android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:typeface="sans" />
+                android:typeface="sans"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/alterarPerfil"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/definicoesNotificações"
@@ -86,7 +111,13 @@
                 android:ems="10"
                 android:textColor="#000000"
                 android:textSize="16sp"
-                android:typeface="sans" />
+                android:typeface="sans"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/alterarDesportos"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/definicoesNotificações2"
@@ -99,16 +130,20 @@
                 android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:typeface="sans" />
+                android:typeface="sans"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/definicoesNotificações"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/alterarNotificacoes"
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
+                android:layout_height="57dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="0dp"
-                android:layout_marginBottom="8dp"
-                android:background="@color/otherBackgroundTableRow"
+                android:background="#329d77"
                 android:drawableLeft="@drawable/notification_icon"
                 android:ems="10"
                 android:gravity="center"
@@ -117,16 +152,21 @@
                 android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:typeface="sans" />
+                android:typeface="sans"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/definicoesNotificações2"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/desativarNotificacoes"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="-10dp"
-                android:background="#329d92"
-                android:drawableLeft="@drawable/notification_icon"
+                android:background="#329d77"
+                android:drawableLeft="@drawable/notification_icon2"
                 android:ems="10"
                 android:gravity="center"
                 android:text="  Desativar Notificações"
@@ -134,7 +174,12 @@
                 android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:typeface="sans" />
+                android:typeface="sans"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/alterarNotificacoes"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/BarraCinzenta"
@@ -145,7 +190,13 @@
                 android:ems="10"
                 android:textColor="#000000"
                 android:textSize="16sp"
-                android:typeface="sans" />
+                android:typeface="sans"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/desativarNotificacoes"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/definicoesGerais"
@@ -158,30 +209,40 @@
                 android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:typeface="sans" />
+                android:typeface="sans"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/BarraCinzenta"
+                app:layout_constraintVertical_bias="0.0" />
 
             <Spinner
                 android:id="@+id/contactosImportantesSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="0dp"
                 android:background="#329d92"
                 android:ems="10"
                 android:gravity="center"
+                android:textAlignment="textStart"
                 android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:typeface="sans" />
+                android:typeface="sans"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/definicoesGerais"
+                app:layout_constraintVertical_bias="0.0" />
 
             <Button
                 android:id="@+id/calendario"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="0dp"
-                android:layout_marginBottom="8dp"
-                android:background="#329d92"
+                android:background="#329d77"
                 android:drawableLeft="@drawable/calendar_icon"
                 android:ems="10"
                 android:gravity="center"
@@ -191,34 +252,19 @@
                 android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:typeface="sans" />
+                android:typeface="sans"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/contactosImportantesSpinner"
+                app:layout_constraintVertical_bias="0.0" />
 
-            <Button
-                android:id="@+id/contactosImportantes"
+            <Spinner
+                android:id="@+id/faqsSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="-10dp"
-                android:layout_marginBottom="8dp"
-                android:background="@color/otherBackgroundTableRow"
-                android:drawableLeft="@drawable/important_contacts"
-                android:ems="10"
-                android:gravity="center"
-                android:text="  Contactos Importantes"
-                android:textAlignment="viewStart"
-                android:textAllCaps="false"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:typeface="sans" />
-
-            <Button
-                android:id="@+id/faqs"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="-10dp"
-                android:layout_marginBottom="8dp"
                 android:background="#329d92"
                 android:drawableLeft="@drawable/faqs_icon"
                 android:ems="10"
@@ -229,27 +275,44 @@
                 android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:typeface="sans" />
+                android:typeface="sans"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/calendario"
+                app:layout_constraintVertical_bias="0.0" />
 
             <Switch
                 android:id="@+id/switchNightMode"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:layout_marginTop="-10dp"
-                android:background="@color/otherBackgroundTableRow"
+                android:background="#329d77"
                 android:gravity="center"
                 android:text="  Night Mode"
                 android:textAlignment="viewStart"
                 android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:typeface="sans" />
+                android:typeface="sans"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/faqsSpinner"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/BarraCinzenta2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#D3D3D3" />
+                android:background="#D3D3D3"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/switchNightMode"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/definicoesConta"
@@ -264,29 +327,43 @@
                 android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:typeface="sans" />
+                android:typeface="sans"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/BarraCinzenta2"
+                app:layout_constraintVertical_bias="0.0"/>
 
-            <TextView
+            <Button
                 android:id="@+id/terminarSessao"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_gravity="center_horizontal"
-                android:background="@color/otherBackgroundTableRow"
+                android:background="#329d77"
                 android:ems="10"
                 android:gravity="center"
                 android:text="  Terminar Sessão?"
+                android:drawableLeft="@drawable/end_icon"
                 android:textAlignment="viewStart"
+                android:textAllCaps="false"
                 android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:typeface="sans" />
+                android:typeface="sans"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/definicoesConta"
+                app:layout_constraintVertical_bias="0.0"/>
 
             <TextView
                 android:id="@+id/eliminarConta"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_gravity="center_horizontal"
-                android:background="@color/otherBackgroundTableRow"
+                android:background="#329d77"
                 android:ems="10"
                 android:gravity="center"
                 android:text="  Eliminar Conta"
@@ -294,8 +371,14 @@
                 android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:typeface="sans" />
-        </LinearLayout>
-    </ScrollView>
+                android:typeface="sans"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/terminarSessao"
+                app:layout_constraintVertical_bias="0.0" />
 
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
 </android.support.constraint.ConstraintLayout>

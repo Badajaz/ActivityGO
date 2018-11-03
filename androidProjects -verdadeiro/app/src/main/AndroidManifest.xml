@@ -23,6 +23,7 @@
             android:label="@string/title_activity_group_tab"
             android:theme="@style/AppTheme" />
         <activity android:name=".AchievementsTab" />
+        <activity android:name=".PopUpTerminarSessao" android:theme="@style/AppTheme.CustomTheme"/>
     </application>
 
 </manifest>
