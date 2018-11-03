@@ -9,13 +9,14 @@
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/firstConstraint"
-        android:layout_width="363dp"
+        android:layout_width="match_parent"
         android:layout_height="125dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
         android:background="@drawable/achievements_frames_shape"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="parent"
@@ -131,10 +132,10 @@
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/secondConstraint"
-        android:layout_width="363dp"
+        android:layout_width="match_parent"
         android:layout_height="125dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
         android:background="@drawable/achievements_frames_shape"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"

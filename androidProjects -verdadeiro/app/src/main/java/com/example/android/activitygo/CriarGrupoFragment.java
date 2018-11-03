@@ -40,17 +40,12 @@ public class CriarGrupoFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        getActivity().setTitle("Grupos");
-
-        // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_criar_grupo, container, false);
-
 
         criarGrupo = (Button) v.findViewById(R.id.buttonCriar);
         final EditText nomeGrupo = (EditText) v.findViewById(R.id.NomeCriarGrupo);
         final EditText descricao = (EditText) v.findViewById(R.id.Descricao);
         final EditText desporto = (EditText) v.findViewById(R.id.DesportoEscolhido);
-
 
         criarGrupo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,23 +55,16 @@ public class CriarGrupoFragment extends android.support.v4.app.Fragment {
                 descricaoTxt = descricao.getText().toString();
                 desportoTxt = desporto.getText().toString();
 
+                nomeGrupo.getText().clear();
+                descricao.getText().clear();
+                desporto.getText().clear();
 
                 Toast toast = Toast.makeText(getActivity(), "O seu grupo " +txtPesquisa+" foi criado!",
                         Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 800);
                 toast.show();
-
-               /* Fragment fragment = new JuntarGrupoFragment();
-                Bundle bundle = new Bundle();
-                bundle.putString("DA_LHE", "DEU CRL");
-                fragment.setArguments(bundle);
-                */
             }
         });
         return v;
-
-
-
     }
-
 }
