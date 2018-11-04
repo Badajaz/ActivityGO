@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#329d92"
+    android:background="#329d77"
     tools:context=".RankingsFragment">
 
     <Button
@@ -11,13 +12,21 @@
         android:layout_width="150dp"
         android:layout_height="110dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginStart="20sp"
-        android:layout_marginTop="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/edit_text_shape"
         android:drawableRight="@drawable/run"
         android:gravity="left|top"
         android:text="Geral Corrida 1/20"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.096"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.086" />
 
     <Button
         android:id="@+id/buttonCorridaGrupo"
@@ -26,13 +35,21 @@
         android:layout_alignBottom="@+id/buttonCorridaGeral"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="20sp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/edit_text_shape"
         android:drawableRight="@drawable/groupdois"
         android:gravity="left|top"
         android:text="Grupo Corrida 3/10"
-        android:textSize="18sp"  />
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.435"
+        app:layout_constraintStart_toEndOf="@+id/buttonCorridaGeral"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.086" />
 
     <Button
         android:id="@+id/buttonCiclismoGeral"
@@ -41,13 +58,21 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="20sp"
-        android:layout_marginTop="228dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/edit_text_shape"
         android:drawableRight="@drawable/cycling"
         android:gravity="left|top"
         android:text="Geral Ciclismo 1/25"
-        android:textSize="18sp"  />
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.899"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonCorridaGrupo"
+        app:layout_constraintVertical_bias="0.319" />
 
     <Button
         android:id="@+id/buttonCiclismoGrupo"
@@ -56,12 +81,20 @@
         android:layout_alignBottom="@+id/buttonCiclismoGeral"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginEnd="20sp"
-        android:layout_marginBottom="-2dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/edit_text_shape"
         android:drawableRight="@drawable/cyclinggroup"
         android:gravity="left|top"
         android:text="Grupo Ciclismo 2/10"
-        android:textSize="18sp"  />
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.096"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonCorridaGeral"
+        app:layout_constraintVertical_bias="0.319" />
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>
