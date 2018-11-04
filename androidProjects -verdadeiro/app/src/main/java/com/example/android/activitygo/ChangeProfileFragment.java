@@ -50,8 +50,6 @@ public class ChangeProfileFragment extends Fragment {
     // lista com as coisas alteradas e as inalteradas + genero + desportos favoritos
     private ArrayList<String> alteracoes = new ArrayList<>();
 
-    private Fragment selectedFragment;
-
     public ChangeProfileFragment() {
         // Required empty public constructor
     }
@@ -59,12 +57,14 @@ public class ChangeProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        ((MenuPrincipal) getActivity()).getSupportActionBar().setTitle("Alterar Informações do Perfil:");
+
+        //((MenuPrincipal) getActivity()).getSupportActionBar().setTitle("Alterar Informações do Perfil:");
+
         View v = inflater.inflate(R.layout.fragment_change_profile, container, false);
 
-        MenuPrincipal mp = (MenuPrincipal) getActivity();
-        userProfileMenuPrincipal = mp.getProfile();
+
+        //MenuPrincipal mp = (MenuPrincipal) getActivity();
+        //userProfileMenuPrincipal = mp.getProfile();
 
         inicializarLayout(v);
 
@@ -78,9 +78,7 @@ public class ChangeProfileFragment extends Fragment {
                 dataNascimentoStr = dataNascimento.getText().toString();
                 paisUserStr = paisUser.getText().toString();
                 email = emailUser.getText().toString();
-                //TODO /*validar o facto de ser um número*/
                 peso = pesoUser.getText().toString();
-                //TODO /*validar o facto de ser um número e decidir se vai ser em cm ou m*/
                 altura = alturaUser.getText().toString();
 
                 usernameStr = username.getText().toString();
@@ -102,17 +100,11 @@ public class ChangeProfileFragment extends Fragment {
                 Toast toast = Toast.makeText(getActivity(), " Alterou os seus dados com sucesso!",
                         Toast.LENGTH_SHORT);
                 toast.show();
-
-                /*selectedFragment = new SettingsFragment();
-                FragmentManager fmSF = getFragmentManager();
-                FragmentTransaction ftSF = fmSF.beginTransaction();
-                ftSF.add(R.id.fragment_container, selectedFragment, "SettingsFragment");
-                //ft.addToBackStack("RunFragment");
-                ftSF.commit();*/
             }
         });
 
         return v;
+
     }
 
     public ArrayList<String> detetarAlteracoesPerfis(ArrayList<String> listUser, ArrayList<String> listUserAlterada) {

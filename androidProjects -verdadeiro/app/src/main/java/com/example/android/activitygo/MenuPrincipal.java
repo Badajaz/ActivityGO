@@ -182,12 +182,6 @@ public class MenuPrincipal extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.Settings:
-                SelectedFragment = new SettingsFragment();
-                FragmentManager fmSettings = getFragmentManager();
-                FragmentTransaction ftSettings = fmSettings.beginTransaction();
-                ftSettings.replace(R.id.fragment_container, SelectedFragment);
-                ftSettings.commit();
-
                 //Bundle bundle = new Bundle();
                 //bundle.putString("FIRSTNAME", profile.get(0));
                 //bundle.putString("LASTNAME", profile.get(1));
@@ -196,6 +190,10 @@ public class MenuPrincipal extends AppCompatActivity {
                 //bundle.putSerializable("USERPROFILE", profile);
                 //cpf.setArguments(bundle);
 
+                Intent i = new Intent(this, SettingsActivity.class);
+                i.putExtra("USERPROFILE", profile);
+
+                startActivity(i);
                 break;
 
             case R.id.BackButton:
