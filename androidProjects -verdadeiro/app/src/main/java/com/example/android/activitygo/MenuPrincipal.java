@@ -49,7 +49,8 @@ public class MenuPrincipal extends AppCompatActivity {
         myDialog = new Dialog(this);
         profile = (ArrayList<String>) getIntent().getSerializableExtra("USERPROFILE");
         selectedSport = "";
-        Toast toast = Toast.makeText(this, "length: " + profile.size(),
+
+        Toast toast = Toast.makeText(this, "length: " + profile.get(7),
                 Toast.LENGTH_SHORT);
         toast.show();
 

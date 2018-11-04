@@ -1,14 +1,23 @@
 package com.example.android.activitygo;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class SignUp extends AppCompatActivity {
 
@@ -50,6 +59,9 @@ public class SignUp extends AppCompatActivity {
     private ArrayList<CheckBox> checkboxes = new ArrayList<CheckBox>();
     private ArrayList<String> userProfile = new ArrayList<>();
 
+    private static final String TAG = "SignUpActivity";
+    private DatePickerDialog.OnDateSetListener mDateSetListener;
+
     public int alreadyRegister = 0;
 
     @Override
@@ -66,8 +78,33 @@ public class SignUp extends AppCompatActivity {
         alturaUser = (TextView) findViewById(R.id.HeightText);
         passwordUser = (TextView) findViewById(R.id.PasswordText);
         confirmaPasswordUser = (TextView) findViewById(R.id.reTypePasswordText);
-        dataNascimento = (TextView) findViewById(R.id.DataNascimento);
         paisUser = (TextView) findViewById(R.id.paisUser);
+
+        dataNascimento = (TextView) findViewById(R.id.DataNascimento);
+        dataNascimento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog = new DatePickerDialog(SignUp.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth, mDateSetListener, year, month, day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+
+        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                month = month + 1;
+                Log.d(TAG, "onDateSet: mm/dd/yyy: " + dayOfMonth + "/" + month + "/" + year);
+
+                String date = dayOfMonth + "/" + month + "/" + year;
+                dataNascimento.setText(date);
+            }
+        };
 
         masculino = (CheckBox) findViewById(R.id.Masculino);
         feminino = (CheckBox) findViewById(R.id.Feminino);
