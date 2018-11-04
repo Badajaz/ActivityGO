@@ -2,21 +2,16 @@ package com.example.android.activitygo;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.ClipData;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.support.v4.app.DialogFragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -68,12 +63,12 @@ public class RunMenuInicial extends Fragment {
         meusGrupos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Fragment SelectedFragmentMeusGrupos = new MyGroupsFragment();
+                Fragment SelectedFragmentMeusGrupos = new MyGroupsFragment();
                 FragmentManager fmMeusGrupos = getFragmentManager();
                 FragmentTransaction ftMeusGrupos = fmMeusGrupos.beginTransaction();
                 ftMeusGrupos.replace(R.id.fragment_container,  SelectedFragmentMeusGrupos,"RunMenuInicial");
                 ftMeusGrupos.addToBackStack("RunFragment");
-                ftMeusGrupos.commit();*/
+                ftMeusGrupos.commit();
 
             }
         });
@@ -104,11 +99,6 @@ public class RunMenuInicial extends Fragment {
                         location[0], location[1] + v.getHeight());
             }
         });
-
         return v;
     }
-
-
-
-
 }
