@@ -1,9 +1,12 @@
 package com.example.android.activitygo;
 
+import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,6 +16,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -25,13 +32,28 @@ public class MenuPrincipal extends AppCompatActivity {
     private Toolbar myToolbar;
     private Toolbar toolbarCima;
     private ArrayList<String> profile;
+    private Dialog myDialog;
+    private CheckBox caminhadaCheckBox;
+    private CheckBox corridaCheckBox;
+    private int corridaChecked = 0;
+    private int caminhadaChecked = 0;
+    private int futebolChecked = 0;
+    private int ciclismoChecked = 0;
+    private ArrayList<CheckBox> checkboxesPopup = new ArrayList<CheckBox>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_principal);
+        myDialog = new Dialog(this);
+        profile = (ArrayList<String>) getIntent().getSerializableExtra("USERPROFILE");
+        Toast toast = Toast.makeText(this, "length: " + profile.size(),
+                Toast.LENGTH_SHORT);
+        toast.show();
 
-       // profile = (ArrayList<String>) getIntent().getSerializableExtra("USERPROFILE");
+        // mostra popup inicial para a pessoa escolher o desporto
+        showPopup();
 
         SelectedFragment = new RunMenuInicial();
         FragmentManager fm = getFragmentManager();
@@ -43,13 +65,11 @@ public class MenuPrincipal extends AppCompatActivity {
         toolbarCima = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbarCima);
         getSupportActionBar().setTitle("ActivityGO");
-       // String iniciais= ""+profile.get(0).charAt(0)+profile.get(1).charAt(0);
-        //getSupportActionBar().setSubtitle(iniciais);
-
+        String iniciais= ""+profile.get(0).charAt(0)+profile.get(1).charAt(0);
+        getSupportActionBar().setSubtitle(iniciais);
 
         BottomNavigationView mMainNav = findViewById(R.id.NavBar);
         mMainNav.setOnNavigationItemSelectedListener(navListener);
-
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
@@ -176,7 +196,54 @@ public class MenuPrincipal extends AppCompatActivity {
         return true;
     }
 
-    public ArrayList<String> getProfile(){
+    public ArrayList<String> getProfile() {
         return this.profile;
+    }
+
+    public void showPopup() {
+        TextView txtclose;
+        TextView txtname;
+        TextView txtusername;
+        Button confirmButton;
+
+        myDialog.setContentView(R.layout.popup_inicial);
+        txtclose = (TextView) myDialog.findViewById(R.id.txtclosePopupInicial);
+        txtname = (TextView) myDialog.findViewById(R.id.idName);
+        txtusername = (TextView) myDialog.findViewById(R.id.idUsername);
+        caminhadaCheckBox = (CheckBox) myDialog.findViewById(R.id.opcaoPraticar1);
+        corridaCheckBox = (CheckBox) myDialog.findViewById(R.id.opcaoPraticar2);
+        confirmButton = (Button) myDialog.findViewById(R.id.confirmButton);
+        txtname.setText(profile.get(0));
+        txtusername.setText(profile.get(2));
+        txtclose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myDialog.dismiss();
+            }
+        });
+        confirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myDialog.dismiss();
+            }
+        });
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
+    }
+
+    public void getCorridaItemPopup(View v) {
+        corridaChecked = 1;
+        checkboxesPopup.add(corridaCheckBox);
+
+        //adiciona desporto no final da lista profile
+        profile.add(corridaCheckBox.getText().toString());
+    }
+
+    public void getCaminhadaItemPopup(View v) {
+        caminhadaChecked = 1;
+        checkboxesPopup.add(caminhadaCheckBox);
+
+        //adiciona desporto no final da lista profile
+        profile.add(caminhadaCheckBox.getText().toString());
     }
 }
