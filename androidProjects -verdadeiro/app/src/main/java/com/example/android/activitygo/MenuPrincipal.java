@@ -44,7 +44,6 @@ public class MenuPrincipal extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_principal);
         myDialog = new Dialog(this);
@@ -186,7 +185,7 @@ public class MenuPrincipal extends AppCompatActivity {
                 //bundle.putString("FIRSTNAME", profile.get(0));
                 //bundle.putString("LASTNAME", profile.get(1));
                 //ChangeProfileFragment cpf = new ChangeProfileFragment();
-                // bundle.putStringArrayList("USERPROFILE", profile);
+                //bundle.putStringArrayList("USERPROFILE", profile);
                 //bundle.putSerializable("USERPROFILE", profile);
                 //cpf.setArguments(bundle);
 
