@@ -61,7 +61,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     LatLng latLng = new LatLng(latitude, longitude);
                     if (marker != null){
                         marker.remove();
-                        marker = mMap.addMarker(new MarkerOptions().position(latLng).title(result));
+                        marker = mMap.addMarker(new MarkerOptions().position(latLng).title(" Lat = "+Double.toString(latitude)+" Long = "+Double.toString(longitude)));
                         mMap.setMaxZoomPreference(20);
                         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12.0f));
                     }
@@ -92,8 +92,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             }
         };
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1, locationListener);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, locationListener);
     }
 
 
