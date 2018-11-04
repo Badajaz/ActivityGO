@@ -23,9 +23,15 @@ import java.util.Calendar;
 public class SettingsActivity extends AppCompatActivity {
 
     private Dialog dialogTerminarSessao;
+    private Dialog dialogCalendario;
     private Dialog dialogChangeProfile;
+    private Dialog dialogFaqs;
     private Button confirmaAltPerfil;
+    private Button contactosImp;
+    private Button faQS;
+    private Button buttonCalendario;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
+    private DatePickerDialog.OnDateSetListener mDateSetListenerForCalendar;
     private static final String TAG = "SettingsActivity";
 
     private TextView firstNameUser;
@@ -65,9 +71,34 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings_layout);
 
         userProfileMenuPrincipal = (ArrayList<String>) getIntent().getSerializableExtra("USERPROFILE");
-
         dialogTerminarSessao = new Dialog(this);
         dialogChangeProfile = new Dialog(this);
+        dialogCalendario = new Dialog(this);
+        dialogFaqs = new Dialog(this);
+        contactosImp = (Button) findViewById(R.id.contactosImportantesButton);
+        contactosImp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showContactosImportantesPopup();
+            }
+        });
+
+        faQS = (Button) findViewById(R.id.faqsButton);
+        faQS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFaqsPopup();
+            }
+        });
+
+        buttonCalendario = (Button) findViewById(R.id.calendarioButton);
+        buttonCalendario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showCalendarioPopup();
+            }
+        });
+
         Button changeProfile = (Button) findViewById(R.id.buttonAlterarPerfil);
         changeProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -219,5 +250,38 @@ public class SettingsActivity extends AppCompatActivity {
             }
         };
         paisUser = (TextView) d.findViewById(R.id.paisUserNameText);
+    }
+
+    private void showContactosImportantesPopup(){
+
+    }
+
+    private void showFaqsPopup(){
+        TextView close;
+        dialogFaqs.setContentView(R.layout.popup_faqs);
+        close = (TextView) dialogFaqs.findViewById(R.id.txtClose);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogFaqs.dismiss();
+            }
+        });
+        dialogFaqs.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialogFaqs.show();
+    }
+
+    private void showCalendarioPopup(){
+        TextView close;
+        dialogCalendario.setContentView(R.layout.popup_calendario);
+        close = (TextView) dialogCalendario.findViewById(R.id.txtClose);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogCalendario.dismiss();
+            }
+        });
+
+        dialogCalendario.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialogCalendario.show();
     }
 }

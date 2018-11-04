@@ -217,19 +217,23 @@
                 app:layout_constraintTop_toBottomOf="@+id/BarraCinzenta"
                 app:layout_constraintVertical_bias="0.0" />
 
-            <Spinner
-                android:id="@+id/contactosImportantesSpinner"
+            <Button
+                android:id="@+id/contactosImportantesButton"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_gravity="center_horizontal"
                 android:background="#329d92"
                 android:ems="10"
                 android:gravity="center"
+                android:textAllCaps="false"
                 android:textAlignment="textStart"
+                android:text="  Contactos Importantes"
+                android:drawableLeft="@drawable/important_contacts"
                 android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:typeface="sans"
+                android:paddingLeft="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -238,7 +242,7 @@
                 app:layout_constraintVertical_bias="0.0" />
 
             <Button
-                android:id="@+id/calendario"
+                android:id="@+id/calendarioButton"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_gravity="center_horizontal"
@@ -246,6 +250,7 @@
                 android:drawableLeft="@drawable/calendar_icon"
                 android:ems="10"
                 android:gravity="center"
+
                 android:text="  Calendário"
                 android:textAlignment="viewStart"
                 android:paddingLeft="5dp"
@@ -258,11 +263,11 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/contactosImportantesSpinner"
+                app:layout_constraintTop_toBottomOf="@+id/contactosImportantesButton"
                 app:layout_constraintVertical_bias="0.0" />
 
-            <Spinner
-                android:id="@+id/faqsSpinner"
+            <Button
+                android:id="@+id/faqsButton"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_gravity="center_horizontal"
@@ -277,11 +282,12 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:typeface="sans"
+                android:paddingLeft="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/calendario"
+                app:layout_constraintTop_toBottomOf="@+id/calendarioButton"
                 app:layout_constraintVertical_bias="0.0" />
 
             <Switch
@@ -300,7 +306,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/faqsSpinner"
+                app:layout_constraintTop_toBottomOf="@+id/faqsButton"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
