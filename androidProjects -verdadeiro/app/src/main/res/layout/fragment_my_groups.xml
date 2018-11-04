@@ -6,4 +6,12 @@
     tools:context=".MyGroupsFragment"
     android:background="#329d77">
 
+
+
+    <ListView
+        android:id="@+id/ListViewMeusGrupos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></ListView>
+
+
 </android.support.constraint.ConstraintLayout>

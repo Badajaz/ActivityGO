@@ -1,6 +1,8 @@
 package com.example.android.activitygo;
 
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -24,6 +26,8 @@ public class MergeGroupFragment extends Fragment {
     private EditText SearchGroup;
     private String searchGrupo;
     private ArrayList<String> possiveisResultados = new ArrayList<String>();
+    private ArrayList<String> grupos = new ArrayList<String>();
+
 
     private ArrayAdapter<String> listViewAdapter;
     private ListView listView;
@@ -53,6 +57,7 @@ public class MergeGroupFragment extends Fragment {
                     if (isOneChecked() && !nomegrupo.equals("")){
                         Toast.makeText(getActivity(),"O grupo "+nomegrupo+"Foi criado",Toast.LENGTH_LONG).show();
                         possiveisResultados.add(nomegrupo);
+                        grupos.add(nomegrupo);
                     }else{
                         Toast.makeText(getActivity(),"erro",Toast.LENGTH_LONG).show();
                     }
@@ -79,6 +84,25 @@ public class MergeGroupFragment extends Fragment {
             }
         });
 
+
+
+        Button meusGrupos = (Button) v.findViewById(R.id.MeusGrupos);
+        meusGrupos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                MyGroupsFragment ldf = new MyGroupsFragment ();
+                Bundle args = new Bundle();
+                args.putStringArrayList("GRUPO",grupos);
+                ldf.setArguments(args);
+                getFragmentManager().beginTransaction().add(R.id.fragment_container, ldf).commit();
+
+
+
+
+            }
+        });
 
 
 

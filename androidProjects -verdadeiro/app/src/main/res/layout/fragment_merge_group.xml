@@ -77,14 +77,26 @@
 
         <Button
             android:id="@+id/buttonCriar"
-            android:layout_width="104dp"
-            android:layout_height="70dp"
+            android:layout_width="73dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="250dp"
-            android:layout_marginTop="-90dp"
+            android:layout_marginTop="-60dp"
             android:background="@drawable/button_border"
             android:text="Criar"
             android:textColor="@color/whiteLetters"
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/MeusGrupos"
+            android:layout_width="71dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="250dp"
+            android:layout_marginTop="-110dp"
+            android:background="@drawable/button_border"
+            android:text="Meus Grupos"
+            android:textColor="@color/whiteLetters"
+            android:textSize="16sp" />
+
 
 
 
