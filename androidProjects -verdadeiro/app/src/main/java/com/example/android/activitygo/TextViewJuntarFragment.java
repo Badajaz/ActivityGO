@@ -10,8 +10,11 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,9 +46,17 @@ public class TextViewJuntarFragment extends Fragment {
         String resultados = getResultados(possiveisResultados,text);
         String [] resultadosArray = resultados.split(" ");
 
-        LinearLayout linearLayout = (LinearLayout)v.findViewById(R.id.layoutResultados);
+        ListView listView = (ListView) v.findViewById(R.id.ListaResultados);
+        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(
+            getActivity(), android.R.layout.simple_list_item_1,resultadosArray);
+
+        listView.setAdapter(listViewAdapter);
+        // ListAdapter resultadosAdapter = new ArrayAdapter<String>(this,android.R.layout.activity_list_item,resultadosArray);
 
 
+        //LinearLayout linearLayout = (LinearLayout)v.findViewById(R.id.layoutResultados);
+
+/*
         if (text.equals("")){
             createTextView("Não Existem resultados", getContext(), linearLayout);
         }else{
@@ -75,10 +86,12 @@ public class TextViewJuntarFragment extends Fragment {
                 minus.setVisibility(v.GONE);
                 plus.setVisibility(v.VISIBLE);
             }
-        });
+        });*/
 
         return v;
     }
+
+
 
     /*
     Obtem os resultados do array
@@ -105,6 +118,7 @@ public class TextViewJuntarFragment extends Fragment {
             b.setGravity(Gravity.CENTER);
             b.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT));
+
             b.setText(sText);
             linearLayout.addView(b);
 
@@ -117,7 +131,7 @@ public class TextViewJuntarFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        tv1.setText(text);
+        //tv1.setText(text);
 
     }
 }
