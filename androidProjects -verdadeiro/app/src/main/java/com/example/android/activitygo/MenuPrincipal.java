@@ -116,7 +116,13 @@ public class MenuPrincipal extends AppCompatActivity {
                             break;
 
                         case R.id.GroupsItem:
-                            SelectedFragment = new GroupFragment();
+                            /*SelectedFragment = new GroupFragment();
+                            FragmentManager fmana = getFragmentManager();
+                            FragmentTransaction ftransacti = fmana.beginTransaction();
+                            ftransacti.replace(R.id.fragment_container, SelectedFragment, "GroupFragment");
+                            ftransacti.commit();
+                            break;*/
+                            SelectedFragment = new MergeGroupFragment();
                             FragmentManager fmana = getFragmentManager();
                             FragmentTransaction ftransacti = fmana.beginTransaction();
                             ftransacti.replace(R.id.fragment_container, SelectedFragment, "GroupFragment");
