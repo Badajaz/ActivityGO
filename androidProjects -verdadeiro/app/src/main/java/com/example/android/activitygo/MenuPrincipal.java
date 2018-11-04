@@ -32,6 +32,7 @@ public class MenuPrincipal extends AppCompatActivity {
     private Toolbar myToolbar;
     private Toolbar toolbarCima;
     private ArrayList<String> profile;
+    private String selectedSport;
     private Dialog myDialog;
     private CheckBox caminhadaCheckBox;
     private CheckBox corridaCheckBox;
@@ -48,6 +49,7 @@ public class MenuPrincipal extends AppCompatActivity {
         setContentView(R.layout.activity_menu_principal);
         myDialog = new Dialog(this);
         profile = (ArrayList<String>) getIntent().getSerializableExtra("USERPROFILE");
+        selectedSport = "";
         Toast toast = Toast.makeText(this, "length: " + profile.size(),
                 Toast.LENGTH_SHORT);
         toast.show();
@@ -65,7 +67,7 @@ public class MenuPrincipal extends AppCompatActivity {
         toolbarCima = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbarCima);
         getSupportActionBar().setTitle("ActivityGO");
-        String iniciais= ""+profile.get(0).charAt(0)+profile.get(1).charAt(0);
+        String iniciais = "" + profile.get(0).charAt(0) + profile.get(1).charAt(0);
         getSupportActionBar().setSubtitle(iniciais);
 
         BottomNavigationView mMainNav = findViewById(R.id.NavBar);
@@ -235,15 +237,15 @@ public class MenuPrincipal extends AppCompatActivity {
         corridaChecked = 1;
         checkboxesPopup.add(corridaCheckBox);
 
-        //adiciona desporto no final da lista profile
-        profile.add(corridaCheckBox.getText().toString());
+        //desporto que a pessoa irá praticar
+        selectedSport = corridaCheckBox.getText().toString();
     }
 
     public void getCaminhadaItemPopup(View v) {
         caminhadaChecked = 1;
         checkboxesPopup.add(caminhadaCheckBox);
 
-        //adiciona desporto no final da lista profile
-        profile.add(caminhadaCheckBox.getText().toString());
+        //desporto que a pessoa irá praticar
+        selectedSport = caminhadaCheckBox.getText().toString();
     }
 }

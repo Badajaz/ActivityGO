@@ -32,6 +32,7 @@ public class RunMenuInicial extends Fragment {
         final Button historial = (Button) v.findViewById(R.id.buttonHistorial);
         Button irCorrida = (Button) v.findViewById(R.id.buttonIrCorrida);
         Button meusGrupos = (Button) v.findViewById(R.id.buttonMeusGrupos);
+        Button alterar = (Button) v.findViewById(R.id.alterarDesportoPraticado);
 
         historial.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +69,14 @@ public class RunMenuInicial extends Fragment {
                 ftMeusGrupos.addToBackStack("RunFragment");
                 ftMeusGrupos.commit();*/
 
+            }
+        });
+
+        alterar.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                //MenuPrincipal mp = new MenuPrincipal();
+                //mp.showPopup();
             }
         });
 
