@@ -10,25 +10,20 @@
     <!-- TODO: Update blank fragment layout -->
 
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
+
+
 
             <ListView
                 android:id="@+id/ListaResultados"
-                android:layout_width="match_parent"
-                android:layout_height="176dp"
-                android:layout_marginTop="391dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginStart="0dp"></ListView>
-        </LinearLayout>
-    </ScrollView>
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="391dp"></ListView>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
