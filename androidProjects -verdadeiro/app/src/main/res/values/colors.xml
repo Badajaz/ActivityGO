@@ -9,5 +9,6 @@
     <color name="hintWhiteColor">#ffffff</color>
     <color name="hintBlackColor">#000000</color>
     <color name="orange">#FFA500</color>
+    <color name="black">#000000</color>
 
 </resources>

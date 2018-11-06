@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#329d77"
     tools:context="com.example.android.activitygo.MenuPrincipal">
 
     <android.support.v7.widget.Toolbar
@@ -13,7 +12,6 @@
         android:layout_height="wrap_content"
         android:background="#329d92"
         android:minHeight="?attr/actionBarSize" />
-
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/NavBar"
@@ -35,4 +33,3 @@
         android:layout_marginTop="56dp" />
 
 </RelativeLayout>
-
