@@ -69,18 +69,19 @@ public class MergeGroupFragment extends Fragment {
         Button procurar = (Button) v.findViewById(R.id.buttonSearch);
 
 
-        listView = (ListView) v.findViewById(R.id.ListaResultados);
-
 
         procurar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                searchGrupo = SearchGroup.getText().toString();
+                searchGrupo =  SearchGroup.getText().toString();
                 String resultados = getResultados(possiveisResultados,searchGrupo);
                 String [] resultadosArray = resultados.split(" ");
-                listViewAdapter = new ArrayAdapter<String>(
-                        getActivity(), android.R.layout.simple_list_item_1,resultadosArray);
-                listView.setAdapter(listViewAdapter);
+                ProcuraGrupos p = new ProcuraGrupos ();
+                Bundle args = new Bundle();
+                args.putStringArray("PROCURA",resultadosArray);
+                p.setArguments(args);
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container, p).commit();
+
             }
         });
 
@@ -96,23 +97,10 @@ public class MergeGroupFragment extends Fragment {
                 Bundle args = new Bundle();
                 args.putStringArrayList("GRUPO",grupos);
                 ldf.setArguments(args);
-                getFragmentManager().beginTransaction().add(R.id.fragment_container, ldf).commit();
-
-
-
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container, ldf).commit();
 
             }
         });
-
-
-
-
-
-
-
-
-
-
 
 
 

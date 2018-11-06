@@ -20,6 +20,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback{
@@ -29,6 +30,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     Marker marker;
     LocationListener locationListener;
+    private ArrayList<Double> posicoes = new ArrayList<>() ;
+    private double accKm = 0.0;
+    public final static double AVERAGE_RADIUS_OF_EARTH_KM = 6371;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +56,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onLocationChanged(Location location) {
                 double latitude = location.getLatitude();
                 double longitude = location.getLongitude();
+                posicoes.add(latitude);
+                posicoes.add(longitude);
+                if (posicoes.size() > 4){
+                    accKm += calculateDistanceInKilometer(posicoes.get(0),posicoes.get(1),posicoes.get(2),posicoes.get(3));
+                    posicoes.remove(0);
+                    posicoes.remove(1);
+                }
+
                 //get the location name from latitude and longitude
                 Geocoder geocoder = new Geocoder(getApplicationContext());
                 try {
@@ -61,7 +74,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     LatLng latLng = new LatLng(latitude, longitude);
                     if (marker != null){
                         marker.remove();
-                        marker = mMap.addMarker(new MarkerOptions().position(latLng).title(" Lat = "+Double.toString(latitude)+" Long = "+Double.toString(longitude)));
+                        marker = mMap.addMarker(new MarkerOptions().position(latLng).title(""+accKm));
                         mMap.setMaxZoomPreference(20);
                         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12.0f));
                     }
@@ -121,4 +134,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onStop();
         locationManager.removeUpdates(locationListener);
     }
+
+
+
+    public int calculateDistanceInKilometer(double userLat, double userLng,
+                                            double venueLat, double venueLng) {
+
+        double latDistance = Math.toRadians(userLat - venueLat);
+        double lngDistance = Math.toRadians(userLng - venueLng);
+
+        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+                + Math.cos(Math.toRadians(userLat)) * Math.cos(Math.toRadians(venueLat))
+                * Math.sin(lngDistance / 2) * Math.sin(lngDistance / 2);
+
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+        return (int) (Math.round(AVERAGE_RADIUS_OF_EARTH_KM * c));
+    }
+
+
+
+
 }
