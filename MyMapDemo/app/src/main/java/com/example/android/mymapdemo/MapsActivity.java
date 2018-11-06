@@ -10,6 +10,8 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -23,16 +25,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback{
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     LocationManager locationManager;
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     Marker marker;
     LocationListener locationListener;
-    private ArrayList<Double> posicoes = new ArrayList<>() ;
+    private ArrayList<Double> posicoes = new ArrayList<>();
     private double accKm = 0.0;
-    public final static double AVERAGE_RADIUS_OF_EARTH_KM = 6371;
 
 
     @Override
@@ -56,33 +57,38 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onLocationChanged(Location location) {
                 double latitude = location.getLatitude();
                 double longitude = location.getLongitude();
+                double altitude = location.getAltitude();
                 posicoes.add(latitude);
                 posicoes.add(longitude);
-                if (posicoes.size() > 4){
-                    accKm += calculateDistanceInKilometer(posicoes.get(0),posicoes.get(1),posicoes.get(2),posicoes.get(3));
+                posicoes.add(altitude);
+
+                if (posicoes.size()== 6){
+                    accKm += distance(posicoes.get(0),posicoes.get(3),posicoes.get(1),posicoes.get(4),posicoes.get(2),posicoes.get(5));
                     posicoes.remove(0);
                     posicoes.remove(1);
+                    posicoes.remove(2);
                 }
+
+  /*              if (posicoes.size() == 4) {
+                    accKm += distance2(posicoes.get(0), posicoes.get(2), posicoes.get(1), posicoes.get(3));
+                    posicoes.remove(0);
+                    posicoes.remove(1);
+                }*/
+
 
                 //get the location name from latitude and longitude
                 Geocoder geocoder = new Geocoder(getApplicationContext());
                 try {
                     List<Address> addresses =
                             geocoder.getFromLocation(latitude, longitude, 1);
-                    String result = addresses.get(0).getLocality()+":";
+                    String result = addresses.get(0).getLocality() + ":";
                     result += addresses.get(0).getCountryName();
                     LatLng latLng = new LatLng(latitude, longitude);
-                    if (marker != null){
-                        marker.remove();
-                        marker = mMap.addMarker(new MarkerOptions().position(latLng).title(""+accKm));
-                        mMap.setMaxZoomPreference(20);
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12.0f));
-                    }
-                    else{
-                        marker = mMap.addMarker(new MarkerOptions().position(latLng).title(result));
-                        mMap.setMaxZoomPreference(20);
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 21.0f));
-                    }
+                    marker = mMap.addMarker(new MarkerOptions().position(latLng).title("acc= " + Double.toString(accKm)));
+                    mMap.setMaxZoomPreference(20);
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 21.0f));
+                    Log.d("COORDENADAS", latitude + " " + longitude + " " + altitude);
+                    Toast.makeText(getApplicationContext(), "acc= " + Double.toString(accKm), Toast.LENGTH_SHORT).show();
 
 
                 } catch (IOException e) {
@@ -136,23 +142,60 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
+    public static double distance(double lat1, double lat2, double lon1,
+                                  double lon2, double el1, double el2) {
 
-    public int calculateDistanceInKilometer(double userLat, double userLng,
-                                            double venueLat, double venueLng) {
+        final int R = 6371; // Radius of the earth
 
-        double latDistance = Math.toRadians(userLat - venueLat);
-        double lngDistance = Math.toRadians(userLng - venueLng);
-
+        double latDistance = Math.toRadians(lat2 - lat1);
+        double lonDistance = Math.toRadians(lon2 - lon1);
         double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
-                + Math.cos(Math.toRadians(userLat)) * Math.cos(Math.toRadians(venueLat))
-                * Math.sin(lngDistance / 2) * Math.sin(lngDistance / 2);
-
+                + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
+                * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        double distance = R * c * 1000; // convert to meters
 
-        return (int) (Math.round(AVERAGE_RADIUS_OF_EARTH_KM * c));
+        double height = el1 - el2;
+
+        distance = Math.pow(distance, 2) + Math.pow(height, 2);
+
+        return Math.sqrt(distance);
     }
 
 
+    public double FlatDistance(double lat1, double lat2, double lon1, double lon2) {
+
+        double latdif = Math.pow(Math.toRadians(lat2 - lat1), 2);
+        double longdif = Math.pow(Math.toRadians(lon2 - lon1), 2);
+
+        return Math.sqrt(latdif + longdif);
+
+    }
+
+
+    private static double distance2(double lat1, double lat2, double lon1, double lon2) {
+        double theta = lon1 - lon2;
+        double dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
+        dist = Math.acos(dist);
+        dist = rad2deg(dist);
+        dist = dist * 60 * 1.1515;
+        dist = dist * 1.609344;
+        return (dist);
+    }
+
+    /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+    /*::	This function converts decimal degrees to radians						 :*/
+    /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+    private static double deg2rad(double deg) {
+        return (deg * Math.PI / 180.0);
+    }
+
+    /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+    /*::	This function converts radians to decimal degrees						 :*/
+    /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+    private static double rad2deg(double rad) {
+        return (rad * 180 / Math.PI);
+    }
 
 
 }
