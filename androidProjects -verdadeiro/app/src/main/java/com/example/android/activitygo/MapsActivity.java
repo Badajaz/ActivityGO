@@ -1,6 +1,7 @@
-package com.example.android.mymapdemo;
+package com.example.android.activitygo;
 
 import android.Manifest;
+import android.app.Fragment;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -8,9 +9,14 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Chronometer;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -36,14 +42,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private double accKm = 0.0;
 
 
+    private Chronometer chronometer;
+    private boolean running;
+    private long pauseOffset;
+
+    private Fragment SelectedFragment;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+        /*SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);*/
+        //mapFragment.getMapAsync(this);
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
@@ -52,6 +65,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             {Manifest.permission.ACCESS_FINE_LOCATION},
                     REQUEST_LOCATION_PERMISSION);
         }
+
+
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
@@ -79,17 +94,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 //get the location name from latitude and longitude
                 Geocoder geocoder = new Geocoder(getApplicationContext());
                 try {
+
                     List<Address> addresses =
                             geocoder.getFromLocation(latitude, longitude, 1);
                     String result = addresses.get(0).getLocality() + ":";
                     result += addresses.get(0).getCountryName();
                     LatLng latLng = new LatLng(latitude, longitude);
-                    marker = mMap.addMarker(new MarkerOptions().position(latLng).title("acc= " + Double.toString(accKm)));
-                    mMap.setMaxZoomPreference(20);
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 21.0f));
-                    Log.d("COORDENADAS", latitude + " " + longitude + " " + altitude);
-                    Toast.makeText(getApplicationContext(), "acc= " + Double.toString(accKm), Toast.LENGTH_SHORT).show();
-
+                    //marker = mMap.addMarker(new MarkerOptions().position(latLng).title("acc= " + Double.toString(accKm)));
+                   // mMap.setMaxZoomPreference(20);
+                    //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 21.0f));
+                    //Log.d("COORDENADAS", latitude + " " + longitude + " " + altitude);
+                    //Toast.makeText(getApplicationContext(), "acc= " + Double.toString(accKm), Toast.LENGTH_SHORT).show();
+                    TextView tv = (TextView)findViewById(R.id.kmTextViewRun);
+                    tv.setText(""+accKm);
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -111,8 +128,55 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             }
         };
+
+
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1, locationListener);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, locationListener);
+
+        Button Stop = (Button) findViewById(R.id.StopRun);
+        Button Start = (Button) findViewById(R.id.StartRun);
+        chronometer = findViewById(R.id.chronometer);
+
+        Start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!running) {
+                    chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
+                    chronometer.start();
+                    running = true;
+                }
+            }
+        });
+
+        Stop.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (running) {
+                    pauseOffset = SystemClock.elapsedRealtime() - chronometer.getBase();
+                    chronometer.stop();
+                    running = false;
+                }
+
+                /*SelectedFragment = new RunFragment();
+                FragmentManager fmana = getFragmentManager();
+                FragmentTransaction ftransacti = fmana.beginTransaction();
+                ftransacti.replace(R.id.fragment_container, SelectedFragment,"StartCorridaFragment");
+                ftransacti.addToBackStack("IrCorridaFragment");
+                ftransacti.commit();*/
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
     }
 
 

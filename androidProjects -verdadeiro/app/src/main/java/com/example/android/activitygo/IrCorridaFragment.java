@@ -2,6 +2,7 @@ package com.example.android.activitygo;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -28,12 +29,15 @@ public class IrCorridaFragment extends Fragment {
        start.setOnClickListener(new View.OnClickListener() {
 
            public void onClick(View v) {
-               Fragment SelectedFragment = new StartCorridaFragment();
+               Intent i = new Intent(getContext(),MapsActivity.class);
+               startActivity(i);
+
+               /*Fragment SelectedFragment = new StartCorridaFragment();
                FragmentManager fm = getFragmentManager();
                FragmentTransaction ft = fm.beginTransaction();
                ft.replace(R.id.fragment_container,  SelectedFragment,"IrCorridaEasy");
                ft.addToBackStack("IrCorridaFragment");
-               ft.commit();
+               ft.commit();*/
            }
        });
 
