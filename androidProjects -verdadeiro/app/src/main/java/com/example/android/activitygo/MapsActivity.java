@@ -30,6 +30,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -50,11 +51,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Fragment SelectedFragment;
     private boolean isStopped = false;
 
+    private ArrayList<String> datas = new ArrayList<String>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        Calendar cal = Calendar.getInstance();
+        final int year = cal.get(Calendar.YEAR);
+        final int month = cal.get(Calendar.MONTH);
+        final int day = cal.get(Calendar.DAY_OF_MONTH);
+
+
+        String date = day + "/" + month + "/" + year;
+        Log.d("DATA",date);
+
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         /*SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);*/
@@ -185,7 +199,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
-
+        Button finalizar = (Button) findViewById(R.id.Finalizar);
+        finalizar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("DATAS","ON CLICK");
+                String data = day+"/"+month+"/"+year;
+                datas.add(data);
+                Fragment p = new HistoricoCorridas();
+                Bundle args = new Bundle();
+                args.putStringArrayList("DATAS", datas);
+                p.setArguments(args);
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container, p).commit();
+                Log.d("DATAS","Faz comit");
+            }
+        });
 
 
 

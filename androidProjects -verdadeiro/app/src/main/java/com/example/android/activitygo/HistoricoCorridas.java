@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -27,9 +29,8 @@ public class HistoricoCorridas extends Fragment {
         View v = inflater.inflate(R.layout.fragment_historico_corridas, container, false);
 
         lv1 = (ListView) v.findViewById(R.id.ListaResultadosDatas);
-        String[] value = getArguments().getStringArray("DATAS");
-        listViewAdapter = new ArrayAdapter<String>(
-                getActivity(), android.R.layout.simple_list_item_1, value);
+        ArrayList<String> value = getArguments().getStringArrayList("DATAS");
+        listViewAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, value);
         lv1.setAdapter(listViewAdapter);
         return v;
     }
