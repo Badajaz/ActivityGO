@@ -28,6 +28,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,6 +48,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private long pauseOffset;
 
     private Fragment SelectedFragment;
+    private boolean isStopped = false;
 
 
     @Override
@@ -70,19 +72,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                double latitude = location.getLatitude();
-                double longitude = location.getLongitude();
-                double altitude = location.getAltitude();
-                posicoes.add(latitude);
-                posicoes.add(longitude);
-                posicoes.add(altitude);
+                if (isStopped == false) {
 
-                if (posicoes.size()== 6){
-                    accKm += distance(posicoes.get(0),posicoes.get(3),posicoes.get(1),posicoes.get(4),posicoes.get(2),posicoes.get(5));
-                    posicoes.remove(0);
-                    posicoes.remove(1);
-                    posicoes.remove(2);
-                }
+
+                    double latitude = location.getLatitude();
+                    double longitude = location.getLongitude();
+                    double altitude = location.getAltitude();
+                    posicoes.add(latitude);
+                    posicoes.add(longitude);
+                    posicoes.add(altitude);
+
+
+                    if (posicoes.size() == 6) {
+                        accKm += distance(posicoes.get(0), posicoes.get(3), posicoes.get(1), posicoes.get(4), posicoes.get(2), posicoes.get(5));
+                        posicoes.remove(0);
+                        posicoes.remove(1);
+                        posicoes.remove(2);
+                    }
 
   /*              if (posicoes.size() == 4) {
                     accKm += distance2(posicoes.get(0), posicoes.get(2), posicoes.get(1), posicoes.get(3));
@@ -91,25 +97,30 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }*/
 
 
-                //get the location name from latitude and longitude
-                Geocoder geocoder = new Geocoder(getApplicationContext());
-                try {
+                    //get the location name from latitude and longitude
+                    Geocoder geocoder = new Geocoder(getApplicationContext());
+                    try {
 
-                    List<Address> addresses =
-                            geocoder.getFromLocation(latitude, longitude, 1);
-                    String result = addresses.get(0).getLocality() + ":";
-                    result += addresses.get(0).getCountryName();
-                    LatLng latLng = new LatLng(latitude, longitude);
-                    //marker = mMap.addMarker(new MarkerOptions().position(latLng).title("acc= " + Double.toString(accKm)));
-                   // mMap.setMaxZoomPreference(20);
-                    //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 21.0f));
-                    //Log.d("COORDENADAS", latitude + " " + longitude + " " + altitude);
-                    //Toast.makeText(getApplicationContext(), "acc= " + Double.toString(accKm), Toast.LENGTH_SHORT).show();
-                    TextView tv = (TextView)findViewById(R.id.kmTextViewRun);
-                    tv.setText(""+accKm);
+                        List<Address> addresses =
+                                geocoder.getFromLocation(latitude, longitude, 1);
+                        String result = addresses.get(0).getLocality() + ":";
+                        result += addresses.get(0).getCountryName();
+                        LatLng latLng = new LatLng(latitude, longitude);
+                        //marker = mMap.addMarker(new MarkerOptions().position(latLng).title("acc= " + Double.toString(accKm)));
+                        // mMap.setMaxZoomPreference(20);
+                        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 21.0f));
+                        //Log.d("COORDENADAS", latitude + " " + longitude + " " + altitude);
 
-                } catch (IOException e) {
-                    e.printStackTrace();
+                        DecimalFormat df = new DecimalFormat();
+                        df.setMaximumFractionDigits(2);
+
+                        TextView tv = (TextView) findViewById(R.id.kmTextViewRun);
+                        tv.setText("" + df.format(accKm));
+                        Toast.makeText(getApplicationContext(), "acc= " + df.format(accKm), Toast.LENGTH_SHORT).show();
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
@@ -130,8 +141,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         };
 
 
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1, locationListener);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, locationListener);
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1, locationListener);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, locationListener);
+
+
+
 
         Button Stop = (Button) findViewById(R.id.StopRun);
         Button Start = (Button) findViewById(R.id.StartRun);
@@ -144,6 +158,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
                     chronometer.start();
                     running = true;
+                    isStopped = false;
                 }
             }
         });
@@ -156,6 +171,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     pauseOffset = SystemClock.elapsedRealtime() - chronometer.getBase();
                     chronometer.stop();
                     running = false;
+                    isStopped = true;
                 }
 
                 /*SelectedFragment = new RunFragment();
