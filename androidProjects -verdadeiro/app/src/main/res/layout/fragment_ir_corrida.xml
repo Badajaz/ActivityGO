@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".IrCorridaFragment"
+    android:layout_marginBottom="50dp"
     android:background="#329d92"
-    android:layout_marginBottom="50dp">
+    tools:context=".IrCorridaFragment">
 
     <ToggleButton
         android:id="@+id/toggleButton3"
@@ -15,12 +15,14 @@
         android:layout_below="@+id/toggleButton2"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="105dp"
-        android:layout_marginTop="14dp"
-        android:layout_marginEnd="101dp"
         android:background="@drawable/edit_text_shape"
         android:textOff="Medium 5KM"
-        android:textOn="Letting go off easy! 200 Points!" />
+        android:textOn="Letting go off easy! 200 Points!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toggleButton2"
+        app:layout_constraintVertical_bias="0.123" />
 
     <ToggleButton
         android:id="@+id/toggleButton4"
@@ -29,12 +31,14 @@
         android:layout_below="@+id/toggleButton3"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="107dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="99dp"
         android:background="@drawable/edit_text_shape"
         android:textOff="Hard 7KM"
-        android:textOn="It's a Hard day's life! 500 Points!" />
+        android:textOn="It's a Hard day's life! 500 Points!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toggleButton3"
+        app:layout_constraintVertical_bias="0.15" />
 
     <ToggleButton
         android:id="@+id/toggleButton2"
@@ -43,26 +47,24 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="103dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="103dp"
         android:background="@drawable/edit_text_shape"
         android:textOff="Easy 2KM"
-        android:textOn="Let's Go Easy! 100 Points!" />
+        android:textOn="Let's Go Easy! 100 Points!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.087" />
 
 
     <Button
         android:id="@+id/buttonStart"
         android:layout_width="274dp"
-        android:layout_height="wrap_content"
+        android:layout_height="136dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="57dp"
-        android:layout_marginTop="306dp"
-        android:layout_marginEnd="53dp"
-        android:layout_marginBottom="10dp"
         android:background="@drawable/button_border"
         android:fontFamily="sans-serif"
         android:text="Start"
@@ -72,9 +74,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonLogin"
-        app:layout_constraintVertical_bias="0.398" />
+        app:layout_constraintTop_toBottomOf="@+id/toggleButton4" />
 
 
-
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

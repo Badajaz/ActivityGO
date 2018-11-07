@@ -12,7 +12,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/greySeparator1"
+            android:id="@+id/blackSeparator1"
             android:layout_width="0.1dp"
             android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
@@ -28,7 +28,7 @@
             app:layout_constraintVertical_bias="0.537" />
 
         <TextView
-            android:id="@+id/greySeparator2"
+            android:id="@+id/blackSeparator2"
             android:layout_width="0.1dp"
             android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
@@ -44,16 +44,19 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.697" />
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/imageView2"
             android:layout_width="153dp"
             android:layout_height="164dp"
+            android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:src="@drawable/user_photo_icon"
+            app:civ_border_color="@color/colorPrimary"
+            app:civ_border_width="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -61,7 +64,7 @@
             app:layout_constraintVertical_bias="0.095" />
 
         <TextView
-            android:id="@+id/idName"
+            android:id="@+id/namePessoaMenuInicial"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -91,7 +94,7 @@
             android:textSize="16sp"
             android:typeface="sans"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/greySeparator1"
+            app:layout_constraintEnd_toStartOf="@+id/blackSeparator1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.538" />
@@ -109,7 +112,7 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/greySeparator1"
+            app:layout_constraintStart_toEndOf="@+id/blackSeparator1"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.538" />
 
@@ -130,7 +133,7 @@
             android:textSize="16sp"
             android:typeface="sans"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/greySeparator2"
+            app:layout_constraintEnd_toStartOf="@+id/blackSeparator2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.697" />
@@ -151,7 +154,7 @@
             android:typeface="sans"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/greySeparator2"
+            app:layout_constraintStart_toEndOf="@+id/blackSeparator2"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.697" />
 

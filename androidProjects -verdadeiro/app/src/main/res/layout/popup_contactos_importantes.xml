@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="350dp"
-    android:layout_height="500dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#329d92">
+    android:layout_width="350dp"
+    android:layout_height="475dp"
+    android:background="#329d77">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -18,8 +18,6 @@
             android:layout_height="wrap_content"
             android:gravity="top|center"
             android:orientation="vertical">
-
-
 
         </LinearLayout>
     </ScrollView>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="350dp"
-    android:layout_height="500dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#329d92">
+    android:layout_width="350dp"
+    android:layout_height="475dp"
+    android:background="#329d77">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -61,17 +61,17 @@
                 android:id="@+id/DataNascimentoChangePopUp"
                 android:layout_width="250dp"
                 android:layout_height="55dp"
-                android:fontFamily="sans-serif"
-                android:ems="10"
-                android:hint="Data de Nascimento: "
-                android:drawableLeft="@drawable/date_icon"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/round_edittext_states"
-                android:padding="5dp"
+                android:drawableLeft="@drawable/date_icon"
                 android:drawablePadding="-30dp"
+                android:ems="10"
+                android:fontFamily="sans-serif"
                 android:gravity="center"
+                android:hint="Data de Nascimento: "
+                android:padding="5dp"
                 android:textSize="16sp"
-                android:typeface="sans"/>
+                android:typeface="sans" />
 
             <EditText
                 android:id="@+id/paisUserNameText"
@@ -150,12 +150,24 @@
                 app:layout_constraintTop_toBottomOf="@+id/WeightText" />
 
             <TextView
+                android:id="@+id/blackSeparator1ChangeProfile"
+                android:layout_width="250dp"
+                android:layout_height="0.1dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/heightNameText" />
+
+            <TextView
                 android:id="@+id/informacaoPrivada"
                 android:layout_width="300dp"
                 android:layout_height="55dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="8dp"
                 android:gravity="center"
-                android:text="Informação Privada:"
+                android:text="Informações Privadas:"
                 android:textColor="#ffffff"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -217,25 +229,31 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/HeightText" />
 
+            <TextView
+                android:id="@+id/blackSeparator2ChangeProfile"
+                android:layout_width="250dp"
+                android:layout_height="0.1dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/heightNameText" />
+
             <Button
                 android:id="@+id/buttonConfirmarAlterarPerfil"
                 android:layout_width="250dp"
                 android:layout_height="55dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="50dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/round_edittext_states"
                 android:fontFamily="sans-serif"
                 android:text="Alterar Perfil"
                 android:textColor="#000000"
                 android:textSize="16sp"
                 android:typeface="sans"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/buttonLogin"
-                app:layout_constraintVertical_bias="0.398" />
+                app:layout_constraintTop_toBottomOf="@+id/blackSeparator2ChangeProfile" />
 
         </LinearLayout>
     </ScrollView>

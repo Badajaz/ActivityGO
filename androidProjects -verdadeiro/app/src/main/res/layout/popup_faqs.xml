@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="350dp"
-    android:layout_height="500dp"
+    android:layout_height="475dp"
     android:background="#329d77"
     android:orientation="vertical">
 
@@ -46,8 +45,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:drawablePadding="15dp"
         android:drawableLeft="@drawable/arrow2_icon"
+        android:drawablePadding="15dp"
         android:text="Para eliminar a sua conta deve ir às definições do ActivityGO onde aparecerá uma opção para a eliminar. Porque o vai fazer? :("
         android:textAlignment="viewStart"
         android:textColor="#ffffff"

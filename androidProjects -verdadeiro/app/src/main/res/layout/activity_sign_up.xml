@@ -26,7 +26,7 @@
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:fontFamily="sans-serif"
+                android:fontFamily="open-sans"
                 android:text="Criar Conta:"
                 android:textAlignment="center"
                 android:textColor="#ffffff"
@@ -36,15 +36,15 @@
 
             <EditText
                 android:id="@+id/FirstNameText"
-                android:layout_width="250dp"
-                android:layout_height="55dp"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/round_edittext_states"
                 android:drawableLeft="@drawable/user_icon3"
                 android:drawablePadding="5dp"
                 android:ems="10"
-                android:fontFamily="sans-serif"
+                android:fontFamily="open-sans"
                 android:hint="@string/FirstNameText"
                 android:inputType="textPersonName"
                 android:padding="5dp"
@@ -55,15 +55,15 @@
 
             <EditText
                 android:id="@+id/LastNameText"
-                android:layout_width="250dp"
-                android:layout_height="55dp"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/round_edittext_states"
                 android:drawableLeft="@drawable/user_icon3"
                 android:drawablePadding="5dp"
                 android:ems="10"
-                android:fontFamily="sans-serif"
+                android:fontFamily="open-sans"
                 android:hint="@string/LastNameText"
                 android:inputType="textPersonName"
                 android:padding="5dp"
@@ -72,57 +72,41 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/FirstNameText" />
 
-            <EditText
-                android:id="@+id/username"
-                android:layout_width="250dp"
-                android:layout_height="55dp"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/round_edittext_states"
-                android:drawableLeft="@drawable/user_icon4"
-                android:drawablePadding="5dp"
-                android:ems="10"
-                android:fontFamily="sans-serif"
-                android:hint="  Username"
-                android:inputType="textPersonName"
-                android:padding="5dp"
-                android:textSize="16sp"
-                android:typeface="sans"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/FirstNameText" />
-            
             <TextView
                 android:id="@+id/DataNascimento"
-                android:layout_width="250dp"
-                android:layout_height="55dp"
-                android:fontFamily="sans-serif"
-                android:ems="10"
-                android:hint="Data de Nascimento: "
-                android:drawableLeft="@drawable/date_icon"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/round_edittext_states"
-                android:padding="5dp"
-                android:drawablePadding="-30dp"
+                android:drawableLeft="@drawable/date_icon"
+                android:drawablePadding="-80dp"
+                android:ems="10"
+                android:fontFamily="open-sans"
                 android:gravity="center"
+                android:hint="Data de Nascimento: "
+                android:padding="5dp"
                 android:textSize="16sp"
-                android:typeface="sans"/>
+                android:typeface="sans" />
 
             <TextView
                 android:id="@+id/Genero"
                 android:layout_width="300dp"
                 android:layout_height="55dp"
                 android:layout_marginTop="16dp"
+                android:fontFamily="open-sans"
                 android:gravity="center"
                 android:text="Género:"
                 android:textColor="#ffffff"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:typeface="sans" />
 
             <CheckBox
                 android:id="@+id/Masculino"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="-60dp"
+                android:fontFamily="open-sans"
                 android:gravity="center"
                 android:onClick="getMasculinoItem"
                 android:text="Masculino" />
@@ -133,21 +117,22 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="60dp"
                 android:layout_marginTop="-32dp"
+                android:fontFamily="open-sans"
                 android:gravity="center"
                 android:onClick="getFemininoItem"
                 android:text="Feminino" />
 
             <EditText
                 android:id="@+id/paisUser"
-                android:layout_width="250dp"
-                android:layout_height="55dp"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/round_edittext_states"
                 android:drawableLeft="@drawable/flag_icon"
                 android:drawablePadding="5dp"
                 android:ems="10"
-                android:fontFamily="sans-serif"
+                android:fontFamily="open-sans"
                 android:hint="  País"
                 android:inputType="textPersonName"
                 android:padding="5dp"
@@ -158,15 +143,15 @@
 
             <EditText
                 android:id="@+id/EmailText"
-                android:layout_width="250dp"
-                android:layout_height="55dp"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/round_edittext_states"
                 android:drawableLeft="@drawable/email_icon"
                 android:drawablePadding="5dp"
                 android:ems="10"
-                android:fontFamily="sans-serif"
+                android:fontFamily="open-sans"
                 android:hint="@string/EmailSignUp"
                 android:inputType="textEmailAddress"
                 android:padding="5dp"
@@ -177,15 +162,15 @@
 
             <EditText
                 android:id="@+id/WeightText"
-                android:layout_width="250dp"
-                android:layout_height="55dp"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/round_edittext_states"
                 android:drawableLeft="@drawable/weight_icon"
                 android:drawablePadding="5dp"
                 android:ems="10"
-                android:fontFamily="sans-serif"
+                android:fontFamily="open-sans"
                 android:hint="@string/WeightSignUp"
                 android:inputType="textPersonName"
                 android:padding="5dp"
@@ -196,15 +181,15 @@
 
             <EditText
                 android:id="@+id/HeightText"
-                android:layout_width="250dp"
-                android:layout_height="55dp"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/round_edittext_states"
                 android:drawableLeft="@drawable/height_icon"
                 android:drawablePadding="5dp"
                 android:ems="10"
-                android:fontFamily="sans-serif"
+                android:fontFamily="open-sans"
                 android:hint="@string/HeightSignUp"
                 android:inputType="textPersonName"
                 android:padding="5dp"
@@ -213,17 +198,62 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/WeightText" />
 
+            <TextView
+                android:id="@+id/blackSeparator1SignUp"
+                android:layout_width="300dp"
+                android:layout_height="0.1dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/HeightText" />
+
+            <TextView
+                android:id="@+id/informacaoPrivadaSignUp"
+                android:layout_width="300dp"
+                android:layout_height="55dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="open-sans"
+                android:gravity="center"
+                android:text="Informações Privadas:"
+                android:textColor="#ffffff"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/blackSeparator1SignUp" />
+
+            <EditText
+                android:id="@+id/username"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/round_edittext_states"
+                android:drawableLeft="@drawable/user_icon4"
+                android:drawablePadding="5dp"
+                android:ems="10"
+                android:fontFamily="open-sans"
+                android:hint="  Username"
+                android:inputType="textPersonName"
+                android:padding="5dp"
+                android:textSize="16sp"
+                android:typeface="sans"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/HeightText" />
+
             <EditText
                 android:id="@+id/PasswordText"
-                android:layout_width="250dp"
-                android:layout_height="55dp"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/round_edittext_states"
                 android:drawableLeft="@drawable/lock_icon"
                 android:drawablePadding="5dp"
                 android:ems="10"
-                android:fontFamily="sans-serif"
+                android:fontFamily="open-sans"
                 android:hint="@string/PasswordSignUp"
                 android:inputType="textPassword"
                 android:padding="5dp"
@@ -234,15 +264,15 @@
 
             <EditText
                 android:id="@+id/reTypePasswordText"
-                android:layout_width="250dp"
-                android:layout_height="55dp"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/round_edittext_states"
                 android:drawableLeft="@drawable/lock_icon"
                 android:drawablePadding="5dp"
                 android:ems="10"
-                android:fontFamily="sans-serif"
+                android:fontFamily="open-sans"
                 android:hint="@string/reTypePasswordSignUp"
                 android:inputType="textPassword"
                 android:padding="5dp"
@@ -252,21 +282,37 @@
                 app:layout_constraintTop_toBottomOf="@+id/HeightText" />
 
             <TextView
+                android:id="@+id/blackSeparator2SignUp"
+                android:layout_width="300dp"
+                android:layout_height="0.1dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/reTypePasswordText" />
+
+            <TextView
                 android:id="@+id/DesportoTextView"
                 android:layout_width="300dp"
-                android:layout_height="55dp"
-                android:layout_marginTop="15dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="open-sans"
                 android:gravity="center"
                 android:text="Desporto Favorito:"
                 android:textColor="#ffffff"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/blackSeparator2SignUp" />
 
             <CheckBox
                 android:id="@+id/caminhada"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="-100dp"
+                android:fontFamily="open-sans"
                 android:onClick="getCaminhadaItem"
                 android:text="Caminhada" />
 
@@ -275,6 +321,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="-113dp"
+                android:fontFamily="open-sans"
                 android:onClick="getCorridaItem"
                 android:text="Corrida" />
 
@@ -284,6 +331,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="80dp"
                 android:layout_marginTop="-65dp"
+                android:fontFamily="open-sans"
                 android:onClick="getFutebolItem"
                 android:text="Futebol"
                 tools:layout_editor_absoluteX="168dp"
@@ -295,6 +343,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="80dp"
                 android:layout_marginTop="2dp"
+                android:fontFamily="open-sans"
                 android:onClick="getCiclismoItem"
                 android:text="Ciclismo" />
 
@@ -304,8 +353,10 @@
                 android:layout_height="0dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
+                android:fontFamily="open-sans"
                 android:padding="10dp"
                 android:text="Desporto Favorito"
+                android:typeface="sans"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/PasswordText" />
 
@@ -318,7 +369,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/round_edittext_states"
-                android:fontFamily="sans-serif"
+                android:fontFamily="open-sans"
                 android:text="Criar Conta"
                 android:textColor="#000000"
                 android:textSize="16sp"

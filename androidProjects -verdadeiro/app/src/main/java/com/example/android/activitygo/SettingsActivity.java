@@ -2,20 +2,15 @@ package com.example.android.activitygo;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -71,6 +66,7 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings_layout);
 
         userProfileMenuPrincipal = (ArrayList<String>) getIntent().getSerializableExtra("USERPROFILE");
+
         dialogTerminarSessao = new Dialog(this);
         dialogChangeProfile = new Dialog(this);
         dialogCalendario = new Dialog(this);
@@ -149,7 +145,7 @@ public class SettingsActivity extends AppCompatActivity {
         dialogTerminarSessao.show();
     }
 
-    public void showChangeProfilePopup(){
+    public void showChangeProfilePopup() {
         dialogChangeProfile.setContentView(R.layout.change_profile_popup);
 
         iniciarCampos(dialogChangeProfile);
@@ -194,15 +190,15 @@ public class SettingsActivity extends AppCompatActivity {
         ArrayList<String> alterada = new ArrayList<>();
         int index = 0;
         for (String str : listUser) {
-            if(index < 9){
+            if (index < 9) {
                 if (!str.equals(listUserAlterada.get(index))) {
                     alterada.add(listUserAlterada.get(index));
-                } else if(str.equals(listUserAlterada.get(index))){
+                } else if (str.equals(listUserAlterada.get(index))) {
                     alterada.add(str);
                 }
                 index++;
             } else {
-                if(index == listUser.size()){
+                if (index == listUser.size()) {
                     break;
                 } else {
                     alterada.add(str);
@@ -214,7 +210,7 @@ public class SettingsActivity extends AppCompatActivity {
         return alterada;
     }
 
-    private void iniciarCampos (Dialog d){
+    private void iniciarCampos(Dialog d) {
         // Preparar para guardar os valores
         firstNameUser = (TextView) d.findViewById(R.id.primeiroNomeText);
         secondNameUser = (TextView) d.findViewById(R.id.apelidoNameText);
@@ -243,8 +239,7 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 month = month + 1;
-                Log.d(TAG, "onDateSet: mm/dd/yyy: " + dayOfMonth + "/" + month + "/" + year);
-
+                //Log.d(TAG, "onDateSet: mm/dd/yyy: " + dayOfMonth + "/" + month + "/" + year);
                 String date = dayOfMonth + "/" + month + "/" + year;
                 dataNascimento.setText(date);
             }
@@ -252,11 +247,11 @@ public class SettingsActivity extends AppCompatActivity {
         paisUser = (TextView) d.findViewById(R.id.paisUserNameText);
     }
 
-    private void showContactosImportantesPopup(){
+    private void showContactosImportantesPopup() {
 
     }
 
-    private void showFaqsPopup(){
+    private void showFaqsPopup() {
         TextView close;
         dialogFaqs.setContentView(R.layout.popup_faqs);
         close = (TextView) dialogFaqs.findViewById(R.id.txtClose);
@@ -270,7 +265,7 @@ public class SettingsActivity extends AppCompatActivity {
         dialogFaqs.show();
     }
 
-    private void showCalendarioPopup(){
+    private void showCalendarioPopup() {
         TextView close;
         dialogCalendario.setContentView(R.layout.popup_calendario);
         close = (TextView) dialogCalendario.findViewById(R.id.txtClose);

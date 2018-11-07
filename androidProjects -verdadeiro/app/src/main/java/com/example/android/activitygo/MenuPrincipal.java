@@ -20,7 +20,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,14 +49,13 @@ public class MenuPrincipal extends AppCompatActivity {
         profile = (ArrayList<String>) getIntent().getSerializableExtra("USERPROFILE");
         selectedSport = "";
 
-        Toast toast = Toast.makeText(this, "length: " + profile.get(7),
-                Toast.LENGTH_SHORT);
-        toast.show();
-
         // mostra popup inicial para a pessoa escolher o desporto
-        showPopup();
+        // showPopup();
 
+        Bundle toRunMenuInicial = new Bundle();
+        toRunMenuInicial.putStringArrayList("USERPROFILE", profile);
         SelectedFragment = new RunMenuInicial();
+        SelectedFragment.setArguments(toRunMenuInicial);
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.add(R.id.fragment_container, SelectedFragment, "RunFragment");
@@ -81,13 +79,19 @@ public class MenuPrincipal extends AppCompatActivity {
                     Fragment SelectedFragment = null;
                     switch (menuItem.getItemId()) {
                         case R.id.runIntem:
+                            //Fragmento Corrida
+                            Bundle toRunMenuInicial = new Bundle();
+                            toRunMenuInicial.putStringArrayList("USERPROFILE", profile);
                             SelectedFragment = new RunMenuInicial();
+                            SelectedFragment.setArguments(toRunMenuInicial);
                             FragmentManager fm = getFragmentManager();
                             FragmentTransaction ft = fm.beginTransaction();
                             ft.replace(R.id.fragment_container, SelectedFragment);
+                            ft.addToBackStack("RunFragment");
                             ft.commit();
                             break;
                         case R.id.chalengeItem:
+                            //Fragmento Desafios
                             SelectedFragment = new ChalengeFragment();
                             FragmentManager fman = getFragmentManager();
                             FragmentTransaction ftra = fman.beginTransaction();
@@ -96,18 +100,12 @@ public class MenuPrincipal extends AppCompatActivity {
                             break;
 
                         case R.id.achievementItem:
-                            /*SelectedFragment = new AchievementsFragment();
-                            FragmentManager fmanager = getFragmentManager();
-                            FragmentTransaction ftransaction = fmanager.beginTransaction();
-                            ftransaction.replace(R.id.fragment_container, SelectedFragment);
-                            ftransaction.commit();
-                            break;*/
-
                             // chamar tab das achievements
                             Intent intent = new Intent(getApplicationContext(), AchievementsTab.class);
                             startActivity(intent);
 
                         case R.id.RankingItem:
+                            //Fragmento Rankings
                             SelectedFragment = new RankingsFragment();
                             FragmentManager fmanag = getFragmentManager();
                             FragmentTransaction ftransactio = fmanag.beginTransaction();
@@ -192,7 +190,6 @@ public class MenuPrincipal extends AppCompatActivity {
 
                 Intent i = new Intent(this, SettingsActivity.class);
                 i.putExtra("USERPROFILE", profile);
-
                 startActivity(i);
                 break;
 
