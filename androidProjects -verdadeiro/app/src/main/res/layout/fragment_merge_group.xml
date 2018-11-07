@@ -1,21 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".MergeGroupFragment"
-    android:background="#329d92">
-
-    <!-- TODO: Update blank fragment layout -->
-
-
-
-
-
-
-
-
+    android:background="#329d92"
+    tools:context=".MergeGroupFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,31 +17,29 @@
         android:orientation="vertical"
         android:paddingTop="50dp">
 
-    <EditText
-        android:id="@+id/NomeCriarGrupo"
-        android:layout_width="149dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="20dp"
-        android:background="@drawable/edit_text_shape2"
-        android:ems="10"
-        android:fontFamily="sans-serif"
-        android:hint="@string/NomeGrupo"
-        android:inputType="textPersonName"
-        android:padding="5dp"
-        android:textSize="16sp"
-        android:typeface="sans"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
+        <EditText
+            android:id="@+id/NomeCriarGrupo"
+            android:layout_width="149dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/edit_text_shape2"
+            android:ems="10"
+            android:fontFamily="sans-serif"
+            android:hint="@string/NomeGrupo"
+            android:inputType="textPersonName"
+            android:padding="5dp"
+            android:textSize="16sp"
+            android:typeface="sans"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <CheckBox
             android:id="@+id/corridaCheck"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
+            android:gravity="center"
             android:text="Corrida" />
 
         <CheckBox
@@ -84,14 +72,7 @@
             android:textColor="@color/whiteLetters"
             android:textSize="16sp" />
 
-
-
-
-
-
-
     </LinearLayout>
-
 
     <TextView
         android:layout_width="match_parent"
@@ -134,8 +115,8 @@
         android:layout_alignBottom="@+id/NomeGrupo"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginTop="200dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/button_border"
         android:text="Procurar"
         app:layout_constraintBaseline_toBaselineOf="@+id/NomeGrupo"

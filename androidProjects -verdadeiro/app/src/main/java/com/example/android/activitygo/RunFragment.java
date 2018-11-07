@@ -1,42 +1,34 @@
 package com.example.android.activitygo;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.content.Intent;
-import android.os.Bundle;
+import android.app.DatePickerDialog;
 import android.app.Fragment;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TableLayout;
-import android.widget.TableRow;
+import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class RunFragment extends Fragment {
 
-    private Button firstLineButton;
-    private TextView tv2;
-    private TextView tv2V;
-    private TextView data;
-    private TextView dataV;
-    private TextView distancia;
-    private TextView distance;
+    private String date;
 
-    private String duracao;
-    private String duracaoValue;
-    private String dataValue;
-    private String dataVal;
-    private String distanciaV;
-    private String distanciaVal;
+    private TextView dataCorridaTv;
+    private DatePickerDialog.OnDateSetListener mDateSetListener;
+    private Button searchAllCorridas;
+    private Button procurarDatas;
 
+    private ArrayList<String> possiveisResultadosDatas = new ArrayList<String>();
 
     public RunFragment() {
         // Required empty public constructor
@@ -47,44 +39,79 @@ public class RunFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_run, container, false);
+        possiveisResultadosDatas.add("02/02/2018");
+        possiveisResultadosDatas.add("04/02/2018");
+        possiveisResultadosDatas.add("05/02/2018");
+        possiveisResultadosDatas.add("06/02/2018");
+        possiveisResultadosDatas.add("10/02/2018");
 
-        firstLineButton = (Button) v.findViewById(R.id.plusButtonLine1);
-        firstLineButton.setOnClickListener(new View.OnClickListener() {
+        dataCorridaTv = (TextView) v.findViewById(R.id.DataCorridaProcuraTextView);
+        dataCorridaTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*T*/
-                tv2 = (TextView) getView().findViewById(R.id.duracaoTextView);
-                tv2V = (TextView) getView().findViewById(R.id.FirstValueDuration);
-                data = (TextView) getView().findViewById(R.id.dataTextView);
-                dataV = (TextView) getView().findViewById(R.id.firstValueData);
-                distancia = (TextView) getView().findViewById(R.id.distanciaTextView);
-                distance = (TextView) getView().findViewById(R.id.firstValueDistance);
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
 
-                duracao = tv2.getText().toString();
-                duracaoValue = tv2V.getText().toString();
-                dataValue = data.getText().toString();
-                dataVal = dataV.getText().toString();
-                distanciaV = distancia.getText().toString();
-                distanciaVal = distance.getText().toString();
+                DatePickerDialog dialog = new DatePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_MinWidth, mDateSetListener, year, month, day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
 
-                Fragment fr = new RunEstatisticsFragment();
-                FragmentManager fm = getFragmentManager();
-                android.app.FragmentTransaction ft = fm.beginTransaction();
+        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                month = month + 1;
+
+                date = dayOfMonth + "/" + month + "/" + year;
+                dataCorridaTv.setText(date);
+            }
+        };
+
+        searchAllCorridas = (Button) v.findViewById(R.id.todasAsCorridasButtonSearch);
+        searchAllCorridas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HistoricoCorridas hc = new HistoricoCorridas();
                 Bundle args = new Bundle();
+                String[] array = new String[possiveisResultadosDatas.size()];
+                array = possiveisResultadosDatas.toArray(array);
+                args.putStringArray("DATAS", array);
+                hc.setArguments(args);
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container, hc).commit();
+            }
+        });
 
-                args.putString("CID", duracao);
-                args.putString("Duração", duracaoValue);
-                args.putString("data", dataValue);
-                args.putString("date", dataVal);
-                args.putString("distancia", distanciaV);
-                args.putString("distance", distanciaVal);
+        procurarDatas = (Button) v.findViewById(R.id.botaoProcurarDatas);
+        procurarDatas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HistoricoCorridas hc = new HistoricoCorridas();
+                if(!date.equals("")){
+                    String resultadosDatas = getResultados(possiveisResultadosDatas, date);
+                    String[] resultadosArray = resultadosDatas.split(" ");
+                    Bundle args = new Bundle();
+                    args.putStringArray("DATAS", resultadosArray);
+                    hc.setArguments(args);
+                    getFragmentManager().beginTransaction().replace(R.id.fragment_container, hc).commit();
+                } else {
+                    Toast.makeText(getContext(), "Tem de selecionar uma data!", Toast.LENGTH_LONG).show();
+                }
 
-                fr.setArguments(args);
-                ft.replace(R.id.fragment_container, fr,"RunEstatisticsFragment");
-                ft.addToBackStack("RunMenuInicial");
-                ft.commit();
             }
         });
         return v;
+    }
+
+    private String getResultados(ArrayList<String> possiveisResultados, String pesquisa) {
+        String resultados = "";
+        for (String resultado : possiveisResultados) {
+            if (resultado.contains(pesquisa)) {
+                resultados += resultado + " ";
+            }
+        }
+        return resultados;
     }
 }

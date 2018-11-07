@@ -179,39 +179,39 @@ public class SignUp extends AppCompatActivity {
                     startActivity(intent);
                 } else {
                     if (firstName.equals("")) {
-                        firstNameUser.setError("O Primeiro nome não foi preenchido");
+                        firstNameUser.setError("Não preencheu o primeiro nome!");
                     }
 
                     if (secondName.equals("")) {
-                        secondNameUser.setError("O apelido não foi preenchido");
+                        secondNameUser.setError("Não preencheu o apelido!");
                     }
 
                     if (email.equals("")) {
-                        emailUser.setError("O email não foi preenchido");
+                        emailUser.setError("Não preencheu o email!");
                     }
 
                     if (peso.equals("")) {
-                        pesoUser.setError("O peso não foi preenchido");
+                        pesoUser.setError("Não preencheu o peso!");
                     }
 
                     if (altura.equals("")) {
-                        alturaUser.setError("A altura não foi preenchida");
+                        alturaUser.setError("Não preencheu a altura!");
                     }
 
                     if (password.equals("")) {
-                        passwordUser.setError("A password não foi preenchida");
+                        passwordUser.setError("Não preencheu a password!");
                     }
 
                     if (confirmaPassword.equals("")) {
-                        confirmaPasswordUser.setError("A confirmação não foi preenchida");
+                        confirmaPasswordUser.setError("Não confirmou a password!");
                     }
 
                     if (!peso.matches("^[1-9]\\d{1,2}")) {
-                        pesoUser.setError("Não tem os digitos certos");
+                        pesoUser.setError("Não tem os digitos certos!");
                     }
 
                     if (!altura.matches("^[1-9]\\d{1,2}")) {
-                        alturaUser.setError("Não tem os digitos certos");
+                        alturaUser.setError("Não tem os digitos certos!");
                     }
 
                     if (!password.equals(confirmaPassword)) {
@@ -220,25 +220,25 @@ public class SignUp extends AppCompatActivity {
                     }
 
                     if (masculinoChecked == 0 && femininoChecked == 0) {
-                        masculino.setError("Não selecionou a caixa");
+                        masculino.setError("Não selecionou o seu sexo!");
                         masculino.requestFocus();
-                        feminino.setError("Não selecionou a caixa");
+                        feminino.setError("Não selecionou o seu sexo!");
                         feminino.requestFocus();
                     }
 
                     if (isAnyItemCheck() == false) {
-                        caminhada.setError("Não selecionou nenhuma caixa");
+                        caminhada.setError("Não selecionou nenhuma caixa!");
                         caminhada.requestFocus();
-                        corrida.setError("Não selecionou nenhuma a caixa");
+                        corrida.setError("Não selecionou nenhuma a caixa!");
                         corrida.requestFocus();
-                        futebol.setError("Não selecionou nenhuma a caixa");
+                        futebol.setError("Não selecionou nenhuma a caixa!");
                         futebol.requestFocus();
-                        ciclismo.setError("Não selecionou nenhuma a caixa");
+                        ciclismo.setError("Não selecionou nenhuma a caixa!");
                         ciclismo.requestFocus();
                     }
 
                     if (paisUser.equals("")) {
-                        firstNameUser.setError("O País não foi preenchido");
+                        firstNameUser.setError("Não preencheu o país!");
                     }
 
                 }

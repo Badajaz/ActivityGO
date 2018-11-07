@@ -11,11 +11,12 @@ import android.widget.ListView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ProcuraGrupos extends Fragment {
+public class HistoricoCorridas extends Fragment {
 
+    private ListView lv1;
     private ArrayAdapter<String> listViewAdapter;
 
-    public ProcuraGrupos() {
+    public HistoricoCorridas() {
         // Required empty public constructor
     }
 
@@ -23,14 +24,13 @@ public class ProcuraGrupos extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        View v = inflater.inflate(R.layout.fragment_historico_corridas, container, false);
 
-        View v = inflater.inflate(R.layout.fragment_procura_grupos, container, false);
-        ListView listView = (ListView) v.findViewById(R.id.ListaResultados);
-        String[] value = getArguments().getStringArray("PROCURA");
-
+        lv1 = (ListView) v.findViewById(R.id.ListaResultadosDatas);
+        String[] value = getArguments().getStringArray("DATAS");
         listViewAdapter = new ArrayAdapter<String>(
                 getActivity(), android.R.layout.simple_list_item_1, value);
-        listView.setAdapter(listViewAdapter);
+        lv1.setAdapter(listViewAdapter);
         return v;
     }
 }

@@ -1,7 +1,7 @@
 package com.example.android.activitygo;
 
-import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,11 +34,8 @@ public class MyGroupsFragment extends Fragment {
 
         listView = (ListView) v.findViewById(R.id.ListViewMeusGrupos);
         listViewAdapter = new ArrayAdapter<String>(
-                getActivity(), android.R.layout.simple_list_item_1,myGroups);
+                getActivity(), android.R.layout.simple_list_item_1, myGroups);
         listView.setAdapter(listViewAdapter);
-
-
-
 
         return v;
     }

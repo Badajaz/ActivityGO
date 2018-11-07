@@ -1,10 +1,7 @@
 package com.example.android.activitygo;
 
-
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +25,6 @@ public class MergeGroupFragment extends Fragment {
     private ArrayList<String> possiveisResultados = new ArrayList<String>();
     private ArrayList<String> grupos = new ArrayList<String>();
 
-
     private ArrayAdapter<String> listViewAdapter;
     private ListView listView;
 
@@ -36,16 +32,14 @@ public class MergeGroupFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v =  inflater.inflate(R.layout.fragment_merge_group, container, false);
+        View v = inflater.inflate(R.layout.fragment_merge_group, container, false);
         possiveisResultados.add("Benfica");
         possiveisResultados.add("Braga");
         possiveisResultados.add("Sporting");
         possiveisResultados.add("Porto");
         possiveisResultados.add("LegiãoFC");
 
-
         nomeGrupo = (EditText) v.findViewById(R.id.NomeCriarGrupo);
-
 
         Button criar = (Button) v.findViewById(R.id.buttonCriar);
         corrida = v.findViewById(R.id.corridaCheck);
@@ -54,83 +48,63 @@ public class MergeGroupFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 nomegrupo = nomeGrupo.getText().toString();
-                    if (isOneChecked() && !nomegrupo.equals("")){
-                        Toast.makeText(getActivity(),"O grupo "+nomegrupo+"Foi criado",Toast.LENGTH_LONG).show();
-                        possiveisResultados.add(nomegrupo);
-                        grupos.add(nomegrupo);
-                    }else{
-                        Toast.makeText(getActivity(),"erro",Toast.LENGTH_LONG).show();
-                    }
-
+                if (isOneChecked() && !nomegrupo.equals("")) {
+                    Toast.makeText(getActivity(), "O grupo " + nomegrupo + "Foi criado", Toast.LENGTH_LONG).show();
+                    possiveisResultados.add(nomegrupo);
+                    grupos.add(nomegrupo);
+                } else {
+                    Toast.makeText(getActivity(), "erro", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
         SearchGroup = (EditText) v.findViewById(R.id.NomeGrupo);
         Button procurar = (Button) v.findViewById(R.id.buttonSearch);
 
-
-
         procurar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                searchGrupo =  SearchGroup.getText().toString();
-                String resultados = getResultados(possiveisResultados,searchGrupo);
-                String [] resultadosArray = resultados.split(" ");
-                ProcuraGrupos p = new ProcuraGrupos ();
+                searchGrupo = SearchGroup.getText().toString();
+                String resultados = getResultados(possiveisResultados, searchGrupo);
+                String[] resultadosArray = resultados.split(" ");
+                ProcuraGrupos p = new ProcuraGrupos();
                 Bundle args = new Bundle();
-                args.putStringArray("PROCURA",resultadosArray);
+                args.putStringArray("PROCURA", resultadosArray);
                 p.setArguments(args);
                 getFragmentManager().beginTransaction().replace(R.id.fragment_container, p).commit();
 
             }
         });
 
-
-
         Button meusGrupos = (Button) v.findViewById(R.id.MeusGrupos);
         meusGrupos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-                MyGroupsFragment ldf = new MyGroupsFragment ();
+                MyGroupsFragment ldf = new MyGroupsFragment();
                 Bundle args = new Bundle();
-                args.putStringArrayList("GRUPO",grupos);
+                args.putStringArrayList("GRUPO", grupos);
                 ldf.setArguments(args);
                 getFragmentManager().beginTransaction().replace(R.id.fragment_container, ldf).commit();
-
             }
         });
-
-
-
-
         return v;
     }
 
+    public boolean isOneChecked() {
 
-
-    public  boolean  isOneChecked(){
-
-        if (corrida.isChecked() &&  caminhada.isChecked()){
+        if (corrida.isChecked() && caminhada.isChecked()) {
             return false;
         }
-       return true;
+        return true;
     }
 
-
-    public String getResultados(ArrayList<String> possiveisResultados ,String pesquisa){
-        String resultados="";
-        for (String resultado:possiveisResultados){
-            if (resultado.contains(pesquisa)){
-                resultados+=resultado+" ";
+    public String getResultados(ArrayList<String> possiveisResultados, String pesquisa) {
+        String resultados = "";
+        for (String resultado : possiveisResultados) {
+            if (resultado.contains(pesquisa)) {
+                resultados += resultado + " ";
             }
         }
         return resultados;
     }
-
-
-
-
-
 }
