@@ -69,6 +69,7 @@ public class SingleTouchEventView extends View implements SensorEventListener {
                     if (acceleration > SHAKE_THRESHOLD) {
                         mLastShakeTime = curTime;
                         path.reset();
+                        invalidate();
                         Toast.makeText(getContext(),"SHAKE MAIOR",Toast.LENGTH_LONG).show();
 
                         //Log.d("APP_NAME", "Shake, Rattle, and Roll");
@@ -79,8 +80,6 @@ public class SingleTouchEventView extends View implements SensorEventListener {
 
                         path.rewind();
                         Toast.makeText(getContext(),"SHAKE MENOR",Toast.LENGTH_LONG).show();
-                        array.get(array.size()-1).reset();
-                        array.remove(array.size()-1);
 
 
                         //Log.d("APP_NAME", "Shake, Rattle, and Roll");

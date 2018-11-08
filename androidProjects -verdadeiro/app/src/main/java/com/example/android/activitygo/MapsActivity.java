@@ -56,6 +56,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private Button finalizar;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -205,15 +206,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         finalizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 datas.add(date);
                 Fragment p = new HistoricoCorridas();
                 Bundle args = new Bundle();
                 args.putStringArrayList("DATAS", datas);
+                args.putString("TEMPO",""+(int)pauseOffset/1000);
                 p.setArguments(args);
                 getFragmentManager().beginTransaction().replace(R.id.fragmentMap, p).commit();
                 Start.setVisibility(View.GONE);
                 Stop.setVisibility(View.GONE);
                 finalizar.setVisibility(View.GONE);
+
+
 
             }
         });
