@@ -61,6 +61,16 @@
         android:background="@drawable/button_border"
         android:text="Finalizar" />
 
+    <FrameLayout
+        android:id="@+id/fragmentMap"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/kmTextViewRun"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="-83dp">
+
+    </FrameLayout>
 
 
 </RelativeLayout>

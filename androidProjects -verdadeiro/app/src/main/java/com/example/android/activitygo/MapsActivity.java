@@ -52,7 +52,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private boolean isStopped = false;
 
     private ArrayList<String> datas = new ArrayList<String>();
+    private String date;
 
+    private Button finalizar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +67,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         final int day = cal.get(Calendar.DAY_OF_MONTH);
 
 
-        String date = day + "/" + month + "/" + year;
+         date = day + "/" + month + "/" + year;
         Log.d("DATA",date);
 
 
@@ -161,8 +163,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
-        Button Stop = (Button) findViewById(R.id.StopRun);
-        Button Start = (Button) findViewById(R.id.StartRun);
+        final Button Stop = (Button) findViewById(R.id.StopRun);
+        final Button Start = (Button) findViewById(R.id.StartRun);
         chronometer = findViewById(R.id.chronometer);
 
         Start.setOnClickListener(new View.OnClickListener() {
@@ -199,19 +201,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
-        Button finalizar = (Button) findViewById(R.id.Finalizar);
+         finalizar = (Button) findViewById(R.id.Finalizar);
         finalizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("DATAS","ON CLICK");
-                String data = day+"/"+month+"/"+year;
-                datas.add(data);
+                datas.add(date);
                 Fragment p = new HistoricoCorridas();
                 Bundle args = new Bundle();
                 args.putStringArrayList("DATAS", datas);
                 p.setArguments(args);
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container, p).commit();
-                Log.d("DATAS","Faz comit");
+                getFragmentManager().beginTransaction().replace(R.id.fragmentMap, p).commit();
+                Start.setVisibility(View.GONE);
+                Stop.setVisibility(View.GONE);
+                finalizar.setVisibility(View.GONE);
+
             }
         });
 
