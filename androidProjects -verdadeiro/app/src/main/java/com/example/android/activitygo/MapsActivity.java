@@ -33,6 +33,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import static java.lang.Math.acos;
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -71,7 +75,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         date = day + "/" + month + "/" + year;
-        Log.d("DATA",date);
+        Log.d("DATA", date);
 
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -96,24 +100,35 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                     double latitude = location.getLatitude();
                     double longitude = location.getLongitude();
-                    double altitude = location.getAltitude();
+                    //double altitude = location.getAltitude();
                     posicoes.add(latitude);
                     posicoes.add(longitude);
-                    posicoes.add(altitude);
+                    //posicoes.add(altitude);
 
 
-                    if (posicoes.size() == 6) {
-                        accKm += distance(posicoes.get(0), posicoes.get(3), posicoes.get(1), posicoes.get(4), posicoes.get(2), posicoes.get(5));
+                   /* if (posicoes.size() == 6) {
+                        accKm += greatCircleInKilometers(posicoes.get(0), posicoes.get(3), posicoes.get(1), posicoes.get(4), posicoes.get(2), posicoes.get(5));
                         posicoes.remove(0);
                         posicoes.remove(1);
                         posicoes.remove(2);
                     }
+*/
+                    if (posicoes.size() == 4) {
+                        Location location1 = new Location("");
+                        location1.setLatitude(posicoes.get(0));
+                        location1.setLongitude(posicoes.get(1));
 
-  /*              if (posicoes.size() == 4) {
-                    accKm += distance2(posicoes.get(0), posicoes.get(2), posicoes.get(1), posicoes.get(3));
-                    posicoes.remove(0);
-                    posicoes.remove(1);
-                }*/
+
+                        Location location2 = new Location("");
+                        location2.setLatitude(posicoes.get(2));
+                        location2.setLongitude(posicoes.get(3));
+                        accKm += location1.distanceTo(location2);
+                        Log.d("ACCKM",""+accKm);
+                                //
+                        // accKm += distance2(posicoes.get(0), posicoes.get(1), posicoes.get(2), posicoes.get(3));
+                        posicoes.remove(0);
+                        posicoes.remove(1);
+                    }
 
 
                     //get the location name from latitude and longitude
@@ -161,10 +176,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         };
 
 
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1, locationListener);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, locationListener);
-
-
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 30000, 1, locationListener);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 30000, 1, locationListener);
 
 
         final Button Stop = (Button) findViewById(R.id.StopRun);
@@ -204,7 +217,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
 
 
-
         finalizar = (Button) findViewById(R.id.Finalizar);
         finalizar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -213,10 +225,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 datas.add(date);
                 Fragment p = new HistoricoCorridas();
                 Bundle args = new Bundle();
-                args.putParcelableArrayList("Markers",arrayMarkers);
+                args.putParcelableArrayList("Markers", arrayMarkers);
                 args.putStringArrayList("DATAS", datas);
-                args.putString("TEMPO",""+(int)pauseOffset/1000);
-                args.putDouble("DISTANCIA",accKm);
+                args.putString("TEMPO", "" + (int) pauseOffset / 1000);
+                args.putDouble("DISTANCIA", accKm);
                 p.setArguments(args);
                 getFragmentManager().beginTransaction().replace(R.id.fragmentMap, p).commit();
                 Start.setVisibility(View.GONE);
@@ -224,15 +236,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 finalizar.setVisibility(View.GONE);
 
 
-
-
             }
         });
-
-
-
-
-
 
 
     }
@@ -271,9 +276,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         double latDistance = Math.toRadians(lat2 - lat1);
         double lonDistance = Math.toRadians(lon2 - lon1);
-        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
-                + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
-                * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
+        double a = sin(latDistance / 2) * sin(latDistance / 2)
+                + cos(Math.toRadians(lat1)) * cos(Math.toRadians(lat2))
+                * sin(lonDistance / 2) * sin(lonDistance / 2);
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         double distance = R * c * 1000; // convert to meters
 
@@ -295,10 +300,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
+    static double PI_RAD = Math.PI / 180.0;
+
+    /**
+     * Use Great Circle distance formula to calculate distance between 2 coordinates in kilometers.
+     * https://software.intel.com/en-us/blogs/2012/11/25/calculating-geographic-distances-in-location-aware-apps
+     */
+    public double greatCircleInKilometers(double lat1, double long1, double lat2, double long2) {
+        double phi1 = lat1 * PI_RAD;
+        double phi2 = lat2 * PI_RAD;
+        double lam1 = long1 * PI_RAD;
+        double lam2 = long2 * PI_RAD;
+
+        return 6371.01 * acos(sin(phi1) * sin(phi2) + cos(phi1) * cos(phi2) * cos(lam2 - lam1));
+    }
+
+
     private static double distance2(double lat1, double lat2, double lon1, double lon2) {
         double theta = lon1 - lon2;
-        double dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
-        dist = Math.acos(dist);
+        double dist = sin(deg2rad(lat1)) * sin(deg2rad(lat2)) + cos(deg2rad(lat1)) * cos(deg2rad(lat2)) * cos(deg2rad(theta));
+        dist = acos(dist);
         dist = rad2deg(dist);
         dist = dist * 60 * 1.1515;
         dist = dist * 1.609344;
