@@ -47,4 +47,5 @@
         <item>Como posso alterar os meus desportos favoritos?</item>
         <item>Onde posso tirar mais dúvidas?</item>
     </string-array>
+    <string name="title_activity_maps">Map</string>
 </resources>

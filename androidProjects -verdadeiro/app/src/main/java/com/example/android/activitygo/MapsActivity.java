@@ -70,7 +70,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         final int day = cal.get(Calendar.DAY_OF_MONTH);
 
 
-         date = day + "/" + month + "/" + year;
+        date = day + "/" + month + "/" + year;
         Log.d("DATA",date);
 
 
@@ -161,8 +161,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         };
 
 
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1, locationListener);
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, locationListener);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1, locationListener);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, locationListener);
 
 
 
@@ -205,7 +205,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
-         finalizar = (Button) findViewById(R.id.Finalizar);
+        finalizar = (Button) findViewById(R.id.Finalizar);
         finalizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,6 +1,7 @@
 package com.example.android.activitygo;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,7 +16,10 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
 
@@ -66,19 +70,27 @@ public class HistoriaStatus extends Fragment {
             public void onMapReady(GoogleMap mMap) {
                 googleMap = mMap;
 
+                PolylineOptions options = new PolylineOptions().width(5).color(Color.BLUE).geodesic(true);
                 // For showing a move to my location button
                 //googleMap.setMyLocationEnabled(true);
 
                 for (LatLng l : markers){
                     googleMap.addMarker(new MarkerOptions().position(l).title("FUNCIONA"));
+                    options.add(l);
 
                 }
+                googleMap.addPolyline(options);
+
+
                 // For dropping a marker at a point on the Map
 
+                LatLngBounds.Builder builder= new LatLngBounds.Builder();
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(markers.get(markers.size()-1), 15.0f));
+                //googleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(builder.build(),17));
 
                 // For zooming automatically to the location of the marker
-                // CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
-                //googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                 //CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
+
             }
         });
 
