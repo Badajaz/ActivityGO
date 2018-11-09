@@ -212,12 +212,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Bundle args = new Bundle();
                 args.putStringArrayList("DATAS", datas);
                 args.putString("TEMPO",""+(int)pauseOffset/1000);
+                args.putDouble("DISTANCIA",accKm);
                 p.setArguments(args);
                 getFragmentManager().beginTransaction().replace(R.id.fragmentMap, p).commit();
                 Start.setVisibility(View.GONE);
                 Stop.setVisibility(View.GONE);
                 finalizar.setVisibility(View.GONE);
-
 
 
             }

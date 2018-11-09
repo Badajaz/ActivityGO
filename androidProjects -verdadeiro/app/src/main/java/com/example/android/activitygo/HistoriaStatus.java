@@ -27,8 +27,12 @@ public class HistoriaStatus extends Fragment {
         View v =  inflater.inflate(R.layout.fragment_historia_status, container, false);
 
         String time = getArguments().getString("Chronometer");
+        double distancia = getArguments().getDouble("DISTANCE");
         TextView tv = v.findViewById(R.id.Tempo);
         tv.setText(time);
+
+        TextView tv2 = v.findViewById(R.id.Distance);
+        tv2.setText(""+distancia);
 
 
 

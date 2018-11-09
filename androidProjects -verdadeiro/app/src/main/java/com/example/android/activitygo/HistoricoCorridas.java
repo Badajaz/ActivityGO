@@ -23,6 +23,7 @@ public class HistoricoCorridas extends Fragment {
     private ArrayAdapter<String> listViewAdapter;
     private ArrayList<String> value;
     private String chronometerTime;
+    private double distancia;
 
     public HistoricoCorridas() {
         // Required empty public constructor
@@ -36,18 +37,18 @@ public class HistoricoCorridas extends Fragment {
 
         lv1 = (ListView) v.findViewById(R.id.ListaResultadosDatas);
         String timeS = getArguments().getString("TEMPO");
+        distancia = getArguments().getDouble("DISTANCIA");
         double timeSconverted = Double.valueOf(timeS);
 
-        double time = timeSconverted/60;
-        int timeInteiro = (int)time;
+        double time = timeSconverted / 60;
+        int timeInteiro = (int) time;
 
-        double minutos = time-timeInteiro;
-        double segundos = minutos*60;
-        chronometerTime = ""+timeInteiro+":"+(int)segundos;
+        double minutos = time - timeInteiro;
+        double segundos = minutos * 60;
+        chronometerTime = "" + timeInteiro + ":" + (int) segundos;
 
 
-
-    Toast.makeText(getContext(),chronometerTime,Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), chronometerTime, Toast.LENGTH_LONG).show();
         value = getArguments().getStringArrayList("DATAS");
         listViewAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, value);
         lv1.setAdapter(listViewAdapter);
@@ -58,7 +59,8 @@ public class HistoricoCorridas extends Fragment {
 
                 Fragment p = new HistoriaStatus();
                 Bundle args = new Bundle();
-                args.putString("Chronometer",chronometerTime);
+                args.putString("Chronometer", chronometerTime);
+                args.putDouble("DISTANCE", distancia);
                 p.setArguments(args);
                 getFragmentManager().beginTransaction().replace(R.id.fragmentMap, p).commit();
 
@@ -69,8 +71,7 @@ public class HistoricoCorridas extends Fragment {
                  */
 
 
-
-                Toast.makeText(getContext(),""+value.get(position),Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "" + value.get(position), Toast.LENGTH_LONG).show();
             }
         });
 
