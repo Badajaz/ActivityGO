@@ -12,6 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.ArrayList;
 
 /**
@@ -24,6 +26,8 @@ public class HistoricoCorridas extends Fragment {
     private ArrayList<String> value;
     private String chronometerTime;
     private double distancia;
+    private ArrayList<LatLng> markers;
+
 
     public HistoricoCorridas() {
         // Required empty public constructor
@@ -38,6 +42,8 @@ public class HistoricoCorridas extends Fragment {
         lv1 = (ListView) v.findViewById(R.id.ListaResultadosDatas);
         String timeS = getArguments().getString("TEMPO");
         distancia = getArguments().getDouble("DISTANCIA");
+        markers = getArguments().getParcelableArrayList("Markers");
+
         double timeSconverted = Double.valueOf(timeS);
 
         double time = timeSconverted / 60;
@@ -45,10 +51,19 @@ public class HistoricoCorridas extends Fragment {
 
         double minutos = time - timeInteiro;
         double segundos = minutos * 60;
-        chronometerTime = "" + timeInteiro + ":" + (int) segundos;
+        if (timeInteiro < 10){
+            if (segundos < 10){
+                chronometerTime = "0" + timeInteiro + ":" + "0"+(int) segundos;
+            }else{
+                chronometerTime = "0" + timeInteiro + ":" + (int) segundos;
+            }
 
 
-        Toast.makeText(getContext(), chronometerTime, Toast.LENGTH_LONG).show();
+        }else{
+            chronometerTime = "" + timeInteiro + ":" + (int) segundos;
+        }
+
+
         value = getArguments().getStringArrayList("DATAS");
         listViewAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, value);
         lv1.setAdapter(listViewAdapter);
@@ -61,15 +76,9 @@ public class HistoricoCorridas extends Fragment {
                 Bundle args = new Bundle();
                 args.putString("Chronometer", chronometerTime);
                 args.putDouble("DISTANCE", distancia);
+                args.putParcelableArrayList("Markers",markers);
                 p.setArguments(args);
                 getFragmentManager().beginTransaction().replace(R.id.fragmentMap, p).commit();
-
-
-
-                /*
-                passar valores para uma nova actividade
-                 */
-
 
                 Toast.makeText(getContext(), "" + value.get(position), Toast.LENGTH_LONG).show();
             }
