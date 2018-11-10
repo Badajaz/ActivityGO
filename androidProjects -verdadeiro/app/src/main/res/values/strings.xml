@@ -23,7 +23,7 @@
     <string name="Duracao">Duração</string>
     <string name="Distancia">Distância</string>
 
-    <string name="QueroRegistar">Quero Registar-me!</string>
+    <string name="QueroRegistar"><u>Quero Registar-me!</u></string>
 
     <string name="HistoricoCorridas">Histórico de Corridas</string>
 
