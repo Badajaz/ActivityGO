@@ -2,10 +2,15 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
+    <!--<item
         android:id="@+id/runIntem"
         android:icon="@drawable/outline_directions_run_black_18dp"
-        android:title="@string/nav_run" />
+        android:title="@string/nav_run" />-->
+    <item
+        android:id="@+id/plusItem"
+        android:icon="@drawable/plus_icon"
+        android:title="Escolher">
+    </item>
     <item
         android:id="@+id/chalengeItem"
         android:icon="@drawable/bicepe_icon2"

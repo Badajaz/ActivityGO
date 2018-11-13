@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,10 +41,9 @@ public class RunMenuInicial extends Fragment {
         final Button historial = (Button) v.findViewById(R.id.buttonHistorial);
         Button irCorrida = (Button) v.findViewById(R.id.buttonIrCorrida);
         Button meusGrupos = (Button) v.findViewById(R.id.buttonMeusGrupos);
-        Button alterar = (Button) v.findViewById(R.id.alterarDesportoPraticado);
+        //Button alterar = (Button) v.findViewById(R.id.alterarDesportoPraticado);
         name1 = (TextView) v.findViewById(R.id.namePessoaMenuInicial);
         name1.setText("Bem vindo " + arraylist.get(0) + " " + arraylist.get(1) + "!");
-
 
         historial.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,12 +83,13 @@ public class RunMenuInicial extends Fragment {
             }
         });
 
-        alterar.setOnClickListener(new View.OnClickListener() {
+        /*alterar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
         });
+        */
         return v;
     }
 }

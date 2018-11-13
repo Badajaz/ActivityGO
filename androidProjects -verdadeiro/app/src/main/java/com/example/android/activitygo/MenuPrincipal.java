@@ -14,6 +14,7 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -39,6 +40,7 @@ public class MenuPrincipal extends AppCompatActivity {
     private int caminhadaChecked = 0;
     private int futebolChecked = 0;
     private int ciclismoChecked = 0;
+    private MenuItem mi;
     private ArrayList<CheckBox> checkboxesPopup = new ArrayList<CheckBox>();
 
     @Override
@@ -47,10 +49,6 @@ public class MenuPrincipal extends AppCompatActivity {
         setContentView(R.layout.activity_menu_principal);
         myDialog = new Dialog(this);
         profile = (ArrayList<String>) getIntent().getSerializableExtra("USERPROFILE");
-        selectedSport = "";
-
-        // mostra popup inicial para a pessoa escolher o desporto
-        // showPopup();
 
         Bundle toRunMenuInicial = new Bundle();
         toRunMenuInicial.putStringArrayList("USERPROFILE", profile);
@@ -78,7 +76,8 @@ public class MenuPrincipal extends AppCompatActivity {
                 public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                     Fragment SelectedFragment = null;
                     switch (menuItem.getItemId()) {
-                        case R.id.runIntem:
+                        case R.id.plusItem:
+                            showPopup(menuItem);
                             //Fragmento Corrida
                             Bundle toRunMenuInicial = new Bundle();
                             toRunMenuInicial.putStringArrayList("USERPROFILE", profile);
@@ -206,11 +205,12 @@ public class MenuPrincipal extends AppCompatActivity {
         return this.profile;
     }
 
-    public void showPopup() {
+    public void showPopup(@NonNull MenuItem menuItem) {
         TextView txtclose;
         TextView txtname;
         TextView txtusername;
         Button confirmButton;
+        mi = menuItem;
 
         myDialog.setContentView(R.layout.popup_inicial);
         txtclose = (TextView) myDialog.findViewById(R.id.txtclosePopupInicial);
@@ -230,11 +230,24 @@ public class MenuPrincipal extends AppCompatActivity {
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String opcao = getSelectedSport();
+                changePlusOption(opcao);
                 myDialog.dismiss();
             }
         });
         myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         myDialog.show();
+    }
+
+    private void changePlusOption(String opcao){
+        switch (opcao){
+            case "Corrida":
+                mi.setIcon(R.drawable.outline_directions_run_black_18dp);
+                break;
+            case "Caminhada":
+                mi.setIcon(R.drawable.walk_icon);
+                break;
+        }
     }
 
     public void getCorridaItemPopup(View v) {
@@ -251,5 +264,9 @@ public class MenuPrincipal extends AppCompatActivity {
 
         //desporto que a pessoa irá praticar
         selectedSport = caminhadaCheckBox.getText().toString();
+    }
+
+    public String getSelectedSport(){
+        return this.selectedSport;
     }
 }
