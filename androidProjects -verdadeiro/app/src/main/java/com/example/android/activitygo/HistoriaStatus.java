@@ -56,12 +56,22 @@ public class HistoriaStatus extends Fragment {
 
         String time = getArguments().getString("Chronometer");
         double distancia = getArguments().getDouble("DISTANCE");
+        long tempoPace = getArguments().getLong("TEMPOPACE");
+        double pace = tempoPace/distancia;
+
+
+
         final ArrayList<LatLng> markers = getArguments().getParcelableArrayList("Markers");
         TextView tv = v.findViewById(R.id.Tempo);
         tv.setText(time);
 
         TextView tv2 = v.findViewById(R.id.Distance);
         tv2.setText(""+distancia);
+
+
+        TextView pacetv = v.findViewById(R.id.Pace);
+        pacetv.setText(""+pace);
+
 
         mMapView.getMapAsync(new OnMapReadyCallback() {
 

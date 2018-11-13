@@ -232,20 +232,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         finalizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (isStopped == true) {
+                    datas.add(date);
+                    Fragment p = new HistoricoCorridas();
+                    Bundle args = new Bundle();
+                    args.putParcelableArrayList("Markers", arrayMarkers);
+                    args.putStringArrayList("DATAS", datas);
+                    args.putLong("TEMPOPACE",(int) pauseOffset / 1000);
+                    args.putString("TEMPO", "" + (int) pauseOffset / 1000);
+                    args.putDouble("DISTANCIA", accKm);
+                    p.setArguments(args);
+                    getFragmentManager().beginTransaction().replace(R.id.fragmentMap, p).commit();
+                    Start.setVisibility(View.GONE);
+                    Stop.setVisibility(View.GONE);
+                    finalizar.setVisibility(View.GONE);
 
-                datas.add(date);
-                Fragment p = new HistoricoCorridas();
-                Bundle args = new Bundle();
-                args.putParcelableArrayList("Markers", arrayMarkers);
-                args.putStringArrayList("DATAS", datas);
-                args.putString("TEMPO", "" + (int) pauseOffset / 1000);
-                args.putDouble("DISTANCIA", accKm);
-                p.setArguments(args);
-                getFragmentManager().beginTransaction().replace(R.id.fragmentMap, p).commit();
-                Start.setVisibility(View.GONE);
-                Stop.setVisibility(View.GONE);
-                finalizar.setVisibility(View.GONE);
-
+                }else{
+                    Toast.makeText(getApplicationContext(),"Tem que carregar primeiro que colocar a actividade em pausa",Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
