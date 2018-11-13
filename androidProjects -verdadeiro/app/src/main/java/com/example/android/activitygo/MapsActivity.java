@@ -45,7 +45,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     Marker marker;
     LocationListener locationListener;
     private ArrayList<Double> posicoes = new ArrayList<>();
-    private double accKm = 0.0;
+    private float accKm = 0;
 
 
     private Chronometer chronometer;
@@ -100,10 +100,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                     double latitude = location.getLatitude();
                     double longitude = location.getLongitude();
-                    //double altitude = location.getAltitude();
+                    double altitude = location.getAltitude();
                     posicoes.add(latitude);
                     posicoes.add(longitude);
-                    //posicoes.add(altitude);
+                   // posicoes.add(altitude);
 
 
                    /* if (posicoes.size() == 6) {
@@ -122,13 +122,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         Location location2 = new Location("");
                         location2.setLatitude(posicoes.get(2));
                         location2.setLongitude(posicoes.get(3));
-                        accKm += location1.distanceTo(location2);
+                        //accKm += location1.distanceTo(location2);
+                        //accKm += distance2(posicoes.get(0), posicoes.get(1), posicoes.get(2), posicoes.get(3));
+                        float[] array = new float[5];
+                        Location.distanceBetween(posicoes.get(0), posicoes.get(1), posicoes.get(2), posicoes.get(3),array);
+                        accKm += array[0];
+                        Log.d("ARRAY4",printArray(posicoes));
                         Log.d("ACCKM",""+accKm);
+
                                 //
-                        // accKm += distance2(posicoes.get(0), posicoes.get(1), posicoes.get(2), posicoes.get(3));
+
                         posicoes.remove(0);
-                        posicoes.remove(1);
+                        posicoes.remove(0);
+                     //   posicoes.remove(0);
+
                     }
+                    Log.d("ARRAY",printArray(posicoes));
+
+
 
 
                     //get the location name from latitude and longitude
@@ -339,6 +350,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static double rad2deg(double rad) {
         return (rad * 180 / Math.PI);
     }
+
+
+
+    public String printArray(ArrayList<Double> coordenadas){
+       String printArray = "";
+        for (Double coordenada:coordenadas){
+            printArray+=coordenada.toString()+" ";
+        }
+        return  printArray;
+    }
+
+
+
+
 
 
 }
