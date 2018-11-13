@@ -8,7 +8,7 @@
         android:title="@string/nav_run" />
     <item
         android:id="@+id/chalengeItem"
-        android:icon="@drawable/bicepe"
+        android:icon="@drawable/bicepe_icon2"
         android:title="@string/nav_bicepe" />
     <item
         android:id="@+id/achievementItem"
@@ -16,10 +16,11 @@
         android:title="@string/nav_achievements" />
     <item
         android:id="@+id/RankingItem"
-        android:icon="@drawable/cup"
+        android:icon="@drawable/trophy_icon222"
         android:title="@string/nav_rankings" />
     <item
         android:id="@+id/GroupsItem"
         android:icon="@drawable/icon_groups"
         android:title="@string/nav_groups" />
+
 </menu>

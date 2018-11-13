@@ -92,6 +92,7 @@ public class MenuPrincipal extends AppCompatActivity {
                             break;
                         case R.id.chalengeItem:
                             //Fragmento Desafios
+                            menuItem.setIcon(R.drawable.bicepe_icon23);
                             SelectedFragment = new ChalengeFragment();
                             FragmentManager fman = getFragmentManager();
                             FragmentTransaction ftra = fman.beginTransaction();
@@ -101,13 +102,15 @@ public class MenuPrincipal extends AppCompatActivity {
 
                         case R.id.achievementItem:
                             // chamar tab das achievements
+                            //menuItem.setIcon(R.drawable.trophy_icon222black);
                             Intent intent = new Intent(getApplicationContext(), AchievementsTab.class);
                             startActivity(intent);
 
                         case R.id.RankingItem:
-                            //Fragmento Rankings
+                            //Fragmento Ranking
                             SelectedFragment = new RankingsFragment();
                             FragmentManager fmanag = getFragmentManager();
+                            menuItem.setIcon(R.drawable.trophy_icon333);
                             FragmentTransaction ftransactio = fmanag.beginTransaction();
                             ftransactio.replace(R.id.fragment_container, SelectedFragment, "Ranking Item");
                             ftransactio.commit();
