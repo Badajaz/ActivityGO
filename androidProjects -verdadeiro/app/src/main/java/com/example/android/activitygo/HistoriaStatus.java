@@ -54,11 +54,14 @@ public class HistoriaStatus extends Fragment {
             e.printStackTrace();
         }
 
+
         String time = getArguments().getString("Chronometer");
         double distancia = getArguments().getDouble("DISTANCE");
         long tempoPace = getArguments().getLong("TEMPOPACE");
         double pace = tempoPace/distancia;
-
+        if (distancia ==0){
+            pace = 0;
+        }
 
 
         final ArrayList<LatLng> markers = getArguments().getParcelableArrayList("Markers");
@@ -103,9 +106,6 @@ public class HistoriaStatus extends Fragment {
 
             }
         });
-
-
-
 
         return v;
     }
