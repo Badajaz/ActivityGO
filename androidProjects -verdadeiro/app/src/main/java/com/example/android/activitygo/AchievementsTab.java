@@ -1,4 +1,4 @@
-package com.example.android.activitygo;
+/*package com.example.android.activitygo;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -31,3 +31,4 @@ public class AchievementsTab extends AppCompatActivity {
         viewPager.setAdapter(adapter);
     }
 }
+*/

@@ -102,9 +102,16 @@ public class MenuPrincipal extends AppCompatActivity {
                         case R.id.achievementItem:
                             // chamar tab das achievements
                             //menuItem.setIcon(R.drawable.trophy_icon222black);
-                            Intent intent = new Intent(getApplicationContext(), AchievementsTab.class);
-                            startActivity(intent);
+                            /*Intent intent = new Intent(getApplicationContext(), AchievementsTab.class);
+                            startActivity(intent);*/
 
+                            
+                            SelectedFragment = new AchievementsFragment();
+                            FragmentManager f = getFragmentManager();
+                            FragmentTransaction fte = f.beginTransaction();
+                            fte.replace(R.id.fragment_container, SelectedFragment, "achievementFragment");
+                            fte.commit();
+                            break;
                         case R.id.RankingItem:
                             //Fragmento Ranking
                             SelectedFragment = new RankingsFragment();
