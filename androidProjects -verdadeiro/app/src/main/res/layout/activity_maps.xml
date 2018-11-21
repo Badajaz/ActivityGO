@@ -1,76 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#329d92"
     tools:context=".StartCorridaFragment">
 
     <TextView
         android:id="@+id/kmTextViewRun"
-        android:layout_width="301dp"
-        android:layout_height="87dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="83dp"
-        android:layout_marginEnd="41dp"
-        android:text="0"
+        android:layout_width="300dp"
+        android:layout_height="90dp"
         android:gravity="center"
-        android:textSize="40sp"/>
+        android:text="0"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="@+id/fragmentMap"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.339" />
 
     <Button
         android:id="@+id/StopRun"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:layout_marginStart="120dp"
-        android:layout_marginTop="300dp"
         android:background="@drawable/button_states"
         android:drawableStart="@drawable/pause"
-        android:textSize="30dp" />
+        android:textSize="30dp"
+        app:layout_constraintBottom_toBottomOf="@+id/fragmentMap"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.21"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/kmTextViewRun"
+        app:layout_constraintVertical_bias="0.269" />
 
     <Button
         android:id="@+id/StartRun"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:layout_marginStart="210dp"
-        android:layout_marginTop="300dp"
         android:background="@drawable/button_states"
         android:drawableStart="@drawable/play"
-        android:textSize="30dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.662"
+        app:layout_constraintStart_toEndOf="@+id/StopRun"
+        app:layout_constraintTop_toBottomOf="@+id/kmTextViewRun"
+        app:layout_constraintVertical_bias="0.269" />
 
     <Chronometer
         android:id="@+id/chronometer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="235dp"
+        android:layout_height="70dp"
         android:layout_below="@+id/StopRun"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="-356dp"
-        android:textSize="30sp" />
+        android:gravity="center"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.062" />
 
+    <TextView
+        android:id="@+id/tvTimeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="open-sans"
+        android:text="Tempo"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:typeface="sans"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chronometer"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/tvDistanceText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="open-sans"
+        android:text="@string/Distancia"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:typeface="sans"
+        app:layout_constraintBottom_toBottomOf="@+id/fragmentMap"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/kmTextViewRun"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/Finalizar"
         android:layout_width="118dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="145dp"
-        android:layout_marginTop="442dp"
-        android:layout_marginEnd="121dp"
         android:background="@drawable/button_border"
-        android:text="Finalizar" />
+        android:text="Finalizar"
+        app:layout_constraintBottom_toBottomOf="@+id/fragmentMap"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.833" />
 
     <FrameLayout
         android:id="@+id/fragmentMap"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignTop="@+id/kmTextViewRun"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="-83dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></FrameLayout>
 
-    </FrameLayout>
-
-
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

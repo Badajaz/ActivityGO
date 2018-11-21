@@ -88,7 +88,7 @@
             android:layout_centerHorizontal="true"
             android:background="?attr/selectableItemBackground"
             android:fontFamily="open-sans"
-            android:text="Começar"
+            android:text="Começar Corrida"
             android:textAllCaps="false"
             android:textColor="#000000"
             android:textSize="16sp"

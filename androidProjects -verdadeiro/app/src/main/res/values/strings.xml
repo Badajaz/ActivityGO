@@ -25,7 +25,7 @@
 
     <string name="QueroRegistar"><u>Quero Registar-me!</u></string>
 
-    <string name="HistoricoCorridas">Histórico</string>
+    <string name="HistoricoCorridas">Histórico de Corridas</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_group_tab">GroupTab</string>
