@@ -2,8 +2,6 @@ package com.example.android.activitygo;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +26,6 @@ public class HistoricoCorridas extends Fragment {
     private double distancia;
     private ArrayList<LatLng> markers;
 
-
     public HistoricoCorridas() {
         // Required empty public constructor
     }
@@ -45,29 +42,23 @@ public class HistoricoCorridas extends Fragment {
         markers = getArguments().getParcelableArrayList("Markers");
 
         double timeSconverted = Double.valueOf(timeS);
-
         double time = timeSconverted / 60;
         int timeInteiro = (int) time;
-
         double minutos = time - timeInteiro;
         double segundos = minutos * 60;
-        if (timeInteiro < 10){
-            if (segundos < 10){
-                chronometerTime = "0" + timeInteiro + ":" + "0"+(int) segundos;
-            }else{
+        if (timeInteiro < 10) {
+            if (segundos < 10) {
+                chronometerTime = "0" + timeInteiro + ":" + "0" + (int) segundos;
+            } else {
                 chronometerTime = "0" + timeInteiro + ":" + (int) segundos;
             }
-
-
-        }else{
+        } else {
             chronometerTime = "" + timeInteiro + ":" + (int) segundos;
         }
-
 
         value = getArguments().getStringArrayList("DATAS");
         listViewAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, value);
         lv1.setAdapter(listViewAdapter);
-
         lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -76,17 +67,13 @@ public class HistoricoCorridas extends Fragment {
                 Bundle args = new Bundle();
                 args.putString("Chronometer", chronometerTime);
                 args.putDouble("DISTANCE", distancia);
-                args.putParcelableArrayList("Markers",markers);
+                args.putParcelableArrayList("Markers", markers);
                 p.setArguments(args);
                 getFragmentManager().beginTransaction().replace(R.id.fragmentMap, p).commit();
 
                 Toast.makeText(getContext(), "" + value.get(position), Toast.LENGTH_LONG).show();
             }
         });
-
-
         return v;
     }
-
-
 }

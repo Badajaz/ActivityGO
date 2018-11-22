@@ -19,13 +19,10 @@ import android.widget.Chronometer;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -73,10 +70,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         final int month = cal.get(Calendar.MONTH);
         final int day = cal.get(Calendar.DAY_OF_MONTH);
 
-
         date = day + "/" + month + "/" + year;
         Log.d("DATA", date);
-
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         /*SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -97,14 +92,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onLocationChanged(Location location) {
                 if (isStopped == false) {
 
-
                     double latitude = location.getLatitude();
                     double longitude = location.getLongitude();
                     double altitude = location.getAltitude();
                     posicoes.add(latitude);
                     posicoes.add(longitude);
-                   // posicoes.add(altitude);
-
+                    // posicoes.add(altitude);
 
                    /* if (posicoes.size() == 6) {
                         accKm += greatCircleInKilometers(posicoes.get(0), posicoes.get(3), posicoes.get(1), posicoes.get(4), posicoes.get(2), posicoes.get(5));
@@ -118,34 +111,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         location1.setLatitude(posicoes.get(0));
                         location1.setLongitude(posicoes.get(1));
 
-
                         Location location2 = new Location("");
                         location2.setLatitude(posicoes.get(2));
                         location2.setLongitude(posicoes.get(3));
                         //accKm += location1.distanceTo(location2);
                         //accKm += distance2(posicoes.get(0), posicoes.get(1), posicoes.get(2), posicoes.get(3));
                         float[] array = new float[5];
-                        Location.distanceBetween(posicoes.get(0), posicoes.get(1), posicoes.get(2), posicoes.get(3),array);
+                        Location.distanceBetween(posicoes.get(0), posicoes.get(1), posicoes.get(2), posicoes.get(3), array);
                         accKm += array[0];
-                        Log.d("ARRAY4",printArray(posicoes));
-                        Log.d("ACCKM",""+accKm);
-
-                                //
+                        Log.d("ARRAY4", printArray(posicoes));
+                        Log.d("ACCKM", "" + accKm);
 
                         posicoes.remove(0);
                         posicoes.remove(0);
-                     //   posicoes.remove(0);
-
+                        //   posicoes.remove(0);
                     }
-                    Log.d("ARRAY",printArray(posicoes));
-
-
-
+                    Log.d("ARRAY", printArray(posicoes));
 
                     //get the location name from latitude and longitude
                     Geocoder geocoder = new Geocoder(getApplicationContext());
                     try {
-
                         List<Address> addresses =
                                 geocoder.getFromLocation(latitude, longitude, 1);
                         String result = addresses.get(0).getLocality() + ":";
@@ -186,10 +171,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         };
 
-
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 30000, 1, locationListener);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 30000, 1, locationListener);
-
 
         final Button Stop = (Button) findViewById(R.id.StopRun);
         final Button Start = (Button) findViewById(R.id.StartRun);
@@ -201,6 +184,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 if (!running) {
                     chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
                     chronometer.start();
+                    Toast.makeText(MapsActivity.this, "Começou a corrida!", Toast.LENGTH_SHORT).show();
                     running = true;
                     isStopped = false;
                 }
@@ -227,18 +211,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
-
         finalizar = (Button) findViewById(R.id.Finalizar);
         finalizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (isStopped == true) {
+                    Toast.makeText(MapsActivity.this, "Terminou a corrida!", Toast.LENGTH_SHORT).show();
                     datas.add(date);
                     Fragment p = new HistoricoCorridas();
                     Bundle args = new Bundle();
                     args.putParcelableArrayList("Markers", arrayMarkers);
                     args.putStringArrayList("DATAS", datas);
-                    args.putLong("TEMPOPACE",(int) pauseOffset / 1000);
+                    args.putLong("TEMPOPACE", (int) pauseOffset / 1000);
                     args.putString("TEMPO", "" + (int) pauseOffset / 1000);
                     args.putDouble("DISTANCIA", accKm);
                     p.setArguments(args);
@@ -246,17 +230,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     Start.setVisibility(View.GONE);
                     Stop.setVisibility(View.GONE);
                     finalizar.setVisibility(View.GONE);
-
-                }else{
-                    Toast.makeText(getApplicationContext(),"Tem que carregar primeiro que colocar a actividade em pausa",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Tem que carregar primeiro que colocar a actividade em pausa", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
-
-
     }
-
 
     /**
      * Manipulates the map once available.
@@ -270,7 +249,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
         // Add a marker in Sydney and move the camera
 //        LatLng sydney = new LatLng(-34, 151);
 //        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
@@ -300,20 +278,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         double height = el1 - el2;
 
         distance = Math.pow(distance, 2) + Math.pow(height, 2);
-
         return Math.sqrt(distance);
     }
-
 
     public double FlatDistance(double lat1, double lat2, double lon1, double lon2) {
 
         double latdif = Math.pow(Math.toRadians(lat2 - lat1), 2);
         double longdif = Math.pow(Math.toRadians(lon2 - lon1), 2);
-
         return Math.sqrt(latdif + longdif);
-
     }
-
 
     static double PI_RAD = Math.PI / 180.0;
 
@@ -329,7 +302,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         return 6371.01 * acos(sin(phi1) * sin(phi2) + cos(phi1) * cos(phi2) * cos(lam2 - lam1));
     }
-
 
     private static double distance2(double lat1, double lat2, double lon1, double lon2) {
         double theta = lon1 - lon2;
@@ -355,19 +327,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return (rad * 180 / Math.PI);
     }
 
-
-
-    public String printArray(ArrayList<Double> coordenadas){
-       String printArray = "";
-        for (Double coordenada:coordenadas){
-            printArray+=coordenada.toString()+" ";
+    public String printArray(ArrayList<Double> coordenadas) {
+        String printArray = "";
+        for (Double coordenada : coordenadas) {
+            printArray += coordenada.toString() + " ";
         }
-        return  printArray;
+        return printArray;
     }
-
-
-
-
-
-
 }

@@ -1,91 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HistoriaStatus"
-    android:background="#329d77">
-
-    <!-- TODO: Update blank fragment layout -->
+    android:background="#ffffff"
+    tools:context=".HistoriaStatus">
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
-        android:layout_height="313dp" />
+        android:layout_height="310dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/Tempo"
-        android:layout_width="166dp"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="362dp"
-        android:layout_marginEnd="29dp"
+        android:gravity="center"
         android:text=""
-        android:textSize="30sp" />
+        android:textColor="#000000"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.159"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mapView"
+        app:layout_constraintVertical_bias="0.37" />
+
+    <TextView
+        android:id="@+id/blackSeparator1HistoriaStatus"
+        android:layout_width="130dp"
+        android:layout_height="0.1dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/orange"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.175"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mapView"
+        app:layout_constraintVertical_bias="0.269" />
+
+    <TextView
+        android:id="@+id/blackSeparator1HistoriaStatus2"
+        android:layout_width="130dp"
+        android:layout_height="0.1dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/orange"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.880"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mapView"
+        app:layout_constraintVertical_bias="0.273" />
 
     <TextView
         android:id="@+id/TempoLabel"
-        android:layout_width="166dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="362dp"
-        android:layout_marginEnd="187dp"
-        android:text="Tempo:"
-        android:textSize="30sp" />
-
+        android:layout_width="140dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="Tempo"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.159"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mapView"
+        app:layout_constraintVertical_bias="0.087" />
 
     <TextView
         android:id="@+id/DistanceLabel"
-        android:layout_width="166dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="445dp"
-        android:layout_marginEnd="188dp"
-        android:text="Distancia:"
-        android:textSize="30sp" />
-
+        android:layout_width="140dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="Distância"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.893"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mapView"
+        app:layout_constraintVertical_bias="0.087" />
 
     <TextView
         android:id="@+id/Distance"
-        android:layout_width="166dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="444dp"
-        android:layout_marginEnd="29dp"
+        android:layout_width="140dp"
+        android:layout_height="40dp"
         android:text=""
-        android:textSize="30sp" />
-
+        android:textColor="#000000"
+        android:gravity="center"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.893"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mapView"
+        app:layout_constraintVertical_bias="0.37" />
 
     <TextView
         android:id="@+id/PaceLabel"
-        android:layout_width="166dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="514dp"
-        android:layout_marginEnd="185dp"
-        android:text="Pace:"
-        android:textSize="30sp" />
+        android:layout_width="140dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="Pace"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.159"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mapView"
+        app:layout_constraintVertical_bias="0.649" />
 
+    <TextView
+        android:id="@+id/blackSeparator1HistoriaStatus3"
+        android:layout_width="130dp"
+        android:layout_height="0.1dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/orange"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.175"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mapView"
+        app:layout_constraintVertical_bias="0.742" />
 
     <TextView
         android:id="@+id/Pace"
-        android:layout_width="166dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="515dp"
-        android:layout_marginEnd="28dp"
+        android:layout_width="140dp"
+        android:layout_height="40dp"
+        android:gravity="center"
         android:text=""
-        android:textSize="30sp" />
+        android:textColor="#000000"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.159"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mapView"
+        app:layout_constraintVertical_bias="0.926" />
 
-
-
-
-
-
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>
