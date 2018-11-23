@@ -136,7 +136,7 @@ public class SignUp extends AppCompatActivity {
 
                 if (password.equals(confirmaPassword) && !password.equals("") && !firstName.equals("") &&
                         !secondName.equals("") && !usernameStr.equals("") && !email.equals("") && !peso.equals("") && !altura.equals("") &&
-                        peso.matches("[1-9]\\d{1,2}") && altura.matches("^[1-9]\\d{1,2}") &&
+                        validaPeso(peso)&& validaAltura(altura) &&
                         ((masculinoChecked == 1 && femininoChecked == 0) || (masculinoChecked == 0 && femininoChecked == 1)) &&
                         isAnyItemCheck() && !dataNascimentoStr.equals("") && !paisUserStr.equals("")) {
 
@@ -206,11 +206,11 @@ public class SignUp extends AppCompatActivity {
                         confirmaPasswordUser.setError("Não confirmou a password!");
                     }
 
-                    if (!peso.matches("^[1-9]\\d{1,2}")) {
+                    if (!validaPeso(peso)) {
                         pesoUser.setError("Não tem os digitos certos!");
                     }
 
-                    if (!altura.matches("^[1-9]\\d{1,2}")) {
+                    if (!validaAltura(altura)) {
                         alturaUser.setError("Não tem os digitos certos!");
                     }
 
@@ -283,4 +283,28 @@ public class SignUp extends AppCompatActivity {
         }
         return false;
     }
+
+    public boolean validaPeso(String peso){
+        if (peso.equals("")){
+            return false;
+        }else{
+            return Double.parseDouble(peso) >= 50 && Double.parseDouble(peso) <= 100;
+        }
+
+
+    }
+
+
+    public boolean validaAltura(String altura){
+
+        if (altura.equals("")){
+            return false;
+        }else{
+            return Integer.parseInt(altura) >= 150 && Integer.parseInt(altura) <= 200;
+        }
+
+
+    }
+
+
 }
