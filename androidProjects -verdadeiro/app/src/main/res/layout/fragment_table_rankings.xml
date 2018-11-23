@@ -2,13 +2,13 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#329d92"
+
     android:stretchColumns="0,1,2">
 
     <TableRow>
 
         <TextView
-            android:background="#80000000"
+            android:background="#FFA500"
             android:gravity="center"
             android:padding="10dip"
             android:text="Classificações"
@@ -16,7 +16,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:background="#80000000"
+            android:background="#FFA500"
             android:gravity="center"
             android:padding="10dip"
             android:text="Nome"
@@ -24,7 +24,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:background="#80000000"
+            android:background="#FFA500"
             android:gravity="center"
             android:padding="10dip"
             android:text="Pontos"
@@ -50,7 +50,7 @@
             android:text="300" />
     </TableRow>
 
-    <TableRow android:background="@color/otherBackgroundTableRow">
+    <TableRow android:background="#FFA500">
 
         <TextView
             android:gravity="center"

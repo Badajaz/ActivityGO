@@ -33,6 +33,7 @@ public class MergeGroupFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_merge_group, container, false);
+        ((MenuPrincipal) getActivity()).getSupportActionBar().setTitle("Grupos:");
         possiveisResultados.add("Benfica");
         possiveisResultados.add("Braga");
         possiveisResultados.add("Sporting");

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#329d77"
+    android:background="#FFFAFA"
     tools:context=".RankingsFragment">
 
     <Button
@@ -26,7 +26,8 @@
         app:layout_constraintHorizontal_bias="0.096"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.086" />
+        app:layout_constraintVertical_bias="0.086"
+        android:backgroundTint="#FFA500"/>
 
     <Button
         android:id="@+id/buttonCorridaGrupo"
@@ -49,7 +50,8 @@
         app:layout_constraintHorizontal_bias="0.435"
         app:layout_constraintStart_toEndOf="@+id/buttonCorridaGeral"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.086" />
+        app:layout_constraintVertical_bias="0.086"
+        android:backgroundTint="#FFA500"/>
 
     <Button
         android:id="@+id/buttonCiclismoGeral"
@@ -67,6 +69,7 @@
         android:gravity="left|top"
         android:text="Geral Ciclismo 1/25"
         android:textSize="18sp"
+        android:backgroundTint="#FFA500"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.899"
@@ -85,6 +88,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:backgroundTint="#FFA500"
         android:background="@drawable/edit_text_shape"
         android:drawableRight="@drawable/cyclinggroup"
         android:gravity="left|top"

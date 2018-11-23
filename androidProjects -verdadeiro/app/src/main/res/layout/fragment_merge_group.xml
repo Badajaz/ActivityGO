@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#329d92"
     tools:context=".MergeGroupFragment">
 
     <LinearLayout
@@ -56,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="250dp"
             android:layout_marginTop="-60dp"
-            android:background="@drawable/button_border"
+            android:background="#FFA500"
             android:text="Criar"
             android:textColor="@color/whiteLetters"
             android:textSize="16sp" />
@@ -67,7 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="250dp"
             android:layout_marginTop="-110dp"
-            android:background="@drawable/button_border"
+            android:background="#FFA500"
             android:text="Meus Grupos"
             android:textColor="@color/whiteLetters"
             android:textSize="16sp" />
@@ -83,7 +82,7 @@
         android:layout_marginBottom="8dp"
         android:gravity="center"
         android:text="Procurar por Nome ou Desporto"
-        android:textColor="#ffffff"
+        android:textColor="#FFA500"
         android:textSize="22sp"
         android:textStyle="bold"
         android:typeface="sans"
@@ -100,7 +99,7 @@
         android:layout_height="59dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="260dp"
-        android:backgroundTint="#ffffff"
+        android:backgroundTint="#FFA500"
         android:ems="10"
         android:inputType="text"
         android:textSize="20sp"
@@ -117,8 +116,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="200dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/button_border"
+        android:background="#FFA500"
         android:text="Procurar"
+        android:textColor="@color/whiteLetters"
         app:layout_constraintBaseline_toBaselineOf="@+id/NomeGrupo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/NomeGrupo" />

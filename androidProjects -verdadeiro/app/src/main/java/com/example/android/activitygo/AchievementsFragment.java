@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 public class AchievementsFragment extends Fragment {
 
@@ -20,7 +21,13 @@ public class AchievementsFragment extends Fragment {
 
         ((MenuPrincipal) getActivity()).getSupportActionBar().setTitle("Conquistas:");
         View v = inflater.inflate(R.layout.fragment_achievements, container, false);
-        // Inflate the layout for this fragment
+
+
+
+
+
+
+
         return v;
     }
 }
