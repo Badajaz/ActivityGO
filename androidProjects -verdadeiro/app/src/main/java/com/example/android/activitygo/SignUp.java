@@ -18,6 +18,8 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SignUp extends AppCompatActivity {
 
@@ -61,6 +63,8 @@ public class SignUp extends AppCompatActivity {
 
     private static final String TAG = "SignUpActivity";
     private DatePickerDialog.OnDateSetListener mDateSetListener;
+    public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
+            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
     public int alreadyRegister = 0;
 
@@ -136,7 +140,7 @@ public class SignUp extends AppCompatActivity {
 
                 if (password.equals(confirmaPassword) && !password.equals("") && !firstName.equals("") &&
                         !secondName.equals("") && !usernameStr.equals("") && !email.equals("") && !peso.equals("") && !altura.equals("") &&
-                        validaPeso(peso)&& validaAltura(altura) &&
+                        validaPeso(peso)&& validaAltura(altura) && validate(email) &&
                         ((masculinoChecked == 1 && femininoChecked == 0) || (masculinoChecked == 0 && femininoChecked == 1)) &&
                         isAnyItemCheck() && !dataNascimentoStr.equals("") && !paisUserStr.equals("")) {
 
@@ -206,6 +210,11 @@ public class SignUp extends AppCompatActivity {
                         confirmaPasswordUser.setError("Não confirmou a password!");
                     }
 
+
+                    if (!validate(email)){
+                        emailUser.setError("email não é válido");
+
+                    }
                     if (!validaPeso(peso)) {
                         pesoUser.setError("Não tem os digitos certos!");
                     }
@@ -213,6 +222,8 @@ public class SignUp extends AppCompatActivity {
                     if (!validaAltura(altura)) {
                         alturaUser.setError("Não tem os digitos certos!");
                     }
+
+
 
                     if (!password.equals(confirmaPassword)) {
                         passwordUser.setError("As passwords não são iguais");
@@ -240,6 +251,8 @@ public class SignUp extends AppCompatActivity {
                     if (paisUser.equals("")) {
                         firstNameUser.setError("Não preencheu o país!");
                     }
+
+
 
                 }
             }
@@ -305,6 +318,12 @@ public class SignUp extends AppCompatActivity {
 
 
     }
+
+    public static boolean validate(String emailStr) {
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(emailStr);
+        return matcher.find();
+    }
+
 
 
 }
