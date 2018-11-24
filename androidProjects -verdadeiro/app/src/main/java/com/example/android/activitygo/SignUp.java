@@ -6,15 +6,11 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -140,7 +136,7 @@ public class SignUp extends AppCompatActivity {
 
                 if (password.equals(confirmaPassword) && !password.equals("") && !firstName.equals("") &&
                         !secondName.equals("") && !usernameStr.equals("") && !email.equals("") && !peso.equals("") && !altura.equals("") &&
-                        validaPeso(peso)&& validaAltura(altura) && validate(email) &&
+                        validaPeso(peso) && validaAltura(altura) && validate(email) &&
                         ((masculinoChecked == 1 && femininoChecked == 0) || (masculinoChecked == 0 && femininoChecked == 1)) &&
                         isAnyItemCheck() && !dataNascimentoStr.equals("") && !paisUserStr.equals("")) {
 
@@ -211,7 +207,7 @@ public class SignUp extends AppCompatActivity {
                     }
 
 
-                    if (!validate(email)){
+                    if (!validate(email)) {
                         emailUser.setError("email não é válido");
 
                     }
@@ -222,7 +218,6 @@ public class SignUp extends AppCompatActivity {
                     if (!validaAltura(altura)) {
                         alturaUser.setError("Não tem os digitos certos!");
                     }
-
 
 
                     if (!password.equals(confirmaPassword)) {
@@ -251,7 +246,6 @@ public class SignUp extends AppCompatActivity {
                     if (paisUser.equals("")) {
                         firstNameUser.setError("Não preencheu o país!");
                     }
-
 
 
                 }
@@ -297,10 +291,10 @@ public class SignUp extends AppCompatActivity {
         return false;
     }
 
-    public boolean validaPeso(String peso){
-        if (peso.equals("")){
+    public boolean validaPeso(String peso) {
+        if (peso.equals("")) {
             return false;
-        }else{
+        } else {
             return Double.parseDouble(peso) >= 50 && Double.parseDouble(peso) <= 100;
         }
 
@@ -308,11 +302,11 @@ public class SignUp extends AppCompatActivity {
     }
 
 
-    public boolean validaAltura(String altura){
+    public boolean validaAltura(String altura) {
 
-        if (altura.equals("")){
+        if (altura.equals("")) {
             return false;
-        }else{
+        } else {
             return Integer.parseInt(altura) >= 150 && Integer.parseInt(altura) <= 200;
         }
 
@@ -320,10 +314,9 @@ public class SignUp extends AppCompatActivity {
     }
 
     public static boolean validate(String emailStr) {
-        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(emailStr);
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
         return matcher.find();
     }
-
 
 
 }

@@ -7,6 +7,8 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -60,42 +62,25 @@ public class SettingsActivity extends AppCompatActivity {
     // lista com as coisas alteradas e as inalteradas + genero + desportos favoritos
     private ArrayList<String> alteracoes = new ArrayList<>();
 
+    private Toolbar toolbarCima;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_layout);
-
         userProfileMenuPrincipal = (ArrayList<String>) getIntent().getSerializableExtra("USERPROFILE");
 
         dialogTerminarSessao = new Dialog(this);
         dialogChangeProfile = new Dialog(this);
         dialogCalendario = new Dialog(this);
-        dialogFaqs = new Dialog(this);
-        contactosImp = (Button) findViewById(R.id.contactosImportantesButton);
-        contactosImp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showContactosImportantesPopup();
-            }
-        });
 
-        faQS = (Button) findViewById(R.id.faqsButton);
-        faQS.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showFaqsPopup();
-            }
-        });
+        toolbarCima = (Toolbar) findViewById(R.id.toolbarSettings);
+        setSupportActionBar(toolbarCima);
+        getSupportActionBar().setTitle("Definições");
+        //String iniciais = "" + profile.get(0).charAt(0) + profile.get(1).charAt(0);
+        //getSupportActionBar().setSubtitle(iniciais);
 
-        buttonCalendario = (Button) findViewById(R.id.calendarioButton);
-        buttonCalendario.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showCalendarioPopup();
-            }
-        });
-
-        Button changeProfile = (Button) findViewById(R.id.buttonAlterarPerfil);
+        Button changeProfile = (Button) findViewById(R.id.buttonAlterarPerfilSettings);
         changeProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,7 +88,15 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        Button terminarSessao = (Button) findViewById(R.id.terminaaaaaaaaaaaaa);
+        buttonCalendario = (Button) findViewById(R.id.buttonCalendarioSettings);
+        buttonCalendario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showCalendarioPopup();
+            }
+        });
+
+        Button terminarSessao = (Button) findViewById(R.id.buttonTerminarSessao);
         terminarSessao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -278,5 +271,14 @@ public class SettingsActivity extends AppCompatActivity {
 
         dialogCalendario.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialogCalendario.show();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.BackButton:
+                getFragmentManager().popBackStack();
+        }
+        return true;
     }
 }
