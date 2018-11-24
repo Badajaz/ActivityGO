@@ -22,10 +22,8 @@ public class SettingsActivity extends AppCompatActivity {
     private Dialog dialogTerminarSessao;
     private Dialog dialogCalendario;
     private Dialog dialogChangeProfile;
-    private Dialog dialogFaqs;
     private Button confirmaAltPerfil;
-    private Button contactosImp;
-    private Button faQS;
+    private Button informacoesPrivadas;
     private Button buttonCalendario;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private DatePickerDialog.OnDateSetListener mDateSetListenerForCalendar;
@@ -77,8 +75,8 @@ public class SettingsActivity extends AppCompatActivity {
         toolbarCima = (Toolbar) findViewById(R.id.toolbarSettings);
         setSupportActionBar(toolbarCima);
         getSupportActionBar().setTitle("Definições");
-        //String iniciais = "" + profile.get(0).charAt(0) + profile.get(1).charAt(0);
-        //getSupportActionBar().setSubtitle(iniciais);
+        String iniciais = "" + userProfileMenuPrincipal.get(0).charAt(0) + userProfileMenuPrincipal.get(1).charAt(0);
+        getSupportActionBar().setSubtitle(iniciais);
 
         Button changeProfile = (Button) findViewById(R.id.buttonAlterarPerfilSettings);
         changeProfile.setOnClickListener(new View.OnClickListener() {
@@ -238,24 +236,6 @@ public class SettingsActivity extends AppCompatActivity {
             }
         };
         paisUser = (TextView) d.findViewById(R.id.paisUserNameText);
-    }
-
-    private void showContactosImportantesPopup() {
-
-    }
-
-    private void showFaqsPopup() {
-        TextView close;
-        dialogFaqs.setContentView(R.layout.popup_faqs);
-        close = (TextView) dialogFaqs.findViewById(R.id.txtClose);
-        close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialogFaqs.dismiss();
-            }
-        });
-        dialogFaqs.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialogFaqs.show();
     }
 
     private void showCalendarioPopup() {
