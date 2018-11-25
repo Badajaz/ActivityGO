@@ -206,9 +206,8 @@ public class SignUp extends AppCompatActivity {
                         confirmaPasswordUser.setError("Não confirmou a password!");
                     }
 
-
                     if (!validate(email)) {
-                        emailUser.setError("email não é válido");
+                        emailUser.setError("O email não é válido");
 
                     }
                     if (!validaPeso(peso)) {
@@ -226,20 +225,20 @@ public class SignUp extends AppCompatActivity {
                     }
 
                     if (masculinoChecked == 0 && femininoChecked == 0) {
-                        masculino.setError("Não selecionou o seu sexo!");
+                        masculino.setError("Tem de escolher um género");
                         masculino.requestFocus();
-                        feminino.setError("Não selecionou o seu sexo!");
+                        feminino.setError("Tem de escolher um género");
                         feminino.requestFocus();
                     }
 
                     if (isAnyItemCheck() == false) {
-                        caminhada.setError("Não selecionou nenhuma caixa!");
+                        caminhada.setError("Não selecionou nenhuma caixa");
                         caminhada.requestFocus();
-                        corrida.setError("Não selecionou nenhuma a caixa!");
+                        corrida.setError("Não selecionou nenhuma caixa");
                         corrida.requestFocus();
-                        futebol.setError("Não selecionou nenhuma a caixa!");
+                        futebol.setError("Não selecionou nenhuma caixa");
                         futebol.requestFocus();
-                        ciclismo.setError("Não selecionou nenhuma a caixa!");
+                        ciclismo.setError("Não selecionou nenhuma caixa");
                         ciclismo.requestFocus();
                     }
 

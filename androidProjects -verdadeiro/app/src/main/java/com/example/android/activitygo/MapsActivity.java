@@ -44,7 +44,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private ArrayList<Double> posicoes = new ArrayList<>();
     private float accKm = 0;
 
-
     private Chronometer chronometer;
     private boolean running;
     private long pauseOffset;
@@ -58,7 +57,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Button finalizar;
 
     private ArrayList<LatLng> arrayMarkers = new ArrayList<LatLng>();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +83,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             {Manifest.permission.ACCESS_FINE_LOCATION},
                     REQUEST_LOCATION_PERMISSION);
         }
-
 
         locationListener = new LocationListener() {
             @Override
@@ -157,17 +154,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             @Override
             public void onStatusChanged(String provider, int status, Bundle extras) {
-
             }
 
             @Override
             public void onProviderEnabled(String provider) {
-
             }
 
             @Override
             public void onProviderDisabled(String provider) {
-
             }
         };
 

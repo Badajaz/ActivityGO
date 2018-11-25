@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -39,6 +41,8 @@ public class SettingsActivity extends AppCompatActivity {
     private TextView dataNascimento;
     private TextView paisUser;
     private TextView confirmaPasswordUser;
+    private TextView nome;
+    private TextView desportoFav;
 
     private String firstName;
     private String secondName;
@@ -77,6 +81,12 @@ public class SettingsActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Definições");
         String iniciais = "" + userProfileMenuPrincipal.get(0).charAt(0) + userProfileMenuPrincipal.get(1).charAt(0);
         getSupportActionBar().setSubtitle(iniciais);
+
+        nome = (TextView) findViewById(R.id.namePessoaMenuSettings);
+        nome.setText(userProfileMenuPrincipal.get(0) + " " + userProfileMenuPrincipal.get(1));
+
+        desportoFav = (TextView) findViewById(R.id.desportoFavoritoSettings);
+        desportoFav.setText("Desporto Favorito: " + userProfileMenuPrincipal.get(10));
 
         Button changeProfile = (Button) findViewById(R.id.buttonAlterarPerfilSettings);
         changeProfile.setOnClickListener(new View.OnClickListener() {
