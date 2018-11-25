@@ -11,7 +11,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-
         android:gravity="top|left"
         android:orientation="vertical"
         android:paddingTop="50dp">
@@ -21,12 +20,13 @@
             android:layout_width="149dp"
             android:layout_height="55dp"
             android:layout_marginStart="20dp"
-            android:background="@drawable/edit_text_shape2"
+            android:backgroundTint="#006aff"
             android:ems="10"
             android:fontFamily="sans-serif"
             android:hint="@string/NomeGrupo"
             android:inputType="textPersonName"
             android:padding="5dp"
+            android:textColorHint="#808080"
             android:textSize="16sp"
             android:typeface="sans"
             app:layout_constraintStart_toStartOf="parent"
@@ -57,6 +57,7 @@
             android:layout_marginTop="-60dp"
             android:background="#FFA500"
             android:text="Criar"
+            android:textAllCaps="false"
             android:textColor="@color/whiteLetters"
             android:textSize="16sp" />
 
@@ -68,9 +69,9 @@
             android:layout_marginTop="-110dp"
             android:background="#FFA500"
             android:text="Meus Grupos"
+            android:textAllCaps="false"
             android:textColor="@color/whiteLetters"
             android:textSize="16sp" />
-
     </LinearLayout>
 
     <TextView
@@ -83,7 +84,7 @@
         android:gravity="center"
         android:text="Procurar por Nome ou Desporto"
         android:textColor="#FFA500"
-        android:textSize="22sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:typeface="sans"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -99,10 +100,10 @@
         android:layout_height="59dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="260dp"
-        android:backgroundTint="#FFA500"
+        android:backgroundTint="#006aff"
         android:ems="10"
         android:inputType="text"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:typeface="sans"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -118,6 +119,7 @@
         android:layout_marginEnd="16dp"
         android:background="#FFA500"
         android:text="Procurar"
+        android:textAllCaps="false"
         android:textColor="@color/whiteLetters"
         app:layout_constraintBaseline_toBaselineOf="@+id/NomeGrupo"
         app:layout_constraintEnd_toEndOf="parent"

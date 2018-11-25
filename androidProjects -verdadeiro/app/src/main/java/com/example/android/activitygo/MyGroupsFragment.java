@@ -10,9 +10,6 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class MyGroupsFragment extends Fragment {
 
     private ArrayList<String> myGroups = new ArrayList<String>();

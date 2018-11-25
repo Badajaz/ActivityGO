@@ -50,11 +50,11 @@ public class MergeGroupFragment extends Fragment {
             public void onClick(View v) {
                 nomegrupo = nomeGrupo.getText().toString();
                 if (isOneChecked() && !nomegrupo.equals("")) {
-                    Toast.makeText(getActivity(), "O grupo " + nomegrupo + "Foi criado", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "O grupo " + nomegrupo + " foi criado", Toast.LENGTH_LONG).show();
                     possiveisResultados.add(nomegrupo);
                     grupos.add(nomegrupo);
                 } else {
-                    Toast.makeText(getActivity(), "erro", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Não foi possível criar o grupo", Toast.LENGTH_LONG).show();
                 }
             }
         });
