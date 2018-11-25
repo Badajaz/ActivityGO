@@ -136,6 +136,7 @@
                 android:gravity="center"
                 android:onClick="getMasculinoItem"
                 android:text="Masculino"
+                android:buttonTint="#FFA500"
                 android:textColor="#808080" />
 
             <CheckBox
@@ -148,6 +149,7 @@
                 android:gravity="center"
                 android:onClick="getFemininoItem"
                 android:text="Feminino"
+                android:buttonTint="#FFA500"
                 android:textColor="#808080" />
 
             <EditText
@@ -355,6 +357,7 @@
                 android:fontFamily="open-sans"
                 android:onClick="getCaminhadaItem"
                 android:text="Caminhada"
+                android:buttonTint="#FFA500"
                 android:textColor="#808080" />
 
             <CheckBox
@@ -365,6 +368,7 @@
                 android:fontFamily="open-sans"
                 android:onClick="getCorridaItem"
                 android:text="Corrida"
+                android:buttonTint="#FFA500"
                 android:textColor="#808080" />
 
             <CheckBox
@@ -377,6 +381,7 @@
                 android:onClick="getFutebolItem"
                 android:text="Futebol"
                 android:textColor="#808080"
+                android:buttonTint="#FFA500"
                 tools:layout_editor_absoluteX="168dp"
                 tools:layout_editor_absoluteY="479dp" />
 
@@ -389,6 +394,7 @@
                 android:fontFamily="open-sans"
                 android:onClick="getCiclismoItem"
                 android:text="Ciclismo"
+                android:buttonTint="#FFA500"
                 android:textColor="#808080" />
 
             <Button
