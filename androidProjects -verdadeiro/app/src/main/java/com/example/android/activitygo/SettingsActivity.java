@@ -14,8 +14,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -41,8 +39,6 @@ public class SettingsActivity extends AppCompatActivity {
     private TextView dataNascimento;
     private TextView paisUser;
     private TextView confirmaPasswordUser;
-    private TextView nome;
-    private TextView desportoFav;
 
     private String firstName;
     private String secondName;
@@ -70,7 +66,7 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_layout);
-        userProfileMenuPrincipal = (ArrayList<String>) getIntent().getSerializableExtra("USERPROFILE");
+        // userProfileMenuPrincipal = (ArrayList<String>) getIntent().getSerializableExtra("USERPROFILE");
 
         dialogTerminarSessao = new Dialog(this);
         dialogChangeProfile = new Dialog(this);
@@ -79,14 +75,8 @@ public class SettingsActivity extends AppCompatActivity {
         toolbarCima = (Toolbar) findViewById(R.id.toolbarSettings);
         setSupportActionBar(toolbarCima);
         getSupportActionBar().setTitle("Definições");
-        String iniciais = "" + userProfileMenuPrincipal.get(0).charAt(0) + userProfileMenuPrincipal.get(1).charAt(0);
-        getSupportActionBar().setSubtitle(iniciais);
-
-        nome = (TextView) findViewById(R.id.namePessoaMenuSettings);
-        nome.setText(userProfileMenuPrincipal.get(0) + " " + userProfileMenuPrincipal.get(1));
-
-        desportoFav = (TextView) findViewById(R.id.desportoFavoritoSettings);
-        desportoFav.setText("Desporto Favorito: " + userProfileMenuPrincipal.get(10));
+        //String iniciais = "" + userProfileMenuPrincipal.get(0).charAt(0) + userProfileMenuPrincipal.get(1).charAt(0);
+        //getSupportActionBar().setSubtitle(iniciais);
 
         Button changeProfile = (Button) findViewById(R.id.buttonAlterarPerfilSettings);
         changeProfile.setOnClickListener(new View.OnClickListener() {
