@@ -10,8 +10,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
+/**
+ * A simple {@link Fragment} subclass.
+ */
 public class RunMenuInicial extends Fragment {
 
     private TextView name1;
@@ -26,7 +27,7 @@ public class RunMenuInicial extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_run_menu_inicial, container, false);
 
-        ArrayList<String> arraylist = getArguments().getStringArrayList("USERPROFILE");
+        //ArrayList<String> arraylist = getArguments().getStringArrayList("USERPROFILE");
 
         ((MenuPrincipal) getActivity()).getSupportActionBar().setTitle("Activity GO:");
 
@@ -35,7 +36,7 @@ public class RunMenuInicial extends Fragment {
         Button meusGrupos = (Button) v.findViewById(R.id.buttonMeusGrupos);
         //Button alterar = (Button) v.findViewById(R.id.alterarDesportoPraticado);
         name1 = (TextView) v.findViewById(R.id.namePessoaMenuInicial);
-        name1.setText("Bem vindo " + arraylist.get(0) + " " + arraylist.get(1) + "!");
+        // name1.setText("Bem vindo " + arraylist.get(0) + " " + arraylist.get(1) + "!");
 
         historial.setOnClickListener(new View.OnClickListener() {
             @Override

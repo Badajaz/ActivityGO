@@ -14,7 +14,6 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -48,7 +47,11 @@ public class MenuPrincipal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_principal);
         myDialog = new Dialog(this);
-        profile = (ArrayList<String>) getIntent().getSerializableExtra("USERPROFILE");
+        //profile = (ArrayList<String>) getIntent().getSerializableExtra("USERPROFILE");
+        String letraInicial = getIntent().getStringExtra("INICIAL");
+        String letraFinal = getIntent().getStringExtra("FINAL");
+
+
 
         Bundle toRunMenuInicial = new Bundle();
         toRunMenuInicial.putStringArrayList("USERPROFILE", profile);
@@ -63,7 +66,7 @@ public class MenuPrincipal extends AppCompatActivity {
         toolbarCima = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbarCima);
         getSupportActionBar().setTitle("ActivityGO");
-        String iniciais = "" + profile.get(0).charAt(0) + profile.get(1).charAt(0);
+        String iniciais = letraInicial+letraFinal;
         getSupportActionBar().setSubtitle(iniciais);
 
         BottomNavigationView mMainNav = findViewById(R.id.NavBar);
@@ -80,9 +83,9 @@ public class MenuPrincipal extends AppCompatActivity {
                             showPopup(menuItem);
                             //Fragmento Corrida
                             Bundle toRunMenuInicial = new Bundle();
-                            toRunMenuInicial.putStringArrayList("USERPROFILE", profile);
+                            //toRunMenuInicial.putStringArrayList("USERPROFILE", profile);
                             SelectedFragment = new RunMenuInicial();
-                            SelectedFragment.setArguments(toRunMenuInicial);
+                            //SelectedFragment.setArguments(toRunMenuInicial);
                             FragmentManager fm = getFragmentManager();
                             FragmentTransaction ft = fm.beginTransaction();
                             ft.replace(R.id.fragment_container, SelectedFragment);
@@ -105,7 +108,7 @@ public class MenuPrincipal extends AppCompatActivity {
                             /*Intent intent = new Intent(getApplicationContext(), AchievementsTab.class);
                             startActivity(intent);*/
 
-                            
+
                             SelectedFragment = new AchievementsFragment();
                             FragmentManager f = getFragmentManager();
                             FragmentTransaction fte = f.beginTransaction();
@@ -226,8 +229,8 @@ public class MenuPrincipal extends AppCompatActivity {
         caminhadaCheckBox = (CheckBox) myDialog.findViewById(R.id.opcaoPraticar1);
         corridaCheckBox = (CheckBox) myDialog.findViewById(R.id.opcaoPraticar2);
         confirmButton = (Button) myDialog.findViewById(R.id.confirmButton);
-        txtname.setText(profile.get(0));
-        txtusername.setText(profile.get(2));
+        //txtname.setText(profile.get(0));
+        //txtusername.setText(profile.get(2));
         txtclose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

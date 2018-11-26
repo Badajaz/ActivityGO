@@ -1,14 +1,18 @@
 package com.example.android.activitygo;
 
-import android.content.Context;
+import android.arch.persistence.room.Room;
 import android.content.Intent;
-import android.graphics.Typeface;
+import android.database.sqlite.SQLiteConstraintException;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.android.activitygo.model.AppDatabase;
+import com.example.android.activitygo.model.User;
+import com.example.android.activitygo.model.UserDao;
 
 import java.util.ArrayList;
 
@@ -18,14 +22,23 @@ public class LoginScreen extends AppCompatActivity {
     private EditText password;
     private ArrayList<String> profile;
     private String pass;
+    private UserDao mUserDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
 
+
+        mUserDAO = Room.databaseBuilder(this, AppDatabase.class, "db-contacts")
+                .allowMainThreadQueries()   //Allows room to do operation on main thread
+                .build()
+                .getUserDAO();
+
+
+
         user = (EditText) findViewById(R.id.usernameText);
-        String username = getIntent().getStringExtra("USERNAME");
+        final String username = getIntent().getStringExtra("USERNAME");
         pass = getIntent().getStringExtra("PASSWORD");
         user.setText(username);
 
@@ -43,25 +56,32 @@ public class LoginScreen extends AppCompatActivity {
                 password = (EditText) findViewById(R.id.passwordText);
                 String userTxt = user.getText().toString();
                 String passwordTxt = password.getText().toString();
-                if(!userTxt.equals("") && !passwordTxt.equals("") && passwordTxt.equals(pass)){
-                //!userTxt.equals("") && !passwordTxt.equals("") && passwordTxt.equals(pass)
-                //if (userTxt.equals("goncalo") && passwordTxt.equals("1234")) {
-                    Intent intent = new Intent(getApplicationContext(), MenuPrincipal.class);
-                    intent.putExtra("USERPROFILE", profile);
-                    startActivity(intent);
-                } else {
-                    if (userTxt.equals("")) {
-                        user.setError("O Texto não foi preenchido");
+
+
+                try {
+                    User u = mUserDAO.getUser(userTxt);
+                    if (u == null){
+                        Toast.makeText(LoginScreen.this, "nao existe o utilizador", Toast.LENGTH_SHORT).show();
+                    }else {
+
+
+                        if (u.getUsername().equals(userTxt) && u.getPassword().equals(passwordTxt)) {
+                            Intent intent = new Intent(getApplicationContext(), MenuPrincipal.class);
+                            intent.putExtra("INICIAL",""+u.getFirstName().charAt(0));
+                            intent.putExtra("FINAL",""+u.getLastName().charAt(0));
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(LoginScreen.this, "nao e igual", Toast.LENGTH_SHORT).show();
+                        }
                     }
 
-                    if (passwordTxt.equals("")) {
-                        password.setError("O texto não foi preenchido");
-                    }
-                    /*
-                    if (!passwordTxt.equals(pass)) {
-                        password.setError("A password não corresponde");
-                    }*/
+
+                } catch (SQLiteConstraintException e) {
+                    Toast.makeText(LoginScreen.this, "erro", Toast.LENGTH_SHORT).show();
                 }
+
+
+
             }
         });
     }
