@@ -54,7 +54,7 @@ public class MenuPrincipal extends AppCompatActivity {
 
 
         Bundle toRunMenuInicial = new Bundle();
-        toRunMenuInicial.putStringArrayList("USERPROFILE", profile);
+       // toRunMenuInicial.putStringArrayList("USERPROFILE", profile);
         SelectedFragment = new RunMenuInicial();
         SelectedFragment.setArguments(toRunMenuInicial);
         FragmentManager fm = getFragmentManager();

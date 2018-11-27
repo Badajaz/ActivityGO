@@ -50,7 +50,7 @@ public class LoginScreen extends AppCompatActivity {
                 SignUp s = new SignUp();
                 int alreadyRRR = getIntent().getIntExtra("ALREADYREGISTER", 0);
                 if (alreadyRRR == 1) {
-                    profile = (ArrayList<String>) getIntent().getSerializableExtra("USERPROFILE");
+                    //profile = (ArrayList<String>) getIntent().getSerializableExtra("USERPROFILE");
                 }
 
                 password = (EditText) findViewById(R.id.passwordText);

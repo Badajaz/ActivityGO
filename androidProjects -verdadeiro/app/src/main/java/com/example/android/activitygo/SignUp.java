@@ -1,16 +1,24 @@
 package com.example.android.activitygo;
 
 import android.app.DatePickerDialog;
+import android.arch.persistence.room.Room;
 import android.content.Intent;
+import android.database.sqlite.SQLiteConstraintException;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.android.activitygo.model.AppDatabase;
+import com.example.android.activitygo.model.User;
+import com.example.android.activitygo.model.UserDao;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -56,6 +64,7 @@ public class SignUp extends AppCompatActivity {
     private int ciclismoChecked = 0;
     private ArrayList<CheckBox> checkboxes = new ArrayList<CheckBox>();
     private ArrayList<String> userProfile = new ArrayList<>();
+    private String genero;
 
     private static final String TAG = "SignUpActivity";
     private DatePickerDialog.OnDateSetListener mDateSetListener;
@@ -63,6 +72,7 @@ public class SignUp extends AppCompatActivity {
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
     public int alreadyRegister = 0;
+    private UserDao mUserDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +80,13 @@ public class SignUp extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
         // Preparar para guardar os valores
+        mUserDAO = Room.databaseBuilder(this, AppDatabase.class, "db-contacts")
+                .allowMainThreadQueries()   //Allows room to do operation on main thread
+                .build()
+                .getUserDAO();
+
+
+
         firstNameUser = (TextView) findViewById(R.id.FirstNameText);
         secondNameUser = (TextView) findViewById(R.id.LastNameText);
         username = (TextView) findViewById(R.id.username);
@@ -139,6 +156,7 @@ public class SignUp extends AppCompatActivity {
                         validaPeso(peso) && validaAltura(altura) && validate(email) &&
                         ((masculinoChecked == 1 && femininoChecked == 0) || (masculinoChecked == 0 && femininoChecked == 1)) &&
                         isAnyItemCheck() && !dataNascimentoStr.equals("") && !paisUserStr.equals("")) {
+                    // Toast.makeText(SignUp.this, "BOM DIA", Toast.LENGTH_SHORT).show();
 
                     userProfile.add(firstName);
                     userProfile.add(secondName);
@@ -151,9 +169,11 @@ public class SignUp extends AppCompatActivity {
                     userProfile.add(paisUserStr);
                     if (masculinoChecked == 1) {
                         userProfile.add(masculino.getText().toString());
+                        genero ="MASCULINO";
                     }
                     if (femininoChecked == 1) {
                         userProfile.add(feminino.getText().toString());
+                        genero = "FEMININO";
                     }
                     if (caminhadaChecked == 1) {
                         userProfile.add(caminhada.getText().toString());
@@ -171,10 +191,38 @@ public class SignUp extends AppCompatActivity {
                     // para confirmar que está registado
                     alreadyRegister = 1;
 
+
+                    User user = new User();
+                    user.setFirstName(firstName);
+                    user.setLastName(secondName);
+                    user.setCountry(paisUserStr);
+                    user.setDate(dataNascimentoStr);
+                    user.setEmail(email);
+                    user.setHight(altura);
+                    user.setWeight(peso);
+                    user.setGender(genero);
+                    user.setUsername(usernameStr);
+                    user.setPassword(password);
+                    //Log.d("REGISTO","estou aqui");
+
+                    //TO DO SPORT
+
+                    try {
+                        Toast.makeText(SignUp.this, "insert", Toast.LENGTH_SHORT).show();
+                        mUserDAO.insert(user);
+                        setResult(RESULT_OK);
+                        finish();
+                    } catch (SQLiteConstraintException e) {
+                        Toast.makeText(SignUp.this, "User already exists", Toast.LENGTH_SHORT).show();
+                    }
+
+
+
+
                     Intent intent = new Intent(getBaseContext(), LoginScreen.class);
                     intent.putExtra("USERNAME", usernameStr);
                     intent.putExtra("PASSWORD", password);
-                    intent.putExtra("USERPROFILE", userProfile);
+                    //intent.putExtra("USERPROFILE", userProfile);
                     intent.putExtra("ALREADYREGISTER", alreadyRegister);
                     startActivity(intent);
                 } else {
@@ -206,8 +254,9 @@ public class SignUp extends AppCompatActivity {
                         confirmaPasswordUser.setError("Não confirmou a password!");
                     }
 
+
                     if (!validate(email)) {
-                        emailUser.setError("O email não é válido");
+                        emailUser.setError("email não é válido");
 
                     }
                     if (!validaPeso(peso)) {
@@ -225,20 +274,20 @@ public class SignUp extends AppCompatActivity {
                     }
 
                     if (masculinoChecked == 0 && femininoChecked == 0) {
-                        masculino.setError("Tem de escolher um género");
+                        masculino.setError("Não selecionou o seu sexo!");
                         masculino.requestFocus();
-                        feminino.setError("Tem de escolher um género");
+                        feminino.setError("Não selecionou o seu sexo!");
                         feminino.requestFocus();
                     }
 
                     if (isAnyItemCheck() == false) {
-                        caminhada.setError("Não selecionou nenhuma caixa");
+                        caminhada.setError("Não selecionou nenhuma caixa!");
                         caminhada.requestFocus();
-                        corrida.setError("Não selecionou nenhuma caixa");
+                        corrida.setError("Não selecionou nenhuma a caixa!");
                         corrida.requestFocus();
-                        futebol.setError("Não selecionou nenhuma caixa");
+                        futebol.setError("Não selecionou nenhuma a caixa!");
                         futebol.requestFocus();
-                        ciclismo.setError("Não selecionou nenhuma caixa");
+                        ciclismo.setError("Não selecionou nenhuma a caixa!");
                         ciclismo.requestFocus();
                     }
 
