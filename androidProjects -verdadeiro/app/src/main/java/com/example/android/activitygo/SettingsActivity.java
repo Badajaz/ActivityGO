@@ -2,6 +2,7 @@ package com.example.android.activitygo;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -13,6 +14,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
+
+import com.example.android.activitygo.model.AppDatabase;
+import com.example.android.activitygo.model.User;
+import com.example.android.activitygo.model.UserDao;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -51,6 +56,8 @@ public class SettingsActivity extends AppCompatActivity {
     private String dataNascimentoStr;
     private String paisUserStr;
 
+    private String usernameReceived;
+
     // perfil que o user coloca quando se regista
     private ArrayList<String> userProfileMenuPrincipal;
 
@@ -61,12 +68,24 @@ public class SettingsActivity extends AppCompatActivity {
     private ArrayList<String> alteracoes = new ArrayList<>();
 
     private Toolbar toolbarCima;
+    private UserDao mUserDAO;
+    private User userUpdate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_layout);
-        // userProfileMenuPrincipal = (ArrayList<String>) getIntent().getSerializableExtra("USERPROFILE");
+        //userProfileMenuPrincipal = (ArrayList<String>) getIntent().getSerializableExtra("USERPROFILE");
+        usernameReceived = getIntent().getStringExtra("USERNAME");
+
+
+        mUserDAO = Room.databaseBuilder(this, AppDatabase.class, "db-contacts")
+                .allowMainThreadQueries()   //Allows room to do operation on main thread
+                .build()
+                .getUserDAO();
+
+         userUpdate = mUserDAO.getUser(usernameReceived);
+
 
         dialogTerminarSessao = new Dialog(this);
         dialogChangeProfile = new Dialog(this);
@@ -141,35 +160,73 @@ public class SettingsActivity extends AppCompatActivity {
 
         iniciarCampos(dialogChangeProfile);
 
-        firstName = firstNameUser.getText().toString();
-        secondName = secondNameUser.getText().toString();
-        dataNascimentoStr = dataNascimento.getText().toString();
-        paisUserStr = paisUser.getText().toString();
-        email = emailUser.getText().toString();
-        peso = pesoUser.getText().toString();
-        altura = alturaUser.getText().toString();
 
-        usernameStr = username.getText().toString();
-        password = passwordUser.getText().toString();
-        confirmaPassword = confirmaPasswordUser.getText().toString();
-
-        userProfileCpf.add(firstName);
-        userProfileCpf.add(secondName);
-        userProfileCpf.add(usernameStr);
-        userProfileCpf.add(email);
-        userProfileCpf.add(peso);
-        userProfileCpf.add(altura);
-        userProfileCpf.add(password);
-        userProfileCpf.add(dataNascimentoStr);
-        userProfileCpf.add(paisUserStr);
-
-        alteracoes = detetarAlteracoesPerfis(userProfileMenuPrincipal, userProfileCpf);
+        //alteracoes = detetarAlteracoesPerfis(userProfileMenuPrincipal, userProfileCpf);
 
         confirmaAltPerfil = (Button) dialogChangeProfile.findViewById(R.id.buttonConfirmarAlterarPerfil);
         confirmaAltPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+                firstName = firstNameUser.getText().toString();
+                secondName = secondNameUser.getText().toString();
+                dataNascimentoStr = dataNascimento.getText().toString();
+                paisUserStr = paisUser.getText().toString();
+                email = emailUser.getText().toString();
+                peso = pesoUser.getText().toString();
+                altura = alturaUser.getText().toString();
+
+                usernameStr = username.getText().toString();
+                password = passwordUser.getText().toString();
+                confirmaPassword = confirmaPasswordUser.getText().toString();
+
+
+
+
+                if (!firstName.equals("")) {
+                    userUpdate.setFirstName(firstName);
+                }
+
+                if (!secondName.equals("")) {
+                    userUpdate.setLastName(secondName);
+                }
+
+                if (!dataNascimentoStr.equals("")) {
+                    userUpdate.setDate(dataNascimentoStr);
+                }
+
+                if (!paisUserStr.equals("")) {
+                    userUpdate.setDate(paisUserStr);
+                }
+
+                if (!email.equals("")) {
+                    userUpdate.setEmail(email);
+                }
+
+                if (!peso.equals("")) {
+                    userUpdate.setWeight(peso);
+                }
+
+                if (!altura.equals("")) {
+                    userUpdate.setHight(altura);
+                }
+
+                if (!usernameStr.equals("")) {
+                    userUpdate.setUsername(usernameStr);
+                }
+
+                if (!password.equals("")) {
+                    userUpdate.setPassword(password);
+                }
+
+                mUserDAO.update(userUpdate);
+                setResult(RESULT_OK);
+                finish();
+
                 dialogChangeProfile.dismiss();
+
+
             }
         });
         dialogChangeProfile.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));

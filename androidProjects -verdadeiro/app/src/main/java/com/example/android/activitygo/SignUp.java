@@ -217,8 +217,6 @@ public class SignUp extends AppCompatActivity {
                     }
 
 
-
-
                     Intent intent = new Intent(getBaseContext(), LoginScreen.class);
                     intent.putExtra("USERNAME", usernameStr);
                     intent.putExtra("PASSWORD", password);

@@ -8,6 +8,10 @@ import android.support.annotation.NonNull;
 @Entity
 public class User {
 
+    @NonNull
+    @PrimaryKey(autoGenerate = true)
+    private int id;
+
     private String firstName;
     private String lastName;
     private String date;
@@ -16,10 +20,17 @@ public class User {
     private String email;
     private String weight;
     private String hight;
-    @PrimaryKey
-    @NonNull
+
     private String username;
     private String password;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(@NonNull int id) {
+        this.id = id;
+    }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;

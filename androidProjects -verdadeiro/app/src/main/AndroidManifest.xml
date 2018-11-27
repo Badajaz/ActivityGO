@@ -40,6 +40,7 @@
         <activity android:name=".AchievementsTab" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".MapsActivity"></activity>
+
     </application>
 
 </manifest>

@@ -67,6 +67,7 @@ public class LoginScreen extends AppCompatActivity {
 
                         if (u.getUsername().equals(userTxt) && u.getPassword().equals(passwordTxt)) {
                             Intent intent = new Intent(getApplicationContext(), MenuPrincipal.class);
+                            intent.putExtra("USERNAME",""+u.getUsername());
                             intent.putExtra("INICIAL",""+u.getFirstName().charAt(0));
                             intent.putExtra("FINAL",""+u.getLastName().charAt(0));
                             startActivity(intent);

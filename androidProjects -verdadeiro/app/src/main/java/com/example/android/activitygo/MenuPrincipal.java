@@ -41,6 +41,8 @@ public class MenuPrincipal extends AppCompatActivity {
     private int ciclismoChecked = 0;
     private MenuItem mi;
     private ArrayList<CheckBox> checkboxesPopup = new ArrayList<CheckBox>();
+    private String username;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,11 +52,11 @@ public class MenuPrincipal extends AppCompatActivity {
         //profile = (ArrayList<String>) getIntent().getSerializableExtra("USERPROFILE");
         String letraInicial = getIntent().getStringExtra("INICIAL");
         String letraFinal = getIntent().getStringExtra("FINAL");
-
+        username = getIntent().getStringExtra("USERNAME");
 
 
         Bundle toRunMenuInicial = new Bundle();
-       // toRunMenuInicial.putStringArrayList("USERPROFILE", profile);
+        // toRunMenuInicial.putStringArrayList("USERPROFILE", profile);
         SelectedFragment = new RunMenuInicial();
         SelectedFragment.setArguments(toRunMenuInicial);
         FragmentManager fm = getFragmentManager();
@@ -66,7 +68,7 @@ public class MenuPrincipal extends AppCompatActivity {
         toolbarCima = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbarCima);
         getSupportActionBar().setTitle("ActivityGO");
-        String iniciais = letraInicial+letraFinal;
+        String iniciais = letraInicial + letraFinal;
         getSupportActionBar().setSubtitle(iniciais);
 
         BottomNavigationView mMainNav = findViewById(R.id.NavBar);
@@ -192,6 +194,7 @@ public class MenuPrincipal extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.Settings:
+
                 //Bundle bundle = new Bundle();
                 //bundle.putString("FIRSTNAME", profile.get(0));
                 //bundle.putString("LASTNAME", profile.get(1));
@@ -201,6 +204,7 @@ public class MenuPrincipal extends AppCompatActivity {
                 //cpf.setArguments(bundle);
 
                 Intent i = new Intent(this, SettingsActivity.class);
+                i.putExtra("USERNAME",username);
                 i.putExtra("USERPROFILE", profile);
                 startActivity(i);
                 break;
@@ -249,8 +253,8 @@ public class MenuPrincipal extends AppCompatActivity {
         myDialog.show();
     }
 
-    private void changePlusOption(String opcao){
-        switch (opcao){
+    private void changePlusOption(String opcao) {
+        switch (opcao) {
             case "Corrida":
                 mi.setIcon(R.drawable.outline_directions_run_black_18dp);
                 break;
@@ -276,7 +280,7 @@ public class MenuPrincipal extends AppCompatActivity {
         selectedSport = caminhadaCheckBox.getText().toString();
     }
 
-    public String getSelectedSport(){
+    public String getSelectedSport() {
         return this.selectedSport;
     }
 }
