@@ -1,16 +1,8 @@
 package com.example.android.activitygo.model;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
-import android.support.annotation.NonNull;
+import java.util.ArrayList;
 
-@Entity
 public class User {
-
-    @NonNull
-    @PrimaryKey(autoGenerate = true)
-    private int id;
 
     private String firstName;
     private String lastName;
@@ -20,56 +12,30 @@ public class User {
     private String email;
     private String weight;
     private String hight;
-
     private String username;
     private String password;
+    private ArrayList<String> sports;
 
-    public int getId() {
-        return id;
+    public User() {
+
     }
 
-    public void setId(@NonNull int id) {
-        this.id = id;
-    }
-
-    public void setFirstName(String firstName) {
+    public User(String firstName, String lastName, String date, String gender, String country, String email, String weight, String hight, String username, String password, ArrayList<String> sports) {
         this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public void setDate(String date) {
         this.date = date;
-    }
-
-    public void setGender(String gender) {
         this.gender = gender;
-    }
-
-    public void setCountry(String country) {
         this.country = country;
-    }
-
-    public void setEmail(String email) {
         this.email = email;
-    }
-
-    public void setWeight(String weight) {
         this.weight = weight;
-    }
-
-    public void setHight(String hight) {
         this.hight = hight;
-    }
-
-    public void setUsername(String username) {
         this.username = username;
+        this.password = password;
+        this.sports = sports;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public ArrayList<String> getSports() {
+        return sports;
     }
 
     public String getFirstName() {

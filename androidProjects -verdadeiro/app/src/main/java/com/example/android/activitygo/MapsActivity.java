@@ -2,7 +2,6 @@ package com.example.android.activitygo;
 
 import android.Manifest;
 import android.app.Fragment;
-import android.arch.persistence.room.Room;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -20,9 +19,7 @@ import android.widget.Chronometer;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.android.activitygo.model.AppDatabase;
 //import com.example.android.activitygo.model.CorridaDao;
-import com.example.android.activitygo.model.UserDao;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;

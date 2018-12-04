@@ -1,24 +1,20 @@
 package com.example.android.activitygo;
 
 import android.app.DatePickerDialog;
-import android.arch.persistence.room.Room;
 import android.content.Intent;
-import android.database.sqlite.SQLiteConstraintException;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.android.activitygo.model.AppDatabase;
 import com.example.android.activitygo.model.User;
-import com.example.android.activitygo.model.UserDao;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -64,6 +60,7 @@ public class SignUp extends AppCompatActivity {
     private int ciclismoChecked = 0;
     private ArrayList<CheckBox> checkboxes = new ArrayList<CheckBox>();
     private ArrayList<String> userProfile = new ArrayList<>();
+    private ArrayList<String> sports = new ArrayList<>();
     private String genero;
 
     private static final String TAG = "SignUpActivity";
@@ -72,20 +69,15 @@ public class SignUp extends AppCompatActivity {
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
     public int alreadyRegister = 0;
-    private UserDao mUserDAO;
+
+    private DatabaseReference databaseUsers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        // Preparar para guardar os valores
-        mUserDAO = Room.databaseBuilder(this, AppDatabase.class, "db-contacts")
-                .allowMainThreadQueries()   //Allows room to do operation on main thread
-                .build()
-                .getUserDAO();
-
-
+        databaseUsers = FirebaseDatabase.getInstance().getReference("users");
 
         firstNameUser = (TextView) findViewById(R.id.FirstNameText);
         secondNameUser = (TextView) findViewById(R.id.LastNameText);
@@ -169,7 +161,7 @@ public class SignUp extends AppCompatActivity {
                     userProfile.add(paisUserStr);
                     if (masculinoChecked == 1) {
                         userProfile.add(masculino.getText().toString());
-                        genero ="MASCULINO";
+                        genero = "MASCULINO";
                     }
                     if (femininoChecked == 1) {
                         userProfile.add(feminino.getText().toString());
@@ -177,45 +169,28 @@ public class SignUp extends AppCompatActivity {
                     }
                     if (caminhadaChecked == 1) {
                         userProfile.add(caminhada.getText().toString());
+                        sports.add("CAMINHADA");
                     }
                     if (corridaChecked == 1) {
                         userProfile.add(corrida.getText().toString());
+                        sports.add("CORRIDA");
                     }
                     if (ciclismoChecked == 1) {
                         userProfile.add(ciclismo.getText().toString());
+                        sports.add("CICLISMO");
                     }
                     if (futebolChecked == 1) {
                         userProfile.add(futebol.getText().toString());
+                        sports.add("FUTEBOL");
                     }
 
                     // para confirmar que está registado
                     alreadyRegister = 1;
 
+                    String id = databaseUsers.push().getKey();
 
-                    User user = new User();
-                    user.setFirstName(firstName);
-                    user.setLastName(secondName);
-                    user.setCountry(paisUserStr);
-                    user.setDate(dataNascimentoStr);
-                    user.setEmail(email);
-                    user.setHight(altura);
-                    user.setWeight(peso);
-                    user.setGender(genero);
-                    user.setUsername(usernameStr);
-                    user.setPassword(password);
-                    //Log.d("REGISTO","estou aqui");
-
-                    //TO DO SPORT
-
-                    try {
-                        Toast.makeText(SignUp.this, "insert", Toast.LENGTH_SHORT).show();
-                        mUserDAO.insert(user);
-                        setResult(RESULT_OK);
-                        finish();
-                    } catch (SQLiteConstraintException e) {
-                        Toast.makeText(SignUp.this, "User already exists", Toast.LENGTH_SHORT).show();
-                    }
-
+                    User user = new User(firstName, secondName, dataNascimentoStr, genero, paisUserStr, email, peso, altura, usernameStr, password, sports);
+                    databaseUsers.child(id).setValue(user);
 
                     Intent intent = new Intent(getBaseContext(), LoginScreen.class);
                     intent.putExtra("USERNAME", usernameStr);
