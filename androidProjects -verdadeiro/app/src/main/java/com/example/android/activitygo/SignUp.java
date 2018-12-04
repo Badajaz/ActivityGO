@@ -193,10 +193,10 @@ public class SignUp extends AppCompatActivity {
                     databaseUsers.child(id).setValue(user);
 
                     Intent intent = new Intent(getBaseContext(), LoginScreen.class);
-                    intent.putExtra("USERNAME", usernameStr);
-                    intent.putExtra("PASSWORD", password);
+                    //intent.putExtra("USERNAME", usernameStr);
+                    //intent.putExtra("PASSWORD", password);
                     //intent.putExtra("USERPROFILE", userProfile);
-                    intent.putExtra("ALREADYREGISTER", alreadyRegister);
+                    //intent.putExtra("ALREADYREGISTER", alreadyRegister);
                     startActivity(intent);
                 } else {
                     if (firstName.equals("")) {
