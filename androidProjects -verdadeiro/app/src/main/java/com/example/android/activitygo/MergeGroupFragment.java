@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +46,7 @@ public class MergeGroupFragment extends Fragment {
     private ArrayAdapter<String> listViewAdapter;
     private ListView listView;
     private DatabaseReference databaseGrupo;
-    private String grupo;
+    private String grupo = "";
     private String sport;
 
 
@@ -88,46 +89,10 @@ public class MergeGroupFragment extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot child : dataSnapshot.getChildren()) {
                             grupo = String.valueOf(child.child("nome").getValue());
-                            Toast.makeText(getContext(),grupo,Toast.LENGTH_LONG).show();
 
-                            if (isOnlyOneChecked() && !nomegrupo.equals("") && !descricaoGrupo.equals("") && !sport.equals("") && !grupo.equals(nomegrupo) ) {
-
-                                String id = databaseGrupo.push().getKey();
-                                Grupo g = new Grupo(nomegrupo, descricaogrupo, sport);
-
-
-                                g.addElementToList("badajaz");
-                                databaseGrupo.child(id).setValue(g);
-
-                                Toast.makeText(getActivity(), "O grupo " + nomegrupo + " foi criado", Toast.LENGTH_LONG).show();
-                                possiveisResultados.add(nomegrupo);
-                                grupos.add(nomegrupo);
-                            } else {
-
-                                if (!isOnlyOneChecked()) {
-                                    corrida.setError("Só pode escolher um desporto!");
-                                    ciclismo.setError("Só pode escolher um desporto!");
-                                    futebol.setError("Só pode escolher um desporto!");
-                                    caminhada.setError("Só pode escolher um desporto!");
-
-                                }
-
-
-                                if (nomegrupo.equals("")) {
-                                    nomeGrupo.setError("Tem de preencher o nome");
-                                }
-
-
-                                if (descricaogrupo.equals("")) {
-                                    descricaoGrupo.setError("Tem de preencher a descricao");
-                                }
-
-                                if (nomegrupo.equals(grupo)) {
-                                    nomeGrupo.setError("já existe esse nome para grupo");
-                                }
-
+                            if (grupo.equals(nomegrupo)){
+                                nomeGrupo.setError("ja existe esse nome");
                             }
-
 
 
 
@@ -139,6 +104,51 @@ public class MergeGroupFragment extends Fragment {
 
                     }
                 });
+
+
+
+                if (isOnlyOneChecked() && !nomegrupo.equals("") && !descricaoGrupo.equals("") && !sport.equals("")) {
+
+                    String id = databaseGrupo.push().getKey();
+                    Grupo g = new Grupo(nomegrupo, descricaogrupo, sport);
+
+                    Toast.makeText(getContext(),grupo,Toast.LENGTH_LONG).show();
+
+
+                    g.addElementToList("badajaz");
+                    databaseGrupo.child(id).setValue(g);
+
+                  //  Toast.makeText(getActivity(), "O grupo " + nomegrupo + " foi criado", Toast.LENGTH_LONG).show();
+                    possiveisResultados.add(nomegrupo);
+                    grupos.add(nomegrupo);
+                } else {
+
+                    if (!isOnlyOneChecked()) {
+                        corrida.setError("Só pode escolher um desporto!");
+                        ciclismo.setError("Só pode escolher um desporto!");
+                        futebol.setError("Só pode escolher um desporto!");
+                        caminhada.setError("Só pode escolher um desporto!");
+
+                    }
+
+
+                    if (nomegrupo.equals("")) {
+                        nomeGrupo.setError("Tem de preencher o nome");
+                    }
+
+
+                    if (descricaogrupo.equals("")) {
+                        descricaoGrupo.setError("Tem de preencher a descricao");
+                    }
+
+                   /* if (!grupo.equals("")) {
+                        nomeGrupo.setError("já existe esse nome para grupo");
+                    }
+
+                    */
+
+                }
+
 
 
 
