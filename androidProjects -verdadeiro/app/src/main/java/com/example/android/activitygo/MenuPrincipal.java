@@ -20,6 +20,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,21 +49,48 @@ public class MenuPrincipal extends AppCompatActivity {
     private MenuItem mi;
     private ArrayList<CheckBox> checkboxesPopup = new ArrayList<CheckBox>();
     private String username;
+    private String firstName = "";
+    private String lastName = "";
+    private String iniciais;
+    private StringBuilder sb;
 
+    private DatabaseReference databaseUsers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_principal);
+        String username = getIntent().getStringExtra("USERNAME");
+
         myDialog = new Dialog(this);
-        //profile = (ArrayList<String>) getIntent().getSerializableExtra("USERPROFILE");
-        String letraInicial = getIntent().getStringExtra("INICIAL");
-        String letraFinal = getIntent().getStringExtra("FINAL");
-        username = getIntent().getStringExtra("USERNAME");
+        sb = new StringBuilder();
+
+
+        databaseUsers = FirebaseDatabase.getInstance().getReference("users");
+
+        databaseUsers.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    firstName = String.valueOf(child.child("firstName").getValue());
+                    lastName = String.valueOf(child.child("lastName").getValue());
+                    toolbarCima = (Toolbar) findViewById(R.id.toolbar);
+                    setSupportActionBar(toolbarCima);
+                    getSupportActionBar().setTitle("ActivityGO");
+
+                    getSupportActionBar().setSubtitle(""+firstName.charAt(0) + lastName.charAt(0));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
 
         Bundle toRunMenuInicial = new Bundle();
-        // toRunMenuInicial.putStringArrayList("USERPROFILE", profile);
+        toRunMenuInicial.putString("USERNAME",username);
         SelectedFragment = new RunMenuInicial();
         SelectedFragment.setArguments(toRunMenuInicial);
         FragmentManager fm = getFragmentManager();
@@ -65,11 +99,6 @@ public class MenuPrincipal extends AppCompatActivity {
         //ft.addToBackStack("RunFragment");
         ft.commit();
 
-        toolbarCima = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbarCima);
-        getSupportActionBar().setTitle("ActivityGO");
-        String iniciais = letraInicial + letraFinal;
-        getSupportActionBar().setSubtitle(iniciais);
 
         BottomNavigationView mMainNav = findViewById(R.id.NavBar);
         mMainNav.setOnNavigationItemSelectedListener(navListener);
@@ -204,7 +233,7 @@ public class MenuPrincipal extends AppCompatActivity {
                 //cpf.setArguments(bundle);
 
                 Intent i = new Intent(this, SettingsActivity.class);
-                i.putExtra("USERNAME",username);
+                i.putExtra("USERNAME", username);
                 i.putExtra("USERPROFILE", profile);
                 startActivity(i);
                 break;

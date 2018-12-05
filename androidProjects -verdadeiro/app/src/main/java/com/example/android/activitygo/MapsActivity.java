@@ -19,11 +19,13 @@ import android.widget.Chronometer;
 import android.widget.TextView;
 import android.widget.Toast;
 
-//import com.example.android.activitygo.model.CorridaDao;
+import com.example.android.activitygo.model.Corrida;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -36,6 +38,7 @@ import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+
 
     private GoogleMap mMap;
     LocationManager locationManager;
@@ -52,24 +55,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Fragment SelectedFragment;
     private boolean isStopped = false;
 
-    private ArrayList<String> datas = new ArrayList<String>();
     private String date;
 
     private Button finalizar;
 
     private ArrayList<LatLng> arrayMarkers = new ArrayList<LatLng>();
-    //private CorridaDao mCorridaDAO;
+    private DatabaseReference databaseCorrida;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        String username = getIntent().getExtras().getString("USERNAME");
 
-       /* mCorridaDAO = Room.databaseBuilder(this, AppDatabase.class, "db-contacts")
-                .allowMainThreadQueries()   //Allows room to do operation on main thread
-                .build()
-                .getCorridaDAO();*/
-
+        databaseCorrida = FirebaseDatabase.getInstance().getReference("corrida");
 
         Calendar cal = Calendar.getInstance();
         final int year = cal.get(Calendar.YEAR);
@@ -219,11 +218,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onClick(View v) {
                 if (isStopped == true) {
                     Toast.makeText(MapsActivity.this, "Terminou a corrida!", Toast.LENGTH_SHORT).show();
-                    datas.add(date);
-                    Fragment p = new HistoricoCorridas();
+
+                    Fragment p = new HistoriaStatus();
                     Bundle args = new Bundle();
                     args.putParcelableArrayList("Markers", arrayMarkers);
-                    args.putStringArrayList("DATAS", datas);
+                    args.putString("DATAS", date);
                     args.putLong("TEMPOPACE", (int) pauseOffset / 1000);
                     args.putString("TEMPO", "" + (int) pauseOffset / 1000);
                     args.putDouble("DISTANCIA", accKm);

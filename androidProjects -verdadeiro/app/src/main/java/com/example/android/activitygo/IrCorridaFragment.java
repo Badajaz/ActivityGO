@@ -8,22 +8,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+
 public class IrCorridaFragment extends Fragment {
 
-    public IrCorridaFragment() {
-        // Required empty public constructor
-    }
+    private String username;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_ir_corrida, container, false);
         Button start = (Button) v.findViewById(R.id.buttonStart);
+        username = getArguments().getString("USERNAME");
 
         start.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
                 Intent i = new Intent(getContext(), MapsActivity.class);
+                i.putExtra("USERNAME",username);
                 startActivity(i);
 
                /*Fragment SelectedFragment = new StartCorridaFragment();

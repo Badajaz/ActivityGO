@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.android.activitygo.model.Corrida;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -17,16 +18,17 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class HistoriaStatus extends Fragment {
 
     private MapView mMapView;
     private GoogleMap googleMap;
+    private String chronometerTime;
+    private DatabaseReference databaseCorrida;
 
     public HistoriaStatus() {
         // Required empty public constructor
@@ -37,6 +39,7 @@ public class HistoriaStatus extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_historia_status, container, false);
+        databaseCorrida = FirebaseDatabase.getInstance().getReference("corrida");
         mMapView = (MapView) v.findViewById(R.id.mapView);
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume(); // needed to get the map to display immediately
@@ -47,17 +50,42 @@ public class HistoriaStatus extends Fragment {
             e.printStackTrace();
         }
 
-        String time = getArguments().getString("Chronometer");
         double distancia = getArguments().getDouble("DISTANCE");
         long tempoPace = getArguments().getLong("TEMPOPACE");
+        String timeS = getArguments().getString("TEMPO");
+        String data = getArguments().getString("DATAS");
         double pace = tempoPace / distancia;
         if (distancia == 0) {
             pace = 0;
         }
 
+        double timeSconverted = Double.valueOf(timeS);
+        double time = timeSconverted / 60;
+        int timeInteiro = (int) time;
+        double minutos = time - timeInteiro;
+        double segundos = minutos * 60;
+        if (timeInteiro < 10) {
+            if (segundos < 10) {
+                chronometerTime = "0" + timeInteiro + ":" + "0" + (int) segundos;
+            } else {
+                chronometerTime = "0" + timeInteiro + ":" + (int) segundos;
+            }
+        } else {
+            chronometerTime = "" + timeInteiro + ":" + (int) segundos;
+        }
+
+        if (distancia == 0) {
+            tempoPace = 0;
+        }
+
         final ArrayList<LatLng> markers = getArguments().getParcelableArrayList("Markers");
+
+        String id = databaseCorrida.push().getKey();
+        Corrida corrida = new Corrida(data, distancia, chronometerTime, tempoPace, markers);
+        databaseCorrida.child(id).setValue(corrida);
+
         TextView tv = v.findViewById(R.id.Tempo);
-        tv.setText(time);
+        tv.setText(chronometerTime);
 
         TextView tv2 = v.findViewById(R.id.Distance);
         tv2.setText("" + distancia);
@@ -66,7 +94,6 @@ public class HistoriaStatus extends Fragment {
         pacetv.setText("" + pace);
 
         mMapView.getMapAsync(new OnMapReadyCallback() {
-
 
             @Override
             public void onMapReady(GoogleMap mMap) {

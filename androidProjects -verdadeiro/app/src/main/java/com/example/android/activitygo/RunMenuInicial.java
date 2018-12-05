@@ -15,11 +15,11 @@ import android.widget.TextView;
  */
 public class RunMenuInicial extends Fragment {
 
+
+    private String username;
     private TextView name1;
 
-    public RunMenuInicial() {
-        // Required empty public constructor
-    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,8 +28,9 @@ public class RunMenuInicial extends Fragment {
         View v = inflater.inflate(R.layout.fragment_run_menu_inicial, container, false);
 
         //ArrayList<String> arraylist = getArguments().getStringArrayList("USERPROFILE");
+        username = getArguments().getString("USERNAME");
 
-        ((MenuPrincipal) getActivity()).getSupportActionBar().setTitle("Activity GO:");
+        //((MenuPrincipal) getActivity()).getSupportActionBar().setTitle("Activity GO:");
 
         final Button historial = (Button) v.findViewById(R.id.buttonHistorial);
         Button irCorrida = (Button) v.findViewById(R.id.buttonIrCorrida);
@@ -54,6 +55,9 @@ public class RunMenuInicial extends Fragment {
             @Override
             public void onClick(View v) {
                 Fragment SelectedFragment = new IrCorridaFragment();
+                Bundle toRunMenuInicial = new Bundle();
+                toRunMenuInicial.putString("USERNAME", username);
+                SelectedFragment.setArguments(toRunMenuInicial);
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 ft.replace(R.id.fragment_container, SelectedFragment, "RunMenuInicial");

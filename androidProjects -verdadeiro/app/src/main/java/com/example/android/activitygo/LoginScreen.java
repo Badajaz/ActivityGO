@@ -53,6 +53,7 @@ public class LoginScreen extends AppCompatActivity {
                             String pwd = String.valueOf(child.child("password").getValue());
                             if (pwd.equals(pass)) {
                                 Intent intent = new Intent(getApplicationContext(), MenuPrincipal.class);
+                                intent.putExtra("USERNAME", username);
                                 startActivity(intent);
                             }
                         }
