@@ -70,7 +70,7 @@ public class RunMenuInicial extends Fragment {
         meusGrupos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment SelectedFragmentMeusGrupos = new MyGroupsFragment();
+                Fragment SelectedFragmentMeusGrupos = new MergeGroupFragment();
                 FragmentManager fmMeusGrupos = getFragmentManager();
                 FragmentTransaction ftMeusGrupos = fmMeusGrupos.beginTransaction();
                 ftMeusGrupos.replace(R.id.fragment_container, SelectedFragmentMeusGrupos, "RunMenuInicial");

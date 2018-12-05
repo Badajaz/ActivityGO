@@ -11,6 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
         android:gravity="top|left"
         android:orientation="vertical"
         android:paddingTop="50dp">
@@ -32,6 +34,25 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <EditText
+            android:id="@+id/DescricaoGrupo"
+            android:layout_width="149dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="20dp"
+            android:backgroundTint="#006aff"
+            android:ems="10"
+            android:fontFamily="sans-serif"
+            android:hint="Descricao"
+            android:inputType="textPersonName"
+            android:padding="5dp"
+            android:textColorHint="#808080"
+            android:textSize="16sp"
+            android:typeface="sans"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+
         <CheckBox
             android:id="@+id/corridaCheck"
             android:layout_width="wrap_content"
@@ -48,6 +69,23 @@
             android:layout_marginStart="20dp"
             android:gravity="center"
             android:text="Caminhada" />
+
+        <CheckBox
+            android:id="@+id/CiclismoCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:gravity="center"
+            android:text="Ciclismo" />
+
+
+        <CheckBox
+            android:id="@+id/FutebolCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:gravity="center"
+            android:text="Futebol" />
 
         <Button
             android:id="@+id/buttonCriar"
@@ -78,7 +116,7 @@
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="300dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:gravity="center"
@@ -99,7 +137,7 @@
         android:layout_width="200dp"
         android:layout_height="59dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="260dp"
+        android:layout_marginTop="340dp"
         android:backgroundTint="#006aff"
         android:ems="10"
         android:inputType="text"
