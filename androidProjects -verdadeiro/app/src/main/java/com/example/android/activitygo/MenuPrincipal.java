@@ -14,9 +14,12 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
@@ -52,7 +55,6 @@ public class MenuPrincipal extends AppCompatActivity {
     private String firstName = "";
     private String lastName = "";
     private String iniciais;
-    private StringBuilder sb;
 
     private DatabaseReference databaseUsers;
 
@@ -63,8 +65,6 @@ public class MenuPrincipal extends AppCompatActivity {
         String username = getIntent().getStringExtra("USERNAME");
 
         myDialog = new Dialog(this);
-        sb = new StringBuilder();
-
 
         databaseUsers = FirebaseDatabase.getInstance().getReference("users");
 
@@ -78,7 +78,7 @@ public class MenuPrincipal extends AppCompatActivity {
                     setSupportActionBar(toolbarCima);
                     getSupportActionBar().setTitle("ActivityGO");
 
-                    getSupportActionBar().setSubtitle(""+firstName.charAt(0) + lastName.charAt(0));
+                    getSupportActionBar().setSubtitle("" + firstName.charAt(0) + lastName.charAt(0));
                 }
             }
 
@@ -88,9 +88,8 @@ public class MenuPrincipal extends AppCompatActivity {
             }
         });
 
-
         Bundle toRunMenuInicial = new Bundle();
-        toRunMenuInicial.putString("USERNAME",username);
+        toRunMenuInicial.putString("USERNAME", username);
         SelectedFragment = new RunMenuInicial();
         SelectedFragment.setArguments(toRunMenuInicial);
         FragmentManager fm = getFragmentManager();

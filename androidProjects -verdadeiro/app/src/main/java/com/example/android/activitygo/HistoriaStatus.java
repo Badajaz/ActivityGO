@@ -1,11 +1,14 @@
 package com.example.android.activitygo;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.android.activitygo.model.Corrida;
@@ -21,6 +24,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class HistoriaStatus extends Fragment {
@@ -30,6 +34,12 @@ public class HistoriaStatus extends Fragment {
     private String chronometerTime;
     private DatabaseReference databaseCorrida;
     private String username;
+    private Button irHistoricoCorridas;
+    private String data;
+    private double distancia;
+    private long tempoPace;
+    private String timeS;
+    private ArrayList<LatLng> marcadores = new ArrayList<>();
 
     public HistoriaStatus() {
         // Required empty public constructor
@@ -51,11 +61,12 @@ public class HistoriaStatus extends Fragment {
             e.printStackTrace();
         }
 
-        double distancia = getArguments().getDouble("DISTANCE");
-        long tempoPace = getArguments().getLong("TEMPOPACE");
-        String timeS = getArguments().getString("TEMPO");
-        String data = getArguments().getString("DATAS");
+        distancia = getArguments().getDouble("DISTANCE");
+        tempoPace = getArguments().getLong("TEMPOPACE");
+        timeS = getArguments().getString("TEMPO");
+        data = getArguments().getString("DATAS");
         username = getArguments().getString("USERNAME");
+        marcadores = getArguments().getParcelableArrayList("Markers");
         double pace = tempoPace / distancia;
         if (distancia == 0) {
             pace = 0;
@@ -101,25 +112,38 @@ public class HistoriaStatus extends Fragment {
             public void onMapReady(GoogleMap mMap) {
                 googleMap = mMap;
                 PolylineOptions options = new PolylineOptions().width(5).color(Color.BLUE).geodesic(true);
-                // For showing a move to my location button
-                //googleMap.setMyLocationEnabled(true);
 
                 for (LatLng l : markers) {
                     googleMap.addMarker(new MarkerOptions().position(l).title("FUNCIONA"));
                     options.add(l);
 
                 }
-                googleMap.addPolyline(options);
 
-                // For dropping a marker at a point on the Map
+                googleMap.addPolyline(options);
 
                 LatLngBounds.Builder builder = new LatLngBounds.Builder();
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(markers.get(markers.size() - 1), 15.0f));
-                //googleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(builder.build(),17));
-                // For zooming automatically to the location of the marker
-                //CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
             }
         });
+
+        irHistoricoCorridas = (Button) v.findViewById(R.id.VerMais);
+        irHistoricoCorridas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment p = new HistoricoCorridas();
+                Bundle args = new Bundle();
+                args.putString("DATAS", data);
+                args.putString("USERNAME", username);
+                args.putDouble("DISTANCE", distancia);
+                args.putLong("TEMPOPACE", tempoPace);
+                args.putString("TEMPO", timeS);
+                args.putParcelableArrayList("MARKERS", markers);
+                args.putString("USERNAME", username);
+                p.setArguments(args);
+                getFragmentManager().beginTransaction().replace(R.id.fragmentMap, p).commit();
+            }
+        });
+
         return v;
     }
 

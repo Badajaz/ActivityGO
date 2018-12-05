@@ -1,7 +1,6 @@
 package com.example.android.activitygo;
 
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
@@ -10,17 +9,18 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import com.example.android.activitygo.model.Corrida;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 public class HistoricoCorridas extends Fragment {
 
@@ -31,10 +31,10 @@ public class HistoricoCorridas extends Fragment {
     private double distancia;
     private ArrayList<LatLng> markers;
     private DatabaseReference databaseCorrida;
-    ArrayList<String> dates = new ArrayList<>();
     private long tempoPace;
-    private String concatena= "";
-
+    private String username;
+    private String timeS;
+    private ArrayList<String> datasCorridas = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,57 +43,34 @@ public class HistoricoCorridas extends Fragment {
         View v = inflater.inflate(R.layout.fragment_historico_corridas, container, false);
         databaseCorrida = FirebaseDatabase.getInstance().getReference("corrida");
         lv1 = (ListView) v.findViewById(R.id.ListaResultadosDatas);
-        String timeS = getArguments().getString("TEMPO");
-        distancia = getArguments().getDouble("DISTANCIA");
-        markers = getArguments().getParcelableArrayList("Markers");
+        timeS = getArguments().getString("TEMPO");
+        distancia = getArguments().getDouble("DISTANCE");
+        markers = getArguments().getParcelableArrayList("MARKERS");
         value = getArguments().getString("DATAS");
         tempoPace = getArguments().getLong("TEMPOPACE");
-
-        double timeSconverted = Double.valueOf(timeS);
-        double time = timeSconverted / 60;
-        int timeInteiro = (int) time;
-        double minutos = time - timeInteiro;
-        double segundos = minutos * 60;
-        if (timeInteiro < 10) {
-            if (segundos < 10) {
-                chronometerTime = "0" + timeInteiro + ":" + "0" + (int) segundos;
-            } else {
-                chronometerTime = "0" + timeInteiro + ":" + (int) segundos;
-            }
-        } else {
-            chronometerTime = "" + timeInteiro + ":" + (int) segundos;
-        }
-
-
-        if (distancia == 0) {
-            tempoPace = 0;
-        }
-
-        //String id = databaseCorrida.push().getKey();
-        //Corrida corrida = new Corrida(value, distancia, chronometerTime, tempoPace, markers);
-        //databaseCorrida.child(id).setValue(corrida);
+        username = getArguments().getString("USERNAME");
 
         databaseCorrida.orderByChild("data").equalTo(value).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     String d = String.valueOf(child.child("data").getValue());
-                    //concatena = d+" ";
-                    dates.add(d);
+                    datasCorridas.add(d);
                 }
 
-                listViewAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, dates);
+                listViewAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, datasCorridas);
 
-                //       Toast.makeText(getContext(),"dataaaaa000"+dates.get(0),Toast.LENGTH_SHORT).show();
                 lv1.setAdapter(listViewAdapter);
                 lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Fragment p = new HistoriaStatus();
                         Bundle args = new Bundle();
-                        args.putString("Chronometer", chronometerTime);
+                        args.putString("TEMPO", timeS);
                         args.putDouble("DISTANCE", distancia);
                         args.putParcelableArrayList("Markers", markers);
+                        args.putLong("TEMPOPACE", tempoPace);
+                        args.putString("USERNAME", username);
                         p.setArguments(args);
                         getFragmentManager().beginTransaction().replace(R.id.fragmentMap, p).commit();
                     }
@@ -104,25 +81,6 @@ public class HistoricoCorridas extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
-
-        String[] arrayDates = concatena.split(" ");
-
-        listViewAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, arrayDates);
-
-    //       Toast.makeText(getContext(),"dataaaaa000"+dates.get(0),Toast.LENGTH_SHORT).show();
-        lv1.setAdapter(listViewAdapter);
-        lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Fragment p = new HistoriaStatus();
-                Bundle args = new Bundle();
-                args.putString("Chronometer", chronometerTime);
-                args.putDouble("DISTANCE", distancia);
-                args.putParcelableArrayList("Markers", markers);
-                p.setArguments(args);
-                getFragmentManager().beginTransaction().replace(R.id.fragmentMap, p).commit();
             }
         });
         return v;

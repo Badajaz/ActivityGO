@@ -138,6 +138,7 @@
         android:textSize="15dp"
         android:fontFamily="sans-serif"
         android:text="Finalizar"
+        android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="@+id/fragmentMap"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.512"
