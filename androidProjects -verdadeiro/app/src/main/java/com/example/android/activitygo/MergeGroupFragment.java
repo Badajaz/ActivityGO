@@ -1,7 +1,9 @@
 package com.example.android.activitygo;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +16,11 @@ import android.widget.Toast;
 
 import com.example.android.activitygo.model.Grupo;
 import com.example.android.activitygo.model.User;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -24,7 +29,7 @@ public class MergeGroupFragment extends Fragment {
     private CheckBox corrida;
     private CheckBox caminhada;
     private CheckBox ciclismo;
-    private CheckBox  futebol;
+    private CheckBox futebol;
 
     private String nomegrupo;
     private String descricaogrupo;
@@ -40,6 +45,8 @@ public class MergeGroupFragment extends Fragment {
     private ArrayAdapter<String> listViewAdapter;
     private ListView listView;
     private DatabaseReference databaseGrupo;
+    private String grupo;
+    private String sport;
 
 
     @Override
@@ -58,7 +65,6 @@ public class MergeGroupFragment extends Fragment {
         databaseGrupo = FirebaseDatabase.getInstance().getReference("grupos");
 
 
-
         nomeGrupo = (EditText) v.findViewById(R.id.NomeCriarGrupo);
         descricaoGrupo = (EditText) v.findViewById(R.id.DescricaoGrupo);
 
@@ -70,42 +76,75 @@ public class MergeGroupFragment extends Fragment {
         criar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 nomegrupo = nomeGrupo.getText().toString();
+
                 descricaogrupo = descricaoGrupo.getText().toString();
-                String sport = getSport();
-
-                if (isOnlyOneChecked() && !nomegrupo.equals("") && !descricaoGrupo.equals("") && !sport.equals("")) {
-
-                    String id = databaseGrupo.push().getKey();
-                    Grupo g = new Grupo(nomegrupo,descricaogrupo,sport);
+                sport = getSport();
 
 
-                    g.addElementToList("badajaz");
-                    databaseGrupo.child(id).setValue(g);
+                databaseGrupo.orderByChild("nome").equalTo(nomegrupo).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot child : dataSnapshot.getChildren()) {
+                            grupo = String.valueOf(child.child("nome").getValue());
+                            Toast.makeText(getContext(),grupo,Toast.LENGTH_LONG).show();
 
-                    Toast.makeText(getActivity(), "O grupo " + nomegrupo + " foi criado", Toast.LENGTH_LONG).show();
-                    possiveisResultados.add(nomegrupo);
-                    grupos.add(nomegrupo);
-                } else {
+                            if (isOnlyOneChecked() && !nomegrupo.equals("") && !descricaoGrupo.equals("") && !sport.equals("") && !grupo.equals(nomegrupo) ) {
 
-                    if (!isOnlyOneChecked()){
-                        corrida.setError("Só pode escolher um desporto!");
-                        ciclismo.setError("Só pode escolher um desporto!");
-                        futebol.setError("Só pode escolher um desporto!");
-                        caminhada.setError("Só pode escolher um desporto!");
+                                String id = databaseGrupo.push().getKey();
+                                Grupo g = new Grupo(nomegrupo, descricaogrupo, sport);
 
+
+                                g.addElementToList("badajaz");
+                                databaseGrupo.child(id).setValue(g);
+
+                                Toast.makeText(getActivity(), "O grupo " + nomegrupo + " foi criado", Toast.LENGTH_LONG).show();
+                                possiveisResultados.add(nomegrupo);
+                                grupos.add(nomegrupo);
+                            } else {
+
+                                if (!isOnlyOneChecked()) {
+                                    corrida.setError("Só pode escolher um desporto!");
+                                    ciclismo.setError("Só pode escolher um desporto!");
+                                    futebol.setError("Só pode escolher um desporto!");
+                                    caminhada.setError("Só pode escolher um desporto!");
+
+                                }
+
+
+                                if (nomegrupo.equals("")) {
+                                    nomeGrupo.setError("Tem de preencher o nome");
+                                }
+
+
+                                if (descricaogrupo.equals("")) {
+                                    descricaoGrupo.setError("Tem de preencher a descricao");
+                                }
+
+                                if (nomegrupo.equals(grupo)) {
+                                    nomeGrupo.setError("já existe esse nome para grupo");
+                                }
+
+                            }
+
+
+
+
+                        }
                     }
 
-
-                    if (nomegrupo.equals("")){
-                        nomeGrupo.setError();
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
                     }
+                });
 
 
 
-                }
             }
+
+
         });
 
         SearchGroup = (EditText) v.findViewById(R.id.NomeGrupo);
@@ -143,20 +182,20 @@ public class MergeGroupFragment extends Fragment {
     public boolean isOnlyOneChecked() {
         int count = 0;
 
-        if (corrida.isChecked()){
-           count ++;
+        if (corrida.isChecked()) {
+            count++;
         }
 
-        if (caminhada.isChecked()){
+        if (caminhada.isChecked()) {
             count++;
         }
 
 
-        if (ciclismo.isChecked()){
+        if (ciclismo.isChecked()) {
             count++;
         }
 
-        if (futebol.isChecked()){
+        if (futebol.isChecked()) {
             count++;
         }
 
@@ -164,21 +203,20 @@ public class MergeGroupFragment extends Fragment {
     }
 
 
-
-    public String getSport(){
-        if (corrida.isChecked()){
+    public String getSport() {
+        if (corrida.isChecked()) {
             return "CORRIDA";
         }
 
-        if (caminhada.isChecked()){
+        if (caminhada.isChecked()) {
             return "CAMINHADA";
         }
 
-        if (ciclismo.isChecked()){
+        if (ciclismo.isChecked()) {
             return "CAMINHADA";
         }
 
-        if (futebol.isChecked()){
+        if (futebol.isChecked()) {
             return "FUTEBOL";
         }
         return "";

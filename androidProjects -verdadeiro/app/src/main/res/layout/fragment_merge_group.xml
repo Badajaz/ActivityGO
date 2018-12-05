@@ -19,7 +19,7 @@
 
         <EditText
             android:id="@+id/NomeCriarGrupo"
-            android:layout_width="149dp"
+            android:layout_width="302dp"
             android:layout_height="55dp"
             android:layout_marginStart="20dp"
             android:backgroundTint="#006aff"
@@ -36,7 +36,7 @@
 
         <EditText
             android:id="@+id/DescricaoGrupo"
-            android:layout_width="149dp"
+            android:layout_width="309dp"
             android:layout_height="55dp"
             android:layout_marginStart="20dp"
             android:backgroundTint="#006aff"
