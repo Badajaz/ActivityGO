@@ -66,7 +66,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        String username = getIntent().getExtras().getString("USERNAME");
+        final String username = getIntent().getExtras().getString("USERNAME");
 
         databaseCorrida = FirebaseDatabase.getInstance().getReference("corrida");
 
@@ -226,6 +226,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     args.putLong("TEMPOPACE", (int) pauseOffset / 1000);
                     args.putString("TEMPO", "" + (int) pauseOffset / 1000);
                     args.putDouble("DISTANCIA", accKm);
+                    args.putString("USERNAME", username);
                     p.setArguments(args);
                     getFragmentManager().beginTransaction().replace(R.id.fragmentMap, p).commit();
                     Start.setVisibility(View.GONE);

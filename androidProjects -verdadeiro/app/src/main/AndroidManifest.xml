@@ -41,9 +41,4 @@
         <activity android:name=".MapsActivity"></activity>
 
     </application>
-
-    <uses-feature
-        android:glEsVersion="0x00020000"
-        android:required="true"></uses-feature>
-
 </manifest>

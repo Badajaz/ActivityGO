@@ -69,9 +69,9 @@ public class HistoricoCorridas extends Fragment {
             tempoPace = 0;
         }
 
-        String id = databaseCorrida.push().getKey();
-        Corrida corrida = new Corrida(value, distancia, chronometerTime, tempoPace, markers);
-        databaseCorrida.child(id).setValue(corrida);
+        //String id = databaseCorrida.push().getKey();
+        //Corrida corrida = new Corrida(value, distancia, chronometerTime, tempoPace, markers);
+        //databaseCorrida.child(id).setValue(corrida);
 
         databaseCorrida.orderByChild("data").equalTo(value).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

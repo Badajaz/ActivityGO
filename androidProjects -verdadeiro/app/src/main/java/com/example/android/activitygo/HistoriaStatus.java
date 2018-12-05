@@ -29,6 +29,7 @@ public class HistoriaStatus extends Fragment {
     private GoogleMap googleMap;
     private String chronometerTime;
     private DatabaseReference databaseCorrida;
+    private String username;
 
     public HistoriaStatus() {
         // Required empty public constructor
@@ -54,6 +55,7 @@ public class HistoriaStatus extends Fragment {
         long tempoPace = getArguments().getLong("TEMPOPACE");
         String timeS = getArguments().getString("TEMPO");
         String data = getArguments().getString("DATAS");
+        username = getArguments().getString("USERNAME");
         double pace = tempoPace / distancia;
         if (distancia == 0) {
             pace = 0;
@@ -81,7 +83,7 @@ public class HistoriaStatus extends Fragment {
         final ArrayList<LatLng> markers = getArguments().getParcelableArrayList("Markers");
 
         String id = databaseCorrida.push().getKey();
-        Corrida corrida = new Corrida(data, distancia, chronometerTime, tempoPace, markers);
+        Corrida corrida = new Corrida(username, data, distancia, chronometerTime, tempoPace, markers);
         databaseCorrida.child(id).setValue(corrida);
 
         TextView tv = v.findViewById(R.id.Tempo);

@@ -8,12 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-
 public class IrCorridaFragment extends Fragment {
 
     private String username;
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

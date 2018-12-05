@@ -1,4 +1,3 @@
-
 package com.example.android.activitygo.model;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -12,13 +11,19 @@ public class Corrida {
     private String tempo;
     private double pace;
     private ArrayList<LatLng> coordenadas;
+    private String username;
 
-    public Corrida(String data, double distancia, String tempo, double pace, ArrayList<LatLng> coordenadas) {
+    public Corrida(String username, String data, double distancia, String tempo, double pace, ArrayList<LatLng> coordenadas) {
         this.data = data;
         this.distancia = distancia;
         this.tempo = tempo;
         this.pace = pace;
         this.coordenadas = coordenadas;
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public String getData() {
@@ -47,4 +52,3 @@ public class Corrida {
         return coordenadas;
     }
 }
-
