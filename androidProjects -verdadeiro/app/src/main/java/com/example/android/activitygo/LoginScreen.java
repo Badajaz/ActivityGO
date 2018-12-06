@@ -31,6 +31,7 @@ public class LoginScreen extends AppCompatActivity {
     private Dialog dialogWrongPassword;
     private DatabaseReference databaseUsers;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

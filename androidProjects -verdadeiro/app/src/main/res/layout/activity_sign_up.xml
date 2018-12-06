@@ -104,26 +104,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/LastNameText" />
 
-            <Button
-                android:id="@+id/loadimage"
-                android:layout_width="260dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/layout_border"
-                android:drawableLeft="@drawable/date_icon"
-                android:drawablePadding="-30dp"
-                android:ems="10"
-                android:fontFamily="open-sans"
-                android:gravity="center"
-                android:hint="Escolher Foto de Perfil: "
-                android:padding="5dp"
-                android:textColor="?android:textColorHint"
-                android:textColorHint="#808080"
-                android:textSize="16sp"
-                android:typeface="sans"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/DataNascimento" />
-
             <TextView
                 android:id="@+id/targeturi"
                 android:layout_width="fill_parent"
