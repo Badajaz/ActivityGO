@@ -162,7 +162,8 @@ public class MergeGroupFragment extends Fragment {
                 String[] resultadosArray = resultados.split(" ");
                 ProcuraGrupos p = new ProcuraGrupos();
                 Bundle args = new Bundle();
-                args.putStringArray("PROCURA", resultadosArray);
+                args.putString("PESQUISA",searchGrupo);
+                //args.putStringArray("PROCURA", resultadosArray);
                 p.setArguments(args);
                 getFragmentManager().beginTransaction().replace(R.id.fragment_container, p).commit();
 
@@ -175,7 +176,7 @@ public class MergeGroupFragment extends Fragment {
             public void onClick(View v) {
                 MyGroupsFragment ldf = new MyGroupsFragment();
                 Bundle args = new Bundle();
-                args.putStringArrayList("GRUPO", grupos);
+                //args.putStringArrayList("GRUPO", grupos);
                 ldf.setArguments(args);
                 getFragmentManager().beginTransaction().replace(R.id.fragment_container, ldf).commit();
             }
