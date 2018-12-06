@@ -2,8 +2,11 @@ package com.example.android.activitygo;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -16,6 +19,7 @@ import com.example.android.activitygo.model.User;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.regex.Matcher;
@@ -32,6 +36,9 @@ public class SignUp extends AppCompatActivity {
     private TextView passwordUser;
     private TextView dataNascimento;
     private TextView paisUser;
+
+    private TextView textTargetUri;
+    private Button buttonLoadImage;
 
     private String firstName;
     private String secondName;
@@ -76,6 +83,18 @@ public class SignUp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
+        buttonLoadImage = (Button) findViewById(R.id.loadimage);
+        textTargetUri = (TextView) findViewById(R.id.targeturi);
+
+        buttonLoadImage.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                Intent intent = new Intent(Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, 0);
+            }
+        });
 
         databaseUsers = FirebaseDatabase.getInstance().getReference("users");
 
@@ -122,7 +141,6 @@ public class SignUp extends AppCompatActivity {
         ciclismo = (CheckBox) findViewById(R.id.ciclismo);
 
         Button criar = (Button) findViewById(R.id.button2);
-
         criar.setOnClickListener(new View.OnClickListener() {
             @Override
 
@@ -133,9 +151,7 @@ public class SignUp extends AppCompatActivity {
                 secondName = secondNameUser.getText().toString();
                 email = emailUser.getText().toString();
 
-                //TODO /*validar o facto de ser um número*/
                 peso = pesoUser.getText().toString();
-                //TODO /*validar o facto de ser um número e decidir se vai ser em cm ou m*/
                 altura = alturaUser.getText().toString();
 
                 password = passwordUser.getText().toString();
@@ -148,7 +164,6 @@ public class SignUp extends AppCompatActivity {
                         validaPeso(peso) && validaAltura(altura) && validate(email) &&
                         ((masculinoChecked == 1 && femininoChecked == 0) || (masculinoChecked == 0 && femininoChecked == 1)) &&
                         isAnyItemCheck() && !dataNascimentoStr.equals("") && !paisUserStr.equals("")) {
-                    // Toast.makeText(SignUp.this, "BOM DIA", Toast.LENGTH_SHORT).show();
 
                     userProfile.add(firstName);
                     userProfile.add(secondName);
@@ -188,7 +203,6 @@ public class SignUp extends AppCompatActivity {
                     alreadyRegister = 1;
 
                     String id = databaseUsers.push().getKey();
-
                     User user = new User(firstName, secondName, dataNascimentoStr, genero, paisUserStr, email, peso, altura, usernameStr, password, sports);
                     databaseUsers.child(id).setValue(user);
 
@@ -227,7 +241,6 @@ public class SignUp extends AppCompatActivity {
                         confirmaPasswordUser.setError("Não confirmou a password!");
                     }
 
-
                     if (!validate(email)) {
                         emailUser.setError("email não é válido");
 
@@ -239,7 +252,6 @@ public class SignUp extends AppCompatActivity {
                     if (!validaAltura(altura)) {
                         alturaUser.setError("Não tem os digitos certos!");
                     }
-
 
                     if (!password.equals(confirmaPassword)) {
                         passwordUser.setError("As passwords não são iguais");
@@ -267,8 +279,6 @@ public class SignUp extends AppCompatActivity {
                     if (paisUser.equals("")) {
                         firstNameUser.setError("Não preencheu o país!");
                     }
-
-
                 }
             }
         });
@@ -318,8 +328,6 @@ public class SignUp extends AppCompatActivity {
         } else {
             return Double.parseDouble(peso) >= 50 && Double.parseDouble(peso) <= 100;
         }
-
-
     }
 
 
@@ -330,8 +338,6 @@ public class SignUp extends AppCompatActivity {
         } else {
             return Integer.parseInt(altura) >= 150 && Integer.parseInt(altura) <= 200;
         }
-
-
     }
 
     public static boolean validate(String emailStr) {
@@ -339,5 +345,19 @@ public class SignUp extends AppCompatActivity {
         return matcher.find();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if (resultCode == RESULT_OK) {
+            Uri targetUri = data.getData();
+            textTargetUri.setText(targetUri.toString());
+            Bitmap bitmap;
+            try {
+                bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

@@ -22,6 +22,7 @@ import java.util.ArrayList;
 
 public class LoginScreen extends AppCompatActivity {
 
+
     private EditText user;
     private EditText password;
     private ArrayList<String> profile;
