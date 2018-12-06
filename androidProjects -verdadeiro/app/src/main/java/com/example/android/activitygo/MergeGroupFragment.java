@@ -46,6 +46,8 @@ public class MergeGroupFragment extends Fragment {
     private String grupo = "";
     private String sport;
 
+    private String username;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,6 +60,8 @@ public class MergeGroupFragment extends Fragment {
         possiveisResultados.add("Sporting");
         possiveisResultados.add("Porto");
         possiveisResultados.add("LegiãoFC");
+
+        username = getArguments().getString("USERNAME");
 
 
         databaseGrupo = FirebaseDatabase.getInstance().getReference("grupos");
@@ -103,7 +107,7 @@ public class MergeGroupFragment extends Fragment {
                             Toast.makeText(getContext(), grupo, Toast.LENGTH_LONG).show();
 
 
-                            g.addElementToList("badajaz");
+                            g.addElementToList(username);
                             databaseGrupo.child(id).setValue(g);
 
                             //  Toast.makeText(getActivity(), "O grupo " + nomegrupo + " foi criado", Toast.LENGTH_LONG).show();
@@ -162,7 +166,8 @@ public class MergeGroupFragment extends Fragment {
                 String[] resultadosArray = resultados.split(" ");
                 ProcuraGrupos p = new ProcuraGrupos();
                 Bundle args = new Bundle();
-                args.putString("PESQUISA",searchGrupo);
+                args.putString("PESQUISA", searchGrupo);
+                args.putString("USERNAME",username);
                 //args.putStringArray("PROCURA", resultadosArray);
                 p.setArguments(args);
                 getFragmentManager().beginTransaction().replace(R.id.fragment_container, p).commit();
@@ -177,6 +182,7 @@ public class MergeGroupFragment extends Fragment {
                 MyGroupsFragment ldf = new MyGroupsFragment();
                 Bundle args = new Bundle();
                 //args.putStringArrayList("GRUPO", grupos);
+                args.putString("USERNAME", username);
                 ldf.setArguments(args);
                 getFragmentManager().beginTransaction().replace(R.id.fragment_container, ldf).commit();
             }

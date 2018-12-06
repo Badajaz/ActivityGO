@@ -58,7 +58,7 @@ public class MenuPrincipal extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_principal);
-        String username = getIntent().getStringExtra("USERNAME");
+        username = getIntent().getStringExtra("USERNAME");
 
         myDialog = new Dialog(this);
 
@@ -158,8 +158,11 @@ public class MenuPrincipal extends AppCompatActivity {
                             ftransacti.replace(R.id.fragment_container, SelectedFragment, "GroupFragment");
                             ftransacti.commit();
                             break;*/
+                            Bundle args = new Bundle();
+                            args.putString("USERNAME", username);
                             SelectedFragment = new MergeGroupFragment();
                             FragmentManager fmana = getFragmentManager();
+                            SelectedFragment.setArguments(args);
                             FragmentTransaction ftransacti = fmana.beginTransaction();
                             ftransacti.replace(R.id.fragment_container, SelectedFragment, "GroupFragment");
                             ftransacti.commit();
