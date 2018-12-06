@@ -3,45 +3,45 @@ package com.example.android.activitygo;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.app.ProgressDialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.UUID;
+import java.io.InputStream;
 
 public class RunMenuInicial extends Fragment {
 
+    private static final int RESULT_LOAD_IMAGE = 71;
     private String username;
-    private static final int PICK_IMAGE_REQUEST = 71;
     private TextView name1;
     private Button selectImage;
-    private Button uploadImage;
     private ImageView imv;
+    private String filepath;
 
-    //Images
-    private FirebaseStorage storage;
-    StorageReference storageReference;
-    private Uri filepath;
+    private DatabaseReference databaseUsers;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,22 +49,30 @@ public class RunMenuInicial extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_run_menu_inicial, container, false);
 
-        //ArrayList<String> arraylist = getArguments().getStringArrayList("USERPROFILE");
         username = getArguments().getString("USERNAME");
-        imv = (ImageView) v.findViewById(R.id.imageView2);
+        name1 = (TextView) v.findViewById(R.id.namePessoaMenuInicial);
 
-        //Firebase images
-        storage = FirebaseStorage.getInstance();
-        storageReference = storage.getReference("fotos");
+        databaseUsers = FirebaseDatabase.getInstance().getReference("users");
+        databaseUsers.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    String fn = String.valueOf(child.child("firstName").getValue());
+                    String ln = String.valueOf(child.child("lastName").getValue());
+                    name1.setText("Bem vindo " + fn + " " + ln + "!");
+                }
+            }
 
-        //((MenuPrincipal) getActivity()).getSupportActionBar().setTitle("Activity GO:");
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         final Button historial = (Button) v.findViewById(R.id.buttonHistorial);
         Button irCorrida = (Button) v.findViewById(R.id.buttonIrCorrida);
         Button meusGrupos = (Button) v.findViewById(R.id.buttonMeusGrupos);
         //Button alterar = (Button) v.findViewById(R.id.alterarDesportoPraticado);
-        name1 = (TextView) v.findViewById(R.id.namePessoaMenuInicial);
-        // name1.setText("Bem vindo " + arraylist.get(0) + " " + arraylist.get(1) + "!");
 
         historial.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,76 +123,69 @@ public class RunMenuInicial extends Fragment {
         });
         */
 
+        imv = (ImageView) v.findViewById(R.id.imageView2);
         selectImage = (Button) v.findViewById(R.id.loadimage);
         selectImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                chooseImage();
+                getImageFromAlbum();
             }
         });
-        uploadImage = (Button) v.findViewById(R.id.uploadImage);
-        uploadImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                uploadImage();
-            }
-        });
+
         return v;
     }
 
-    private void chooseImage() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == -1 && data != null && data.getData() != null) {
-            filepath = data.getData();
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver()
-                        , filepath);
-                //
-            } catch (IOException o) {
-                o.printStackTrace();
-            }
+    private void getImageFromAlbum() {
+        try {
+            Intent i = new Intent(Intent.ACTION_PICK,
+                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(i, RESULT_LOAD_IMAGE);
+        } catch (Exception exp) {
+            Log.i("Error", exp.toString());
         }
     }
 
+    @Override
+    public void onActivityResult(int reqCode, int resultCode, Intent data) {
+        super.onActivityResult(reqCode, resultCode, data);
 
-    private void uploadImage() {
+        if (resultCode == -1) {
+            try {
+                final Uri imageUri = data.getData();
+                filepath = imageUri.toString();
+                Toast.makeText(getContext(), "FP!!!!" + filepath, Toast.LENGTH_SHORT).show();
+                final InputStream imageStream = getContext().getContentResolver().openInputStream(imageUri);
+                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                imv.setImageBitmap(selectedImage);
 
-        imv.setImage
-        /*if (filepath != null) {
-            final ProgressDialog progressDialog = new ProgressDialog(getContext());
-            progressDialog.setTitle("Uploading...");
-            progressDialog.show();
+                // muda o valor da string do content
+                changeFilePathDb();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_LONG).show();
+            }
 
-            StorageReference ref = storageReference.child(UUID.randomUUID().toString());
-            ref.putFile(filepath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    progressDialog.dismiss();
-                    Toast.makeText(getContext(), "Uploaded", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getContext(), "You haven't picked Image", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void changeFilePathDb() {
+        databaseUsers.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    if (filepath != null) {
+                        Toast.makeText(getContext(), "FPPPP" + filepath, Toast.LENGTH_SHORT).show();
+                        databaseUsers.child(child.getKey()).child("photoPath").setValue(filepath);
+                    }
                 }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    progressDialog.dismiss();
-                    Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
-                }
-            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                    double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                    progressDialog.setMessage("Uploaded" + (int) progress + "%");
-                }
-            });
-        }*/
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
     }
 }

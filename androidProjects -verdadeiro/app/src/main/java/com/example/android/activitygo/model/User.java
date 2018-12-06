@@ -15,12 +15,13 @@ public class User {
     private String username;
     private String password;
     private ArrayList<String> sports;
+    private String photoPath;
 
     public User() {
 
     }
 
-    public User(String firstName, String lastName, String date, String gender, String country, String email, String weight, String hight, String username, String password, ArrayList<String> sports) {
+    public User(String firstName, String lastName, String date, String gender, String country, String email, String weight, String hight, String username, String password, ArrayList<String> sports, String photoPath) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.date = date;
@@ -32,6 +33,11 @@ public class User {
         this.username = username;
         this.password = password;
         this.sports = sports;
+        this.photoPath = photoPath;
+    }
+
+    public String getPhotoPath() {
+        return photoPath;
     }
 
     public ArrayList<String> getSports() {

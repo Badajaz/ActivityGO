@@ -19,13 +19,17 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.activitygo.model.Grupo;
 import com.example.android.activitygo.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -94,14 +98,14 @@ public class SignUp extends AppCompatActivity {
 
     private DatabaseReference databaseUsers;
 
+    private boolean existe = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-
         databaseUsers = FirebaseDatabase.getInstance().getReference("users");
-        //databaseFotos = FirebaseDatabase.getInstance().getReference("fotos");
 
         firstNameUser = (TextView) findViewById(R.id.FirstNameText);
         secondNameUser = (TextView) findViewById(R.id.LastNameText);
@@ -164,130 +168,163 @@ public class SignUp extends AppCompatActivity {
                 dataNascimentoStr = dataNascimento.getText().toString();
                 paisUserStr = paisUser.getText().toString();
 
-                if (password.equals(confirmaPassword) && !password.equals("") && !firstName.equals("") &&
-                        !secondName.equals("") && !usernameStr.equals("") && !email.equals("") && !peso.equals("") && !altura.equals("") &&
-                        validaPeso(peso) && validaAltura(altura) && validate(email) &&
-                        ((masculinoChecked == 1 && femininoChecked == 0) || (masculinoChecked == 0 && femininoChecked == 1)) &&
-                        isAnyItemCheck() && !dataNascimentoStr.equals("") && !paisUserStr.equals("")) {
+                databaseUsers.addListenerForSingleValueEvent(new ValueEventListener() {
 
-                    userProfile.add(firstName);
-                    userProfile.add(secondName);
-                    userProfile.add(usernameStr);
-                    userProfile.add(email);
-                    userProfile.add(peso);
-                    userProfile.add(altura);
-                    userProfile.add(password);
-                    userProfile.add(dataNascimentoStr);
-                    userProfile.add(paisUserStr);
-                    if (masculinoChecked == 1) {
-                        userProfile.add(masculino.getText().toString());
-                        genero = "MASCULINO";
-                    }
-                    if (femininoChecked == 1) {
-                        userProfile.add(feminino.getText().toString());
-                        genero = "FEMININO";
-                    }
-                    if (caminhadaChecked == 1) {
-                        userProfile.add(caminhada.getText().toString());
-                        sports.add("CAMINHADA");
-                    }
-                    if (corridaChecked == 1) {
-                        userProfile.add(corrida.getText().toString());
-                        sports.add("CORRIDA");
-                    }
-                    if (ciclismoChecked == 1) {
-                        userProfile.add(ciclismo.getText().toString());
-                        sports.add("CICLISMO");
-                    }
-                    if (futebolChecked == 1) {
-                        userProfile.add(futebol.getText().toString());
-                        sports.add("FUTEBOL");
+                    @Override
+                    public void onDataChange(DataSnapshot snapshot) {
+                        for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                            User g = userSnapshot.getValue(User.class);
+                            if (g.getUsername().equals(usernameStr)) {
+                                existe = true;
+                            }else{
+                                existe = false;
+                            }
+
+                        }
+
+                        if (password.equals(confirmaPassword) && !password.equals("") && !firstName.equals("") &&
+                                !secondName.equals("") && !usernameStr.equals("") && !email.equals("") && !peso.equals("") && !altura.equals("") &&
+                                validaPeso(peso) && validaAltura(altura) && validate(email) &&
+                                ((masculinoChecked == 1 && femininoChecked == 0) || (masculinoChecked == 0 && femininoChecked == 1)) &&
+                                isAnyItemCheck() && !dataNascimentoStr.equals("") && !paisUserStr.equals("") && existe == false) {
+
+                            userProfile.add(firstName);
+                            userProfile.add(secondName);
+                            userProfile.add(usernameStr);
+                            userProfile.add(email);
+                            userProfile.add(peso);
+                            userProfile.add(altura);
+                            userProfile.add(password);
+                            userProfile.add(dataNascimentoStr);
+                            userProfile.add(paisUserStr);
+                            if (masculinoChecked == 1) {
+                                userProfile.add(masculino.getText().toString());
+                                genero = "MASCULINO";
+                            }
+                            if (femininoChecked == 1) {
+                                userProfile.add(feminino.getText().toString());
+                                genero = "FEMININO";
+                            }
+                            if (caminhadaChecked == 1) {
+                                userProfile.add(caminhada.getText().toString());
+                                sports.add("CAMINHADA");
+                            }
+                            if (corridaChecked == 1) {
+                                userProfile.add(corrida.getText().toString());
+                                sports.add("CORRIDA");
+                            }
+                            if (ciclismoChecked == 1) {
+                                userProfile.add(ciclismo.getText().toString());
+                                sports.add("CICLISMO");
+                            }
+                            if (futebolChecked == 1) {
+                                userProfile.add(futebol.getText().toString());
+                                sports.add("FUTEBOL");
+                            }
+
+                            // para confirmar que está registado
+                            alreadyRegister = 1;
+
+                            String id = databaseUsers.push().getKey();
+
+                            User user = new User(firstName, secondName, dataNascimentoStr, genero, paisUserStr, email, peso, altura, usernameStr, password, sports, "");
+                            databaseUsers.child(id).setValue(user);
+
+                            Intent intent = new Intent(getBaseContext(), LoginScreen.class);
+                            //intent.putExtra("USERNAME", usernameStr);
+                            //intent.putExtra("PASSWORD", password);
+                            //intent.putExtra("USERPROFILE", userProfile);
+                            //intent.putExtra("ALREADYREGISTER", alreadyRegister);
+                            startActivity(intent);
+                        } else {
+                            if (firstName.equals("")) {
+                                firstNameUser.setError("Não preencheu o primeiro nome!");
+                            }
+
+                            if (secondName.equals("")) {
+                                secondNameUser.setError("Não preencheu o apelido!");
+                            }
+
+                            if (email.equals("")) {
+                                emailUser.setError("Não preencheu o email!");
+                            }
+
+                            if (peso.equals("")) {
+                                pesoUser.setError("Não preencheu o peso!");
+                            }
+
+                            if (altura.equals("")) {
+                                alturaUser.setError("Não preencheu a altura!");
+                            }
+
+                            if (password.equals("")) {
+                                passwordUser.setError("Não preencheu a password!");
+                            }
+
+                            if (confirmaPassword.equals("")) {
+                                confirmaPasswordUser.setError("Não confirmou a password!");
+                            }
+
+                            if (!validate(email)) {
+                                emailUser.setError("email não é válido");
+
+                            }
+                            if (!validaPeso(peso)) {
+                                pesoUser.setError("Não tem os digitos certos!");
+                            }
+
+                            if (!validaAltura(altura)) {
+                                alturaUser.setError("Não tem os digitos certos!");
+                            }
+
+                            if (!password.equals(confirmaPassword)) {
+                                passwordUser.setError("As passwords não são iguais");
+                                confirmaPasswordUser.setError("As passwords não são iguais");
+                            }
+
+                            if (masculinoChecked == 0 && femininoChecked == 0) {
+                                masculino.setError("Não selecionou o seu sexo!");
+                                masculino.requestFocus();
+                                feminino.setError("Não selecionou o seu sexo!");
+                                feminino.requestFocus();
+                            }
+
+                            if (isAnyItemCheck() == false) {
+                                caminhada.setError("Não selecionou nenhuma caixa!");
+                                caminhada.requestFocus();
+                                corrida.setError("Não selecionou nenhuma a caixa!");
+                                corrida.requestFocus();
+                                futebol.setError("Não selecionou nenhuma a caixa!");
+                                futebol.requestFocus();
+                                ciclismo.setError("Não selecionou nenhuma a caixa!");
+                                ciclismo.requestFocus();
+                            }
+
+                            if (paisUser.equals("")) {
+                                firstNameUser.setError("Não preencheu o país!");
+                            }
+                            if (existe == true) {
+                                username.setError("o user já existe");
+                            }
+
+                        }
+
+
                     }
 
-                    // para confirmar que está registado
-                    alreadyRegister = 1;
-
-                    String id = databaseUsers.push().getKey();
-                    User user = new User(firstName, secondName, dataNascimentoStr, genero, paisUserStr, email, peso, altura, usernameStr, password, sports);
-                    databaseUsers.child(id).setValue(user);
-
-                    Intent intent = new Intent(getBaseContext(), LoginScreen.class);
-                    //intent.putExtra("USERNAME", usernameStr);
-                    //intent.putExtra("PASSWORD", password);
-                    //intent.putExtra("USERPROFILE", userProfile);
-                    //intent.putExtra("ALREADYREGISTER", alreadyRegister);
-                    startActivity(intent);
-                } else {
-                    if (firstName.equals("")) {
-                        firstNameUser.setError("Não preencheu o primeiro nome!");
-                    }
-
-                    if (secondName.equals("")) {
-                        secondNameUser.setError("Não preencheu o apelido!");
-                    }
-
-                    if (email.equals("")) {
-                        emailUser.setError("Não preencheu o email!");
-                    }
-
-                    if (peso.equals("")) {
-                        pesoUser.setError("Não preencheu o peso!");
-                    }
-
-                    if (altura.equals("")) {
-                        alturaUser.setError("Não preencheu a altura!");
-                    }
-
-                    if (password.equals("")) {
-                        passwordUser.setError("Não preencheu a password!");
-                    }
-
-                    if (confirmaPassword.equals("")) {
-                        confirmaPasswordUser.setError("Não confirmou a password!");
-                    }
-
-                    if (!validate(email)) {
-                        emailUser.setError("email não é válido");
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
                     }
-                    if (!validaPeso(peso)) {
-                        pesoUser.setError("Não tem os digitos certos!");
-                    }
 
-                    if (!validaAltura(altura)) {
-                        alturaUser.setError("Não tem os digitos certos!");
-                    }
+                });
 
-                    if (!password.equals(confirmaPassword)) {
-                        passwordUser.setError("As passwords não são iguais");
-                        confirmaPasswordUser.setError("As passwords não são iguais");
-                    }
 
-                    if (masculinoChecked == 0 && femininoChecked == 0) {
-                        masculino.setError("Não selecionou o seu sexo!");
-                        masculino.requestFocus();
-                        feminino.setError("Não selecionou o seu sexo!");
-                        feminino.requestFocus();
-                    }
-
-                    if (isAnyItemCheck() == false) {
-                        caminhada.setError("Não selecionou nenhuma caixa!");
-                        caminhada.requestFocus();
-                        corrida.setError("Não selecionou nenhuma a caixa!");
-                        corrida.requestFocus();
-                        futebol.setError("Não selecionou nenhuma a caixa!");
-                        futebol.requestFocus();
-                        ciclismo.setError("Não selecionou nenhuma a caixa!");
-                        ciclismo.requestFocus();
-                    }
-
-                    if (paisUser.equals("")) {
-                        firstNameUser.setError("Não preencheu o país!");
-                    }
-                }
             }
+
         });
     }
+
 
     public void getMasculinoItem(View v) {
         masculinoChecked = 1;
@@ -336,7 +373,6 @@ public class SignUp extends AppCompatActivity {
     }
 
     public boolean validaAltura(String altura) {
-
         if (altura.equals("")) {
             return false;
         } else {
