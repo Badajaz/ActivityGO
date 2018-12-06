@@ -1,14 +1,16 @@
 package com.example.android.activitygo;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,7 +27,7 @@ public class LoginScreen extends AppCompatActivity {
     private ArrayList<String> profile;
     private String pass;
     private String username;
-
+    private Dialog dialogWrongPassword;
     private DatabaseReference databaseUsers;
 
     @Override
@@ -33,6 +35,7 @@ public class LoginScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
 
+        dialogWrongPassword = new Dialog(this);
         databaseUsers = FirebaseDatabase.getInstance().getReference("users");
 
         Button button = (Button) findViewById(R.id.buttonLogin);
@@ -55,6 +58,9 @@ public class LoginScreen extends AppCompatActivity {
                                 Intent intent = new Intent(getApplicationContext(), MenuPrincipal.class);
                                 intent.putExtra("USERNAME", username);
                                 startActivity(intent);
+                            } else {
+                                showWrongPasswordPopup();
+                                password.getText().clear();
                             }
                         }
                     }
@@ -71,5 +77,30 @@ public class LoginScreen extends AppCompatActivity {
     public void criarConta(View view) {
         Intent intent = new Intent(this, SignUp.class);
         startActivity(intent);
+    }
+
+    public void showWrongPasswordPopup() {
+        Button okButton;
+        TextView close;
+        TextView popupId;
+        dialogWrongPassword.setContentView(R.layout.popup_password_errada);
+        okButton = (Button) dialogWrongPassword.findViewById(R.id.okButton);
+        close = (TextView) dialogWrongPassword.findViewById(R.id.txtClose);
+        popupId = (TextView) dialogWrongPassword.findViewById(R.id.popUpId);
+        popupId.setText("\nUsername ou Password errados.\nTenta de novo.");
+        okButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogWrongPassword.dismiss();
+            }
+        });
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogWrongPassword.dismiss();
+            }
+        });
+        dialogWrongPassword.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialogWrongPassword.show();
     }
 }
