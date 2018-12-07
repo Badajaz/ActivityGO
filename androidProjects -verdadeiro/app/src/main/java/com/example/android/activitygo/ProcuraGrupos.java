@@ -47,14 +47,14 @@ public class ProcuraGrupos extends Fragment {
     private Dialog dialogWrongPassword;
     private ArrayList<String> listaPessoas;
     private Grupo g;
-
+    private View v;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View v = inflater.inflate(R.layout.fragment_procura_grupos, container, false);
+        v = inflater.inflate(R.layout.fragment_procura_grupos, container, false);
         databaseGrupo = FirebaseDatabase.getInstance().getReference("grupos");
         dialogResultadoInexistente = new Dialog(getContext());
         dialogWrongPassword = new Dialog(getContext());
@@ -62,6 +62,8 @@ public class ProcuraGrupos extends Fragment {
 
         final String pesquisa = getArguments().getString("PESQUISA");
         username = getArguments().getString("USERNAME");
+
+
 
 
         databaseGrupo.addValueEventListener(new ValueEventListener() {
@@ -85,35 +87,39 @@ public class ProcuraGrupos extends Fragment {
 
                 }
                 if (!array.isEmpty()) {
-                    ListView listView = (ListView) getView().findViewById(R.id.ListaResultados);
-                    //String[] value = getArguments().getStringArray("PROCURA");
+                   // v = inflater.inflate(R.layout.fragment_procura_grupos, container, false);
+                   if ( getActivity()!= null) {
+                       ListView listView = (ListView) v.findViewById(R.id.ListaResultados);
+                       //String[] value = getArguments().getStringArray("PROCURA");
 
-                    listViewAdapter = new ArrayAdapter<String>(
-                            getActivity(), android.R.layout.simple_list_item_1, array);
-                    listView.setAdapter(listViewAdapter);
-                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                       listViewAdapter = new ArrayAdapter<String>(
+                               getActivity(), android.R.layout.simple_list_item_1, array);
+                       listView.setAdapter(listViewAdapter);
+                       listViewAdapter.notifyDataSetChanged();
 
-
-                        private ListaDeElementosJuntarGrupo SelectedFragment;
-
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            //Toast.makeText(getContext(),array.get(position),Toast.LENGTH_LONG).show();
-                            //confirmJoin(array.get(position))
-                            Bundle args = new Bundle();
-                            args.putString("NOMEGRUPO", g.getNome());
-                            args.putString("USERNAME", username);
-                            SelectedFragment = new ListaDeElementosJuntarGrupo();
-                            SelectedFragment.setArguments(args);
-                            FragmentManager fmana = getFragmentManager();
-                            FragmentTransaction ftransacti = fmana.beginTransaction();
-                            ftransacti.replace(R.id.fragment_container, SelectedFragment, "GroupFragment");
-                            ftransacti.commit();
+                       listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 
-                        }
-                    });
+                           private ListaDeElementosJuntarGrupo SelectedFragment;
 
+                           @Override
+                           public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                               //Toast.makeText(getContext(),array.get(position),Toast.LENGTH_LONG).show();
+                               //confirmJoin(array.get(position))
+                               Bundle args = new Bundle();
+                               args.putString("NOMEGRUPO", g.getNome());
+                               args.putString("USERNAME", username);
+                               SelectedFragment = new ListaDeElementosJuntarGrupo();
+                               SelectedFragment.setArguments(args);
+                               FragmentManager fmana = getFragmentManager();
+                               FragmentTransaction ftransacti = fmana.beginTransaction();
+                               ftransacti.replace(R.id.fragment_container, SelectedFragment, "GroupFragment");
+                               ftransacti.commit();
+
+                           }
+
+                       });
+                   }
 
                 } else {
                     resultadosInexistentesPopup();
@@ -125,7 +131,9 @@ public class ProcuraGrupos extends Fragment {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
+
         });
+
 
         return v;
     }

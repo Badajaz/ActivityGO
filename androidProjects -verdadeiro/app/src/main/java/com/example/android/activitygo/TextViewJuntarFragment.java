@@ -40,7 +40,7 @@ public class TextViewJuntarFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_text_view_juntar, container, false);
 
-        String[]  possiveisResultados = {"Benfica","Braga","Sporting","Porto","Legião FC"};
+  /*      String[]  possiveisResultados = {"Benfica","Braga","Sporting","Porto","Legião FC"};
         text = getArguments().getString("Pesquisa");
 
         String resultados = getResultados(possiveisResultados,text);
@@ -48,9 +48,9 @@ public class TextViewJuntarFragment extends Fragment {
 
         ListView listView = (ListView) v.findViewById(R.id.ListaResultados);
         ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(
-            getActivity(), android.R.layout.simple_list_item_1,resultadosArray);
+            getActivity(), android.R.layout.simple_list_item_1,resultadosArray);*/
 
-        listView.setAdapter(listViewAdapter);
+        //listView.setAdapter(listViewAdapter);
         // ListAdapter resultadosAdapter = new ArrayAdapter<String>(this,android.R.layout.activity_list_item,resultadosArray);
 
 

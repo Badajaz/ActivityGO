@@ -39,6 +39,7 @@ public class ListaDeElementosJuntarGrupo extends Fragment {
     private Dialog dialogWrongPassword;
 
     private String username;
+    private String ele;
 
 
     @Override
@@ -52,6 +53,7 @@ public class ListaDeElementosJuntarGrupo extends Fragment {
         databaseGrupo = FirebaseDatabase.getInstance().getReference("grupos");
         dialogWrongPassword = new Dialog(getContext());
         final Button join = (Button) v.findViewById(R.id.juntarPopup);
+
 
 
         databaseGrupo.addValueEventListener(new ValueEventListener() {
@@ -132,7 +134,7 @@ public class ListaDeElementosJuntarGrupo extends Fragment {
             @Override
             public void onClick(View v) {
                // dialogWrongPassword.dismiss();
-
+                //elementosGrupo.setText("");
                 databaseGrupo.orderByChild("nome").equalTo(group).addListenerForSingleValueEvent(new ValueEventListener() {
                     private String displayElem;
                     @Override
@@ -143,6 +145,7 @@ public class ListaDeElementosJuntarGrupo extends Fragment {
                             if (g.getNome().equals(group)) {
                                 for (String elem: g.getElementosGrupo()){
                                     if (elem.equals(username)){
+                                        encontrou = false;
                                         Toast.makeText(getContext(),"Já pertence a este grupo",Toast.LENGTH_SHORT).show();
                                         break;
                                     }else{
@@ -160,17 +163,17 @@ public class ListaDeElementosJuntarGrupo extends Fragment {
                             arrayGrupoNovo.add(username);
                             databaseGrupo.child(child.getKey()).child("elementosGrupo").setValue(arrayGrupoNovo);
 
-                            displayElem="";
+                            ele="";
                             for (String str : arrayGrupoNovo){
-                                displayElem+=str+"\n";
+                                ele+=str+"\n";
                             }
+                            elementosGrupo.setText(ele);
 
                         }
 
                         }
+                       // elementosGrupo.setText("");
 
-
-                        elementosGrupo.setText(displayElem);
                         dialogWrongPassword.dismiss();
 
 
