@@ -46,6 +46,7 @@ public class ProcuraGrupos extends Fragment {
     private String username;
     private Dialog dialogWrongPassword;
     private ArrayList<String> listaPessoas;
+    private Grupo g;
 
 
     @Override
@@ -69,7 +70,7 @@ public class ProcuraGrupos extends Fragment {
                 String valores = "";
                 final ArrayList<String> array = new ArrayList<>();
                 for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
-                    Grupo g = userSnapshot.getValue(Grupo.class);
+                    g = userSnapshot.getValue(Grupo.class);
                     if (g.getNome().contains(pesquisa)) {
                         array.add(g.getNome());
                     }
@@ -91,10 +92,23 @@ public class ProcuraGrupos extends Fragment {
                             getActivity(), android.R.layout.simple_list_item_1, array);
                     listView.setAdapter(listViewAdapter);
                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+
+                        private ListaDeElementosJuntarGrupo SelectedFragment;
+
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             //Toast.makeText(getContext(),array.get(position),Toast.LENGTH_LONG).show();
-                            confirmJoin(array.get(position));
+                            //confirmJoin(array.get(position))
+                            Bundle args = new Bundle();
+                            args.putString("NOMEGRUPO", g.getNome());
+                            args.putString("USERNAME", username);
+                            SelectedFragment = new ListaDeElementosJuntarGrupo();
+                            SelectedFragment.setArguments(args);
+                            FragmentManager fmana = getFragmentManager();
+                            FragmentTransaction ftransacti = fmana.beginTransaction();
+                            ftransacti.replace(R.id.fragment_container, SelectedFragment, "GroupFragment");
+                            ftransacti.commit();
 
 
                         }
