@@ -61,7 +61,7 @@ public class HistoriaStatus extends Fragment {
             e.printStackTrace();
         }
 
-        distancia = getArguments().getDouble("DISTANCE");
+        distancia = getArguments().getDouble("DISTANCIA");
         tempoPace = getArguments().getLong("TEMPOPACE");
         timeS = getArguments().getString("TEMPO");
         data = getArguments().getString("DATAS");
@@ -134,7 +134,7 @@ public class HistoriaStatus extends Fragment {
                 Bundle args = new Bundle();
                 args.putString("DATAS", data);
                 args.putString("USERNAME", username);
-                args.putDouble("DISTANCE", distancia);
+                args.putDouble("DISTANCIA", distancia);
                 args.putLong("TEMPOPACE", tempoPace);
                 args.putString("TEMPO", timeS);
                 args.putParcelableArrayList("MARKERS", markers);

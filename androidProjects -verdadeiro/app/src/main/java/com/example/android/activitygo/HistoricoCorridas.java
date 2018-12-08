@@ -44,7 +44,7 @@ public class HistoricoCorridas extends Fragment {
         databaseCorrida = FirebaseDatabase.getInstance().getReference("corrida");
         lv1 = (ListView) v.findViewById(R.id.ListaResultadosDatas);
         timeS = getArguments().getString("TEMPO");
-        distancia = getArguments().getDouble("DISTANCE");
+        distancia = getArguments().getDouble("DISTANCIA");
         markers = getArguments().getParcelableArrayList("MARKERS");
         value = getArguments().getString("DATAS");
         tempoPace = getArguments().getLong("TEMPOPACE");
@@ -67,7 +67,7 @@ public class HistoricoCorridas extends Fragment {
                         Fragment p = new HistoriaStatus();
                         Bundle args = new Bundle();
                         args.putString("TEMPO", timeS);
-                        args.putDouble("DISTANCE", distancia);
+                        args.putDouble("DISTANCIA", distancia);
                         args.putParcelableArrayList("Markers", markers);
                         args.putLong("TEMPOPACE", tempoPace);
                         args.putString("USERNAME", username);
