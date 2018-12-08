@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -69,6 +70,26 @@ public class MyGroupsFragment extends Fragment {
                     listViewAdapter = new ArrayAdapter<String>(
                             getActivity(), android.R.layout.simple_list_item_1, myGroups);
                     listView.setAdapter(listViewAdapter);
+
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+
+                        private MyGroupFragmentElements SelectedFragment;
+
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                            Bundle args = new Bundle();
+                            args.putString("NOMEGRUPO",myGroups.get(position));
+                            SelectedFragment = new MyGroupFragmentElements();
+                            SelectedFragment.setArguments(args);
+                            FragmentManager fmana = getFragmentManager();
+                            FragmentTransaction ftransacti = fmana.beginTransaction();
+                            ftransacti.replace(R.id.fragment_container, SelectedFragment, "GroupFragment");
+                            ftransacti.commit();
+                        }
+                    });
+
 
 
 
