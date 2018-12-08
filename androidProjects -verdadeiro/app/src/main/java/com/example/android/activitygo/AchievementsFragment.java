@@ -23,6 +23,7 @@ public class AchievementsFragment extends Fragment {
 
     private DatabaseReference databaseCorrida;
     private TextView tv;
+    private double maiorDistancia = 0.0;
 
     public AchievementsFragment() {
         // Required empty public constructor
@@ -35,6 +36,9 @@ public class AchievementsFragment extends Fragment {
         ((MenuPrincipal) getActivity()).getSupportActionBar().setTitle("Conquistas:");
         View v = inflater.inflate(R.layout.fragment_achievements, container, false);
         tv = v.findViewById(R.id.valorTextViewPrimeiraCaixaCaminhada);
+        final String username = getArguments().getString("USERNAME");
+
+
 
 
         databaseCorrida = FirebaseDatabase.getInstance().getReference("corrida");
@@ -45,12 +49,11 @@ public class AchievementsFragment extends Fragment {
                 String valores = "";
                 for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                     Corrida c = userSnapshot.getValue(Corrida.class);
-                    if (c.getData().equals("8/11/2018")){
-                        tv.setText(Double.toString(c.getDistancia()));
+                    if (c.getUsername().equals(username) &&  c.getDistancia() > maiorDistancia){
+                        maiorDistancia = c.getDistancia();
                     }
 
-
-
+                        tv.setText(Double.toString(maiorDistancia));
 
                 }
 

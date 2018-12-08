@@ -130,8 +130,10 @@ public class MenuPrincipal extends AppCompatActivity {
                             /*Intent intent = new Intent(getApplicationContext(), AchievementsTab.class);
                             startActivity(intent);*/
 
-
+                            Bundle bundle = new Bundle();
+                            bundle.putString("USERNAME", username);
                             SelectedFragment = new AchievementsFragment();
+                            SelectedFragment.setArguments(bundle);
                             FragmentManager f = getFragmentManager();
                             FragmentTransaction fte = f.beginTransaction();
                             fte.replace(R.id.fragment_container, SelectedFragment, "achievementFragment");
