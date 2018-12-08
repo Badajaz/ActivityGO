@@ -13,8 +13,10 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
         <TextView
             android:id="@+id/blackSeparator1"
@@ -72,9 +74,9 @@
             android:id="@+id/uploadActivity"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:drawableLeft="@drawable/take_pic_icon"
             android:layout_centerHorizontal="true"
             android:background="?attr/selectableItemBackground"
+            android:drawableLeft="@drawable/take_pic_icon"
             android:fontFamily="open-sans"
             android:gravity="center"
             android:textAllCaps="false"

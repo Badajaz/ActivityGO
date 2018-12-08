@@ -1,17 +1,24 @@
 package com.example.android.activitygo;
 
+import android.Manifest;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,6 +30,8 @@ public class RunMenuInicial extends Fragment {
 
     private String username;
     private TextView name1;
+    private static final int STORAGE_PERMISSION_CODE = 1;
+    private static final int REQUEST_LOCATION_PERMISSION = 1;
 
     private Button photoActivityButton;
     private ImageView mImageView;
@@ -76,6 +85,8 @@ public class RunMenuInicial extends Fragment {
         irCorrida.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                requestThemStoragePermissions();
+                requestThemLocationPermissions();
                 Fragment SelectedFragment = new IrCorridaFragment();
                 Bundle toRunMenuInicial = new Bundle();
                 toRunMenuInicial.putString("USERNAME", username);
@@ -123,5 +134,49 @@ public class RunMenuInicial extends Fragment {
         });
 
         return v;
+    }
+
+    private void requestThemLocationPermissions() {
+        if (ActivityCompat.checkSelfPermission(getActivity(),
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[]
+                            {Manifest.permission.ACCESS_FINE_LOCATION},
+                    REQUEST_LOCATION_PERMISSION);
+        }
+    }
+
+    private void requestThemStoragePermissions() {
+        if (ContextCompat.checkSelfPermission(getContext(),
+                Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(getContext(), "Já foi dada esta permissão!",
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            requestStoragePermission();
+        }
+    }
+
+    private void requestStoragePermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
+                Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+        } else {
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+        }
+
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == STORAGE_PERMISSION_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(getActivity(), "Permission GRANTED", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getActivity(), "Permission DENIED", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }
