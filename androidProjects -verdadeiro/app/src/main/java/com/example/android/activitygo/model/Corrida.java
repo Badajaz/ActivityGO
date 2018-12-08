@@ -10,10 +10,14 @@ public class Corrida {
     private double distancia;
     private String tempo;
     private double pace;
-    private ArrayList<LatLng> coordenadas;
+    private ArrayList<Double> coordenadas;
     private String username;
 
-    public Corrida(String username, String data, double distancia, String tempo, double pace, ArrayList<LatLng> coordenadas) {
+
+    public Corrida(){}
+
+
+    public Corrida(String username, String data, double distancia, String tempo, double pace, ArrayList<Double> coordenadas) {
         this.data = data;
         this.distancia = distancia;
         this.tempo = tempo;
@@ -48,7 +52,7 @@ public class Corrida {
         return pace;
     }
 
-    public ArrayList<LatLng> getCoordenadas() {
+    public ArrayList<Double> getCoordenadas() {
         return coordenadas;
     }
 }

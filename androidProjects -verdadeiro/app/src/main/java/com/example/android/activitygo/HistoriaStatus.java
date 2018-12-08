@@ -92,9 +92,19 @@ public class HistoriaStatus extends Fragment {
         }
 
         final ArrayList<LatLng> markers = getArguments().getParcelableArrayList("Markers");
+        final ArrayList<Double> markersParaInserirNaDB = new ArrayList<>();
+
+        for (LatLng l : markers){
+            markersParaInserirNaDB.add(l.latitude);
+            markersParaInserirNaDB.add(l.longitude);
+        }
+
+
+
+
 
         String id = databaseCorrida.push().getKey();
-        Corrida corrida = new Corrida(username, data, distancia, chronometerTime, tempoPace, markers);
+        Corrida corrida = new Corrida(username, data, distancia, chronometerTime, tempoPace, markersParaInserirNaDB);
         databaseCorrida.child(id).setValue(corrida);
 
         TextView tv = v.findViewById(R.id.Tempo);
