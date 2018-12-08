@@ -6,15 +6,22 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.android.activitygo.model.User;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -41,6 +48,9 @@ public class SettingsActivity extends AppCompatActivity {
     private TextView dataNascimento;
     private TextView paisUser;
     private TextView confirmaPasswordUser;
+    private ImageView imv;
+    private TextView displayName;
+    private TextView displayDesporto;
 
     private String firstName;
     private String secondName;
@@ -52,6 +62,9 @@ public class SettingsActivity extends AppCompatActivity {
     private String confirmaPassword;
     private String dataNascimentoStr;
     private String paisUserStr;
+
+    private String fn;
+    private String ln;
 
     private String usernameReceived;
 
@@ -67,22 +80,42 @@ public class SettingsActivity extends AppCompatActivity {
     private Toolbar toolbarCima;
     private User userUpdate;
 
+    private DatabaseReference databaseUsers;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_layout);
-        //userProfileMenuPrincipal = (ArrayList<String>) getIntent().getSerializableExtra("USERPROFILE");
         usernameReceived = getIntent().getStringExtra("USERNAME");
 
         dialogTerminarSessao = new Dialog(this);
         dialogChangeProfile = new Dialog(this);
         dialogCalendario = new Dialog(this);
+        imv = (ImageView) findViewById(R.id.imageViewSettings);
+        displayName = (TextView) findViewById(R.id.namePessoaMenuSettings);
+        displayDesporto = (TextView) findViewById(R.id.desportoFavoritoSettings);
 
-        toolbarCima = (Toolbar) findViewById(R.id.toolbarSettings);
-        setSupportActionBar(toolbarCima);
-        getSupportActionBar().setTitle("Definições");
-        //String iniciais = "" + userProfileMenuPrincipal.get(0).charAt(0) + userProfileMenuPrincipal.get(1).charAt(0);
-        //getSupportActionBar().setSubtitle(iniciais);
+        databaseUsers = FirebaseDatabase.getInstance().getReference("users");
+        databaseUsers.orderByChild("username").equalTo(usernameReceived).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    fn = String.valueOf(child.child("firstName").getValue());
+                    ln = String.valueOf(child.child("lastName").getValue());
+                    toolbarCima = (Toolbar) findViewById(R.id.toolbarSettings);
+                    setSupportActionBar(toolbarCima);
+                    getSupportActionBar().setTitle("ActivityGO");
+
+                    getSupportActionBar().setSubtitle("" + fn.charAt(0) + ln.charAt(0));
+                    displayName.setText("Olá " + fn + " " + ln + "!");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         Button changeProfile = (Button) findViewById(R.id.buttonAlterarPerfilSettings);
         changeProfile.setOnClickListener(new View.OnClickListener() {
@@ -113,10 +146,13 @@ public class SettingsActivity extends AppCompatActivity {
         Button yesButton;
         Button noButton;
         TextView close;
+        TextView popupId;
         dialogTerminarSessao.setContentView(R.layout.popup_terminar_sessao);
         yesButton = (Button) dialogTerminarSessao.findViewById(R.id.yesButton);
         noButton = (Button) dialogTerminarSessao.findViewById(R.id.noButton);
         close = (TextView) dialogTerminarSessao.findViewById(R.id.txtClose);
+        popupId = (TextView) dialogTerminarSessao.findViewById(R.id.popUpId);
+        popupId.setText("Tem a certeza?");
 
         close.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,9 +180,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     public void showChangeProfilePopup() {
         dialogChangeProfile.setContentView(R.layout.change_profile_popup);
-
         iniciarCampos(dialogChangeProfile);
-
 
         //alteracoes = detetarAlteracoesPerfis(userProfileMenuPrincipal, userProfileCpf);
 
@@ -155,7 +189,7 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
+                // obtem os valores mudados
                 firstName = firstNameUser.getText().toString();
                 secondName = secondNameUser.getText().toString();
                 dataNascimentoStr = dataNascimento.getText().toString();
@@ -163,13 +197,58 @@ public class SettingsActivity extends AppCompatActivity {
                 email = emailUser.getText().toString();
                 peso = pesoUser.getText().toString();
                 altura = alturaUser.getText().toString();
-
                 usernameStr = username.getText().toString();
                 password = passwordUser.getText().toString();
                 confirmaPassword = confirmaPasswordUser.getText().toString();
 
+                databaseUsers = FirebaseDatabase.getInstance().getReference("users");
+                databaseUsers.orderByChild("username").equalTo(usernameReceived).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot child : dataSnapshot.getChildren()) {
+                            String fn = String.valueOf(child.child("firstName").getValue());
+                            String sn = String.valueOf(child.child("lastName").getValue());
+                            String dn = String.valueOf(child.child("date").getValue());
+                            String email2 = String.valueOf(child.child("email").getValue());
+                            //String u = String.valueOf(child.child("username").getValue());
+                            String pwd = String.valueOf(child.child("password").getValue());
+                            String w = String.valueOf(child.child("weight").getValue());
+                            String h = String.valueOf(child.child("hight").getValue());
+                            String pais = String.valueOf(child.child("country").getValue());
+                            if (!firstName.equals(fn) && !firstName.equals("")) {
+                                databaseUsers.child(child.getKey()).child("firstName").setValue(firstName);
+                            }
 
+                            if (!secondName.equals(sn) && !secondName.equals("")) {
+                                databaseUsers.child(child.getKey()).child("lastName").setValue(secondName);
+                            }
+                            if (!dataNascimentoStr.equals(dn) && !dataNascimentoStr.equals("")) {
+                                databaseUsers.child(child.getKey()).child("date").setValue(dataNascimentoStr);
+                            }
+                            if (!paisUserStr.equals(pais) && !paisUserStr.equals("")) {
+                                databaseUsers.child(child.getKey()).child("country").setValue(paisUserStr);
+                            }
+                            if (!email.equals(email2) && !email.equals("")) {
+                                databaseUsers.child(child.getKey()).child("email").setValue(email);
+                            }
+                            if (!peso.equals(w) && !peso.equals("")) {
+                                databaseUsers.child(child.getKey()).child("weight").setValue(peso);
+                            }
+                            if (!altura.equals(h) && !altura.equals("")) {
+                                databaseUsers.child(child.getKey()).child("hight").setValue(altura);
+                            }
+                            if (!password.equals(pwd) && !password.equals("")) {
+                                databaseUsers.child(child.getKey()).child("password").setValue(password);
+                            }
+                            // NAO ESTA A MUDAR O USERNAME
+                        }
+                    }
 
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
 /*
                 if (!firstName.equals("")) {
                     userUpdate.setFirstName(firstName);

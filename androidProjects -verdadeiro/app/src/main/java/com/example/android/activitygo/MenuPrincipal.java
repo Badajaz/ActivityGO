@@ -36,7 +36,6 @@ public class MenuPrincipal extends AppCompatActivity {
     private Fragment SelectedFragment;
     private Toolbar myToolbar;
     private Toolbar toolbarCima;
-    private ArrayList<String> profile;
     private String selectedSport;
     private Dialog myDialog;
     private CheckBox caminhadaCheckBox;
@@ -50,7 +49,6 @@ public class MenuPrincipal extends AppCompatActivity {
     private String username;
     private String firstName = "";
     private String lastName = "";
-    private String iniciais;
 
     private DatabaseReference databaseUsers;
 
@@ -94,7 +92,6 @@ public class MenuPrincipal extends AppCompatActivity {
         //ft.addToBackStack("RunFragment");
         ft.commit();
 
-
         BottomNavigationView mMainNav = findViewById(R.id.NavBar);
         mMainNav.setOnNavigationItemSelectedListener(navListener);
     }
@@ -105,13 +102,12 @@ public class MenuPrincipal extends AppCompatActivity {
                 public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                     Fragment SelectedFragment = null;
                     switch (menuItem.getItemId()) {
-                        case R.id.plusItem:
-                            showPopup(menuItem);
+                        case R.id.run:
                             //Fragmento Corrida
-                            Bundle toRunMenuInicial = new Bundle();
-                            //toRunMenuInicial.putStringArrayList("USERPROFILE", profile);
                             SelectedFragment = new RunMenuInicial();
-                            //SelectedFragment.setArguments(toRunMenuInicial);
+                            Bundle toRunMenuInicial = new Bundle();
+                            toRunMenuInicial.putString("USERNAME", username);
+                            SelectedFragment.setArguments(toRunMenuInicial);
                             FragmentManager fm = getFragmentManager();
                             FragmentTransaction ft = fm.beginTransaction();
                             ft.replace(R.id.fragment_container, SelectedFragment);
@@ -232,7 +228,7 @@ public class MenuPrincipal extends AppCompatActivity {
 
                 Intent i = new Intent(this, SettingsActivity.class);
                 i.putExtra("USERNAME", username);
-                i.putExtra("USERPROFILE", profile);
+                //i.putExtra("USERPROFILE", profile);
                 startActivity(i);
                 break;
 
@@ -242,10 +238,11 @@ public class MenuPrincipal extends AppCompatActivity {
         return true;
     }
 
-    public ArrayList<String> getProfile() {
-        return this.profile;
-    }
-
+    /*
+        public ArrayList<String> getProfile() {
+            return this.profile;
+        }
+    */
     public void showPopup(@NonNull MenuItem menuItem) {
         TextView txtclose;
         TextView txtname;

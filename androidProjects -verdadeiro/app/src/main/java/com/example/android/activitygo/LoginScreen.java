@@ -29,6 +29,7 @@ public class LoginScreen extends AppCompatActivity {
     private String pass;
     private String username;
     private Dialog dialogWrongPassword;
+    private Dialog dialogUserNaoExiste;
     private DatabaseReference databaseUsers;
 
 
@@ -38,6 +39,7 @@ public class LoginScreen extends AppCompatActivity {
         setContentView(R.layout.activity_login_screen);
 
         dialogWrongPassword = new Dialog(this);
+        dialogUserNaoExiste = new Dialog(this);
         databaseUsers = FirebaseDatabase.getInstance().getReference("users");
 
         Button button = (Button) findViewById(R.id.buttonLogin);
@@ -54,16 +56,22 @@ public class LoginScreen extends AppCompatActivity {
                 databaseUsers.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for (DataSnapshot child : dataSnapshot.getChildren()) {
-                            String pwd = String.valueOf(child.child("password").getValue());
-                            if (pwd.equals(pass)) {
-                                Intent intent = new Intent(getApplicationContext(), MenuPrincipal.class);
-                                intent.putExtra("USERNAME", username);
-                                startActivity(intent);
-                            } else {
-                                showWrongPasswordPopup();
-                                password.getText().clear();
+                        if (dataSnapshot.exists()) {
+                            for (DataSnapshot child : dataSnapshot.getChildren()) {
+                                String pwd = String.valueOf(child.child("password").getValue());
+                                if (pwd.equals(pass)) {
+                                    Intent intent = new Intent(getApplicationContext(), MenuPrincipal.class);
+                                    intent.putExtra("USERNAME", username);
+                                    startActivity(intent);
+                                } else {
+                                    showWrongPasswordPopup();
+                                    password.getText().clear();
+                                }
                             }
+                        } else {
+                            showUserQueNaoExiste();
+                            user.getText().clear();
+                            password.getText().clear();
                         }
                     }
 
@@ -104,5 +112,30 @@ public class LoginScreen extends AppCompatActivity {
         });
         dialogWrongPassword.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialogWrongPassword.show();
+    }
+
+    public void showUserQueNaoExiste() {
+        Button okButton;
+        TextView close;
+        TextView popupId;
+        dialogUserNaoExiste.setContentView(R.layout.popup_user_nao_existe);
+        okButton = (Button) dialogUserNaoExiste.findViewById(R.id.okButton);
+        close = (TextView) dialogUserNaoExiste.findViewById(R.id.txtClose);
+        popupId = (TextView) dialogUserNaoExiste.findViewById(R.id.popUpId);
+        popupId.setText("\nNão existe esse utilizador.\nTenta de novo.");
+        okButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogUserNaoExiste.dismiss();
+            }
+        });
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogUserNaoExiste.dismiss();
+            }
+        });
+        dialogUserNaoExiste.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialogUserNaoExiste.show();
     }
 }

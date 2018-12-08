@@ -1,15 +1,10 @@
 package com.example.android.activitygo;
 
 import android.app.DatePickerDialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -17,26 +12,16 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.android.activitygo.model.Grupo;
 import com.example.android.activitygo.model.User;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -133,7 +118,6 @@ public class SignUp extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 month = month + 1;
-                //Log.d(TAG, "onDateSet: mm/dd/yyy: " + dayOfMonth + "/" + month + "/" + year);
                 String date = dayOfMonth + "/" + month + "/" + year;
                 dataNascimento.setText(date);
             }
@@ -173,7 +157,7 @@ public class SignUp extends AppCompatActivity {
                             User g = userSnapshot.getValue(User.class);
                             if (g.getUsername().equals(usernameStr)) {
                                 existe = true;
-                            }else{
+                            } else {
                                 existe = false;
                             }
 
@@ -228,10 +212,6 @@ public class SignUp extends AppCompatActivity {
                             databaseUsers.child(id).setValue(user);
 
                             Intent intent = new Intent(getBaseContext(), LoginScreen.class);
-                            //intent.putExtra("USERNAME", usernameStr);
-                            //intent.putExtra("PASSWORD", password);
-                            //intent.putExtra("USERPROFILE", userProfile);
-                            //intent.putExtra("ALREADYREGISTER", alreadyRegister);
                             startActivity(intent);
                         } else {
                             if (firstName.equals("")) {
@@ -263,7 +243,7 @@ public class SignUp extends AppCompatActivity {
                             }
 
                             if (!validate(email)) {
-                                emailUser.setError("email não é válido");
+                                emailUser.setError("O Email não é válido!");
 
                             }
                             if (!validaPeso(peso)) {
@@ -275,8 +255,8 @@ public class SignUp extends AppCompatActivity {
                             }
 
                             if (!password.equals(confirmaPassword)) {
-                                passwordUser.setError("As passwords não são iguais");
-                                confirmaPasswordUser.setError("As passwords não são iguais");
+                                passwordUser.setError("As passwords não são iguais!");
+                                confirmaPasswordUser.setError("As passwords não são iguais!");
                             }
 
                             if (masculinoChecked == 0 && femininoChecked == 0) {
@@ -303,10 +283,7 @@ public class SignUp extends AppCompatActivity {
                             if (existe == true) {
                                 username.setError("o user já existe");
                             }
-
                         }
-
-
                     }
 
                     @Override
@@ -315,8 +292,6 @@ public class SignUp extends AppCompatActivity {
                     }
 
                 });
-
-
             }
 
         });
