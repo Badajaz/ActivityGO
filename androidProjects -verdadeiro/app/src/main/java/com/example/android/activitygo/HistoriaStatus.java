@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.activitygo.model.Corrida;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -40,6 +41,7 @@ public class HistoriaStatus extends Fragment {
     private long tempoPace;
     private String timeS;
     private ArrayList<LatLng> marcadores = new ArrayList<>();
+    private String melhorkm;
 
     public HistoriaStatus() {
         // Required empty public constructor
@@ -67,6 +69,7 @@ public class HistoriaStatus extends Fragment {
         data = getArguments().getString("DATAS");
         username = getArguments().getString("USERNAME");
         marcadores = getArguments().getParcelableArrayList("Markers");
+        melhorkm = getArguments().getString("MELHORKM");
         double pace = tempoPace / distancia;
         if (distancia == 0) {
             pace = 0;
@@ -104,7 +107,8 @@ public class HistoriaStatus extends Fragment {
 
 
         String id = databaseCorrida.push().getKey();
-        Corrida corrida = new Corrida(username, data, distancia, chronometerTime, tempoPace, markersParaInserirNaDB);
+        Toast.makeText(getActivity(),melhorkm, Toast.LENGTH_SHORT).show();
+        Corrida corrida = new Corrida(username, data, distancia, chronometerTime, tempoPace, markersParaInserirNaDB,melhorkm);
         databaseCorrida.child(id).setValue(corrida);
 
         TextView tv = v.findViewById(R.id.Tempo);

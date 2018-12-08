@@ -24,6 +24,13 @@ public class AchievementsFragment extends Fragment {
     private DatabaseReference databaseCorrida;
     private TextView tv;
     private double maiorDistancia = 0.0;
+    private TextView tvdata;
+    private String melhorKm = "4000:00";
+    private TextView melhorKmTv;
+    private String dataDistancia;
+    private String melhorKmData;
+    private TextView melhorkmDataTv;
+    private int count = 0;
 
     public AchievementsFragment() {
         // Required empty public constructor
@@ -36,30 +43,49 @@ public class AchievementsFragment extends Fragment {
         ((MenuPrincipal) getActivity()).getSupportActionBar().setTitle("Conquistas:");
         View v = inflater.inflate(R.layout.fragment_achievements, container, false);
         tv = v.findViewById(R.id.valorTextViewPrimeiraCaixaCaminhada);
+        tvdata = v.findViewById(R.id.dataTextViewPrimeiraCaixaCaminhada);
+        melhorKmTv = v.findViewById(R.id.melhorKmTempo);
+        melhorkmDataTv= v.findViewById(R.id.melhorKmData);
+
+
+
         final String username = getArguments().getString("USERNAME");
-
-
 
 
         databaseCorrida = FirebaseDatabase.getInstance().getReference("corrida");
 
         databaseCorrida.addValueEventListener(new ValueEventListener() {
+
+
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String valores = "";
+
                 for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                     Corrida c = userSnapshot.getValue(Corrida.class);
-                    if (c.getUsername().equals(username) &&  c.getDistancia() > maiorDistancia){
+                    if (c.getUsername().equals(username) && c.getDistancia() > maiorDistancia) {
                         maiorDistancia = c.getDistancia();
+                        dataDistancia = c.getData();
+
                     }
 
-                        tv.setText(Double.toString(maiorDistancia));
+                    if (c.getDistancia() > 1000 && isLower(melhorKm, c.getMelhorkm())) {
+                        melhorKm = c.getMelhorkm();
+                        melhorKmData = c.getData();
+                        count ++;
+
+                    }
+
+                    tv.setText(Double.toString(maiorDistancia));
+                    tvdata.setText(dataDistancia);
+                    melhorKmTv.setText(melhorKm);
+                    melhorkmDataTv.setText(melhorKmData);
 
                 }
 
 
-
             }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -68,10 +94,58 @@ public class AchievementsFragment extends Fragment {
         });
 
 
-
-
-
-
         return v;
     }
+
+    public boolean isLower(String actual, String cycle) {
+        boolean a = false;
+
+        if (count ==0) {
+
+            int aaa = Integer.parseInt(actual.substring(0, 3));
+            int bbb = Integer.parseInt(actual.substring(5, 6));
+
+
+            int cycleMin = Integer.parseInt(cycle.substring(0, 2));
+            int cycleSec = Integer.parseInt(cycle.substring(4, 5));
+
+            if (cycleMin < aaa) {
+                a = true;
+            } else {
+
+                if (cycleMin == aaa) {
+                    if (cycleSec < bbb) {
+                        a = true;
+                    }
+                }
+
+            }
+
+            count ++;
+        }else {
+
+            int actualMin = Integer.parseInt(actual.substring(0, 2));
+            int actualSec = Integer.parseInt(actual.substring(4, 5));
+
+            int cycleMin = Integer.parseInt(cycle.substring(0, 2));
+            int cycleSec = Integer.parseInt(cycle.substring(4, 5));
+
+            if (cycleMin < actualMin) {
+                a = true;
+            } else {
+
+                if (cycleMin == actualMin) {
+                    if (cycleSec < actualSec) {
+                        a = true;
+                    }
+                }
+
+
+            }
+
+        }
+        return a;
+    }
+
+
 }
