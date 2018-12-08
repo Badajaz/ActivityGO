@@ -195,12 +195,11 @@ public class UploadPhotoActivity extends AppCompatActivity {
                             handler.postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    //mProgressBar.setProgress(0);
                                 }
                             }, 500);
 
                             Toast.makeText(UploadPhotoActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
-                            Upload upload = new Upload(mEditTextFileName.getText().toString().trim(),
+                            Upload upload = new Upload(username, mEditTextFileName.getText().toString().trim(),
                                     fileReference.getDownloadUrl().toString());
                             String uploadId = mDatabaseRef.push().getKey();
                             mDatabaseRef.child(uploadId).setValue(upload);
@@ -216,7 +215,6 @@ public class UploadPhotoActivity extends AppCompatActivity {
                         @Override
                         public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
                             double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                            //mProgressBar.setProgress((int) progress);
                         }
                     });
         } else {

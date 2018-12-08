@@ -118,6 +118,9 @@ public class MenuPrincipal extends AppCompatActivity {
                             //Fragmento Desafios
                             menuItem.setIcon(R.drawable.bicepe_icon23);
                             SelectedFragment = new ChalengeFragment();
+                            Bundle toChallengeFragment = new Bundle();
+                            toChallengeFragment.putString("USERNAME", username);
+                            SelectedFragment.setArguments(toChallengeFragment);
                             FragmentManager fman = getFragmentManager();
                             FragmentTransaction ftra = fman.beginTransaction();
                             ftra.replace(R.id.fragment_container, SelectedFragment, "ChalengeFragment");

@@ -3,6 +3,7 @@ package com.example.android.activitygo.model;
 import android.widget.Toast;
 
 public class Upload {
+    private String mUsername;
     private String mName;
     private String mImageUrl;
 
@@ -10,13 +11,17 @@ public class Upload {
         //empty constructor needed
     }
 
-    public Upload(String name, String imageUrl) {
+    public Upload(String username, String name, String imageUrl) {
         if (name.trim().equals("")) {
             name = "No Name";
         }
-
+        mUsername = username;
         mName = name;
         mImageUrl = imageUrl;
+    }
+
+    public String getUsername() {
+        return mUsername;
     }
 
     public String getName() {
