@@ -1,5 +1,7 @@
 package com.example.android.activitygo.model;
 
+import android.widget.Toast;
+
 public class Upload {
     private String mName;
     private String mImageUrl;

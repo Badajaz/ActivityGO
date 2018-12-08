@@ -10,7 +10,11 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/blackSeparator1"
@@ -64,32 +68,24 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.095" />
 
-        <ProgressBar
-            android:id="@+id/progress_bar"
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/loadimage"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="16dp" />
-
         <Button
-            android:id="@+id/loadimage"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@drawable/layout_border"
+            android:id="@+id/uploadActivity"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:drawableLeft="@drawable/take_pic_icon"
+            android:layout_centerHorizontal="true"
+            android:background="?attr/selectableItemBackground"
             android:fontFamily="open-sans"
             android:gravity="center"
-            android:text="+"
+            android:textAllCaps="false"
+            android:textColor="#000000"
             android:textSize="16sp"
-            android:textStyle="bold"
-            android:typeface="sans"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.675"
+            app:layout_constraintHorizontal_bias="0.655"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.333" />
+            app:layout_constraintVertical_bias="0.307" />
 
         <TextView
             android:id="@+id/namePessoaMenuInicial"
