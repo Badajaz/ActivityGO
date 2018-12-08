@@ -62,6 +62,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private ArrayList<LatLng> arrayMarkers = new ArrayList<LatLng>();
     private DatabaseReference databaseCorrida;
 
+    private boolean atingiu = false;
+    private String chronometerTime;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,6 +126,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         float[] array = new float[5];
                         Location.distanceBetween(posicoes.get(0), posicoes.get(1), posicoes.get(2), posicoes.get(3), array);
                         accKm += array[0];
+                        if (accKm > 999 && atingiu == false){
+                            Toast.makeText(getApplicationContext(),"1km",Toast.LENGTH_SHORT).show();
+                            double timeSconverted = Double.valueOf((int) pauseOffset / 1000);
+                            double time = timeSconverted / 60;
+                            int timeInteiro = (int) time;
+                            double minutos = time - timeInteiro;
+                            double segundos = minutos * 60;
+
+                            if (timeInteiro < 10) {
+                                if (segundos < 10) {
+                                    chronometerTime = "0" + timeInteiro + ":" + "0" + (int) segundos;
+                                } else {
+                                    chronometerTime = "0" + timeInteiro + ":" + (int) segundos;
+                                }
+                            } else {
+                                chronometerTime = "" + timeInteiro + ":" + (int) segundos;
+                            }
+
+
+
+                            atingiu = true;
+                        }
                         Log.d("ARRAY4", printArray(posicoes));
                         Log.d("ACCKM", "" + accKm);
 
@@ -227,6 +252,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     args.putString("TEMPO", "" + (int) pauseOffset / 1000);
                     args.putDouble("DISTANCIA", accKm);
                     args.putString("USERNAME", username);
+                    args.putString("MELHORKM",chronometerTime);
                     p.setArguments(args);
                     getFragmentManager().beginTransaction().replace(R.id.fragmentMap, p).commit();
                     Start.setVisibility(View.GONE);

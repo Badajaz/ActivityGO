@@ -35,6 +35,7 @@ public class HistoricoCorridas extends Fragment {
     private String username;
     private String timeS;
     private ArrayList<String> datasCorridas = new ArrayList<>();
+    private String melhorkm;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
