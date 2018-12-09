@@ -32,8 +32,10 @@ public class SettingsActivity extends AppCompatActivity {
     private Dialog dialogCalendario;
     private Dialog dialogChangeProfile;
     private Button confirmaAltPerfil;
+    private Button eliminarContaButton;
     private Button informacoesPrivadas;
     private Button buttonCalendario;
+    private Dialog eliminarContaDialog;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private DatePickerDialog.OnDateSetListener mDateSetListenerForCalendar;
     private static final String TAG = "SettingsActivity";
@@ -68,15 +70,6 @@ public class SettingsActivity extends AppCompatActivity {
 
     private String usernameReceived;
 
-    // perfil que o user coloca quando se regista
-    private ArrayList<String> userProfileMenuPrincipal;
-
-    // coisas novas que o user quer alterar
-    private ArrayList<String> userProfileCpf = new ArrayList<>();
-
-    // lista com as coisas alteradas e as inalteradas + genero + desportos favoritos
-    private ArrayList<String> alteracoes = new ArrayList<>();
-
     private Toolbar toolbarCima;
     private User userUpdate;
 
@@ -91,6 +84,7 @@ public class SettingsActivity extends AppCompatActivity {
         dialogTerminarSessao = new Dialog(this);
         dialogChangeProfile = new Dialog(this);
         dialogCalendario = new Dialog(this);
+        eliminarContaDialog = new Dialog(this);
         imv = (ImageView) findViewById(R.id.imageViewSettings);
         displayName = (TextView) findViewById(R.id.namePessoaMenuSettings);
         displayDesporto = (TextView) findViewById(R.id.desportoFavoritoSettings);
@@ -140,6 +134,72 @@ public class SettingsActivity extends AppCompatActivity {
                 showTerminarSessaoPopup();
             }
         });
+
+        eliminarContaButton = (Button) findViewById(R.id.eliminarConta);
+        eliminarContaButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showEliminarContaPopup();
+            }
+        });
+    }
+
+    public void showEliminarContaPopup() {
+        Button yesButton;
+        Button noButton;
+        TextView close;
+        TextView popupId;
+        eliminarContaDialog.setContentView(R.layout.popup_eliminar_conta);
+        yesButton = (Button) eliminarContaDialog.findViewById(R.id.yesButton);
+        noButton = (Button) eliminarContaDialog.findViewById(R.id.noButton);
+        close = (TextView) eliminarContaDialog.findViewById(R.id.txtClose);
+        popupId = (TextView) eliminarContaDialog.findViewById(R.id.popUpId);
+        popupId.setText("Ao eliminar a sua conta os seus dados serão eliminados dos nossos servidores. Tem a certeza?");
+
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogTerminarSessao.dismiss();
+            }
+        });
+
+        yesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                databaseUsers.orderByChild("username").equalTo(usernameReceived).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot child : dataSnapshot.getChildren()) {
+                            String id = child.getKey();
+                            databaseUsers.child(id).removeValue();
+                            fn = String.valueOf(child.child("firstName").getValue());
+                            ln = String.valueOf(child.child("lastName").getValue());
+                            toolbarCima = (Toolbar) findViewById(R.id.toolbarSettings);
+                            setSupportActionBar(toolbarCima);
+                            getSupportActionBar().setTitle("ActivityGO");
+
+                            getSupportActionBar().setSubtitle("" + fn.charAt(0) + ln.charAt(0));
+                            displayName.setText("Olá " + fn + " " + ln + "!");
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+                startActivity(new Intent(getApplicationContext(), LoginScreen.class));
+            }
+        });
+
+        noButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogTerminarSessao.dismiss();
+            }
+        });
+        eliminarContaDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        eliminarContaDialog.show();
     }
 
     public void showTerminarSessaoPopup() {

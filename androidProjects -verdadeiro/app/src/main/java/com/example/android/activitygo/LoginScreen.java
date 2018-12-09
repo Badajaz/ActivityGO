@@ -22,7 +22,6 @@ import java.util.ArrayList;
 
 public class LoginScreen extends AppCompatActivity {
 
-
     private EditText user;
     private EditText password;
     private ArrayList<String> profile;
@@ -31,7 +30,6 @@ public class LoginScreen extends AppCompatActivity {
     private Dialog dialogWrongPassword;
     private Dialog dialogUserNaoExiste;
     private DatabaseReference databaseUsers;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
