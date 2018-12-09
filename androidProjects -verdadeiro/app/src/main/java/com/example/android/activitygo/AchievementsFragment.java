@@ -72,18 +72,18 @@ public class AchievementsFragment extends Fragment {
                     if (c.getDistancia() > 1000 && isLower(melhorKm, c.getMelhorkm())) {
                         melhorKm = c.getMelhorkm();
                         melhorKmData = c.getData();
-                        count ++;
+                        //count ++;
 
                     }
 
-                    tv.setText(Double.toString(maiorDistancia));
-                    tvdata.setText(dataDistancia);
-                    melhorKmTv.setText(melhorKm);
-                    melhorkmDataTv.setText(melhorKmData);
 
                 }
 
 
+                tv.setText(Double.toString(maiorDistancia));
+                tvdata.setText(dataDistancia);
+                melhorKmTv.setText(melhorKm);
+                melhorkmDataTv.setText(melhorKmData);
             }
 
 

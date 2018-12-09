@@ -63,7 +63,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private DatabaseReference databaseCorrida;
 
     private boolean atingiu = false;
-    private String chronometerTime;
+    private String chronoTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +95,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         locationListener = new LocationListener() {
+            private long pauseOff;
+
             @Override
             public void onLocationChanged(Location location) {
                 if (isStopped == false) {
@@ -126,9 +128,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         float[] array = new float[5];
                         Location.distanceBetween(posicoes.get(0), posicoes.get(1), posicoes.get(2), posicoes.get(3), array);
                         accKm += array[0];
+
+                        Log.d("ARRAY4", printArray(posicoes));
+                        Log.d("ACCKM", "" + accKm);
+
+                        posicoes.remove(0);
+                        posicoes.remove(0);
+
+                        pauseOff = SystemClock.elapsedRealtime() - chronometer.getBase();
+
+
                         if (accKm > 999 && atingiu == false){
-                            Toast.makeText(getApplicationContext(),"1km",Toast.LENGTH_SHORT).show();
-                            double timeSconverted = Double.valueOf((int) pauseOffset / 1000);
+                            double timeSconverted = Double.valueOf((int) pauseOff / 1000);
                             double time = timeSconverted / 60;
                             int timeInteiro = (int) time;
                             double minutos = time - timeInteiro;
@@ -136,23 +147,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                             if (timeInteiro < 10) {
                                 if (segundos < 10) {
-                                    chronometerTime = "0" + timeInteiro + ":" + "0" + (int) segundos;
+                                    chronoTime = "0" + timeInteiro + ":" + "0" + (int) segundos;
                                 } else {
-                                    chronometerTime = "0" + timeInteiro + ":" + (int) segundos;
+                                    chronoTime = "0" + timeInteiro + ":" + (int) segundos;
                                 }
                             } else {
-                                chronometerTime = "" + timeInteiro + ":" + (int) segundos;
+                                chronoTime = "" + timeInteiro + ":" + (int) segundos;
                             }
 
-
+                            Toast.makeText(getApplicationContext(),"CHRONOTIME "+chronoTime,Toast.LENGTH_SHORT).show();
 
                             atingiu = true;
                         }
-                        Log.d("ARRAY4", printArray(posicoes));
-                        Log.d("ACCKM", "" + accKm);
 
-                        posicoes.remove(0);
-                        posicoes.remove(0);
+
+
+
+
+
                         //   posicoes.remove(0);
                     }
                     Log.d("ARRAY", printArray(posicoes));
@@ -213,6 +225,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     Toast.makeText(MapsActivity.this, "Começou a corrida!", Toast.LENGTH_SHORT).show();
                     running = true;
                     isStopped = false;
+
                 }
             }
         });
@@ -252,7 +265,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     args.putString("TEMPO", "" + (int) pauseOffset / 1000);
                     args.putDouble("DISTANCIA", accKm);
                     args.putString("USERNAME", username);
-                    args.putString("MELHORKM",chronometerTime);
+                    args.putString("MELHORKM",chronoTime);
                     p.setArguments(args);
                     getFragmentManager().beginTransaction().replace(R.id.fragmentMap, p).commit();
                     Start.setVisibility(View.GONE);
