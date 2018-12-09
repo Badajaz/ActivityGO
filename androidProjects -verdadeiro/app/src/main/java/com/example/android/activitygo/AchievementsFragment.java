@@ -31,6 +31,8 @@ public class AchievementsFragment extends Fragment {
     private String melhorKmData;
     private TextView melhorkmDataTv;
     private int count = 0;
+    private double accKm = 0.0;
+    private TextView Totalkm;
 
     public AchievementsFragment() {
         // Required empty public constructor
@@ -46,6 +48,7 @@ public class AchievementsFragment extends Fragment {
         tvdata = v.findViewById(R.id.dataTextViewPrimeiraCaixaCaminhada);
         melhorKmTv = v.findViewById(R.id.melhorKmTempo);
         melhorkmDataTv= v.findViewById(R.id.melhorKmData);
+        Totalkm = v.findViewById(R.id.TotalKmPercorridosValor);
 
 
 
@@ -63,6 +66,10 @@ public class AchievementsFragment extends Fragment {
 
                 for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                     Corrida c = userSnapshot.getValue(Corrida.class);
+                    if (c.getUsername().equals(username)){
+                        accKm += c.getDistancia();
+                    }
+
                     if (c.getUsername().equals(username) && c.getDistancia() > maiorDistancia) {
                         maiorDistancia = c.getDistancia();
                         dataDistancia = c.getData();
@@ -80,10 +87,12 @@ public class AchievementsFragment extends Fragment {
                 }
 
 
-                tv.setText(Double.toString(maiorDistancia));
+                tv.setText(Double.toString(Math.round(maiorDistancia)));
                 tvdata.setText(dataDistancia);
                 melhorKmTv.setText(melhorKm);
                 melhorkmDataTv.setText(melhorKmData);
+                Totalkm.setText(""+accKm);
+
             }
 
 
