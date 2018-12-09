@@ -125,10 +125,10 @@ public class AchievementsFragment extends Fragment {
         }else {
 
             int actualMin = Integer.parseInt(actual.substring(0, 2));
-            int actualSec = Integer.parseInt(actual.substring(4, 5));
+            int actualSec = Integer.parseInt(actual.substring(3, 5));
 
             int cycleMin = Integer.parseInt(cycle.substring(0, 2));
-            int cycleSec = Integer.parseInt(cycle.substring(4, 5));
+            int cycleSec = Integer.parseInt(cycle.substring(3, 5));
 
             if (cycleMin < actualMin) {
                 a = true;
