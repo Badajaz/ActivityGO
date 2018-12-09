@@ -43,7 +43,7 @@ public class UploadPhotoActivity extends AppCompatActivity {
     private Button mButtontakePhoto;
     private Uri mImageUri;
     private ImageView mImageView;
-    private EditText mEditTextFileName;
+    //private EditText mEditTextFileName;
     private static int RESULT_IMAGE_CLICK = 1;
     private static final int CAMERA_REQUEST = 1888;
     private static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -65,7 +65,6 @@ public class UploadPhotoActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            // Step 6: Get the data out of the Bundle
             username = extras.getString("USERNAME");
         } else {
             username = "";
@@ -82,7 +81,7 @@ public class UploadPhotoActivity extends AppCompatActivity {
         mButtonUploadImage = findViewById(R.id.uploadImage);
         mButtontakePhoto = findViewById(R.id.takePicture);
         mImageView = findViewById(R.id.imageView2Here);
-        mEditTextFileName = findViewById(R.id.edit_text_file_name);
+        //mEditTextFileName = findViewById(R.id.edit_text_file_name);
 
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
@@ -199,7 +198,7 @@ public class UploadPhotoActivity extends AppCompatActivity {
                             }, 500);
 
                             Toast.makeText(UploadPhotoActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
-                            Upload upload = new Upload(username, mEditTextFileName.getText().toString().trim(),
+                            Upload upload = new Upload(username, username.trim(),
                                     fileReference.getDownloadUrl().toString());
                             String uploadId = mDatabaseRef.push().getKey();
                             mDatabaseRef.child(uploadId).setValue(upload);

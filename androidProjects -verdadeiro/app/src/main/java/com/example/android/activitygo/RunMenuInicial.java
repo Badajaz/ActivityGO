@@ -1,11 +1,9 @@
 package com.example.android.activitygo;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -149,8 +147,7 @@ public class RunMenuInicial extends Fragment {
     private void requestThemStoragePermissions() {
         if (ContextCompat.checkSelfPermission(getContext(),
                 Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(getContext(), "Já foi dada esta permissão!",
-                    Toast.LENGTH_SHORT).show();
+
         } else {
             requestStoragePermission();
         }
