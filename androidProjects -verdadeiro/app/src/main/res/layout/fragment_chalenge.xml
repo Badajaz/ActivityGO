@@ -49,22 +49,22 @@
 
         <TextView
             android:id="@+id/descricaoTextViewPrimeiraCaixaCaminhad"
-            android:layout_width="119dp"
+            android:layout_width="210dp"
             android:layout_height="26dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="60dp"
+            android:layout_marginBottom="68dp"
             android:fontFamily="sans-serif"
             android:gravity="center"
-            android:text="Complete 5km"
+            android:text=""
             android:textAlignment="center"
             android:textSize="18sp"
             android:typeface="sans"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.574"
+            app:layout_constraintHorizontal_bias="0.943"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ProgressBar
@@ -85,131 +85,290 @@
 
     </android.support.constraint.ConstraintLayout>
 
-        <!--<LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp">
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/edit_text_shape"
-                android:gravity="center"
-                android:text="Desafios Corrida"
-                android:textColor="@color/whiteLetters"
-                android:textSize="20sp" />
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/secondConstrainte"
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="220dp"
 
-            <CheckBox
-                android:id="@+id/checkBox21"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:text="Run 2km" />
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/layout_border"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-            <CheckBox
-                android:id="@+id/checkBox5"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:text="Run 5km" />
+        <TextView
+            android:id="@+id/nomeTextViewSegundaCaixaCaminhad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="Corrida"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:typeface="sans"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.165"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.365" />
 
-            <CheckBox
-                android:id="@+id/checkBox2"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:text="Run 10km" />
+        <TextView
+            android:id="@+id/secondChallenge"
+            android:layout_width="201dp"
+            android:layout_height="26dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="60dp"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text=""
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:typeface="sans"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.947"
+            app:layout_constraintStart_toStartOf="parent" />
 
-            <TextView
-                android:id="@+id/textViewChallenge2"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/edit_text_shape"
-                android:gravity="center"
-                android:text="Desafios Caminhada"
-                android:textColor="@color/whiteLetters"
-                android:textSize="20sp" />
+        <ProgressBar
+            android:id="@+id/SecondprogressBarCorrida"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="201dp"
+            android:layout_height="15dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.316"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.808">
 
-            <CheckBox
-                android:id="@+id/checkBoxCaminhada1"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:text="Andar 2km" />
+        </ProgressBar>
 
-            <CheckBox
-                android:id="@+id/checkBoxCaminhada2"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:text="Andar 10km" />
+    </android.support.constraint.ConstraintLayout>
 
-            <CheckBox
-                android:id="@+id/checkBoxCaminhada3"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:text="Andar 20km" />
 
-            <TextView
-                android:id="@+id/textViewCiclismo"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/edit_text_shape"
-                android:gravity="center"
-                android:text="Desafios Ciclismo"
-                android:textColor="@color/whiteLetters"
-                android:textSize="20sp" />
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/ThirdConstrainte"
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="376dp"
 
-            <CheckBox
-                android:id="@+id/checkBoxCiclismo1"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:text="Correr 25km" />
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/layout_border"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-            <CheckBox
-                android:id="@+id/checkBoxCiclismo2"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:text="Correr 30km" />
+        <TextView
+            android:id="@+id/nomeTextViewTerceiroCaixaCaminhad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="Corrida"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:typeface="sans"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.165"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.365" />
 
-            <CheckBox
-                android:id="@+id/checkBoxCiclismo3"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:text="Correr 120km" />
+        <TextView
+            android:id="@+id/ThirdChallenge"
+            android:layout_width="213dp"
+            android:layout_height="32dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="60dp"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text=""
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:typeface="sans"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.942"
+            app:layout_constraintStart_toStartOf="parent" />
 
-        </LinearLayout>
+        <ProgressBar
+            android:id="@+id/ThirdprogressBarCorrida"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="201dp"
+            android:layout_height="15dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.316"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.808">
+
+        </ProgressBar>
+
+    </android.support.constraint.ConstraintLayout>
+
+
+
+
+
+
+    <!--<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/edit_text_shape"
+            android:gravity="center"
+            android:text="Desafios Corrida"
+            android:textColor="@color/whiteLetters"
+            android:textSize="20sp" />
+
+        <CheckBox
+            android:id="@+id/checkBox21"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:text="Run 2km" />
+
+        <CheckBox
+            android:id="@+id/checkBox5"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:text="Run 5km" />
+
+        <CheckBox
+            android:id="@+id/checkBox2"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:text="Run 10km" />
+
+        <TextView
+            android:id="@+id/textViewChallenge2"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/edit_text_shape"
+            android:gravity="center"
+            android:text="Desafios Caminhada"
+            android:textColor="@color/whiteLetters"
+            android:textSize="20sp" />
+
+        <CheckBox
+            android:id="@+id/checkBoxCaminhada1"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:text="Andar 2km" />
+
+        <CheckBox
+            android:id="@+id/checkBoxCaminhada2"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:text="Andar 10km" />
+
+        <CheckBox
+            android:id="@+id/checkBoxCaminhada3"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:text="Andar 20km" />
+
+        <TextView
+            android:id="@+id/textViewCiclismo"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/edit_text_shape"
+            android:gravity="center"
+            android:text="Desafios Ciclismo"
+            android:textColor="@color/whiteLetters"
+            android:textSize="20sp" />
+
+        <CheckBox
+            android:id="@+id/checkBoxCiclismo1"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:text="Correr 25km" />
+
+        <CheckBox
+            android:id="@+id/checkBoxCiclismo2"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:text="Correr 30km" />
+
+        <CheckBox
+            android:id="@+id/checkBoxCiclismo3"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:text="Correr 120km" />
+
+    </LinearLayout>
 -->
 
 
