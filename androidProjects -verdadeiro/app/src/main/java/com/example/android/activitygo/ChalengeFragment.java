@@ -76,6 +76,8 @@ public class ChalengeFragment extends Fragment {
         String[] chalenges = {"Faça 2 km", "Faça 2 km antes dos 10 minutos", "Faça uma corrida de 30 minutos", "Faça uma corrida de 10 min", "Faça uma corrida de 5km",
                 "Faça 7km", "Faça 3km em 15 min"};
 
+        int[] points = {100,200,200,50,500,1000,2000};
+
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
 
@@ -83,7 +85,7 @@ public class ChalengeFragment extends Fragment {
 
             int index = randomChallenge.nextInt(chalenges.length);
             String id = databaseChallenges.push().getKey();
-            Challenge c = new Challenge(username, "corrida", chalenges[index], dateFormat.format(date));
+            Challenge c = new Challenge(username, "corrida", chalenges[index], dateFormat.format(date),points[index]);
             databaseChallenges.child(id).setValue(c);
 
         }

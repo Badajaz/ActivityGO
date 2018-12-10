@@ -6,16 +6,18 @@ public class Challenge {
     private String descricao;
     private String data;
     private String mUsername;
+    private int pontos;
 
     public Challenge() {
 
     }
 
-    public Challenge(String username, String tipoDesporto, String descricao, String data) {
+    public Challenge(String username, String tipoDesporto, String descricao, String data, int pontos) {
         this.tipoDesporto = tipoDesporto;
         this.descricao = descricao;
         this.data = data;
         this.mUsername = username;
+        this.pontos = pontos;
     }
 
     public String getmUsername() {
@@ -32,5 +34,9 @@ public class Challenge {
 
     public String getData() {
         return data;
+    }
+
+    public int getPontos() {
+        return pontos;
     }
 }
