@@ -48,6 +48,7 @@ public class ProcuraGrupos extends Fragment {
     private ArrayList<String> listaPessoas;
     private Grupo g;
     private View v;
+    private ValueEventListener grupos;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
@@ -66,7 +67,7 @@ public class ProcuraGrupos extends Fragment {
 
 
 
-        databaseGrupo.addValueEventListener(new ValueEventListener() {
+        grupos = databaseGrupo.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String valores = "";
@@ -138,6 +139,12 @@ public class ProcuraGrupos extends Fragment {
         return v;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        databaseGrupo.removeEventListener(grupos);
+
+    }
 
     public void resultadosInexistentesPopup() {
         Button okButton;

@@ -9,12 +9,31 @@
     android:orientation="vertical"
     tools:context=".ChalengeFragment">
 
+
+    <ScrollView
+        android:layout_width="383dp"
+        android:layout_height="845dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toTopOf="@+id/firstConstrainte"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+
     <android.support.constraint.ConstraintLayout
         android:id="@+id/firstConstrainte"
         android:layout_width="match_parent"
         android:layout_height="125dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="16dp"
 
         android:layout_marginEnd="8dp"
         android:background="@drawable/layout_border"
@@ -85,19 +104,18 @@
 
     </android.support.constraint.ConstraintLayout>
 
-
     <android.support.constraint.ConstraintLayout
         android:id="@+id/secondConstrainte"
         android:layout_width="match_parent"
         android:layout_height="125dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="160dp"
 
         android:layout_marginEnd="8dp"
         android:background="@drawable/layout_border"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -162,13 +180,12 @@
 
     </android.support.constraint.ConstraintLayout>
 
-
     <android.support.constraint.ConstraintLayout
         android:id="@+id/ThirdConstrainte"
         android:layout_width="match_parent"
         android:layout_height="125dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="376dp"
+        android:layout_marginTop="304dp"
 
         android:layout_marginEnd="8dp"
         android:background="@drawable/layout_border"
@@ -238,10 +255,6 @@
         </ProgressBar>
 
     </android.support.constraint.ConstraintLayout>
-
-
-
-
 
 
     <!--<LinearLayout
