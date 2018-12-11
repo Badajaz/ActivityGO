@@ -12,10 +12,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.android.activitygo.model.Grupo;
 import com.example.android.activitygo.model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,8 +26,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -34,8 +42,10 @@ public class SettingsActivity extends AppCompatActivity {
     private Button confirmaAltPerfil;
     private Button eliminarContaButton;
     private Button informacoesPrivadas;
+    private Button alterarDesportoFavorito;
     private Button buttonCalendario;
     private Dialog eliminarContaDialog;
+    private Dialog desportoFavoritoDialog;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private DatePickerDialog.OnDateSetListener mDateSetListenerForCalendar;
     private static final String TAG = "SettingsActivity";
@@ -68,6 +78,8 @@ public class SettingsActivity extends AppCompatActivity {
     private String fn;
     private String ln;
 
+    private User u;
+
     private String usernameReceived;
 
     private Toolbar toolbarCima;
@@ -85,6 +97,7 @@ public class SettingsActivity extends AppCompatActivity {
         dialogChangeProfile = new Dialog(this);
         dialogCalendario = new Dialog(this);
         eliminarContaDialog = new Dialog(this);
+        desportoFavoritoDialog = new Dialog(this);
         imv = (ImageView) findViewById(R.id.imageViewSettings);
         displayName = (TextView) findViewById(R.id.namePessoaMenuSettings);
         displayDesporto = (TextView) findViewById(R.id.desportoFavoritoSettings);
@@ -142,6 +155,98 @@ public class SettingsActivity extends AppCompatActivity {
                 showEliminarContaPopup();
             }
         });
+
+        alterarDesportoFavorito = (Button) findViewById(R.id.buttonAlterarDesportoFavorito);
+        alterarDesportoFavorito.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDesportoFavoritoPopup();
+            }
+        });
+    }
+
+    public void showDesportoFavoritoPopup() {
+        TextView close, popupId;
+        final Button confirm;
+        final CheckBox checkBoxCorrida, checkBoxCaminhada, checkBoxFutebol, checkBoxCiclismo;
+        desportoFavoritoDialog.setContentView(R.layout.change_favorite_sport);
+        close = (TextView) desportoFavoritoDialog.findViewById(R.id.txtClose);
+        popupId = (TextView) desportoFavoritoDialog.findViewById(R.id.popUpId);
+        confirm = (Button) desportoFavoritoDialog.findViewById(R.id.buttonConfirmar);
+        checkBoxCaminhada = (CheckBox) desportoFavoritoDialog.findViewById(R.id.caminhada);
+        checkBoxCorrida = (CheckBox) desportoFavoritoDialog.findViewById(R.id.corrida);
+        checkBoxFutebol = (CheckBox) desportoFavoritoDialog.findViewById(R.id.futebol);
+        checkBoxCiclismo = (CheckBox) desportoFavoritoDialog.findViewById(R.id.ciclismo);
+        popupId.setText("Mudar o meu desporto favorito:");
+
+        databaseUsers.orderByChild("username").equalTo(usernameReceived).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
+                ArrayList<String> array = new ArrayList<>();
+                final ArrayList<String> newSports = new ArrayList<>();
+                u = dataSnapshot.getValue(User.class);
+                array = u.getSports();
+                
+                for (String str : array) {
+                    switch (str) {
+                        case "CAMINHADA":
+                            checkBoxCaminhada.setChecked(true);
+                            break;
+                        case "CORRIDA":
+                            checkBoxCorrida.setChecked(true);
+                            break;
+                        case "CICLISMO":
+                            checkBoxCiclismo.setChecked(true);
+                            break;
+                        case "FUTEBOL":
+                            checkBoxFutebol.setChecked(true);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+                if (checkBoxCaminhada.isChecked()) {
+                    newSports.add("CAMINHADA");
+                }
+                if (checkBoxCiclismo.isChecked()) {
+                    newSports.add("CICLISMO");
+                }
+                if (checkBoxCorrida.isChecked()) {
+                    newSports.add("CORRIDA");
+                }
+                if (checkBoxFutebol.isChecked()) {
+                    newSports.add("FUTEBOL");
+                }
+
+                confirm.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        databaseUsers.child(dataSnapshot.getKey()).child("sports").setValue(newSports);
+                    }
+                });
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        close.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick(View v) {
+                desportoFavoritoDialog.dismiss();
+            }
+        });
+        desportoFavoritoDialog.getWindow().
+
+                setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        desportoFavoritoDialog.show();
     }
 
     public void showEliminarContaPopup() {
@@ -159,7 +264,7 @@ public class SettingsActivity extends AppCompatActivity {
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialogTerminarSessao.dismiss();
+                eliminarContaDialog.dismiss();
             }
         });
 
@@ -195,7 +300,7 @@ public class SettingsActivity extends AppCompatActivity {
         noButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialogTerminarSessao.dismiss();
+                eliminarContaDialog.dismiss();
             }
         });
         eliminarContaDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));

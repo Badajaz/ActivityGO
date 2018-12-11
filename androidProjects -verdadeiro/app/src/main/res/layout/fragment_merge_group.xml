@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     tools:context=".MergeGroupFragment">
 
     <LinearLayout
@@ -25,9 +26,8 @@
             android:backgroundTint="#006aff"
             android:ems="10"
             android:fontFamily="sans-serif"
-            android:hint="@string/NomeGrupo"
+            android:hint="Nome do Grupo"
             android:inputType="textPersonName"
-            android:padding="5dp"
             android:textColorHint="#808080"
             android:textSize="16sp"
             android:typeface="sans"

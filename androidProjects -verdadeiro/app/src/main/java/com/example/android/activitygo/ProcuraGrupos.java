@@ -35,9 +35,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class ProcuraGrupos extends Fragment {
 
     private ArrayAdapter<String> listViewAdapter;
@@ -60,12 +57,8 @@ public class ProcuraGrupos extends Fragment {
         dialogResultadoInexistente = new Dialog(getContext());
         dialogWrongPassword = new Dialog(getContext());
 
-
         final String pesquisa = getArguments().getString("PESQUISA");
         username = getArguments().getString("USERNAME");
-
-
-
 
         grupos = databaseGrupo.addValueEventListener(new ValueEventListener() {
             @Override
@@ -88,39 +81,38 @@ public class ProcuraGrupos extends Fragment {
 
                 }
                 if (!array.isEmpty()) {
-                   // v = inflater.inflate(R.layout.fragment_procura_grupos, container, false);
-                   if ( getActivity()!= null) {
-                       ListView listView = (ListView) v.findViewById(R.id.ListaResultados);
-                       //String[] value = getArguments().getStringArray("PROCURA");
+                    // v = inflater.inflate(R.layout.fragment_procura_grupos, container, false);
+                    if (getActivity() != null) {
+                        ListView listView = (ListView) v.findViewById(R.id.ListaResultados);
+                        //String[] value = getArguments().getStringArray("PROCURA");
 
-                       listViewAdapter = new ArrayAdapter<String>(
-                               getActivity(), android.R.layout.simple_list_item_1, array);
-                       listView.setAdapter(listViewAdapter);
-                       listViewAdapter.notifyDataSetChanged();
+                        listViewAdapter = new ArrayAdapter<String>(
+                                getActivity(), android.R.layout.simple_list_item_1, array);
+                        listView.setAdapter(listViewAdapter);
+                        listViewAdapter.notifyDataSetChanged();
 
-                       listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+                            private ListaDeElementosJuntarGrupo SelectedFragment;
 
-                           private ListaDeElementosJuntarGrupo SelectedFragment;
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                //Toast.makeText(getContext(),array.get(position),Toast.LENGTH_LONG).show();
+                                //confirmJoin(array.get(position))
+                                Bundle args = new Bundle();
+                                args.putString("NOMEGRUPO", g.getNome());
+                                args.putString("USERNAME", username);
+                                SelectedFragment = new ListaDeElementosJuntarGrupo();
+                                SelectedFragment.setArguments(args);
+                                FragmentManager fmana = getFragmentManager();
+                                FragmentTransaction ftransacti = fmana.beginTransaction();
+                                ftransacti.replace(R.id.fragment_container, SelectedFragment, "GroupFragment");
+                                ftransacti.commit();
 
-                           @Override
-                           public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                               //Toast.makeText(getContext(),array.get(position),Toast.LENGTH_LONG).show();
-                               //confirmJoin(array.get(position))
-                               Bundle args = new Bundle();
-                               args.putString("NOMEGRUPO", g.getNome());
-                               args.putString("USERNAME", username);
-                               SelectedFragment = new ListaDeElementosJuntarGrupo();
-                               SelectedFragment.setArguments(args);
-                               FragmentManager fmana = getFragmentManager();
-                               FragmentTransaction ftransacti = fmana.beginTransaction();
-                               ftransacti.replace(R.id.fragment_container, SelectedFragment, "GroupFragment");
-                               ftransacti.commit();
+                            }
 
-                           }
-
-                       });
-                   }
+                        });
+                    }
 
                 } else {
                     resultadosInexistentesPopup();
@@ -135,7 +127,6 @@ public class ProcuraGrupos extends Fragment {
 
         });
 
-
         return v;
     }
 
@@ -143,7 +134,6 @@ public class ProcuraGrupos extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         databaseGrupo.removeEventListener(grupos);
-
     }
 
     public void resultadosInexistentesPopup() {
@@ -255,7 +245,4 @@ public class ProcuraGrupos extends Fragment {
         dialogWrongPassword.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialogWrongPassword.show();
     }
-
-
 }
-

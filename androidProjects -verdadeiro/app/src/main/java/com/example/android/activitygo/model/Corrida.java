@@ -14,9 +14,8 @@ public class Corrida {
     private String username;
     private String melhorkm;
 
-
-    public Corrida(){}
-
+    public Corrida() {
+    }
 
     public Corrida(String username, String data, double distancia, String tempo, double pace, ArrayList<Double> coordenadas, String melhorkm) {
         this.data = data;
