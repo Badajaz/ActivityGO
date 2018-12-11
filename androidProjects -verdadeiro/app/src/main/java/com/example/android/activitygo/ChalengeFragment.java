@@ -1,11 +1,14 @@
 package com.example.android.activitygo;
 
+import android.app.Notification;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.NonNull;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +52,9 @@ public class ChalengeFragment extends Fragment {
     private ArrayList<String> descricaoChallenges = new ArrayList<>();
     private DatabaseReference databaseDesafios;
 
+    public static final String CHANNEL_1_ID = "channel1";
+
+    private NotificationManagerCompat notificationManager;
 
     public ChalengeFragment() {
         // Required empty public constructor
@@ -66,15 +72,12 @@ public class ChalengeFragment extends Fragment {
         segundatv = v.findViewById(R.id.secondChallenge);
         terceiratv = v.findViewById(R.id.ThirdChallenge);
 
-
         Bundle extras = getArguments();
         if (extras != null) {
             username = extras.getString("USERNAME");
         } else {
             username = "";
         }
-
-
 
 
         databaseChallenges.addValueEventListener(new ValueEventListener() {
@@ -86,27 +89,16 @@ public class ChalengeFragment extends Fragment {
                 for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                     Challenge c = userSnapshot.getValue(Challenge.class);
                     if (!c.getData().equals(dateFormat.format(date))) {
-
                         databaseChallenges.removeValue();
                         FirebaseDatabase.getInstance().getReference().child("desafios").setValue(0);
-
                     }
-
                 }
-
-
             }
-
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
-
-
-
-
 
         ValueEventListener ola = FirebaseDatabase.getInstance().getReference().child("desafios").addValueEventListener(new ValueEventListener() {
             @Override
@@ -131,15 +123,21 @@ public class ChalengeFragment extends Fragment {
                             Challenge c = new Challenge(username, "corrida", chalenges[index], dateFormat.format(date), points[index]);
                             databaseChallenges.child(id).setValue(c);
 
+                            //NOTIFICACOES PARA NOVOS DESAFIOS
+                            notificationManager = NotificationManagerCompat.from(getActivity());
+                            Notification notification = new NotificationCompat.Builder(getActivity(), CHANNEL_1_ID)
+                                    .setSmallIcon(R.drawable.notification_icon)
+                                    .setContentTitle("Tem novas challenges!")
+                                    .setPriority(NotificationCompat.PRIORITY_HIGH)
+                                    .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                                    .build();
+
+                            notificationManager.notify(1, notification);
+
                             FirebaseDatabase.getInstance().getReference().child("desafios").setValue(1);
-
-
                         }
                     }
-
-
                 }
-
 
                 databaseChallenges.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -150,7 +148,6 @@ public class ChalengeFragment extends Fragment {
                             if (c.getmUsername().equals(username)) {
                                 descricaoChallenges.add(c.getDescricao());
                             }
-
                         }
 
                         primeiratv.setText(descricaoChallenges.get(0));
@@ -158,7 +155,6 @@ public class ChalengeFragment extends Fragment {
                         terceiratv.setText(descricaoChallenges.get(2));
 
                     }
-
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -172,38 +168,12 @@ public class ChalengeFragment extends Fragment {
             }
         });
 
-
         databaseChallenges.removeEventListener(ola);
-
 
         ProgressBar corrida = (ProgressBar) v.findViewById(R.id.progressBarCorrida);
         corrida.setMax(5);
         corrida.setProgress(3);
         corrida.setProgressTintList(ColorStateList.valueOf(Color.parseColor("#FFA500")));
-
-       /* databaseAllChallenges.orderByChild("Corrida").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                Random randomGenerator = new Random();
-                int index = randomGenerator.nextInt(listaCorrida.size());
-                String randomValue = listaCorrida.get(index);
-
-                Date c = Calendar.getInstance().getTime();
-                SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
-                String formattedDate = df.format(c);
-                String id = databaseChallenges.push().getKey();
-                Challenge ch = new Challenge("Corrida", randomValue, formattedDate);
-                databaseChallenges.child(id).setValue(ch);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });*/
         return v;
     }
-
-
 }
