@@ -1,6 +1,7 @@
 package com.example.android.activitygo;
 
 import android.app.Fragment;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
@@ -11,9 +12,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,11 +29,13 @@ import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.lang.reflect.Array;
+import java.security.KeyStore;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Map;
 import java.util.Random;
 
 public class HistoricoCorridas extends Fragment {
@@ -49,6 +57,13 @@ public class HistoricoCorridas extends Fragment {
     private ArrayList<String> dates;
     private Random random;
     private ArrayList<BarEntry> barEntries;
+
+
+    LineChart lineChart;
+    ArrayList<String> xAxes = new ArrayList<>();
+    ArrayList<Entry> yAxes = new ArrayList<>();
+    ArrayList<ILineDataSet> lineDataSets = new ArrayList<>();
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -98,6 +113,36 @@ public class HistoricoCorridas extends Fragment {
 
             }
         });
+
+
+        lineChart = (LineChart) v.findViewById(R.id.LineChart);
+        xAxes.add("Monday");
+        xAxes.add("Tuesday");
+        xAxes.add("Wednesday");
+        xAxes.add("Thursday");
+        xAxes.add("Friday");
+
+        yAxes.add(new Entry(10,0));
+        yAxes.add(new Entry(50,1));
+        yAxes.add(new Entry(40,2));
+        yAxes.add(new Entry(60,3));
+        yAxes.add(new Entry(20,4));
+        String [] xaxes = new String[xAxes.size()];
+        for (int i = 0 ;i < xAxes.size();i++){
+            xaxes[i] = xAxes.get(i).toString();
+        }
+
+        LineDataSet lineDataSet = new LineDataSet(yAxes,"values");
+        lineDataSet.setDrawCircles(true);
+        lineDataSet.setColor(Color.BLUE);
+        lineDataSets.add(lineDataSet);
+
+        lineChart.setData(new LineData(xaxes,lineDataSets));
+        lineChart.setVisibleXRangeMaximum(65f);
+        lineChart.setTouchEnabled(true);
+        lineChart.setDragEnabled(true);
+
+
         return v;
     }
 
