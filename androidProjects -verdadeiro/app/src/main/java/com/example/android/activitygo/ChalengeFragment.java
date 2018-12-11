@@ -1,10 +1,12 @@
 package com.example.android.activitygo;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +47,7 @@ public class ChalengeFragment extends Fragment {
     private TextView terceiratv;
 
     private ArrayList<String> descricaoChallenges = new ArrayList<>();
+    private DatabaseReference databaseDesafios;
 
 
     public ChalengeFragment() {
@@ -71,41 +74,26 @@ public class ChalengeFragment extends Fragment {
             username = "";
         }
 
-        Random randomChallenge = new Random();
 
-        String[] chalenges = {"Faça 2 km", "Faça 2 km antes dos 10 minutos", "Faça uma corrida de 30 minutos", "Faça uma corrida de 10 min", "Faça uma corrida de 5km",
-                "Faça 7km", "Faça 3km em 15 min"};
-
-        int[] points = {100,200,200,50,500,1000,2000};
-
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        Date date = new Date();
-
-        for (int i = 0; i < 3; i++) {
-
-            int index = randomChallenge.nextInt(chalenges.length);
-            String id = databaseChallenges.push().getKey();
-            Challenge c = new Challenge(username, "corrida", chalenges[index], dateFormat.format(date),points[index]);
-            databaseChallenges.child(id).setValue(c);
-
-        }
 
 
         databaseChallenges.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                Date date = new Date();
                 String valores = "";
                 for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                     Challenge c = userSnapshot.getValue(Challenge.class);
-                    if (c.getmUsername().equals(username)) {
-                        descricaoChallenges.add(c.getDescricao());
+                    if (!c.getData().equals(dateFormat.format(date))) {
+
+                        databaseChallenges.removeValue();
+                        FirebaseDatabase.getInstance().getReference().child("desafios").setValue(0);
+
                     }
 
                 }
 
-                primeiratv.setText(descricaoChallenges.get(0));
-                segundatv.setText(descricaoChallenges.get(1));
-                terceiratv.setText(descricaoChallenges.get(2));
 
             }
 
@@ -118,6 +106,74 @@ public class ChalengeFragment extends Fragment {
 
 
 
+
+
+        ValueEventListener ola = FirebaseDatabase.getInstance().getReference().child("desafios").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                Log.d("DESAFIOS", "" + snapshot.getValue());
+                if (snapshot.getValue() != null) {
+                    if (Long.valueOf(snapshot.getValue().toString()) == 0) {
+                        Toast.makeText(getContext(), "" + snapshot.getValue(), Toast.LENGTH_SHORT).show();
+                        Log.d("DESAFIOS1", "" + snapshot.getValue());
+                        Random randomChallenge = new Random();
+                        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                        Date date = new Date();
+                        String[] chalenges = {"Faça 2 km", "Faça 2 km antes dos 10 minutos", "Faça uma corrida de 30 minutos", "Faça uma corrida de 10 min", "Faça uma corrida de 5km",
+                                "Faça 7km", "Faça 3km em 15 min"};
+
+                        int[] points = {100, 200, 200, 50, 500, 1000, 2000};
+                        for (int i = 0; i < 3; i++) {
+
+                            int index = randomChallenge.nextInt(chalenges.length);
+                            Log.d("DESAFIOS2", "" + snapshot.getValue());
+                            String id = databaseChallenges.push().getKey();
+                            Challenge c = new Challenge(username, "corrida", chalenges[index], dateFormat.format(date), points[index]);
+                            databaseChallenges.child(id).setValue(c);
+
+                            FirebaseDatabase.getInstance().getReference().child("desafios").setValue(1);
+
+
+                        }
+                    }
+
+
+                }
+
+
+                databaseChallenges.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        String valores = "";
+                        for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                            Challenge c = userSnapshot.getValue(Challenge.class);
+                            if (c.getmUsername().equals(username)) {
+                                descricaoChallenges.add(c.getDescricao());
+                            }
+
+                        }
+
+                        primeiratv.setText(descricaoChallenges.get(0));
+                        segundatv.setText(descricaoChallenges.get(1));
+                        terceiratv.setText(descricaoChallenges.get(2));
+
+                    }
+
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+
+        databaseChallenges.removeEventListener(ola);
 
 
         ProgressBar corrida = (ProgressBar) v.findViewById(R.id.progressBarCorrida);
@@ -148,4 +204,6 @@ public class ChalengeFragment extends Fragment {
         });*/
         return v;
     }
+
+
 }
