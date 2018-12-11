@@ -70,7 +70,7 @@ public class HistoriaStatus extends Fragment {
         username = getArguments().getString("USERNAME");
         marcadores = getArguments().getParcelableArrayList("Markers");
         melhorkm = getArguments().getString("MELHORKM");
-        Toast.makeText(getContext(),"MELHORKM "+melhorkm,Toast.LENGTH_LONG).show();
+        //Toast.makeText(getContext(),"MELHORKM "+melhorkm,Toast.LENGTH_LONG).show();
         double pace = tempoPace / distancia;
         if (distancia == 0) {
             pace = 0;

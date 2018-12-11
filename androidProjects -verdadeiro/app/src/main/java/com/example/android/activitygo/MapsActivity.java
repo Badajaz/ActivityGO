@@ -28,9 +28,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import static java.lang.Math.acos;
@@ -55,8 +58,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Fragment SelectedFragment;
     private boolean isStopped = false;
 
-    private String date;
-
     private Button finalizar;
 
     private ArrayList<LatLng> arrayMarkers = new ArrayList<LatLng>();
@@ -64,6 +65,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private boolean atingiu = false;
     private String chronoTime;
+    private Date date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,18 +75,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         databaseCorrida = FirebaseDatabase.getInstance().getReference("corrida");
 
-        Calendar cal = Calendar.getInstance();
-        final int year = cal.get(Calendar.YEAR);
-        final int month = cal.get(Calendar.MONTH);
-        final int day = cal.get(Calendar.DAY_OF_MONTH);
-
-        date = day + "/" + month + "/" + year;
-        Log.d("DATA", date);
-
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        /*SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);*/
-        //mapFragment.getMapAsync(this);
+        final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        date = new Date();
+        
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
@@ -138,7 +131,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         pauseOff = SystemClock.elapsedRealtime() - chronometer.getBase();
 
 
-                        if (accKm > 999 && atingiu == false){
+                        if (accKm > 999 && atingiu == false) {
                             double timeSconverted = Double.valueOf((int) pauseOff / 1000);
                             double time = timeSconverted / 60;
                             int timeInteiro = (int) time;
@@ -155,14 +148,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 chronoTime = "" + timeInteiro + ":" + (int) segundos;
                             }
 
-                            Toast.makeText(getApplicationContext(),"CHRONOTIME "+chronoTime,Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "CHRONOTIME " + chronoTime, Toast.LENGTH_SHORT).show();
 
                             atingiu = true;
                         }
-
-
-
-
 
 
                         //   posicoes.remove(0);
@@ -260,12 +249,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     Fragment p = new HistoriaStatus();
                     Bundle args = new Bundle();
                     args.putParcelableArrayList("Markers", arrayMarkers);
-                    args.putString("DATAS", date);
+                    args.putString("DATAS", dateFormat.format(date));
                     args.putLong("TEMPOPACE", (int) pauseOffset / 1000);
                     args.putString("TEMPO", "" + (int) pauseOffset / 1000);
                     args.putDouble("DISTANCIA", accKm);
                     args.putString("USERNAME", username);
-                    args.putString("MELHORKM",chronoTime);
+                    args.putString("MELHORKM", chronoTime);
                     p.setArguments(args);
                     getFragmentManager().beginTransaction().replace(R.id.fragmentMap, p).commit();
                     Start.setVisibility(View.GONE);
