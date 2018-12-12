@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#329d77"
+    android:background="@color/white"
     tools:context=".GroupFragment">
 
     <Button
@@ -19,20 +19,20 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/edit_text_shape"
-        android:drawableRight="@drawable/run"
+        android:background="@drawable/edit_test"
+        android:drawableRight="@drawable/run_test"
         android:fontFamily="sans-serif"
         android:gravity="center"
         android:text="Criar Grupo"
         android:textAllCaps="false"
         android:textColor="#ffffff"
-        android:textSize="16sp"
+        android:textSize="20sp"
         android:typeface="sans"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.139" />
+        app:layout_constraintVertical_bias="0.147" />
 
     <Button
         android:id="@+id/buttonJuntarGrupo"
@@ -45,20 +45,20 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/edit_text_shape"
-        android:drawableRight="@drawable/groupdois"
+        android:background="@drawable/edit_test"
+        android:drawableRight="@drawable/add_grouptest"
         android:fontFamily="sans-serif"
         android:gravity="center"
         android:text="Juntar Grupo"
         android:textAllCaps="false"
         android:textColor="#ffffff"
-        android:textSize="16sp"
+        android:textSize="20sp"
         android:typeface="sans"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonCriarGrupo"
-        app:layout_constraintVertical_bias="0.061" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.412" />
 
     <Button
         android:id="@+id/buttonMyGroups"
@@ -70,20 +70,20 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/edit_text_shape"
-        android:drawableRight="@drawable/groupdois"
+        android:layout_marginBottom="80dp"
+        android:background="@drawable/edit_test"
+        android:drawableRight="@drawable/group_test"
         android:fontFamily="sans-serif"
         android:gravity="center"
         android:text="Os Meus Grupos"
         android:textAllCaps="false"
         android:textColor="#ffffff"
-        android:textSize="16sp"
+        android:textSize="20sp"
         android:typeface="sans"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonJuntarGrupo"
-        app:layout_constraintVertical_bias="0.16" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.816" />
 
 </android.support.constraint.ConstraintLayout>
