@@ -3,18 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#329d92"
+    android:background="@color/white"
     tools:context=".StartCorridaFragment">
 
     <TextView
         android:id="@+id/kmTextViewRun"
         android:layout_width="258dp"
         android:layout_height="74dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="97dp"
-        android:layout_marginEnd="58dp"
-        android:text="0.00Km"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="211dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="282dp"
+        android:text="   0.00Km"
         android:textSize="50sp" />
 
     <Button
@@ -24,7 +28,7 @@
         android:layout_marginStart="120dp"
         android:layout_marginTop="300dp"
         android:background="@drawable/button_states"
-        android:drawableStart="@drawable/pause"
+        android:drawableStart="@drawable/pause_test"
         android:textSize="30dp" />
 
     <Button
@@ -34,16 +38,19 @@
         android:layout_marginStart="210dp"
         android:layout_marginTop="300dp"
         android:background="@drawable/button_states"
-        android:drawableStart="@drawable/play"
+        android:drawableStart="@drawable/play_test"
         android:textSize="30dp" />
 
     <Chronometer
         android:id="@+id/chronometer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/StopRun"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="-356dp"
+        android:layout_width="116dp"
+        android:layout_height="61dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="145dp"
+        android:layout_marginTop="132dp"
+        android:layout_marginEnd="123dp"
         android:textSize="30sp" />
 
 </RelativeLayout>

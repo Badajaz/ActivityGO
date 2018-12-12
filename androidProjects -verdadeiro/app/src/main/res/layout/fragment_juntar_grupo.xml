@@ -5,7 +5,7 @@
     android:id="@+id/JuntarGroups"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#329d92"
+    android:background="@color/white"
     tools:context=".JuntarGrupoFragment">
 
     <TextView
@@ -17,7 +17,7 @@
         android:layout_marginBottom="8dp"
         android:gravity="center"
         android:text="Procurar por Nome ou Desporto"
-        android:textColor="#ffffff"
+        android:textColor="#FFA500"
         android:textSize="22sp"
         android:textStyle="bold"
         android:typeface="sans"
@@ -34,7 +34,7 @@
         android:layout_height="59dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="48dp"
-        android:backgroundTint="#ffffff"
+        android:backgroundTint="#FFA500"
         android:ems="10"
         android:inputType="text"
         android:textSize="20sp"
@@ -52,6 +52,7 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/button_border"
         android:text="Procurar"
+        android:textColor="#FFFFFF"
         app:layout_constraintBaseline_toBaselineOf="@+id/NomeGrupo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/NomeGrupo" />
