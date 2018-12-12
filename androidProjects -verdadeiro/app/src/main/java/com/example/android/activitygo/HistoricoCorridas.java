@@ -1,23 +1,26 @@
 package com.example.android.activitygo;
 
 import android.app.Fragment;
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.example.android.activitygo.model.Corrida;
+import com.example.android.activitygo.model.Grupo;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.google.android.gms.maps.model.LatLng;
@@ -57,12 +60,6 @@ public class HistoricoCorridas extends Fragment {
     private ArrayList<String> dates;
     private Random random;
     private ArrayList<BarEntry> barEntries;
-
-
-    LineChart lineChart;
-    ArrayList<String> xAxes = new ArrayList<>();
-    ArrayList<Entry> yAxes = new ArrayList<>();
-    ArrayList<ILineDataSet> lineDataSets = new ArrayList<>();
 
 
     @Override
@@ -113,40 +110,71 @@ public class HistoricoCorridas extends Fragment {
 
             }
         });
+        barChart = (BarChart) v.findViewById(R.id.bargraph);
 
 
-        lineChart = (LineChart) v.findViewById(R.id.LineChart);
-        xAxes.add("Monday");
-        xAxes.add("Tuesday");
-        xAxes.add("Wednesday");
-        xAxes.add("Thursday");
-        xAxes.add("Friday");
 
-        yAxes.add(new Entry(10,0));
-        yAxes.add(new Entry(50,1));
-        yAxes.add(new Entry(40,2));
-        yAxes.add(new Entry(60,3));
-        yAxes.add(new Entry(20,4));
-        String [] xaxes = new String[xAxes.size()];
-        for (int i = 0 ;i < xAxes.size();i++){
-            xaxes[i] = xAxes.get(i).toString();
-        }
+        databaseCorrida.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ArrayList<String> datas = new ArrayList<>();
+                ArrayList<Double> distance = new ArrayList<>();
 
-        LineDataSet lineDataSet = new LineDataSet(yAxes,"values");
-        lineDataSet.setDrawCircles(true);
-        lineDataSet.setColor(Color.BLUE);
-        lineDataSets.add(lineDataSet);
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot child : dataSnapshot.getChildren()) {
+                        //String pwd = String.valueOf(child.child("password").getValue());
+                        Corrida c = child.getValue(Corrida.class);
+                        datas.add(c.getData());
+//                        Log.d("DATASSSSS",c.getData());
+                        distance.add(c.getDistancia());
 
-        lineChart.setData(new LineData(xaxes,lineDataSets));
-        lineChart.setVisibleXRangeMaximum(65f);
-        lineChart.setTouchEnabled(true);
-        lineChart.setDragEnabled(true);
+                    }
+                }
+
+                ArrayList<BarEntry> barEntry = new ArrayList<>();
+                int i = 0;
+                for (double s :distance){
+                    barEntry.add(new BarEntry((float)s, i));
+                    i++;
+                }
+                BarDataSet barDataSet = new BarDataSet(barEntry, "Dates");
+
+                BarData theData = new BarData(datas, barDataSet);
+
+                barChart.setData(theData);
+                barChart.setTouchEnabled(true);
+                barChart.setDragEnabled(true);
+                barChart.setScaleEnabled(true);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
 
+
+
+
+
+
+       /* BarDataSet barDataSet = new BarDataSet(barEntries, "Dates");
+        BarData barData = new BarData(dates, barDataSet);
+        barChart.setData(barData);
+        barChart.setDescription("My First Bar Graph!");
+
+
+
+
+        createRandomBarGraph("2016/05/05","2016/06/01");
+*/
         return v;
     }
 
-    public void createRandomBarGraph(String Date1, String Date2) {
+   /* public void createRandomBarGraph(String Date1, String Date2) {
+
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
 
@@ -205,5 +233,5 @@ public class HistoricoCorridas extends Fragment {
             e.printStackTrace();
         }
         return curDate;
-    }
+    }*/
 }
