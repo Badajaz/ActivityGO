@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="300dp"
     android:layout_height="200dp"
     android:layout_gravity="center"
@@ -32,15 +31,14 @@
         android:layout_height="wrap_content"
         android:buttonTint="#FFA500"
         android:fontFamily="open-sans"
-        android:onClick="getCaminhadaItem"
         android:text="Caminhada"
         android:textColor="#808080"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.186"
+        app:layout_constraintHorizontal_bias="0.138"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.171" />
+        app:layout_constraintVertical_bias="0.369" />
 
     <CheckBox
         android:id="@+id/corrida"
@@ -52,10 +50,10 @@
         android:textColor="#808080"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.868"
+        app:layout_constraintHorizontal_bias="0.86"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.763" />
+        app:layout_constraintVertical_bias="0.636" />
 
     <CheckBox
         android:id="@+id/futebol"
@@ -67,10 +65,10 @@
         android:textColor="#808080"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/popUpId"
-        app:layout_constraintHorizontal_bias="0.875"
+        app:layout_constraintHorizontal_bias="0.86"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.157" />
+        app:layout_constraintVertical_bias="0.375" />
 
     <CheckBox
         android:id="@+id/ciclismo"
@@ -82,10 +80,10 @@
         android:textColor="#808080"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/popUpId"
-        app:layout_constraintHorizontal_bias="0.154"
+        app:layout_constraintHorizontal_bias="0.138"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.743" />
+        app:layout_constraintVertical_bias="0.636" />
 
     <TextView
         android:id="@+id/txtClose"
@@ -106,17 +104,20 @@
 
     <Button
         android:id="@+id/buttonConfirmar"
-        android:layout_width="250dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="83dp"
+        android:layout_height="40dp"
         android:background="@drawable/round_edittext_states"
         android:fontFamily="sans-serif"
-        android:text="Confirmar"
+        android:gravity="center"
+        android:text="OK"
         android:textColor="#000000"
         android:textSize="16sp"
         android:typeface="sans"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ciclismo" />
+        app:layout_constraintTop_toBottomOf="@+id/ciclismo"
+        app:layout_constraintVertical_bias="0.304" />
 
 </android.support.constraint.ConstraintLayout>

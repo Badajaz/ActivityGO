@@ -16,9 +16,7 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.android.activitygo.model.Grupo;
 import com.example.android.activitygo.model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,13 +24,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -86,6 +79,9 @@ public class SettingsActivity extends AppCompatActivity {
     private User userUpdate;
 
     private DatabaseReference databaseUsers;
+
+    // key usada apenas para a parte das checkboxes, IMPORTANTE
+    private String key = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -177,56 +173,302 @@ public class SettingsActivity extends AppCompatActivity {
         checkBoxCorrida = (CheckBox) desportoFavoritoDialog.findViewById(R.id.corrida);
         checkBoxFutebol = (CheckBox) desportoFavoritoDialog.findViewById(R.id.futebol);
         checkBoxCiclismo = (CheckBox) desportoFavoritoDialog.findViewById(R.id.ciclismo);
-        popupId.setText("Mudar o meu desporto favorito:");
+        popupId.setText("Alterar o meu desporto favorito:");
 
         databaseUsers.orderByChild("username").equalTo(usernameReceived).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
+                // lista com os desportos
                 ArrayList<String> array = new ArrayList<>();
-                final ArrayList<String> newSports = new ArrayList<>();
-                u = dataSnapshot.getValue(User.class);
-                array = u.getSports();
-                
+
+                // lista para os novos desportos
+                final ArrayList<String> listaCurrentSports = new ArrayList<>();
+
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    u = child.getValue(User.class);
+                    if (key.equals("")) {
+                        key = child.getKey();
+                    }
+                    array = u.getSports();
+                }
+
                 for (String str : array) {
                     switch (str) {
                         case "CAMINHADA":
                             checkBoxCaminhada.setChecked(true);
+                            listaCurrentSports.add("CAMINHADA");
+
+                            checkBoxCaminhada.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    if (checkBoxCaminhada.isChecked()) {
+                                        listaCurrentSports.add("CAMINHADA");
+                                    } else {
+                                        if (listaCurrentSports.size() - 1 == 0) {
+                                            checkBoxCaminhada.requestFocus();
+                                            listaCurrentSports.remove("CAMINHADA");
+                                        } else {
+                                            listaCurrentSports.remove("CAMINHADA");
+                                        }
+                                    }
+                                }
+                            });
+                            checkBoxCiclismo.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    if (checkBoxCiclismo.isChecked()) {
+                                        listaCurrentSports.add("CICLISMO");
+                                    } else {
+                                        if (listaCurrentSports.size() - 1 == 0) {
+                                            checkBoxCiclismo.requestFocus();
+                                            listaCurrentSports.remove("CICLISMO");
+                                        } else {
+                                            listaCurrentSports.remove("CICLISMO");
+                                        }
+                                    }
+                                }
+                            });
+                            checkBoxCorrida.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    if (checkBoxCorrida.isChecked()) {
+                                        listaCurrentSports.add("CORRIDA");
+                                    } else {
+                                        if (listaCurrentSports.size() - 1 == 0) {
+                                            checkBoxCorrida.requestFocus();
+                                            listaCurrentSports.remove("CORRIDA");
+                                        } else {
+                                            listaCurrentSports.remove("CORRIDA");
+                                        }
+                                    }
+                                }
+                            });
+                            checkBoxFutebol.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    if (checkBoxFutebol.isChecked()) {
+                                        listaCurrentSports.add("FUTEBOL");
+                                    } else {
+                                        if (listaCurrentSports.size() - 1 == 0) {
+                                            checkBoxFutebol.requestFocus();
+                                            listaCurrentSports.remove("FUTEBOL");
+                                        } else {
+                                            listaCurrentSports.remove("FUTEBOL");
+                                        }
+                                    }
+                                }
+                            });
+
                             break;
                         case "CORRIDA":
                             checkBoxCorrida.setChecked(true);
+                            listaCurrentSports.add("CORRIDA");
+
+                            checkBoxCorrida.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    if (checkBoxCorrida.isChecked()) {
+                                        listaCurrentSports.add("CORRIDA");
+                                    } else {
+                                        if (listaCurrentSports.size() - 1 == 0) {
+                                            checkBoxCorrida.requestFocus();
+                                            listaCurrentSports.remove("CORRIDA");
+                                        } else {
+                                            listaCurrentSports.remove("CORRIDA");
+                                        }
+                                    }
+                                }
+                            });
+                            checkBoxCaminhada.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    if (checkBoxCaminhada.isChecked()) {
+                                        listaCurrentSports.add("CAMINHADA");
+                                    } else {
+                                        if (listaCurrentSports.size() - 1 == 0) {
+                                            checkBoxCaminhada.requestFocus();
+                                            listaCurrentSports.remove("CAMINHADA");
+                                        } else {
+                                            listaCurrentSports.remove("CAMINHADA");
+                                        }
+                                    }
+                                }
+                            });
+                            checkBoxFutebol.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    if (checkBoxFutebol.isChecked()) {
+                                        listaCurrentSports.add("FUTEBOL");
+                                    } else {
+                                        if (listaCurrentSports.size() - 1 == 0) {
+                                            checkBoxFutebol.requestFocus();
+                                            listaCurrentSports.remove("FUTEBOL");
+                                        } else {
+                                            listaCurrentSports.remove("FUTEBOL");
+                                        }
+                                    }
+                                }
+                            });
+                            checkBoxCiclismo.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    if (checkBoxCiclismo.isChecked()) {
+                                        listaCurrentSports.add("CICLISMO");
+                                    } else {
+                                        if (listaCurrentSports.size() - 1 == 0) {
+                                            checkBoxCiclismo.requestFocus();
+                                            listaCurrentSports.remove("CICLISMO");
+                                        } else {
+                                            listaCurrentSports.remove("CICLISMO");
+                                        }
+                                    }
+                                }
+                            });
+
                             break;
                         case "CICLISMO":
                             checkBoxCiclismo.setChecked(true);
+                            listaCurrentSports.add("CICLISMO");
+
+                            checkBoxCiclismo.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    if (checkBoxCiclismo.isChecked()) {
+                                        listaCurrentSports.add("CICLISMO");
+                                    } else {
+                                        if (listaCurrentSports.size() - 1 == 0) {
+                                            checkBoxCiclismo.requestFocus();
+                                            listaCurrentSports.remove("CICLISMO");
+                                        } else {
+                                            listaCurrentSports.remove("CICLISMO");
+                                        }
+                                    }
+                                }
+                            });
+                            checkBoxFutebol.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    if (checkBoxFutebol.isChecked()) {
+                                        listaCurrentSports.add("FUTEBOL");
+                                    } else {
+                                        if (listaCurrentSports.size() - 1 == 0) {
+                                            checkBoxFutebol.requestFocus();
+                                            listaCurrentSports.remove("FUTEBOL");
+                                        } else {
+                                            listaCurrentSports.remove("FUTEBOL");
+                                        }
+                                    }
+                                }
+                            });
+                            checkBoxCaminhada.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    if (checkBoxCaminhada.isChecked()) {
+                                        listaCurrentSports.add("CAMINHADA");
+                                    } else {
+                                        if (listaCurrentSports.size() - 1 == 0) {
+                                            checkBoxCaminhada.requestFocus();
+                                            listaCurrentSports.remove("CAMINHADA");
+                                        } else {
+                                            listaCurrentSports.remove("CAMINHADA");
+                                        }
+                                    }
+                                }
+                            });
+                            checkBoxCorrida.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    if (checkBoxCorrida.isChecked()) {
+                                        listaCurrentSports.add("CORRIDA");
+                                    } else {
+                                        if (listaCurrentSports.size() - 1 == 0) {
+                                            checkBoxCorrida.requestFocus();
+                                            listaCurrentSports.remove("CORRIDA");
+                                        } else {
+                                            listaCurrentSports.remove("CORRIDA");
+                                        }
+                                    }
+                                }
+                            });
+
                             break;
                         case "FUTEBOL":
                             checkBoxFutebol.setChecked(true);
+                            listaCurrentSports.add("FUTEBOL");
+
+                            checkBoxFutebol.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    if (checkBoxFutebol.isChecked()) {
+                                        listaCurrentSports.add("FUTEBOL");
+                                    } else {
+                                        if (listaCurrentSports.size() - 1 == 0) {
+                                            checkBoxFutebol.requestFocus();
+                                            listaCurrentSports.remove("FUTEBOL");
+                                        } else {
+                                            listaCurrentSports.remove("FUTEBOL");
+                                        }
+                                    }
+                                }
+                            });
+                            checkBoxCiclismo.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    if (checkBoxCiclismo.isChecked()) {
+                                        listaCurrentSports.add("CICLISMO");
+                                    } else {
+                                        if (listaCurrentSports.size() - 1 == 0) {
+                                            checkBoxCiclismo.requestFocus();
+                                            listaCurrentSports.remove("CICLISMO");
+                                        } else {
+                                            listaCurrentSports.remove("CICLISMO");
+                                        }
+                                    }
+                                }
+                            });
+                            checkBoxCorrida.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    if (checkBoxCorrida.isChecked()) {
+                                        listaCurrentSports.add("CORRIDA");
+                                    } else {
+                                        if (listaCurrentSports.size() - 1 == 0) {
+                                            checkBoxCorrida.requestFocus();
+                                            listaCurrentSports.remove("CORRIDA");
+                                        } else {
+                                            listaCurrentSports.remove("CORRIDA");
+                                        }
+                                    }
+                                }
+                            });
+                            checkBoxCaminhada.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    if (checkBoxCaminhada.isChecked()) {
+                                        listaCurrentSports.add("CAMINHADA");
+                                    } else {
+                                        if (listaCurrentSports.size() - 1 == 0) {
+                                            checkBoxCaminhada.requestFocus();
+                                            listaCurrentSports.remove("CAMINHADA");
+                                        } else {
+                                            listaCurrentSports.remove("CAMINHADA");
+                                        }
+                                    }
+                                }
+                            });
+
                             break;
                         default:
                             break;
                     }
                 }
-
-                if (checkBoxCaminhada.isChecked()) {
-                    newSports.add("CAMINHADA");
-                }
-                if (checkBoxCiclismo.isChecked()) {
-                    newSports.add("CICLISMO");
-                }
-                if (checkBoxCorrida.isChecked()) {
-                    newSports.add("CORRIDA");
-                }
-                if (checkBoxFutebol.isChecked()) {
-                    newSports.add("FUTEBOL");
-                }
-
                 confirm.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        databaseUsers.child(dataSnapshot.getKey()).child("sports").setValue(newSports);
+                        databaseUsers.child(key).child("sports").setValue(listaCurrentSports);
+                        desportoFavoritoDialog.dismiss();
                     }
                 });
-
-
             }
 
             @Override
@@ -347,8 +589,6 @@ public class SettingsActivity extends AppCompatActivity {
         dialogChangeProfile.setContentView(R.layout.change_profile_popup);
         iniciarCampos(dialogChangeProfile);
 
-        //alteracoes = detetarAlteracoesPerfis(userProfileMenuPrincipal, userProfileCpf);
-
         confirmaAltPerfil = (Button) dialogChangeProfile.findViewById(R.id.buttonConfirmarAlterarPerfil);
         confirmaAltPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -383,7 +623,6 @@ public class SettingsActivity extends AppCompatActivity {
                             if (!firstName.equals(fn) && !firstName.equals("")) {
                                 databaseUsers.child(child.getKey()).child("firstName").setValue(firstName);
                             }
-
                             if (!secondName.equals(sn) && !secondName.equals("")) {
                                 databaseUsers.child(child.getKey()).child("lastName").setValue(secondName);
                             }
@@ -414,75 +653,10 @@ public class SettingsActivity extends AppCompatActivity {
 
                     }
                 });
-/*
-                if (!firstName.equals("")) {
-                    userUpdate.setFirstName(firstName);
-                }
-
-                if (!secondName.equals("")) {
-                    userUpdate.setLastName(secondName);
-                }
-
-                if (!dataNascimentoStr.equals("")) {
-                    userUpdate.setDate(dataNascimentoStr);
-                }
-
-                if (!paisUserStr.equals("")) {
-                    userUpdate.setDate(paisUserStr);
-                }
-
-                if (!email.equals("")) {
-                    userUpdate.setEmail(email);
-                }
-
-                if (!peso.equals("")) {
-                    userUpdate.setWeight(peso);
-                }
-
-                if (!altura.equals("")) {
-                    userUpdate.setHight(altura);
-                }
-
-                if (!usernameStr.equals("")) {
-                    userUpdate.setUsername(usernameStr);
-                }
-
-                if (!password.equals("")) {
-                    userUpdate.setPassword(password);
-                }*/
-
-                dialogChangeProfile.dismiss();
-
-
             }
         });
         dialogChangeProfile.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialogChangeProfile.show();
-    }
-
-    public ArrayList<String> detetarAlteracoesPerfis(ArrayList<String> listUser, ArrayList<String> listUserAlterada) {
-        // index da listaUserAlterada
-        ArrayList<String> alterada = new ArrayList<>();
-        int index = 0;
-        for (String str : listUser) {
-            if (index < 9) {
-                if (!str.equals(listUserAlterada.get(index))) {
-                    alterada.add(listUserAlterada.get(index));
-                } else if (str.equals(listUserAlterada.get(index))) {
-                    alterada.add(str);
-                }
-                index++;
-            } else {
-                if (index == listUser.size()) {
-                    break;
-                } else {
-                    alterada.add(str);
-                    index++;
-                }
-            }
-        }
-
-        return alterada;
     }
 
     private void iniciarCampos(Dialog d) {

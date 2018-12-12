@@ -30,6 +30,8 @@ public class RunMenuInicial extends Fragment {
     private TextView name1;
     private static final int STORAGE_PERMISSION_CODE = 1;
     private static final int REQUEST_LOCATION_PERMISSION = 1;
+    private static final int REQUEST_CODE = 1;
+
 
     private Button photoActivityButton;
     private ImageView mImageView;
@@ -147,7 +149,8 @@ public class RunMenuInicial extends Fragment {
     private void requestThemStoragePermissions() {
         if (ContextCompat.checkSelfPermission(getContext(),
                 Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-
+            Toast.makeText(getContext(), "Já foi dada esta permissão!",
+                    Toast.LENGTH_SHORT).show();
         } else {
             requestStoragePermission();
         }
@@ -162,12 +165,11 @@ public class RunMenuInicial extends Fragment {
             ActivityCompat.requestPermissions(getActivity(),
                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
         }
-
-
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
         if (requestCode == STORAGE_PERMISSION_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(getActivity(), "Permission GRANTED", Toast.LENGTH_SHORT).show();

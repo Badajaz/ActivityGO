@@ -38,6 +38,7 @@ public class MenuPrincipal extends AppCompatActivity {
     private Toolbar toolbarCima;
     private String selectedSport;
     private Dialog myDialog;
+    private Dialog dialogTerminarSessao;
     private CheckBox caminhadaCheckBox;
     private CheckBox corridaCheckBox;
     private int corridaChecked = 0;
@@ -59,6 +60,7 @@ public class MenuPrincipal extends AppCompatActivity {
         username = getIntent().getStringExtra("USERNAME");
 
         myDialog = new Dialog(this);
+        dialogTerminarSessao = new Dialog(this);
 
         databaseUsers = FirebaseDatabase.getInstance().getReference("users");
 
@@ -233,14 +235,50 @@ public class MenuPrincipal extends AppCompatActivity {
 
                 Intent i = new Intent(this, SettingsActivity.class);
                 i.putExtra("USERNAME", username);
-                //i.putExtra("USERPROFILE", profile);
                 startActivity(i);
                 break;
 
             case R.id.BackButton:
-                getFragmentManager().popBackStack();
+                //getFragmentManager().popBackStack();
+                showTerminarSessaoPopup();
         }
         return true;
+    }
+
+    public void showTerminarSessaoPopup() {
+        Button yesButton;
+        Button noButton;
+        TextView close;
+        TextView popupId;
+        dialogTerminarSessao.setContentView(R.layout.popup_terminar_sessao);
+        yesButton = (Button) dialogTerminarSessao.findViewById(R.id.yesButton);
+        noButton = (Button) dialogTerminarSessao.findViewById(R.id.noButton);
+        close = (TextView) dialogTerminarSessao.findViewById(R.id.txtClose);
+        popupId = (TextView) dialogTerminarSessao.findViewById(R.id.popUpId);
+        popupId.setText("Tem a certeza?");
+
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogTerminarSessao.dismiss();
+            }
+        });
+
+        yesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), LoginScreen.class));
+            }
+        });
+
+        noButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogTerminarSessao.dismiss();
+            }
+        });
+        dialogTerminarSessao.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialogTerminarSessao.show();
     }
 
     /*
