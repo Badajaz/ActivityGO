@@ -113,7 +113,6 @@ public class HistoricoCorridas extends Fragment {
         barChart = (BarChart) v.findViewById(R.id.bargraph);
 
 
-
         databaseCorrida.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -133,8 +132,8 @@ public class HistoricoCorridas extends Fragment {
 
                 ArrayList<BarEntry> barEntry = new ArrayList<>();
                 int i = 0;
-                for (double s :distance){
-                    barEntry.add(new BarEntry((float)s, i));
+                for (double s : distance) {
+                    barEntry.add(new BarEntry((float) s, i));
                     i++;
                 }
                 BarDataSet barDataSet = new BarDataSet(barEntry, "Dates");
@@ -234,8 +233,6 @@ public class HistoricoCorridas extends Fragment {
         }
         return curDate;
     }*/
-
-
 
 
 }

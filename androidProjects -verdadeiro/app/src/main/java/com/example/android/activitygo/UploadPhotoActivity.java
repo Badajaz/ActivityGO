@@ -38,6 +38,10 @@ import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class UploadPhotoActivity extends AppCompatActivity {
 
     private Button mButtonChooseImage;
@@ -46,7 +50,6 @@ public class UploadPhotoActivity extends AppCompatActivity {
     private Button mButtontakePhoto;
     private Uri mImageUri;
     private ImageView mImageView;
-    //private EditText mEditTextFileName;
     private static int RESULT_IMAGE_CLICK = 1;
     private static final int CAMERA_REQUEST = 1888;
     private static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -60,6 +63,7 @@ public class UploadPhotoActivity extends AppCompatActivity {
 
     private StorageTask mUploadTask;
     private FirebaseAuth mAuth;
+    private Date date;
 
     private static final int PERMISSION_CAMERA = 1;
 
@@ -86,7 +90,6 @@ public class UploadPhotoActivity extends AppCompatActivity {
         mButtonUploadImage = findViewById(R.id.uploadImage);
         mButtontakePhoto = findViewById(R.id.takePicture);
         mImageView = findViewById(R.id.imageView2Here);
-        //mEditTextFileName = findViewById(R.id.edit_text_file_name);
 
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
@@ -105,6 +108,8 @@ public class UploadPhotoActivity extends AppCompatActivity {
 
                 } else {
                     uploadFile3();
+
+
                 }
             }
         });
@@ -187,8 +192,11 @@ public class UploadPhotoActivity extends AppCompatActivity {
     }
 
     private void uploadFile3() {
+
+        final DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        date = new Date();
         if (mImageUri != null) {
-            final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
+            final StorageReference fileReference = mStorageRef.child(username + "." + System.currentTimeMillis()
                     + "." + getFileExtension(mImageUri));
 
             mUploadTask = fileReference.putFile(mImageUri)
@@ -202,7 +210,23 @@ public class UploadPhotoActivity extends AppCompatActivity {
                                 }
                             }, 500);
 
-                            Toast.makeText(UploadPhotoActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
+                            Toast.makeText(UploadPhotoActivity.this, "Foto carregada com sucesso!", Toast.LENGTH_LONG).show();
+                            Thread thread = new Thread() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        Thread.sleep(3500); // As I am using LENGTH_LONG in Toast
+                                        Intent intent = new Intent(getApplicationContext(), MenuPrincipal.class);
+                                        intent.putExtra("USERNAME", username);
+                                        startActivity(intent);
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            };
+
+                            thread.start();
+
                             Upload upload = new Upload(username, username.trim(),
                                     fileReference.getDownloadUrl().toString());
                             String uploadId = mDatabaseRef.push().getKey();

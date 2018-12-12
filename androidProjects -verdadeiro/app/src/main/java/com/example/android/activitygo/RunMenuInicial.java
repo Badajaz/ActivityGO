@@ -32,7 +32,6 @@ public class RunMenuInicial extends Fragment {
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     private static final int REQUEST_CODE = 1;
 
-
     private Button photoActivityButton;
     private ImageView mImageView;
     private DatabaseReference databaseUsers;
