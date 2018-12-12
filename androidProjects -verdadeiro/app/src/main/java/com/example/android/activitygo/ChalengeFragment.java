@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.activitygo.model.Challenge;
+import com.example.android.activitygo.model.Corrida;
 import com.example.android.activitygo.model.Grupo;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -55,6 +57,7 @@ public class ChalengeFragment extends Fragment {
     public static final String CHANNEL_1_ID = "channel1";
 
     private NotificationManagerCompat notificationManager;
+    private DatabaseReference databaseCorrida;
 
     public ChalengeFragment() {
         // Required empty public constructor
@@ -67,6 +70,7 @@ public class ChalengeFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_chalenge, container, false);
 
         databaseChallenges = FirebaseDatabase.getInstance().getReference("challenges");
+        databaseCorrida = FirebaseDatabase.getInstance().getReference("corrida");
         //databaseAllChallenges = FirebaseDatabase.getInstance().getReference("all-challenges");
         primeiratv = v.findViewById(R.id.descricaoTextViewPrimeiraCaixaCaminhad);
         segundatv = v.findViewById(R.id.secondChallenge);
@@ -111,10 +115,10 @@ public class ChalengeFragment extends Fragment {
                         Random randomChallenge = new Random();
                         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                         Date date = new Date();
-                        String[] chalenges = {"Faça 2 km", "Faça 2 km antes dos 10 minutos", "Faça uma corrida de 30 minutos", "Faça uma corrida de 10 min", "Faça uma corrida de 5km",
+                        String[] chalenges = {"Faça 2 km","Faça 2 km","Faça 2 km","Faça 2 km","Faça 2 km","Faça 2 km","Faça 2 km","Faça 2 km", "Faça 2 km antes dos 10 minutos", "Faça uma corrida de 30 minutos", "Faça uma corrida de 10 min", "Faça uma corrida de 5km",
                                 "Faça 7km", "Faça 3km em 15 min"};
 
-                        int[] points = {100, 200, 200, 50, 500, 1000, 2000};
+                        int[] points = {100,100,100,100,100,100,100,100, 200, 200, 50, 500, 1000, 2000};
                         for (int i = 0; i < 3; i++) {
 
                             int index = randomChallenge.nextInt(chalenges.length);
@@ -154,6 +158,60 @@ public class ChalengeFragment extends Fragment {
                         segundatv.setText(descricaoChallenges.get(1));
                         terceiratv.setText(descricaoChallenges.get(2));
 
+                        for (String s : descricaoChallenges) {
+                            if (s.equals("Faça 2 km")) {
+
+                                databaseCorrida.addValueEventListener(new ValueEventListener() {
+
+                                    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                                    Date date = new Date();
+                                    String d = dateFormat.format(date);
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        double distanciaFeita = 0.0;
+                                        String valores = "";
+                                        for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                                            Corrida c = userSnapshot.getValue(Corrida.class);
+                                            if (c.getUsername().equals(username) && c.getData().equals(d)) {
+                                                distanciaFeita += c.getDistancia();
+
+
+                                            }
+                                        }
+
+                                        if (distanciaFeita >= 10) {
+
+
+                                            if (primeiratv.getText().equals("Faça 2 km")){
+                                                ConstraintLayout c = getView().findViewById(R.id.firstConstrainte);
+                                                c.setBackgroundColor(Color.BLUE);
+
+                                            }
+
+                                            if (segundatv.getText().equals("Faça 2 km")){
+                                                ConstraintLayout c = getView().findViewById(R.id.secondConstrainte);
+                                                c.setBackgroundColor(Color.BLUE);
+                                            }
+
+                                            if (terceiratv.getText().equals("Faça 2 km")){
+                                                ConstraintLayout c = getView().findViewById(R.id.ThirdConstrainte);
+                                                c.setBackgroundColor(Color.BLUE);
+
+                                            }
+
+                                        }
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+                            }
+                        }
+
+
                     }
 
                     @Override
@@ -168,6 +226,8 @@ public class ChalengeFragment extends Fragment {
             }
         });
 
+
+
         databaseChallenges.removeEventListener(ola);
 
         ProgressBar corrida = (ProgressBar) v.findViewById(R.id.progressBarCorrida);
@@ -176,4 +236,11 @@ public class ChalengeFragment extends Fragment {
         corrida.setProgressTintList(ColorStateList.valueOf(Color.parseColor("#FFA500")));
         return v;
     }
+
+
 }
+
+
+
+
+
