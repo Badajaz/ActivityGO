@@ -6,10 +6,12 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,16 +38,31 @@ public class RunMenuInicial extends Fragment {
     private ImageView mImageView;
     private DatabaseReference databaseUsers;
 
+    private String image_path = "";
+    private Uri fileUri;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_run_menu_inicial, container, false);
 
-        username = getArguments().getString("USERNAME");
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            username = bundle.getString("USERNAME");
+            image_path = bundle.getString("URI");
+            if (!TextUtils.isEmpty(image_path)) {
+                fileUri = Uri.parse(image_path);
+            }
+        } else {
+            username = "";
+        }
 
         photoActivityButton = v.findViewById(R.id.uploadActivity);
         mImageView = v.findViewById(R.id.imageView2);
+        if (fileUri != null) {
+            mImageView.setImageURI(fileUri);
+        }
 
         final Button historial = (Button) v.findViewById(R.id.buttonHistorial);
         Button irCorrida = (Button) v.findViewById(R.id.buttonIrCorrida);

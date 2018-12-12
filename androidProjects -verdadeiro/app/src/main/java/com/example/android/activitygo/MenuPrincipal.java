@@ -7,6 +7,7 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,6 +15,7 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -50,6 +52,7 @@ public class MenuPrincipal extends AppCompatActivity {
     private String username;
     private String firstName = "";
     private String lastName = "";
+    private String image_path = "";
 
     private DatabaseReference databaseUsers;
 
@@ -57,7 +60,16 @@ public class MenuPrincipal extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_principal);
-        username = getIntent().getStringExtra("USERNAME");
+        Bundle b = getIntent().getExtras();
+        if (b != null) {
+            username = getIntent().getStringExtra("USERNAME");
+            image_path = getIntent().getStringExtra("imagePath");
+            if (!TextUtils.isEmpty(image_path)) {
+                Uri fileUri = Uri.parse(image_path);
+            }
+        } else {
+            username = "";
+        }
 
         myDialog = new Dialog(this);
         dialogTerminarSessao = new Dialog(this);
@@ -86,6 +98,7 @@ public class MenuPrincipal extends AppCompatActivity {
 
         Bundle toRunMenuInicial = new Bundle();
         toRunMenuInicial.putString("USERNAME", username);
+        toRunMenuInicial.putString("URI", image_path);
         SelectedFragment = new RunMenuInicial();
         SelectedFragment.setArguments(toRunMenuInicial);
         FragmentManager fm = getFragmentManager();

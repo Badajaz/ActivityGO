@@ -192,9 +192,6 @@ public class UploadPhotoActivity extends AppCompatActivity {
     }
 
     private void uploadFile3() {
-
-        final DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        date = new Date();
         if (mImageUri != null) {
             final StorageReference fileReference = mStorageRef.child(username + "." + System.currentTimeMillis()
                     + "." + getFileExtension(mImageUri));
@@ -218,6 +215,7 @@ public class UploadPhotoActivity extends AppCompatActivity {
                                         Thread.sleep(3500); // As I am using LENGTH_LONG in Toast
                                         Intent intent = new Intent(getApplicationContext(), MenuPrincipal.class);
                                         intent.putExtra("USERNAME", username);
+                                        intent.putExtra("URI", mImageUri.toString());
                                         startActivity(intent);
                                     } catch (Exception e) {
                                         e.printStackTrace();
