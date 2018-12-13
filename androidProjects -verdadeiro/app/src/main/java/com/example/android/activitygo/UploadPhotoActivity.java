@@ -207,15 +207,18 @@ public class UploadPhotoActivity extends AppCompatActivity {
                                 }
                             }, 500);
 
-                            Toast.makeText(UploadPhotoActivity.this, "Foto carregada com sucesso!", Toast.LENGTH_LONG).show();
+                            final String ur = mImageUri.toString();
+                            //Toast.makeText(UploadPhotoActivity.this, "Foto carregada com sucesso!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UploadPhotoActivity.this, "ur! " + ur, Toast.LENGTH_SHORT).show();
+
                             Thread thread = new Thread() {
                                 @Override
                                 public void run() {
                                     try {
-                                        Thread.sleep(3500); // As I am using LENGTH_LONG in Toast
+                                        Thread.sleep(Toast.LENGTH_SHORT); // As I am using LENGTH_LONG in Toast
                                         Intent intent = new Intent(getApplicationContext(), MenuPrincipal.class);
                                         intent.putExtra("USERNAME", username);
-                                        intent.putExtra("URI", mImageUri.toString());
+                                        intent.putExtra("URI", ur);
                                         startActivity(intent);
                                     } catch (Exception e) {
                                         e.printStackTrace();

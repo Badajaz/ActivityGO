@@ -63,7 +63,7 @@ public class MenuPrincipal extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
         if (b != null) {
             username = getIntent().getStringExtra("USERNAME");
-            image_path = getIntent().getStringExtra("imagePath");
+            image_path = getIntent().getStringExtra("URI");
             if (!TextUtils.isEmpty(image_path)) {
                 Uri fileUri = Uri.parse(image_path);
             }
@@ -122,6 +122,7 @@ public class MenuPrincipal extends AppCompatActivity {
                             SelectedFragment = new RunMenuInicial();
                             Bundle toRunMenuInicial = new Bundle();
                             toRunMenuInicial.putString("USERNAME", username);
+                            toRunMenuInicial.putString("URI", image_path);
                             SelectedFragment.setArguments(toRunMenuInicial);
                             FragmentManager fm = getFragmentManager();
                             FragmentTransaction ft = fm.beginTransaction();
@@ -237,17 +238,9 @@ public class MenuPrincipal extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.Settings:
-
-                //Bundle bundle = new Bundle();
-                //bundle.putString("FIRSTNAME", profile.get(0));
-                //bundle.putString("LASTNAME", profile.get(1));
-                //ChangeProfileFragment cpf = new ChangeProfileFragment();
-                //bundle.putStringArrayList("USERPROFILE", profile);
-                //bundle.putSerializable("USERPROFILE", profile);
-                //cpf.setArguments(bundle);
-
                 Intent i = new Intent(this, SettingsActivity.class);
                 i.putExtra("USERNAME", username);
+                i.putExtra("URI", image_path);
                 startActivity(i);
                 break;
 

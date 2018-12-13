@@ -5,10 +5,12 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -70,9 +72,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     private String fn;
     private String ln;
-
     private User u;
-
     private String usernameReceived;
 
     private Toolbar toolbarCima;
@@ -82,12 +82,25 @@ public class SettingsActivity extends AppCompatActivity {
 
     // key usada apenas para a parte das checkboxes, IMPORTANTE
     private String key = "";
+    private String image_path = "";
+
+    private Uri fileUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_layout);
-        usernameReceived = getIntent().getStringExtra("USERNAME");
+
+        Bundle b = getIntent().getExtras();
+        if (b != null) {
+            usernameReceived = getIntent().getStringExtra("USERNAME");
+            image_path = getIntent().getStringExtra("URI");
+            if (!TextUtils.isEmpty(image_path)) {
+                fileUri = Uri.parse(image_path);
+            }
+        } else {
+            usernameReceived = "";
+        }
 
         dialogTerminarSessao = new Dialog(this);
         dialogChangeProfile = new Dialog(this);
@@ -95,6 +108,10 @@ public class SettingsActivity extends AppCompatActivity {
         eliminarContaDialog = new Dialog(this);
         desportoFavoritoDialog = new Dialog(this);
         imv = (ImageView) findViewById(R.id.imageViewSettings);
+
+        if (fileUri != null) {
+            imv.setImageURI(fileUri);
+        }
         displayName = (TextView) findViewById(R.id.namePessoaMenuSettings);
         displayDesporto = (TextView) findViewById(R.id.desportoFavoritoSettings);
 
@@ -105,6 +122,9 @@ public class SettingsActivity extends AppCompatActivity {
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     fn = String.valueOf(child.child("firstName").getValue());
                     ln = String.valueOf(child.child("lastName").getValue());
+
+                    //TODO exibir desporto/desportos favoritos da pessoa
+
                     toolbarCima = (Toolbar) findViewById(R.id.toolbarSettings);
                     setSupportActionBar(toolbarCima);
                     getSupportActionBar().setTitle("ActivityGO");
