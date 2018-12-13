@@ -66,11 +66,11 @@ public class SobreNos extends AppCompatActivity {
         sobreNOS = (TextView) findViewById(R.id.tvThis);
         sobreNOS.setText("Sobre Nós: ");
         descricao1 = (TextView) findViewById(R.id.IMVDescricao1);
-        descricao1.setText("Estudante da FCUL");
-        descricao2 = (TextView) findViewById(R.id.IMVDescricao2);
-        descricao2.setText("Estudante da FCUL");
+        descricao1.setText("Gonçalo Cardoso.\nEstudante da FCUL.");
         descricao3 = (TextView) findViewById(R.id.IMVDescricao3);
-        descricao3.setText("Estudante da FCUL");
+        descricao3.setText("Ricardo Calçado.\nEstudante da FCUL.");
+        descricao2 = (TextView) findViewById(R.id.IMVDescricao2);
+        descricao2.setText("Gonçalo Lobo.\nEstudante da FCUL");
 
     }
 }

@@ -18,6 +18,7 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.activitygo.model.User;
 import com.google.firebase.database.DataSnapshot;
@@ -684,6 +685,7 @@ public class SettingsActivity extends AppCompatActivity {
 
                     }
                 });
+                Toast.makeText(SettingsActivity.this, "Alterou os dados com sucesso!", Toast.LENGTH_SHORT).show();
             }
         });
         dialogChangeProfile.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));

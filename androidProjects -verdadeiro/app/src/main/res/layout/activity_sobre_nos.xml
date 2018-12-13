@@ -31,9 +31,10 @@
                 android:id="@+id/tvThis"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sobre Nós: "
+                android:gravity="left"
                 android:textColor="@color/black"
-                android:textSize="40dp"
+                android:textSize="30dp"
+                android:paddingStart="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -46,8 +47,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="open-sans"
-                android:paddingStart="5dp"
+                android:paddingStart="20dp"
                 android:paddingEnd="5dp"
+                android:paddingTop="5dp"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:typeface="sans"
@@ -64,20 +66,21 @@
                 android:layout_height="100dp"
                 android:layout_centerInParent="true"
                 android:layout_gravity="left"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/hobbit"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/user_icon2"
                 app:civ_border_color="#FFA500"
                 app:civ_border_width="1dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/tvThis"
-                app:layout_constraintHorizontal_bias="0.056"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.029"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvDescricao"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.029" />
 
             <TextView
                 android:id="@+id/IMVDescricao1"
-                android:layout_width="250dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="open-sans"
@@ -88,10 +91,10 @@
                 android:typeface="sans"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.611"
+                app:layout_constraintHorizontal_bias="0.529"
                 app:layout_constraintStart_toEndOf="@+id/firstIMV"
                 app:layout_constraintTop_toBottomOf="@+id/tvDescricao"
-                app:layout_constraintVertical_bias="0.153" />
+                app:layout_constraintVertical_bias="0.108" />
 
             <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/secondIMV"
@@ -99,8 +102,8 @@
                 android:layout_height="100dp"
                 android:layout_centerInParent="true"
                 android:layout_gravity="left"
-                android:layout_marginTop="20dp"
-                android:src="@drawable/badajaz"
+                android:layout_marginTop="50dp"
+                android:src="@drawable/user_icon2"
                 app:civ_border_color="#FFA500"
                 app:civ_border_width="1dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -112,10 +115,8 @@
 
             <TextView
                 android:id="@+id/IMVDescricao3"
-                android:layout_width="250dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
                 android:fontFamily="open-sans"
                 android:paddingStart="5dp"
                 android:paddingEnd="5dp"
@@ -124,10 +125,10 @@
                 android:typeface="sans"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.3"
+                app:layout_constraintHorizontal_bias="0.533"
                 app:layout_constraintStart_toEndOf="@+id/secondIMV"
                 app:layout_constraintTop_toBottomOf="@+id/tvDescricao"
-                app:layout_constraintVertical_bias="0.534" />
+                app:layout_constraintVertical_bias="0.505" />
 
             <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/thirdIMV"
@@ -135,8 +136,8 @@
                 android:layout_height="100dp"
                 android:layout_centerInParent="true"
                 android:layout_gravity="left"
-                android:layout_marginTop="20dp"
-                android:src="@drawable/moije"
+                android:layout_marginTop="50dp"
+                android:src="@drawable/user_icon2"
                 app:civ_border_color="#FFA500"
                 app:civ_border_width="1dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -144,11 +145,11 @@
                 app:layout_constraintHorizontal_bias="0.056"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/secondIMV"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="1.0" />
 
             <TextView
                 android:id="@+id/IMVDescricao2"
-                android:layout_width="250dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
@@ -160,10 +161,10 @@
                 android:typeface="sans"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.3"
+                app:layout_constraintHorizontal_bias="0.466"
                 app:layout_constraintStart_toEndOf="@+id/thirdIMV"
                 app:layout_constraintTop_toBottomOf="@+id/tvDescricao"
-                app:layout_constraintVertical_bias="0.89" />
+                app:layout_constraintVertical_bias="0.907" />
 
         </android.support.constraint.ConstraintLayout>
 

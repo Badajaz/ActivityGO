@@ -166,8 +166,7 @@ public class RunMenuInicial extends Fragment {
     private void requestThemStoragePermissions() {
         if (ContextCompat.checkSelfPermission(getContext(),
                 Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(getContext(), "Já foi dada esta permissão!",
-                    Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getContext(), "Já foi dada esta permissão!",Toast.LENGTH_SHORT).show();
         } else {
             requestStoragePermission();
         }

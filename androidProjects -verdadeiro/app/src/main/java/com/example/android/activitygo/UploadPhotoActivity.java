@@ -208,8 +208,7 @@ public class UploadPhotoActivity extends AppCompatActivity {
                             }, 500);
 
                             final String ur = mImageUri.toString();
-                            //Toast.makeText(UploadPhotoActivity.this, "Foto carregada com sucesso!", Toast.LENGTH_SHORT).show();
-                            Toast.makeText(UploadPhotoActivity.this, "ur! " + ur, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UploadPhotoActivity.this, "Foto carregada com sucesso!", Toast.LENGTH_SHORT).show();
 
                             Thread thread = new Thread() {
                                 @Override
@@ -247,7 +246,7 @@ public class UploadPhotoActivity extends AppCompatActivity {
                         }
                     });
         } else {
-            Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Tem de selecionar um ficheiro.", Toast.LENGTH_SHORT).show();
         }
     }
 
