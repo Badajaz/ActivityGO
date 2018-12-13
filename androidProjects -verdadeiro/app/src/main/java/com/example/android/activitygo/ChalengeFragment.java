@@ -420,6 +420,120 @@ public class ChalengeFragment extends Fragment {
                             }
 
 
+                            if (s.equals("Corra 10 minutos")) {
+
+                                databaseCorrida.addValueEventListener(new ValueEventListener() {
+
+                                    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                                    Date date = new Date();
+                                    String d = dateFormat.format(date);
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        String valores = "";
+                                        boolean ehMaior = false;
+                                        for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                                            Corrida c = userSnapshot.getValue(Corrida.class);
+                                            if (c.getUsername().equals(username) && c.getData().equals(d)) {
+                                                String time = c.getTempo().substring(0,2);
+                                               if (Integer.parseInt(time) >= 10 && c.getDistancia() >= 1000){
+                                                   ehMaior = true;
+                                               }
+
+
+                                            }
+                                        }
+
+                                        if (ehMaior == true) {
+                                            int lime = getResources().getColor(R.color.orange);
+
+                                            if (primeiratv.getText().equals("Corra 10 minutos")){
+                                                ConstraintLayout c = getView().findViewById(R.id.firstConstrainte);
+                                                c.setBackgroundColor(lime);
+
+                                            }
+
+                                            if (segundatv.getText().equals("Corra 10 minutos")){
+                                                ConstraintLayout c = getView().findViewById(R.id.secondConstrainte);
+                                                c.setBackgroundColor(lime);
+                                            }
+
+                                            if (terceiratv.getText().equals("Corra 10 minutos")){
+                                                ConstraintLayout c = getView().findViewById(R.id.ThirdConstrainte);
+                                                c.setBackgroundColor(lime);
+
+                                            }
+
+                                        }
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+                            }
+
+
+
+                            if (s.equals("Corra 20 minutos")) {
+
+                                databaseCorrida.addValueEventListener(new ValueEventListener() {
+
+                                    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                                    Date date = new Date();
+                                    String d = dateFormat.format(date);
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        String valores = "";
+                                        boolean ehMaior = false;
+                                        for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                                            Corrida c = userSnapshot.getValue(Corrida.class);
+                                            if (c.getUsername().equals(username) && c.getData().equals(d)) {
+                                                String time = c.getTempo().substring(0,2);
+                                                if (Integer.parseInt(time) >= 20 && c.getDistancia() >= 2000){
+                                                    ehMaior = true;
+                                                }
+
+
+                                            }
+                                        }
+
+                                        if (ehMaior == true) {
+                                            int lime = getResources().getColor(R.color.orange);
+
+                                            if (primeiratv.getText().equals("Corra 20 minutos")){
+                                                ConstraintLayout c = getView().findViewById(R.id.firstConstrainte);
+                                                c.setBackgroundColor(lime);
+
+                                            }
+
+                                            if (segundatv.getText().equals("Corra 20 minutos")){
+                                                ConstraintLayout c = getView().findViewById(R.id.secondConstrainte);
+                                                c.setBackgroundColor(lime);
+                                            }
+
+                                            if (terceiratv.getText().equals("Corra 20 minutos")){
+                                                ConstraintLayout c = getView().findViewById(R.id.ThirdConstrainte);
+                                                c.setBackgroundColor(lime);
+
+                                            }
+
+                                        }
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+                            }
+
+
+                            
+
+
 
 
 
