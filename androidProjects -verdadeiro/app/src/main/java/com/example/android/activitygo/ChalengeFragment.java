@@ -115,10 +115,9 @@ public class ChalengeFragment extends Fragment {
                         Random randomChallenge = new Random();
                         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                         Date date = new Date();
-                        String[] chalenges = {"Faça 2 km","Faça 3 km","Faça 5 km","Faça 7 km","Faça 10 km","Corra 10 minutos","Corra 20 minutos","Corra 30 minutos", "Faça 100m em menos de 9 segundos", "Faça 200m em menos de 18 segundos", "Faça uma corrida de 10 min", "Faça uma corrida de 5km",
-                                "Faça 7km", "Faça 3km em 15 min"};
+                        String[] chalenges = {"Faça 2 km","Faça 3 km","Faça 5 km","Faça 7 km","Faça 10 km","Corra 10 minutos","Corra 20 minutos","Corra 30 minutos", "Faça 100m em menos de 9 segundos", "Faça 200m em menos de 18 segundos"};
 
-                        int[] points = {100,100,100,100,100,100,100,100, 200, 200, 50, 500, 1000, 2000};
+                        int[] points = {100,200,300,500,700,50,200,400, 300, 500};
                         for (int i = 0; i < 3; i++) {
 
                             int index = randomChallenge.nextInt(chalenges.length);
