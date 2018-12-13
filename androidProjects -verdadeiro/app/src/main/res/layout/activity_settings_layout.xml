@@ -112,7 +112,7 @@
             android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:src="@drawable/user_photo_icon"
-            app:civ_border_color="#006aff"
+            app:civ_border_color="#FFA500"
             app:civ_border_width="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
