@@ -177,7 +177,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                         TextView tv = (TextView) findViewById(R.id.kmTextViewRun);
                         tv.setText("" + df.format(accKm));
-                        Toast.makeText(getApplicationContext(), "acc= " + df.format(accKm), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), "acc= " + df.format(accKm), Toast.LENGTH_SHORT).show();
 
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -211,7 +211,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 if (!running) {
                     chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
                     chronometer.start();
-                    Toast.makeText(MapsActivity.this, "Começou a corrida!", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(MapsActivity.this, "Começou a corrida!", Toast.LENGTH_SHORT).show();
                     running = true;
                     isStopped = false;
 
