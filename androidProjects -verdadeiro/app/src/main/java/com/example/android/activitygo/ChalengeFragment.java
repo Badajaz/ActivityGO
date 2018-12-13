@@ -115,7 +115,7 @@ public class ChalengeFragment extends Fragment {
                         Random randomChallenge = new Random();
                         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                         Date date = new Date();
-                        String[] chalenges = {"Faça 2 km","Faça 3 km","Faça 5 km","Faça 7 km","Faça 10 km","Corra 10 minutos","Corra 20 minutos","Corra 30 minutos", "Faça 2 km antes dos 10 minutos", "Faça uma corrida de 30 minutos", "Faça uma corrida de 10 min", "Faça uma corrida de 5km",
+                        String[] chalenges = {"Faça 2 km","Faça 3 km","Faça 5 km","Faça 7 km","Faça 10 km","Corra 10 minutos","Corra 20 minutos","Corra 30 minutos", "Faça 100m em menos de 9 segundos", "Faça 200m em menos de 18 segundos", "Faça uma corrida de 10 min", "Faça uma corrida de 5km",
                                 "Faça 7km", "Faça 3km em 15 min"};
 
                         int[] points = {100,100,100,100,100,100,100,100, 200, 200, 50, 500, 1000, 2000};
@@ -531,7 +531,187 @@ public class ChalengeFragment extends Fragment {
                             }
 
 
-                            
+
+                            if (s.equals("Corra 30 minutos")) {
+
+                                databaseCorrida.addValueEventListener(new ValueEventListener() {
+
+                                    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                                    Date date = new Date();
+                                    String d = dateFormat.format(date);
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        String valores = "";
+                                        boolean ehMaior = false;
+                                        for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                                            Corrida c = userSnapshot.getValue(Corrida.class);
+                                            if (c.getUsername().equals(username) && c.getData().equals(d)) {
+                                                String time = c.getTempo().substring(0,2);
+                                                if (Integer.parseInt(time) >= 30 && c.getDistancia() >= 3000){
+                                                    ehMaior = true;
+                                                }
+
+
+                                            }
+                                        }
+
+                                        if (ehMaior == true) {
+                                            int lime = getResources().getColor(R.color.orange);
+
+                                            if (primeiratv.getText().equals("Corra 30 minutos")){
+                                                ConstraintLayout c = getView().findViewById(R.id.firstConstrainte);
+                                                c.setBackgroundColor(lime);
+
+                                            }
+
+                                            if (segundatv.getText().equals("Corra 30 minutos")){
+                                                ConstraintLayout c = getView().findViewById(R.id.secondConstrainte);
+                                                c.setBackgroundColor(lime);
+                                            }
+
+                                            if (terceiratv.getText().equals("Corra 30 minutos")){
+                                                ConstraintLayout c = getView().findViewById(R.id.ThirdConstrainte);
+                                                c.setBackgroundColor(lime);
+
+                                            }
+
+                                        }
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+                            }
+
+
+                            if (s.equals("Faça 100m em menos de 9 segundos")) {
+
+                                databaseCorrida.addValueEventListener(new ValueEventListener() {
+
+                                    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                                    Date date = new Date();
+                                    String d = dateFormat.format(date);
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        String valores = "";
+                                        boolean ehMaior = false;
+                                        for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                                            Corrida c = userSnapshot.getValue(Corrida.class);
+                                            if (c.getUsername().equals(username) && c.getData().equals(d)) {
+                                                String timesec = c.getTempo().substring(3,5);
+                                                String timemin = c.getTempo().substring(0,2);
+                                                //Toast.makeText(getContext(),"TIME "+time,Toast.LENGTH_SHORT).show();
+                                                if (Integer.parseInt(timemin) == 0 && Integer.parseInt(timesec) < 9 && c.getDistancia() >= 100 ){
+                                                    ehMaior = true;
+                                                }
+
+
+                                            }
+                                        }
+
+                                        if (ehMaior == true) {
+                                            int lime = getResources().getColor(R.color.orange);
+
+                                            if (primeiratv.getText().equals("Faça 100m em menos de 9 segundos")){
+                                                ConstraintLayout c = getView().findViewById(R.id.firstConstrainte);
+                                                c.setBackgroundColor(lime);
+
+                                            }
+
+                                            if (segundatv.getText().equals("Faça 100m em menos de 9 segundos")){
+                                                ConstraintLayout c = getView().findViewById(R.id.secondConstrainte);
+                                                c.setBackgroundColor(lime);
+                                            }
+
+                                            if (terceiratv.getText().equals("Faça 100m em menos de 9 segundos")){
+                                                ConstraintLayout c = getView().findViewById(R.id.ThirdConstrainte);
+                                                c.setBackgroundColor(lime);
+
+                                            }
+
+                                        }
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+                            }
+
+
+
+                            if (s.equals("Faça 200m em menos de 18 segundos")) {
+
+                                databaseCorrida.addValueEventListener(new ValueEventListener() {
+
+                                    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                                    Date date = new Date();
+                                    String d = dateFormat.format(date);
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        String valores = "";
+                                        boolean ehMaior = false;
+                                        for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                                            Corrida c = userSnapshot.getValue(Corrida.class);
+                                            if (c.getUsername().equals(username) && c.getData().equals(d)) {
+                                                String timesec = c.getTempo().substring(3,5);
+                                                String timemin = c.getTempo().substring(0,2);
+                                                //Toast.makeText(getContext(),"TIME "+timemin+":"+timesec,Toast.LENGTH_SHORT).show();
+                                                if (Integer.parseInt(timemin) == 0 && Integer.parseInt(timesec) < 18 && c.getDistancia() >= 200 ){
+                                                    ehMaior = true;
+                                                }
+
+
+                                            }
+                                        }
+
+                                        if (ehMaior == true) {
+                                            int lime = getResources().getColor(R.color.orange);
+
+                                            if (primeiratv.getText().equals("Faça 200m em menos de 18 segundos")){
+                                                ConstraintLayout c = getView().findViewById(R.id.firstConstrainte);
+                                                c.setBackgroundColor(lime);
+
+                                            }
+
+                                            if (segundatv.getText().equals("Faça 200m em menos de 18 segundos")){
+                                                ConstraintLayout c = getView().findViewById(R.id.secondConstrainte);
+                                                c.setBackgroundColor(lime);
+                                            }
+
+                                            if (terceiratv.getText().equals("Faça 200m em menos de 18 segundos")){
+                                                ConstraintLayout c = getView().findViewById(R.id.ThirdConstrainte);
+                                                c.setBackgroundColor(lime);
+
+                                            }
+
+                                        }
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+                            }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
