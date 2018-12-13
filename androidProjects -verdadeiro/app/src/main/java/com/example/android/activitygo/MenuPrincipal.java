@@ -86,7 +86,7 @@ public class MenuPrincipal extends AppCompatActivity {
                     setSupportActionBar(toolbarCima);
                     getSupportActionBar().setTitle("ActivityGO");
 
-                    getSupportActionBar().setSubtitle("" + firstName.charAt(0) + lastName.charAt(0));
+                    getSupportActionBar().setSubtitle("" + firstName.charAt(0) + lastName.charAt(0) + ":");
                 }
             }
 

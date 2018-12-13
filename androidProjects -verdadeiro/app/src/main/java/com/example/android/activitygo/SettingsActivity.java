@@ -39,6 +39,7 @@ public class SettingsActivity extends AppCompatActivity {
     private Button informacoesPrivadas;
     private Button alterarDesportoFavorito;
     private Button buttonCalendario;
+    private Button buttonAboutUs;
     private Dialog eliminarContaDialog;
     private Dialog desportoFavoritoDialog;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
@@ -177,6 +178,16 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showDesportoFavoritoPopup();
+            }
+        });
+
+        buttonAboutUs = (Button) findViewById(R.id.buttonAboutUs);
+        buttonAboutUs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SobreNos.class);
+                intent.putExtra("USERNAME", usernameReceived);
+                startActivity(intent);
             }
         });
     }
@@ -735,7 +746,7 @@ public class SettingsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.BackButton:
-                getFragmentManager().popBackStack();
+                //getFragmentManager().popBackStack();
         }
         return true;
     }

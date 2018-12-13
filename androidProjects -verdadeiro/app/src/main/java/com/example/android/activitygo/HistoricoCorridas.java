@@ -82,6 +82,7 @@ public class HistoricoCorridas extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     String d = String.valueOf(child.child("data").getValue());
+                    String c = String.valueOf(child.child("distancia").getValue());
                     datasCorridas.add(d);
                 }
 
