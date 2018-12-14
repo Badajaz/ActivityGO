@@ -41,6 +41,9 @@ public class SettingsActivity extends AppCompatActivity {
     private Button alterarDesportoFavorito;
     private Button buttonCalendario;
     private Button buttonAboutUs;
+
+    private Dialog challengePopup;
+
     private Dialog eliminarContaDialog;
     private Dialog desportoFavoritoDialog;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
@@ -71,14 +74,12 @@ public class SettingsActivity extends AppCompatActivity {
     private String confirmaPassword;
     private String dataNascimentoStr;
     private String paisUserStr;
-
     private String fn;
     private String ln;
     private User u;
     private String usernameReceived;
 
     private Toolbar toolbarCima;
-    private User userUpdate;
 
     private DatabaseReference databaseUsers;
 
@@ -109,6 +110,7 @@ public class SettingsActivity extends AppCompatActivity {
         dialogCalendario = new Dialog(this);
         eliminarContaDialog = new Dialog(this);
         desportoFavoritoDialog = new Dialog(this);
+        challengePopup = new Dialog(this);
         imv = (ImageView) findViewById(R.id.imageViewSettings);
 
         if (fileUri != null) {
@@ -163,6 +165,7 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showTerminarSessaoPopup();
+                //showChallengePopup();
             }
         });
 
@@ -192,12 +195,30 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
     }
+    /*
+
+    public void showChallengePopup() {
+        final Button receive;
+        challengePopup.setContentView(R.layout.popup_challenge_completed);
+        receive = (Button) challengePopup.findViewById(R.id.receiveButton);
+        receive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                challengePopup.dismiss();
+            }
+        });
+        challengePopup.getWindow().getAttributes().windowAnimations = R.style.FadeDialog;
+        challengePopup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        challengePopup.show();
+    }*/
 
     public void showDesportoFavoritoPopup() {
         TextView close, popupId;
         final Button confirm;
         final CheckBox checkBoxCorrida, checkBoxCaminhada, checkBoxFutebol, checkBoxCiclismo;
         desportoFavoritoDialog.setContentView(R.layout.change_favorite_sport);
+        desportoFavoritoDialog.getWindow().getAttributes().windowAnimations = R.style.SlideAnimation;
         close = (TextView) desportoFavoritoDialog.findViewById(R.id.txtClose);
         popupId = (TextView) desportoFavoritoDialog.findViewById(R.id.popUpId);
         confirm = (Button) desportoFavoritoDialog.findViewById(R.id.buttonConfirmar);
@@ -529,6 +550,7 @@ public class SettingsActivity extends AppCompatActivity {
         TextView close;
         TextView popupId;
         eliminarContaDialog.setContentView(R.layout.popup_eliminar_conta);
+        eliminarContaDialog.getWindow().getAttributes().windowAnimations = R.style.FadeAnimation;
         yesButton = (Button) eliminarContaDialog.findViewById(R.id.yesButton);
         noButton = (Button) eliminarContaDialog.findViewById(R.id.noButton);
         close = (TextView) eliminarContaDialog.findViewById(R.id.txtClose);
@@ -587,6 +609,7 @@ public class SettingsActivity extends AppCompatActivity {
         TextView close;
         TextView popupId;
         dialogTerminarSessao.setContentView(R.layout.popup_terminar_sessao);
+        dialogTerminarSessao.getWindow().getAttributes().windowAnimations = R.style.FadeAnimation;
         yesButton = (Button) dialogTerminarSessao.findViewById(R.id.yesButton);
         noButton = (Button) dialogTerminarSessao.findViewById(R.id.noButton);
         close = (TextView) dialogTerminarSessao.findViewById(R.id.txtClose);
@@ -732,6 +755,7 @@ public class SettingsActivity extends AppCompatActivity {
     private void showCalendarioPopup() {
         TextView close;
         dialogCalendario.setContentView(R.layout.popup_calendario);
+        dialogCalendario.getWindow().getAttributes().windowAnimations = R.style.SlideAnimation;
         close = (TextView) dialogCalendario.findViewById(R.id.txtClose);
         close.setOnClickListener(new View.OnClickListener() {
             @Override

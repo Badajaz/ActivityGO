@@ -17,7 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="top|center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="30dp">
 
             <EditText
                 android:id="@+id/primeiroNomeText"
@@ -234,7 +235,7 @@
                 android:layout_height="55dp"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/round_edittext_states"
+                android:background="@drawable/layout_border"
                 android:drawableLeft="@drawable/lock_icon"
                 android:drawablePadding="5dp"
                 android:ems="10"

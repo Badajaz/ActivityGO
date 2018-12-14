@@ -26,7 +26,7 @@
         android:id="@+id/txtClose"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:background="@drawable/rectangle_background"
+        android:background="?attr/selectableItemBackground"
         android:gravity="center_horizontal"
         android:text="X"
         android:textColor="#ffffff"
