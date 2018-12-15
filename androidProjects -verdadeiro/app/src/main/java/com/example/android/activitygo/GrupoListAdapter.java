@@ -1,0 +1,49 @@
+package com.example.android.activitygo;
+
+import android.content.Context;
+import android.support.annotation.NonNull;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
+
+import com.example.android.activitygo.model.Grupo;
+
+import java.util.ArrayList;
+
+class GrupoListAdapter extends ArrayAdapter<Grupo> {
+
+    private final static String TAG = "GrupoListAdapter";
+    private Context mContext;
+    int mResource;
+
+    public GrupoListAdapter(Context context, int resource, ArrayList<Grupo> objects) {
+        super(context, resource, objects);
+        mContext = context;
+        mResource = resource;
+    }
+
+    @NonNull
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        String nome = getItem(position).getNome();
+        String descricao = getItem(position).getDescricao();
+        String desporto = getItem(position).getDesporto();
+
+        Grupo g = new Grupo(nome, descricao, desporto);
+
+        LayoutInflater inflater = LayoutInflater.from(mContext);
+        convertView = inflater.inflate(mResource, parent, false);
+
+        TextView tvName = (TextView) convertView.findViewById(R.id.textView1);
+        TextView tvDescricao = (TextView) convertView.findViewById(R.id.textView2);
+        TextView tvDesporto = (TextView) convertView.findViewById(R.id.textView3);
+
+        tvName.setText(nome);
+        tvDescricao.setText(descricao);
+        tvDesporto.setText(desporto.charAt(0) + desporto.substring(1, desporto.length()).toLowerCase());
+
+        return convertView;
+    }
+}

@@ -4,13 +4,10 @@ import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.app.TimePickerDialog;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +19,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.activitygo.model.Grupo;
-import com.example.android.activitygo.model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,8 +27,6 @@ import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 public class ProcuraGrupos extends Fragment {
@@ -47,10 +41,11 @@ public class ProcuraGrupos extends Fragment {
     private View v;
     private ValueEventListener grupos;
 
+    private final static String TAG = "ProcuraGrupo";
+
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
         v = inflater.inflate(R.layout.fragment_procura_grupos, container, false);
         databaseGrupo = FirebaseDatabase.getInstance().getReference("grupos");
@@ -65,32 +60,21 @@ public class ProcuraGrupos extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String valores = "";
                 final ArrayList<String> array = new ArrayList<>();
+                final ArrayList<Grupo> trying = new ArrayList<>();
                 for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                     g = userSnapshot.getValue(Grupo.class);
                     if (g.getNome().contains(pesquisa)) {
                         array.add(g.getNome());
+                        trying.add(g);
                     }
-
-                    /* for (String nomeElemento : g.getElementosGrupo()) {
-                        if (nomeElemento.equals("badajaz") && g.getNome().contains(pesquisa)) {
-                            array.add(g.getNome());
-
-
-                        }
-                    }*/
-
                 }
                 if (!array.isEmpty()) {
-                    // v = inflater.inflate(R.layout.fragment_procura_grupos, container, false);
                     if (getActivity() != null) {
                         ListView listView = (ListView) v.findViewById(R.id.ListaResultados);
-                        //String[] value = getArguments().getStringArray("PROCURA");
 
-                        listViewAdapter = new ArrayAdapter<String>(
-                                getActivity(), android.R.layout.simple_list_item_1, array);
-                        listView.setAdapter(listViewAdapter);
-                        listViewAdapter.notifyDataSetChanged();
-
+                        GrupoListAdapter adapter = new GrupoListAdapter(getContext(), R.layout.adapter_view_layout, trying);
+                        listView.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
                         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                             private ListaDeElementosJuntarGrupo SelectedFragment;
@@ -108,7 +92,6 @@ public class ProcuraGrupos extends Fragment {
                                 FragmentTransaction ftransacti = fmana.beginTransaction();
                                 ftransacti.replace(R.id.fragment_container, SelectedFragment, "GroupFragment");
                                 ftransacti.commit();
-
                             }
 
                         });
@@ -141,6 +124,7 @@ public class ProcuraGrupos extends Fragment {
         TextView close;
         TextView popupId;
         dialogResultadoInexistente.setContentView(R.layout.popup_password_errada);
+        dialogResultadoInexistente.getWindow().getAttributes().windowAnimations = R.style.FadeAnimation;
         okButton = (Button) dialogResultadoInexistente.findViewById(R.id.okButton);
         close = (TextView) dialogResultadoInexistente.findViewById(R.id.txtClose);
         popupId = (TextView) dialogResultadoInexistente.findViewById(R.id.popUpId);
@@ -177,6 +161,7 @@ public class ProcuraGrupos extends Fragment {
         TextView close;
         TextView popupId;
         dialogWrongPassword.setContentView(R.layout.popupjuntargrupo);
+        dialogWrongPassword.getWindow().getAttributes().windowAnimations = R.style.FadeAnimation;
         okButton = (Button) dialogWrongPassword.findViewById(R.id.okButton);
         Button cancelButton = (Button) dialogWrongPassword.findViewById(R.id.cancelButton);
         close = (TextView) dialogWrongPassword.findViewById(R.id.txtClose);

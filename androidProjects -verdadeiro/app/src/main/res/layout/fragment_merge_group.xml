@@ -52,7 +52,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-
         <CheckBox
             android:id="@+id/corridaCheck"
             android:layout_width="wrap_content"

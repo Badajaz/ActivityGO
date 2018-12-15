@@ -32,10 +32,8 @@ public class MyGroupsFragment extends Fragment {
     private ListView listView;
     private ArrayAdapter<String> listViewAdapter;
     private DatabaseReference databaseGrupo;
-
     private String username;
     private Dialog dialogResultadoInexistente;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,7 +43,6 @@ public class MyGroupsFragment extends Fragment {
         ((MenuPrincipal) getActivity()).getSupportActionBar().setTitle("Os meus grupos:");
         databaseGrupo = FirebaseDatabase.getInstance().getReference("grupos");
         dialogResultadoInexistente = new Dialog(getContext());
-
 
         username = getArguments().getString("USERNAME");
 
@@ -61,7 +58,6 @@ public class MyGroupsFragment extends Fragment {
                             myGroups.add(g.getNome());
                         }
                     }
-
                 }
 
                 if (!myGroups.isEmpty()) {
@@ -73,14 +69,13 @@ public class MyGroupsFragment extends Fragment {
 
                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-
                         private MyGroupFragmentElements SelectedFragment;
 
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                             Bundle args = new Bundle();
-                            args.putString("NOMEGRUPO",myGroups.get(position));
+                            args.putString("NOMEGRUPO", myGroups.get(position));
                             SelectedFragment = new MyGroupFragmentElements();
                             SelectedFragment.setArguments(args);
                             FragmentManager fmana = getFragmentManager();
@@ -89,10 +84,6 @@ public class MyGroupsFragment extends Fragment {
                             ftransacti.commit();
                         }
                     });
-
-
-
-
                 } else {
                     resultadosInexistentesPopup();
                 }
@@ -142,6 +133,4 @@ public class MyGroupsFragment extends Fragment {
         dialogResultadoInexistente.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialogResultadoInexistente.show();
     }
-
-
 }

@@ -3,6 +3,8 @@ package com.example.android.activitygo;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.activitygo.model.Grupo;
@@ -35,7 +38,6 @@ public class MergeGroupFragment extends Fragment {
     private EditText nomeGrupo;
     private EditText SearchGroup;
     private EditText descricaoGrupo;
-
     private String searchGrupo;
     private ArrayList<String> possiveisResultados = new ArrayList<String>();
     private ArrayList<String> grupos = new ArrayList<String>();
@@ -52,7 +54,7 @@ public class MergeGroupFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View v = inflater.inflate(R.layout.fragment_merge_group, container, false);
         ((MenuPrincipal) getActivity()).getSupportActionBar().setTitle("Grupos:");
         possiveisResultados.add("Benfica");
@@ -63,9 +65,7 @@ public class MergeGroupFragment extends Fragment {
 
         username = getArguments().getString("USERNAME");
 
-
         databaseGrupo = FirebaseDatabase.getInstance().getReference("grupos");
-
 
         nomeGrupo = (EditText) v.findViewById(R.id.NomeCriarGrupo);
         descricaoGrupo = (EditText) v.findViewById(R.id.DescricaoGrupo);
@@ -75,37 +75,30 @@ public class MergeGroupFragment extends Fragment {
         ciclismo = v.findViewById(R.id.CiclismoCheck);
         futebol = v.findViewById(R.id.FutebolCheck);
         caminhada = v.findViewById(R.id.CaminhadaCheck);
+
         criar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 nomegrupo = nomeGrupo.getText().toString();
-
                 descricaogrupo = descricaoGrupo.getText().toString();
                 sport = getSport();
-
 
                 databaseGrupo.orderByChild("nome").equalTo(nomegrupo).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot child : dataSnapshot.getChildren()) {
                             grupo = String.valueOf(child.child("nome").getValue());
-
                             if (grupo.equals(nomegrupo)) {
                                 nomeGrupo.setError("ja existe esse nome");
                             }
-
-
                         }
-
 
                         if (isOnlyOneChecked() && !nomegrupo.equals("") && !descricaoGrupo.equals("") && !sport.equals("") && !grupo.equals(nomegrupo)) {
 
                             String id = databaseGrupo.push().getKey();
                             Grupo g = new Grupo(nomegrupo, descricaogrupo, sport);
-
                             Toast.makeText(getContext(), grupo, Toast.LENGTH_LONG).show();
-
 
                             g.addElementToList(username);
                             databaseGrupo.child(id).setValue(g);
@@ -114,20 +107,16 @@ public class MergeGroupFragment extends Fragment {
                             possiveisResultados.add(nomegrupo);
                             grupos.add(nomegrupo);
                         } else {
-
                             if (!isOnlyOneChecked()) {
                                 corrida.setError("Só pode escolher um desporto!");
                                 ciclismo.setError("Só pode escolher um desporto!");
                                 futebol.setError("Só pode escolher um desporto!");
                                 caminhada.setError("Só pode escolher um desporto!");
-
                             }
-
 
                             if (nomegrupo.equals("")) {
                                 nomeGrupo.setError("Tem de preencher o nome");
                             }
-
 
                             if (descricaogrupo.equals("")) {
                                 descricaoGrupo.setError("Tem de preencher a descricao");
@@ -136,11 +125,7 @@ public class MergeGroupFragment extends Fragment {
                             if (grupo.equals(nomegrupo)) {
                                 nomeGrupo.setError("já existe esse nome para grupo");
                             }
-
-
                         }
-
-
                     }
 
                     @Override
@@ -148,11 +133,7 @@ public class MergeGroupFragment extends Fragment {
 
                     }
                 });
-
-
             }
-
-
         });
 
         SearchGroup = (EditText) v.findViewById(R.id.NomeGrupo);
@@ -167,11 +148,10 @@ public class MergeGroupFragment extends Fragment {
                 ProcuraGrupos p = new ProcuraGrupos();
                 Bundle args = new Bundle();
                 args.putString("PESQUISA", searchGrupo);
-                args.putString("USERNAME",username);
+                args.putString("USERNAME", username);
                 //args.putStringArray("PROCURA", resultadosArray);
                 p.setArguments(args);
                 getFragmentManager().beginTransaction().replace(R.id.fragment_container, p).commit();
-
             }
         });
 
@@ -187,6 +167,7 @@ public class MergeGroupFragment extends Fragment {
                 getFragmentManager().beginTransaction().replace(R.id.fragment_container, ldf).commit();
             }
         });
+
         return v;
     }
 
@@ -201,7 +182,6 @@ public class MergeGroupFragment extends Fragment {
             count++;
         }
 
-
         if (ciclismo.isChecked()) {
             count++;
         }
@@ -209,10 +189,8 @@ public class MergeGroupFragment extends Fragment {
         if (futebol.isChecked()) {
             count++;
         }
-
         return count == 1;
     }
-
 
     public String getSport() {
         if (corrida.isChecked()) {
