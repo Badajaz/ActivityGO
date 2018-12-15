@@ -25,39 +25,16 @@
         android:gravity="center"
         android:text=""
         android:textColor="#000000"
-        android:textSize="30sp"
+        android:textSize="28sp"
+        android:background="@drawable/layout_border"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.159"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mapView"
-        app:layout_constraintVertical_bias="0.37" />
+        app:layout_constraintVertical_bias="0.37"
+        />
 
-    <TextView
-        android:id="@+id/blackSeparator1HistoriaStatus"
-        android:layout_width="130dp"
-        android:layout_height="0.1dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@color/orange"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.175"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mapView"
-        app:layout_constraintVertical_bias="0.269" />
-
-    <TextView
-        android:id="@+id/blackSeparator1HistoriaStatus2"
-        android:layout_width="130dp"
-        android:layout_height="0.1dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@color/orange"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.880"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mapView"
-        app:layout_constraintVertical_bias="0.269" />
 
     <TextView
         android:id="@+id/TempoLabel"
@@ -66,13 +43,15 @@
         android:gravity="center"
         android:text="Tempo"
         android:textColor="#000000"
-        android:textSize="30sp"
+        android:textSize="28sp"
+        android:background="@drawable/layout_border"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.159"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mapView"
         app:layout_constraintVertical_bias="0.087" />
+
 
     <TextView
         android:id="@+id/DistanceLabel"
@@ -81,7 +60,8 @@
         android:gravity="center"
         android:text="Distância"
         android:textColor="#000000"
-        android:textSize="30sp"
+        android:textSize="28sp"
+        android:background="@drawable/layout_border"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.893"
@@ -96,6 +76,7 @@
         android:gravity="center"
         android:text=""
         android:textColor="#000000"
+        android:background="@drawable/layout_border"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -110,8 +91,9 @@
         android:layout_height="40dp"
         android:gravity="center"
         android:text="Pace"
+        android:background="@drawable/layout_border"
         android:textColor="#000000"
-        android:textSize="30sp"
+        android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.159"
@@ -119,18 +101,7 @@
         app:layout_constraintTop_toBottomOf="@+id/mapView"
         app:layout_constraintVertical_bias="0.649" />
 
-    <TextView
-        android:id="@+id/blackSeparator1HistoriaStatus3"
-        android:layout_width="130dp"
-        android:layout_height="0.1dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@color/orange"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.175"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mapView"
-        app:layout_constraintVertical_bias="0.742" />
+
 
     <TextView
         android:id="@+id/Pace"
@@ -139,7 +110,8 @@
         android:gravity="center"
         android:text=""
         android:textColor="#000000"
-        android:textSize="30sp"
+        android:textSize="28sp"
+        android:background="@drawable/layout_border"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.159"
@@ -151,17 +123,17 @@
         android:id="@+id/VerMais"
         android:layout_width="140dp"
         android:layout_height="40dp"
+        android:background="?attr/selectableItemBackground"
         android:gravity="center"
         android:text="Ver Corridas"
         android:textAllCaps="false"
-        android:background="?attr/selectableItemBackground"
         android:textColor="#000000"
-        android:textSize="16sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.893"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mapView"
-        app:layout_constraintVertical_bias="0.649" />
+        app:layout_constraintVertical_bias="0.926" />
 
 </android.support.constraint.ConstraintLayout>

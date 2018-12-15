@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#329d92"
+    android:background="@color/white"
     tools:context=".CriarGrupoFragment">
 
     <ScrollView
@@ -31,7 +31,7 @@
                 android:layout_height="55dp"
                 android:layout_marginStart="-75dp"
                 android:layout_marginTop="55dp"
-                android:background="@drawable/edit_text_shape2"
+                android:background="@drawable/layout_border"
                 android:ems="10"
                 android:padding="5dp"
                 android:fontFamily="sans-serif"
@@ -48,7 +48,7 @@
                 android:layout_height="55dp"
                 android:layout_marginStart="-75dp"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/edit_text_shape2"
+                android:background="@drawable/layout_border"
                 android:ems="10"
                 android:fontFamily="sans-serif"
                 android:padding="5dp"
@@ -65,7 +65,7 @@
                 android:layout_height="55dp"
                 android:layout_marginStart="-75dp"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/edit_text_shape2"
+                android:background="@drawable/layout_border"
                 android:ems="10"
                 android:fontFamily="sans-serif"
                 android:hint="@string/DesportoGrupo"

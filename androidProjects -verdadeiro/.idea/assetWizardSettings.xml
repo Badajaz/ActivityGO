@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/av/ic_pause_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/social/ic_group_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -28,12 +28,12 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="fefefe" />
-                            <entry key="height" value="65" />
-                            <entry key="outputName" value="pause_test" />
+                            <entry key="color" value="080801" />
+                            <entry key="height" value="45" />
+                            <entry key="outputName" value="group_test2" />
                             <entry key="overrideSize" value="true" />
                             <entry key="sourceFile" value="C:\Users\ricar" />
-                            <entry key="width" value="65" />
+                            <entry key="width" value="45" />
                           </map>
                         </option>
                       </PersistentState>

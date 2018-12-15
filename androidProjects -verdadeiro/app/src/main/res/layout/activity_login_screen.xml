@@ -12,7 +12,6 @@
         android:layout_width="260dp"
         android:layout_height="50dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="80dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/layout_border"
@@ -26,19 +25,16 @@
         android:textColorHint="#808080"
         android:textSize="16sp"
         android:typeface="sans"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/passwordText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.272" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/passwordText"
         android:layout_width="260dp"
         android:layout_height="50dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/layout_border"
         android:drawableLeft="@drawable/lock_icon"
         android:drawablePadding="5dp"
@@ -49,18 +45,16 @@
         android:textColorHint="#808080"
         android:textSize="16sp"
         android:typeface="sans"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/buttonLogin"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usernameText"
-        app:layout_constraintVertical_bias="0.006" />
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/buttonLogin"
         android:layout_width="260dp"
         android:layout_height="50dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="7dp"
+        android:layout_marginBottom="164dp"
         android:background="#FFA500"
         android:fontFamily="open-sans"
         android:text="Iniciar Sessão"
@@ -71,29 +65,28 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordText"
-        app:layout_constraintVertical_bias="0.159" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/criarContaButton"
         android:layout_width="260dp"
         android:layout_height="60dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="8dp"
-        android:background="@color/white"
-        android:fontFamily="sans-serif"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="60dp"
+        android:background="#FFA500"
+        android:fontFamily="open-sans"
         android:onClick="criarConta"
         android:text="@string/QueroRegistar"
         android:textAllCaps="false"
-        android:textColor="#FFA500"
+        android:textColor="@color/hintWhiteColor"
         android:textSize="20sp"
         android:typeface="sans"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonLogin"
-        app:layout_constraintVertical_bias="0.202" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
         android:id="@+id/imageView3"

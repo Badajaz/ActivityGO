@@ -8,9 +8,10 @@
     tools:context=".ProcuraGrupos">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="182dp"
+        android:layout_height="50dp"
         android:layout_centerHorizontal="true"
+        android:background="@drawable/layout_border"
         android:fontFamily="open-sans"
         android:gravity="center"
         android:text="Resultados: "
@@ -19,17 +20,16 @@
         android:typeface="sans"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.029" />
+        app:layout_constraintVertical_bias="0.009" />
 
     <TextView
         android:id="@+id/blackSeparator4"
         android:layout_width="350dp"
         android:layout_height="0.1dp"
         android:layout_gravity="center_horizontal"
-        android:background="#006aff"
+        android:background="#FFA500"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.47"

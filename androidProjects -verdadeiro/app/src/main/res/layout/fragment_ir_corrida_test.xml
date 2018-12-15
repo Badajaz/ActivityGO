@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".IrCorridaEasy">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="507dp"
+        android:fontFamily="open-sans"
+        android:gravity="center"
+        android:text="Antes de Começar!"
+        android:textAlignment="center"
+        android:textColor="#FFA500"
+        android:textSize="35sp"
+        android:typeface="sans"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.01" />
+
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="65dp"
+        android:layout_marginTop="332dp"
+        android:layout_marginEnd="58dp"
+        android:layout_marginBottom="175dp"
+        android:text="Certifique-se que o sitio onde está a decorrer a atividade física, não põe em causa a sua intergridade física"
+        android:textColor="#FFA500" />
+
+    <Button
+        android:id="@+id/buttonStart"
+        android:layout_width="196dp"
+        android:layout_height="31dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="99dp"
+        android:layout_marginEnd="89dp"
+        android:layout_marginBottom="35dp"
+        android:background="#FFA500"
+        android:fontFamily="sans-serif"
+        android:text="Start"
+        android:textColor="#ffffff"
+        android:textSize="16sp"
+        android:typeface="sans"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toggleButton4"
+        app:layout_constraintVertical_bias="0.32" />
+
+
+
+</RelativeLayout>
