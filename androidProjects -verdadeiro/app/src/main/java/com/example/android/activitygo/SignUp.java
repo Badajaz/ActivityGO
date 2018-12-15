@@ -13,6 +13,7 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
+import com.example.android.activitygo.model.Desafio;
 import com.example.android.activitygo.model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -81,6 +82,7 @@ public class SignUp extends AppCompatActivity {
     private DatabaseReference databaseUsers;
 
     private boolean existe = false;
+    private DatabaseReference databaseDesafios;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +90,7 @@ public class SignUp extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
         databaseUsers = FirebaseDatabase.getInstance().getReference("users");
+        databaseDesafios = FirebaseDatabase.getInstance().getReference("desafios");
 
         firstNameUser = (TextView) findViewById(R.id.FirstNameText);
         secondNameUser = (TextView) findViewById(R.id.LastNameText);
@@ -210,6 +213,11 @@ public class SignUp extends AppCompatActivity {
 
                             User user = new User(firstName, secondName, dataNascimentoStr, genero, paisUserStr, email, peso, altura, usernameStr, password, sports, "");
                             databaseUsers.child(id).setValue(user);
+
+                            String id1 = databaseDesafios.push().getKey();
+                            Desafio d = new Desafio(0,usernameStr);
+                            databaseDesafios.child(id1).setValue(d);
+
 
                             Intent intent = new Intent(getBaseContext(), LoginScreen.class);
                             startActivity(intent);

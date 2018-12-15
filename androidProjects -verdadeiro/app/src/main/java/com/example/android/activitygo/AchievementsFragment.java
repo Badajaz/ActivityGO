@@ -25,7 +25,7 @@ public class AchievementsFragment extends Fragment {
     private TextView tv;
     private double maiorDistancia = 0.0;
     private TextView tvdata;
-    private String melhorKm = "4000:00";
+    private String melhorKm = "00:00";
     private TextView melhorKmTv;
     private String dataDistancia;
     private String melhorKmData;
@@ -63,6 +63,7 @@ public class AchievementsFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String valores = "";
+                boolean first = false;
 
                 for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                     Corrida c = userSnapshot.getValue(Corrida.class);
@@ -76,9 +77,21 @@ public class AchievementsFragment extends Fragment {
 
                     }
 
-                    if (c.getDistancia() > 1000 && isLower(melhorKm, c.getMelhorkm())) {
-                        melhorKm = c.getMelhorkm();
-                        melhorKmData = c.getData();
+                    if (c.getDistancia() >= 1000  &&  c.getUsername().equals(username)) {
+                        if (first == false){
+                            melhorKm = c.getMelhorkm();
+                            first = true;
+                        }else{
+
+
+                            if (isLower(melhorKm, c.getMelhorkm())){
+                                melhorKm = c.getMelhorkm();
+                                melhorKmData = c.getData();
+                            }
+
+                        }
+
+
                         //count ++;
 
                     }
@@ -105,6 +118,50 @@ public class AchievementsFragment extends Fragment {
 
         return v;
     }
+
+
+
+
+
+
+    public boolean isLower(String actual,String ciclo){
+
+       String[] Atime = actual.split(":"); // min,seg
+       String[] Ctime = ciclo.split(":"); // min,seg
+
+
+       if (Integer.parseInt(Atime[0]) > Integer.parseInt(Ctime[0]) ){
+           return true;
+       }else{
+           if(Integer.parseInt(Atime[0]) == Integer.parseInt(Ctime[0])){
+               if (Integer.parseInt(Atime[1]) > Integer.parseInt(Ctime[1])){
+                   return true;
+               }else{
+                   return false;
+               }
+
+           }else{
+                return false;
+           }
+       }
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*
 
     public boolean isLower(String actual, String cycle) {
         boolean a = false;
@@ -154,7 +211,7 @@ public class AchievementsFragment extends Fragment {
 
         }
         return a;
-    }
+    }*/
 
 
 }
