@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.android.activitygo.model.Challenge;
 import com.example.android.activitygo.model.Corrida;
@@ -41,6 +42,9 @@ public class RankingsFragment extends Fragment {
     private DatabaseReference databaseUsers;
     private Corrida c;
     private User u;
+    private Ranking r;
+
+    private String username;
 
     public RankingsFragment() {
     }
@@ -51,9 +55,12 @@ public class RankingsFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_rankings, container, false);
 
         ((MenuPrincipal) getActivity()).getSupportActionBar().setTitle("Rankings:");
+        username = getArguments().getString("USERNAME");
+
         databaseRankings = FirebaseDatabase.getInstance().getReference("rankings");
         databaseCorridas = FirebaseDatabase.getInstance().getReference("corrida");
         databaseUsers = FirebaseDatabase.getInstance().getReference("users");
+        classificacaoCorridaGeral = (Button) v.findViewById(R.id.buttonCorridaGeral);
 
         databaseUsers.orderByChild("pontos").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -61,16 +68,45 @@ public class RankingsFragment extends Fragment {
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     u = child.getValue(User.class);
                     if (u.getPontos() >= 0) {
+                        // lista inversa com os users para obter os pontos de cada
                         listaUsers.add(u.getUsername());
+                        Collections.reverse(listaUsers);
+                    }
+                }
+
+                // OBTER RANKING GERAL CORRIDA
+                databaseRankings.orderByChild("desporto").equalTo("corrida").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot != null) {
+                            for (DataSnapshot child : dataSnapshot.getChildren()) {
+                                r = child.getValue(Ranking.class);
+
+                                // lista dos rankings de corrida
+                                final ArrayList<String> lista = r.getRankings();
+                                int lugar = lista.indexOf(username) + 1;
+                                int total = lista.size();
+                                classificacaoCorridaGeral.setText("Classificacao: " + lugar + "/" + total);
+                            }
+                        } else {
+                            Ranking r = new Ranking("corrida", listaUsers);
+                            String id = databaseRankings.push().getKey();
+                            databaseRankings.child(id).setValue(r);
+                        }
                     }
 
-                }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+                /*
                 Collections.reverse(listaUsers);
 
                 //Ranking r = new Ranking("Classificacao Geral Corrida", "corrida", listaUsers);
                 Ranking r = new Ranking("corrida", listaUsers);
                 String id = databaseRankings.push().getKey();
-                databaseRankings.child(id).setValue(r);
+                databaseRankings.child(id).setValue(r);*/
 
             }
 
@@ -87,7 +123,6 @@ public class RankingsFragment extends Fragment {
         databaseRankings.child(id).setValue(rankingCorridas);
         */
 
-        classificacaoCorridaGeral = (Button) v.findViewById(R.id.buttonCorridaGeral);
         classificacaoCorridaGeral.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
