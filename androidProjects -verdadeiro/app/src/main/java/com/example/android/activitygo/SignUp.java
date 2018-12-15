@@ -211,11 +211,11 @@ public class SignUp extends AppCompatActivity {
 
                             String id = databaseUsers.push().getKey();
 
-                            User user = new User(firstName, secondName, dataNascimentoStr, genero, paisUserStr, email, peso, altura, usernameStr, password, sports, "");
+                            User user = new User(firstName, secondName, dataNascimentoStr, genero, paisUserStr, email, peso, altura, usernameStr, password, sports, "", 0);
                             databaseUsers.child(id).setValue(user);
 
                             String id1 = databaseDesafios.push().getKey();
-                            Desafio d = new Desafio(0,usernameStr);
+                            Desafio d = new Desafio(0, usernameStr);
                             databaseDesafios.child(id1).setValue(d);
 
 

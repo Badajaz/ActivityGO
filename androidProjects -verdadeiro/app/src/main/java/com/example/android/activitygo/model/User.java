@@ -16,12 +16,13 @@ public class User {
     private String password;
     private ArrayList<String> sports;
     private String photoPath;
+    private int pontos;
 
     public User() {
 
     }
 
-    public User(String firstName, String lastName, String date, String gender, String country, String email, String weight, String hight, String username, String password, ArrayList<String> sports, String photoPath) {
+    public User(String firstName, String lastName, String date, String gender, String country, String email, String weight, String hight, String username, String password, ArrayList<String> sports, String photoPath, int pontos) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.date = date;
@@ -34,6 +35,11 @@ public class User {
         this.password = password;
         this.sports = sports;
         this.photoPath = photoPath;
+        this.pontos = pontos;
+    }
+
+    public int getPontos() {
+        return pontos;
     }
 
     public String getPhotoPath() {

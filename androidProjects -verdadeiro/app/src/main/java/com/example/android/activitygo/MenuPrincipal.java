@@ -160,7 +160,10 @@ public class MenuPrincipal extends AppCompatActivity {
                             break;
                         case R.id.RankingItem:
                             //Fragmento Ranking
+                            Bundle b1 = new Bundle();
+                            b1.putString("USERNAME", username);
                             SelectedFragment = new RankingsFragment();
+                            SelectedFragment.setArguments(b1);
                             FragmentManager fmanag = getFragmentManager();
                             menuItem.setIcon(R.drawable.trophy_icon333);
                             FragmentTransaction ftransactio = fmanag.beginTransaction();
