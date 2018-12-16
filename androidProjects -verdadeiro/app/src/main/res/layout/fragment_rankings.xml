@@ -56,7 +56,6 @@
         android:backgroundTint="#FFA500"
         android:drawableRight="@drawable/run"
         android:gravity="center"
-        android:text="Classificação Corrida: "
         android:textAllCaps="false"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
