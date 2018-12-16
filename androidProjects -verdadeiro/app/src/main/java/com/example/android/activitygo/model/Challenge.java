@@ -7,17 +7,19 @@ public class Challenge {
     private String data;
     private String mUsername;
     private int pontos;
+    private int textview;
 
     public Challenge() {
 
     }
 
-    public Challenge(String username, String tipoDesporto, String descricao, String data, int pontos) {
+    public Challenge(String username, String tipoDesporto, String descricao, String data, int pontos,int textview) {
         this.tipoDesporto = tipoDesporto;
         this.descricao = descricao;
         this.data = data;
         this.mUsername = username;
         this.pontos = pontos;
+        this.textview = textview;
     }
 
     public String getmUsername() {
@@ -38,5 +40,9 @@ public class Challenge {
 
     public int getPontos() {
         return pontos;
+    }
+
+    public int getTextview() {
+        return textview;
     }
 }
