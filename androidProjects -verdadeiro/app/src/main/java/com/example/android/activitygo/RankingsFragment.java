@@ -45,6 +45,7 @@ public class RankingsFragment extends Fragment {
     private Ranking r;
 
     private String username;
+    private static final String TAG = "RankingsFragment";
 
     public RankingsFragment() {
     }
@@ -116,20 +117,13 @@ public class RankingsFragment extends Fragment {
             }
         });
 
-
-        /*
-        Ranking rankingCorridas = new Ranking("corrida", usersCorridas);
-        String id = databaseRankings.push().getKey();
-        databaseRankings.child(id).setValue(rankingCorridas);
-        */
-
         classificacaoCorridaGeral.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Fragment SelectedFragment = new TableRankingsFragment();
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(R.id.fragment_container, SelectedFragment, "TableRankingsFragment");
+                ft.replace(R.id.fragment_container, SelectedFragment, "RankingsFragment");
                 ft.addToBackStack("RankingsFragment");
                 ft.commit();
             }

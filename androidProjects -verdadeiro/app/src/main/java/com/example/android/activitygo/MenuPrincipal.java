@@ -54,6 +54,8 @@ public class MenuPrincipal extends AppCompatActivity {
     private String lastName = "";
     private String image_path = "";
 
+    private static final String TAG = "MenuPrincipal";
+
     private DatabaseReference databaseUsers;
 
     @Override
@@ -144,20 +146,17 @@ public class MenuPrincipal extends AppCompatActivity {
                             break;
 
                         case R.id.achievementItem:
-                            // chamar tab das achievements
-                            //menuItem.setIcon(R.drawable.trophy_icon222black);
-                            /*Intent intent = new Intent(getApplicationContext(), AchievementsTab.class);
-                            startActivity(intent);*/
-
                             Bundle bundle = new Bundle();
                             bundle.putString("USERNAME", username);
                             SelectedFragment = new AchievementsFragment();
                             SelectedFragment.setArguments(bundle);
                             FragmentManager f = getFragmentManager();
                             FragmentTransaction fte = f.beginTransaction();
-                            fte.replace(R.id.fragment_container, SelectedFragment, "achievementFragment");
+                            fte.replace(R.id.fragment_container, SelectedFragment, "AchievementFragment");
+                            fte.addToBackStack("AchievementFragment");
                             fte.commit();
                             break;
+
                         case R.id.RankingItem:
                             //Fragmento Ranking
                             Bundle b1 = new Bundle();
@@ -167,24 +166,20 @@ public class MenuPrincipal extends AppCompatActivity {
                             FragmentManager fmanag = getFragmentManager();
                             menuItem.setIcon(R.drawable.trophy_icon333);
                             FragmentTransaction ftransactio = fmanag.beginTransaction();
-                            ftransactio.replace(R.id.fragment_container, SelectedFragment, "Ranking Item");
+                            ftransactio.replace(R.id.fragment_container, SelectedFragment, "RankingsFragment");
+                            ftransactio.addToBackStack("RankingsFragment");
                             ftransactio.commit();
                             break;
 
                         case R.id.GroupsItem:
-                            /*SelectedFragment = new GroupFragment();
-                            FragmentManager fmana = getFragmentManager();
-                            FragmentTransaction ftransacti = fmana.beginTransaction();
-                            ftransacti.replace(R.id.fragment_container, SelectedFragment, "GroupFragment");
-                            ftransacti.commit();
-                            break;*/
                             Bundle args = new Bundle();
                             args.putString("USERNAME", username);
                             SelectedFragment = new MergeGroupFragment();
                             FragmentManager fmana = getFragmentManager();
                             SelectedFragment.setArguments(args);
                             FragmentTransaction ftransacti = fmana.beginTransaction();
-                            ftransacti.replace(R.id.fragment_container, SelectedFragment, "GroupFragment");
+                            ftransacti.replace(R.id.fragment_container, SelectedFragment, "MergeGroupFragment");
+                            ftransacti.addToBackStack("MergeGroupFragment");
                             ftransacti.commit();
                             break;
 
@@ -249,7 +244,18 @@ public class MenuPrincipal extends AppCompatActivity {
 
             case R.id.BackButton:
                 //getFragmentManager().popBackStack();
-                showTerminarSessaoPopup();
+                //RankingsFragment
+                RankingsFragment myFragment = (RankingsFragment) getFragmentManager().findFragmentByTag("RankingsFragment");
+                TableRankingsFragment myFragment2 = (TableRankingsFragment) getFragmentManager().findFragmentByTag("TableRankingsFragment");
+                MergeGroupFragment mergeGroupFragment = (MergeGroupFragment) getFragmentManager().findFragmentByTag("MergeGroupFragment");
+
+                if (myFragment != null && myFragment.isVisible()) {
+                    getFragmentManager().popBackStack();
+                } else if (myFragment2 != null && myFragment2.isVisible()) {
+                    getFragmentManager().popBackStack();
+                } else if (mergeGroupFragment != null && mergeGroupFragment.isVisible()) {
+                    getFragmentManager().popBackStack();
+                }
         }
         return true;
     }

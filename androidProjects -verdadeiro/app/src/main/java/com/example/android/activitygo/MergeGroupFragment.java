@@ -49,7 +49,7 @@ public class MergeGroupFragment extends Fragment {
     private String sport;
 
     private String username;
-
+    private static final String TAG = "MergeGroupFragment";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
