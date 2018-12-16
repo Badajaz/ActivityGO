@@ -116,9 +116,6 @@ public class ChalengeFragment extends Fragment {
                 databaseChallenges.child(id).setValue(c);
 
 
-
-
-
             }
 
         });
@@ -148,10 +145,10 @@ public class ChalengeFragment extends Fragment {
                             obterChallenge.setVisibility(View.GONE);
 
                         }
-
+                        count++;
                     }
 
-                    count++;
+
 
 
                 }

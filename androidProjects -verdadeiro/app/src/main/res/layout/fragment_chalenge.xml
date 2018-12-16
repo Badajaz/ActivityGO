@@ -14,17 +14,21 @@
         android:id="@+id/getChallenge"
         android:layout_width="265dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="52dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="108dp"
+        android:background="#FFA500"
         android:text="Obter novo challenge"
+        android:textColor="@color/whiteLetters"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ThirdConstrainte" />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/firstConstrainte"
-        android:layout_width="match_parent"
-        android:layout_height="125dp"
+        android:layout_width="349dp"
+        android:layout_height="95dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
 
@@ -32,7 +36,7 @@
         android:background="@drawable/layout_border"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.421"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -67,7 +71,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="68dp"
+            android:layout_marginBottom="52dp"
             android:fontFamily="sans-serif"
             android:gravity="center"
             android:text=""
@@ -76,7 +80,7 @@
             android:typeface="sans"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.943"
+            app:layout_constraintHorizontal_bias="0.944"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ProgressBar
@@ -99,16 +103,15 @@
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/secondConstrainte"
-        android:layout_width="match_parent"
-        android:layout_height="125dp"
+        android:layout_width="349dp"
+        android:layout_height="88dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="128dp"
 
         android:layout_marginEnd="8dp"
         android:background="@drawable/layout_border"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -175,16 +178,16 @@
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/ThirdConstrainte"
-        android:layout_width="match_parent"
-        android:layout_height="125dp"
+        android:layout_width="349dp"
+        android:layout_height="95dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="304dp"
+        android:layout_marginTop="236dp"
 
         android:layout_marginEnd="8dp"
         android:background="@drawable/layout_border"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.578"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -219,7 +222,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="60dp"
+            android:layout_marginBottom="44dp"
             android:fontFamily="sans-serif"
             android:gravity="center"
             android:text=""
@@ -228,7 +231,7 @@
             android:typeface="sans"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.942"
+            app:layout_constraintHorizontal_bias="0.933"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ProgressBar
