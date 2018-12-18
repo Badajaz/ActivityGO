@@ -184,10 +184,29 @@ public class ChalengeFragment extends Fragment {
 
                                 if (distanciaFeita >= 2000) {
                                     int lime = getResources().getColor(R.color.orange);
+                                    databaseChallenges.orderByChild("mUsername").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            for (DataSnapshot child : dataSnapshot.getChildren()) {
+                                                Challenge c = child.getValue(Challenge.class);
+                                                if (c.getDescricao().equals("Faça 2 km")){
+                                                    databaseChallenges.child(child.getKey()).child("completed").setValue(1);
+                                                }
+
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                        }
+                                    });
 
                                     if (primeiratv.getText().equals("Faça 2 km")) {
                                         ConstraintLayout c = getView().findViewById(R.id.firstConstrainte);
                                         c.setBackgroundColor(lime);
+
 
                                     }
 
@@ -237,6 +256,24 @@ public class ChalengeFragment extends Fragment {
 
                                 if (distanciaFeita >= 3000) {
                                     int lime = getResources().getColor(R.color.orange);
+                                    databaseChallenges.orderByChild("mUsername").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            for (DataSnapshot child : dataSnapshot.getChildren()) {
+                                                Challenge c = child.getValue(Challenge.class);
+                                                if (c.getDescricao().equals("Faça 3 km")){
+                                                    databaseChallenges.child(child.getKey()).child("completed").setValue(1);
+                                                }
+
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                        }
+                                    });
 
                                     if (primeiratv.getText().equals("Faça 3 km")) {
                                         ConstraintLayout c = getView().findViewById(R.id.firstConstrainte);
@@ -286,12 +323,13 @@ public class ChalengeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 int lime = getResources().getColor(R.color.orange);
+                //conn.getBackground()
                     databaseChallenges.orderByChild("mUsername").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             for (DataSnapshot child : dataSnapshot.getChildren()) {
                                 Challenge c = child.getValue(Challenge.class);
-                                if (c.getDescricao().equals(terceiratv.getText().toString())) {
+                                if (c.getDescricao().equals(terceiratv.getText().toString()) && c.getCompleted()==1 ) {
                                     String id = child.getKey();
                                     databaseChallenges.child(id).removeValue();
                                     terceiratv.setText("");
@@ -338,7 +376,7 @@ public class ChalengeFragment extends Fragment {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             for (DataSnapshot child : dataSnapshot.getChildren()) {
                                 Challenge c = child.getValue(Challenge.class);
-                                if (c.getDescricao().equals(primeiratv.getText().toString())) {
+                                if (c.getDescricao().equals(primeiratv.getText().toString()) && c.getCompleted() == 1) {
                                     String id = child.getKey();
                                     databaseChallenges.child(id).removeValue();
 
@@ -383,7 +421,7 @@ public class ChalengeFragment extends Fragment {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             for (DataSnapshot child : dataSnapshot.getChildren()) {
                                 Challenge c = child.getValue(Challenge.class);
-                                if (c.getDescricao().equals(segundatv.getText().toString())) {
+                                if (c.getDescricao().equals(segundatv.getText().toString()) && c.getCompleted() == 1) {
                                     String id = child.getKey();
                                     databaseChallenges.child(id).removeValue();
                                     segundatv.setText("");
@@ -411,7 +449,7 @@ public class ChalengeFragment extends Fragment {
 
                         }
                     });
-                
+
             }
         });
 
