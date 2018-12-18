@@ -28,6 +28,7 @@ import com.example.android.activitygo.model.Challenge;
 import com.example.android.activitygo.model.Corrida;
 import com.example.android.activitygo.model.Desafio;
 import com.example.android.activitygo.model.Grupo;
+import com.example.android.activitygo.model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -48,27 +49,24 @@ import java.util.Random;
 
 public class ChalengeFragment extends Fragment {
 
+    public static final String CHANNEL_1_ID = "channel1";
     private String nomeChallenge;
     private String username;
     private String descricaoChallenge;
     private String dataChallenge;
     private DatabaseReference databaseChallenges;
     private DatabaseReference databaseAllChallenges;
-
     private TextView primeiratv;
     private TextView segundatv;
     private TextView terceiratv;
-
     private ArrayList<String> descricaoChallenges = new ArrayList<>();
     private DatabaseReference databaseDesafios;
-
-    public static final String CHANNEL_1_ID = "channel1";
-
     private NotificationManagerCompat notificationManager;
     private DatabaseReference databaseCorrida;
     private boolean inseriu = false;
     private ValueEventListener o;
     private Drawable background;
+    private DatabaseReference databaseUsers;
 
     public ChalengeFragment() {
         // Required empty public constructor
@@ -83,6 +81,7 @@ public class ChalengeFragment extends Fragment {
         databaseChallenges = FirebaseDatabase.getInstance().getReference("challenges");
         databaseCorrida = FirebaseDatabase.getInstance().getReference("corrida");
         databaseDesafios = FirebaseDatabase.getInstance().getReference("desafios");
+        databaseUsers = FirebaseDatabase.getInstance().getReference("users");
         //databaseAllChallenges = FirebaseDatabase.getInstance().getReference("all-challenges");
         //primeiratv = v.findViewById(R.id.descricaoTextViewPrimeiraCaixaCaminhad);
         //segundatv = v.findViewById(R.id.secondChallenge);
@@ -101,9 +100,8 @@ public class ChalengeFragment extends Fragment {
         primeiratv = v.findViewById(R.id.descricaoTextViewPrimeiraCaixaCaminhad);
         segundatv = v.findViewById(R.id.secondChallenge);
         terceiratv = v.findViewById(R.id.ThirdChallenge);
-         ConstraintLayout c = (ConstraintLayout) v.findViewById(R.id.ThirdConstrainte);
-         background = c.getBackground();
-
+        ConstraintLayout c = (ConstraintLayout) v.findViewById(R.id.ThirdConstrainte);
+        background = c.getBackground();
 
 
         obterChallenge.setOnClickListener(new View.OnClickListener() {
@@ -129,7 +127,7 @@ public class ChalengeFragment extends Fragment {
         });
 
 
-       o = databaseChallenges.addValueEventListener(new ValueEventListener() {
+        o = databaseChallenges.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ArrayList<String> challengeDesricao = new ArrayList<>();
@@ -190,7 +188,7 @@ public class ChalengeFragment extends Fragment {
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                             for (DataSnapshot child : dataSnapshot.getChildren()) {
                                                 Challenge c = child.getValue(Challenge.class);
-                                                if (c.getDescricao().equals("Faça 2 km")){
+                                                if (c.getDescricao().equals("Faça 2 km")) {
                                                     databaseChallenges.child(child.getKey()).child("completed").setValue(1);
                                                 }
 
@@ -262,7 +260,7 @@ public class ChalengeFragment extends Fragment {
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                             for (DataSnapshot child : dataSnapshot.getChildren()) {
                                                 Challenge c = child.getValue(Challenge.class);
-                                                if (c.getDescricao().equals("Faça 3 km")){
+                                                if (c.getDescricao().equals("Faça 3 km")) {
                                                     databaseChallenges.child(child.getKey()).child("completed").setValue(1);
                                                 }
 
@@ -312,10 +310,6 @@ public class ChalengeFragment extends Fragment {
         });
 
 
-
-
-
-
         final ConstraintLayout conn = (ConstraintLayout) v.findViewById(R.id.ThirdConstrainte);
 
 
@@ -324,45 +318,62 @@ public class ChalengeFragment extends Fragment {
             public void onClick(View v) {
                 int lime = getResources().getColor(R.color.orange);
                 //conn.getBackground()
-                    databaseChallenges.orderByChild("mUsername").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            for (DataSnapshot child : dataSnapshot.getChildren()) {
-                                Challenge c = child.getValue(Challenge.class);
-                                if (c.getDescricao().equals(terceiratv.getText().toString()) && c.getCompleted()==1 ) {
-                                    String id = child.getKey();
-                                    databaseChallenges.child(id).removeValue();
-                                    terceiratv.setText("");
-                                    Random randomChallenge = new Random();
-                                    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                                    Date date = new Date();
-                                    String[] chalenges = {"Faça 2 km", "Faça 3 km", "Faça 5 km", "Faça 7 km", "Faça 10 km", "Corra 10 minutos", "Corra 20 minutos", "Corra 30 minutos", "Faça 100m em menos de 9 segundos", "Faça 200m em menos de 18 segundos"};
+                databaseChallenges.orderByChild("mUsername").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
+                    Challenge c;
 
-                                    int[] points = {100, 200, 300, 500, 700, 50, 200, 400, 300, 500};
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot child : dataSnapshot.getChildren()) {
+                            c = child.getValue(Challenge.class);
+                            if (c.getDescricao().equals(terceiratv.getText().toString()) && c.getCompleted() == 1) {
+                                String id = child.getKey();
+                                databaseChallenges.child(id).removeValue();
+                                terceiratv.setText("");
+
+                                databaseUsers.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        for (DataSnapshot child : dataSnapshot.getChildren()) {
+                                            User u = child.getValue(User.class);
+                                            int pontos = u.getPontos() + c.getPontos();
+                                            databaseUsers.child(child.getKey()).child("pontos").setValue(pontos);
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
 
 
-                                    int index = randomChallenge.nextInt(chalenges.length);
-                                    String id3 = databaseChallenges.push().getKey();
-                                    Challenge c3 = new Challenge(username, "corrida", chalenges[index], dateFormat.format(date), points[index], 0);
-                                    databaseChallenges.child(id3).setValue(c3);
-                                    conn.setBackgroundDrawable(background);
+                                Random randomChallenge = new Random();
+                                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                                Date date = new Date();
+                                String[] chalenges = {"Faça 2 km", "Faça 3 km", "Faça 5 km", "Faça 7 km", "Faça 10 km", "Corra 10 minutos", "Corra 20 minutos", "Corra 30 minutos", "Faça 100m em menos de 9 segundos", "Faça 200m em menos de 18 segundos"};
 
-                                }
+                                int[] points = {100, 200, 300, 500, 700, 50, 200, 400, 300, 500};
+
+
+                                int index = randomChallenge.nextInt(chalenges.length);
+                                String id3 = databaseChallenges.push().getKey();
+                                Challenge c3 = new Challenge(username, "corrida", chalenges[index], dateFormat.format(date), points[index], 0);
+                                databaseChallenges.child(id3).setValue(c3);
+                                conn.setBackgroundDrawable(background);
 
                             }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
                         }
-                    });
-                }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
 
         });
-
-
-
 
 
         final ConstraintLayout con = (ConstraintLayout) v.findViewById(R.id.firstConstrainte);
@@ -371,41 +382,57 @@ public class ChalengeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 int lime = getResources().getColor(R.color.orange);
-                    databaseChallenges.orderByChild("mUsername").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            for (DataSnapshot child : dataSnapshot.getChildren()) {
-                                Challenge c = child.getValue(Challenge.class);
-                                if (c.getDescricao().equals(primeiratv.getText().toString()) && c.getCompleted() == 1) {
-                                    String id = child.getKey();
-                                    databaseChallenges.child(id).removeValue();
+                databaseChallenges.orderByChild("mUsername").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
+                    Challenge c;
 
-                                    primeiratv.setText("");
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot child : dataSnapshot.getChildren()) {
+                            c = child.getValue(Challenge.class);
+                            if (c.getDescricao().equals(primeiratv.getText().toString()) && c.getCompleted() == 1) {
+                                String id = child.getKey();
+                                databaseChallenges.child(id).removeValue();
+                                primeiratv.setText("");
+                                databaseUsers.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        for (DataSnapshot child : dataSnapshot.getChildren()) {
+                                            User u = child.getValue(User.class);
+                                            int pontos = u.getPontos() + c.getPontos();
+                                            databaseUsers.child(child.getKey()).child("pontos").setValue(pontos);
 
-                                    Random randomChallenge = new Random();
-                                    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                                    Date date = new Date();
-                                    String[] chalenges = {"Faça 2 km", "Faça 3 km", "Faça 5 km", "Faça 7 km", "Faça 10 km", "Corra 10 minutos", "Corra 20 minutos", "Corra 30 minutos", "Faça 100m em menos de 9 segundos", "Faça 200m em menos de 18 segundos"};
+                                        }
+                                    }
 
-                                    int[] points = {100, 200, 300, 500, 700, 50, 200, 400, 300, 500};
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+
+                                Random randomChallenge = new Random();
+                                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                                Date date = new Date();
+                                String[] chalenges = {"Faça 2 km", "Faça 3 km", "Faça 5 km", "Faça 7 km", "Faça 10 km", "Corra 10 minutos", "Corra 20 minutos", "Corra 30 minutos", "Faça 100m em menos de 9 segundos", "Faça 200m em menos de 18 segundos"};
+
+                                int[] points = {100, 200, 300, 500, 700, 50, 200, 400, 300, 500};
 
 
-                                    int index = randomChallenge.nextInt(chalenges.length);
-                                    String id2 = databaseChallenges.push().getKey();
-                                    Challenge ca = new Challenge(username, "corrida", chalenges[index], dateFormat.format(date), points[index], 0);
-                                    databaseChallenges.child(id2).setValue(ca);
-                                    con.setBackgroundDrawable(background);
-                                }
-
+                                int index = randomChallenge.nextInt(chalenges.length);
+                                String id2 = databaseChallenges.push().getKey();
+                                Challenge ca = new Challenge(username, "corrida", chalenges[index], dateFormat.format(date), points[index], 0);
+                                databaseChallenges.child(id2).setValue(ca);
+                                con.setBackgroundDrawable(background);
                             }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
                         }
-                    });
+                    }
 
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
 
 
             }
@@ -416,46 +443,62 @@ public class ChalengeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 int lime = getResources().getColor(R.color.orange);
-                    databaseChallenges.orderByChild("mUsername").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            for (DataSnapshot child : dataSnapshot.getChildren()) {
-                                Challenge c = child.getValue(Challenge.class);
-                                if (c.getDescricao().equals(segundatv.getText().toString()) && c.getCompleted() == 1) {
-                                    String id = child.getKey();
-                                    databaseChallenges.child(id).removeValue();
-                                    segundatv.setText("");
+                databaseChallenges.orderByChild("mUsername").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
+                    Challenge c;
 
-                                    Random randomChallenge = new Random();
-                                    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                                    Date date = new Date();
-                                    String[] chalenges = {"Faça 2 km", "Faça 3 km", "Faça 5 km", "Faça 7 km", "Faça 10 km", "Corra 10 minutos", "Corra 20 minutos", "Corra 30 minutos", "Faça 100m em menos de 9 segundos", "Faça 200m em menos de 18 segundos"};
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot child : dataSnapshot.getChildren()) {
+                            c = child.getValue(Challenge.class);
+                            if (c.getDescricao().equals(segundatv.getText().toString()) && c.getCompleted() == 1) {
+                                String id = child.getKey();
+                                databaseChallenges.child(id).removeValue();
+                                segundatv.setText("");
 
-                                    int[] points = {100, 200, 300, 500, 700, 50, 200, 400, 300, 500};
+                                databaseUsers.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        for (DataSnapshot child : dataSnapshot.getChildren()) {
+                                            User u = child.getValue(User.class);
+                                            int pontos = u.getPontos() + c.getPontos();
+                                            databaseUsers.child(child.getKey()).child("pontos").setValue(pontos);
+
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
 
 
-                                    int index = randomChallenge.nextInt(chalenges.length);
-                                    String id1 = databaseChallenges.push().getKey();
-                                    Challenge ch = new Challenge(username, "corrida", chalenges[index], dateFormat.format(date), points[index], 0);
-                                    databaseChallenges.child(id1).setValue(ch);
-                                    co.setBackgroundDrawable(background);
-                                }
+                                Random randomChallenge = new Random();
+                                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                                Date date = new Date();
+                                String[] chalenges = {"Faça 2 km", "Faça 3 km", "Faça 5 km", "Faça 7 km", "Faça 10 km", "Corra 10 minutos", "Corra 20 minutos", "Corra 30 minutos", "Faça 100m em menos de 9 segundos", "Faça 200m em menos de 18 segundos"};
 
+                                int[] points = {100, 200, 300, 500, 700, 50, 200, 400, 300, 500};
+
+
+                                int index = randomChallenge.nextInt(chalenges.length);
+                                String id1 = databaseChallenges.push().getKey();
+                                Challenge ch = new Challenge(username, "corrida", chalenges[index], dateFormat.format(date), points[index], 0);
+                                databaseChallenges.child(id1).setValue(ch);
+                                co.setBackgroundDrawable(background);
                             }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
                         }
-                    });
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
 
             }
         });
-
-
-
-
 
 
         return v;
