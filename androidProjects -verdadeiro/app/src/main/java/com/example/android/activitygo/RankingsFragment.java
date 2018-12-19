@@ -27,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 
@@ -77,10 +78,35 @@ public class RankingsFragment extends Fragment {
                     if (u.getPontos() >= 0) {
                         // lista inversa com os users para obter os pontos de cada
                         listaUsers.add(u);
+
+
                         // Collections.reverse(listaUsers);
                     }
                 }
-                rankingsNomes = new String[listaUsers.size()];
+
+                int[] listForSort = new int[listaUsers.size()];
+                actualizada = new ArrayList<>();
+
+
+                for (int i = 0; i < listaUsers.size(); i++) {
+                    listForSort[i] = listaUsers.get(i).getPontos();
+                }
+
+                Arrays.sort(listForSort);
+
+                for (int j = 0; j < listForSort.length; j++) {
+                    for (int k = 0; k < listForSort.length; k++) {
+                        if (listForSort[j] == listaUsers.get(k).getPontos()) {
+                                actualizada.add(listaUsers.get(k).getUsername());
+                        }
+                    }
+                }
+
+
+
+
+
+                /*rankingsNomes = new String[listaUsers.size()];
 
 
                 for (int i = 0; i < listaUsers.size(); i++) {
@@ -103,7 +129,7 @@ public class RankingsFragment extends Fragment {
                 }
 
                 actualizada = new ArrayList<String>();
-                actualizada.addAll(convertListaToArratList(rankingsNomes));
+                actualizada.addAll(convertListaToArratList(rankingsNomes));*/
 
 
                 FirebaseDatabase.getInstance().getReference().addListenerForSingleValueEvent(new ValueEventListener() {
@@ -121,8 +147,8 @@ public class RankingsFragment extends Fragment {
                                         Ranking r = child.getValue(Ranking.class);
                                         databaseRankings.child(child.getKey()).child("rankings").setValue(actualizada);
                                     }
-
-                                    classificacaoCorridaGeral.setText("Classificacao: " + getRankingUser(username,actualizada) + "/" + actualizada.size());
+                                    Collections.reverse(actualizada);
+                                    classificacaoCorridaGeral.setText("Classificacao: " + getRankingUser(username, actualizada) + "/" + actualizada.size());
 
 
                                 }
@@ -210,14 +236,14 @@ public class RankingsFragment extends Fragment {
 
 
     private int getRankingUser(String username, ArrayList<String> rank) {
-        int i;
-        for (i = 0; i < rank.size(); i++) {
-            if (rank.equals(username)) {
-                return i;
+        int user = -1 ;
+        for (int i = 0; i < rank.size(); i++) {
+            if (rank.get(i).equals(username)) {
+                user = i+1;
             }
         }
 
-        return i;
+       return  user;
     }
 
 
