@@ -5,6 +5,7 @@ import android.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.service.notification.NotificationListenerService;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -27,25 +28,25 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 public class RankingsFragment extends Fragment {
 
-    private ArrayList<String> listaUsers = new ArrayList<>();
 
+    private static final String TAG = "RankingsFragment";
     private Button classificacaoCorridaGeral;
     private Button classificacaoCiclismoGeral;
     private Button classificacaoCorridaGrupo;
     private Button classificacaoCiclismoGrupo;
-
     private DatabaseReference databaseRankings;
     private DatabaseReference databaseCorridas;
     private DatabaseReference databaseUsers;
     private Corrida c;
     private User u;
     private Ranking r;
-
     private String username;
-    private static final String TAG = "RankingsFragment";
+    private String[] rankingsNomes;
+    private ArrayList<String> actualizada;
 
     public RankingsFragment() {
     }
@@ -63,20 +64,86 @@ public class RankingsFragment extends Fragment {
         databaseUsers = FirebaseDatabase.getInstance().getReference("users");
         classificacaoCorridaGeral = (Button) v.findViewById(R.id.buttonCorridaGeral);
 
-        databaseUsers.orderByChild("pontos").addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseUsers.orderByChild("username").addListenerForSingleValueEvent(new ValueEventListener() {
+
+            ArrayList<User> listaUsers = new ArrayList<User>();
+
+
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     u = child.getValue(User.class);
                     if (u.getPontos() >= 0) {
                         // lista inversa com os users para obter os pontos de cada
-                        listaUsers.add(u.getUsername());
-                        Collections.reverse(listaUsers);
+                        listaUsers.add(u);
+                        // Collections.reverse(listaUsers);
                     }
                 }
+                rankingsNomes = new String[listaUsers.size()];
+
+
+                for (int i = 0; i < listaUsers.size(); i++) {
+
+                    if (i == 0) {
+                        rankingsNomes[0] = listaUsers.get(0).getUsername();
+                    } else {
+                        for (int j = 0; j < i; j++) {
+                            if (listaUsers.get(j).getPontos() < listaUsers.get(i).getPontos()) {
+                                String aux = rankingsNomes[j];
+                                rankingsNomes[j] = listaUsers.get(i).getUsername();
+                                rankingsNomes[i] = aux;
+
+                            } else {
+                                rankingsNomes[i] = listaUsers.get(i).getUsername();
+                            }
+                        }
+                    }
+
+                }
+
+                actualizada = new ArrayList<String>();
+                actualizada.addAll(convertListaToArratList(rankingsNomes));
+
+
+                FirebaseDatabase.getInstance().getReference().addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (!dataSnapshot.hasChild("rankings")) {
+                            Ranking r = new Ranking("corrida", actualizada);
+                            String id = databaseRankings.push().getKey();
+                            databaseRankings.child(id).setValue(r);
+                        } else {
+                            databaseRankings.orderByChild("desporto").equalTo("corrida").addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    for (DataSnapshot child : dataSnapshot.getChildren()) {
+                                        Ranking r = child.getValue(Ranking.class);
+                                        databaseRankings.child(child.getKey()).child("rankings").setValue(actualizada);
+                                    }
+
+                                    classificacaoCorridaGeral.setText("Classificacao: " + getRankingUser(username,actualizada) + "/" + actualizada.size());
+
+
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
 
                 // OBTER RANKING GERAL CORRIDA
-                databaseRankings.orderByChild("desporto").equalTo("corrida").addListenerForSingleValueEvent(new ValueEventListener() {
+                /*databaseRankings.orderByChild("desporto").equalTo("corrida").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot != null) {
@@ -100,7 +167,7 @@ public class RankingsFragment extends Fragment {
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
                     }
-                });
+                });*/
                 /*
                 Collections.reverse(listaUsers);
 
@@ -130,4 +197,28 @@ public class RankingsFragment extends Fragment {
         });
         return v;
     }
+
+
+    private ArrayList convertListaToArratList(String[] array) {
+        ArrayList<String> novo = new ArrayList<>();
+        for (String s : array) {
+            novo.add(s);
+        }
+
+        return novo;
+    }
+
+
+    private int getRankingUser(String username, ArrayList<String> rank) {
+        int i;
+        for (i = 0; i < rank.size(); i++) {
+            if (rank.equals(username)) {
+                return i;
+            }
+        }
+
+        return i;
+    }
+
+
 }
