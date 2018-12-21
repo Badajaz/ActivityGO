@@ -1,6 +1,5 @@
 package com.example.android.activitygo;
 
-import android.Manifest;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -9,8 +8,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -50,9 +47,7 @@ public class UploadPhotoActivity extends AppCompatActivity {
     private Button mButtontakePhoto;
     private Uri mImageUri;
     private ImageView mImageView;
-    private static int RESULT_IMAGE_CLICK = 1;
     private static final int CAMERA_REQUEST = 1888;
-    private static final int REQUEST_IMAGE_CAPTURE = 1;
     private Toolbar toolbarCima;
     private String username;
 
@@ -63,7 +58,6 @@ public class UploadPhotoActivity extends AppCompatActivity {
 
     private StorageTask mUploadTask;
     private FirebaseAuth mAuth;
-    private Date date;
 
     private static final int PERMISSION_CAMERA = 1;
 

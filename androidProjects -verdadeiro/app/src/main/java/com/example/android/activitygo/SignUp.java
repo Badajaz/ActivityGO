@@ -123,6 +123,7 @@ public class SignUp extends AppCompatActivity {
                 month = month + 1;
                 String date = dayOfMonth + "/" + month + "/" + year;
                 dataNascimento.setText(date);
+                dataNascimento.setTextColor(Color.parseColor("#006aff"));
             }
         };
 

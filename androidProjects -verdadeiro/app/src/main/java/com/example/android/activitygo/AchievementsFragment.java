@@ -47,9 +47,8 @@ public class AchievementsFragment extends Fragment {
         tv = v.findViewById(R.id.valorTextViewPrimeiraCaixaCaminhada);
         tvdata = v.findViewById(R.id.dataTextViewPrimeiraCaixaCaminhada);
         melhorKmTv = v.findViewById(R.id.melhorKmTempo);
-        melhorkmDataTv= v.findViewById(R.id.melhorKmData);
+        melhorkmDataTv = v.findViewById(R.id.melhorKmData);
         Totalkm = v.findViewById(R.id.TotalKmPercorridosValor);
-
 
 
         final String username = getArguments().getString("USERNAME");
@@ -67,7 +66,7 @@ public class AchievementsFragment extends Fragment {
 
                 for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                     Corrida c = userSnapshot.getValue(Corrida.class);
-                    if (c.getUsername().equals(username)){
+                    if (c.getUsername().equals(username)) {
                         accKm += c.getDistancia();
                     }
 
@@ -77,14 +76,14 @@ public class AchievementsFragment extends Fragment {
 
                     }
 
-                    if (c.getDistancia() >= 1000  &&  c.getUsername().equals(username)) {
-                        if (first == false){
+                    if (c.getDistancia() >= 1000 && c.getUsername().equals(username)) {
+                        if (first == false) {
                             melhorKm = c.getMelhorkm();
                             first = true;
-                        }else{
+                        } else {
 
 
-                            if (isLower(melhorKm, c.getMelhorkm())){
+                            if (isLower(melhorKm, c.getMelhorkm())) {
                                 melhorKm = c.getMelhorkm();
                                 melhorKmData = c.getData();
                             }
@@ -104,7 +103,7 @@ public class AchievementsFragment extends Fragment {
                 tvdata.setText(dataDistancia);
                 melhorKmTv.setText(melhorKm);
                 melhorkmDataTv.setText(melhorKmData);
-                Totalkm.setText(""+accKm);
+                Totalkm.setText("" + accKm);
 
             }
 
@@ -114,36 +113,28 @@ public class AchievementsFragment extends Fragment {
 
             }
         });
-
-
         return v;
     }
 
+    public boolean isLower(String actual, String ciclo) {
 
+        String[] Atime = actual.split(":"); // min,seg
+        String[] Ctime = ciclo.split(":"); // min,seg
 
+        if (Integer.parseInt(Atime[0]) > Integer.parseInt(Ctime[0])) {
+            return true;
+        } else {
+            if (Integer.parseInt(Atime[0]) == Integer.parseInt(Ctime[0])) {
+                if (Integer.parseInt(Atime[1]) > Integer.parseInt(Ctime[1])) {
+                    return true;
+                } else {
+                    return false;
+                }
 
-
-
-    public boolean isLower(String actual,String ciclo){
-
-       String[] Atime = actual.split(":"); // min,seg
-       String[] Ctime = ciclo.split(":"); // min,seg
-
-
-       if (Integer.parseInt(Atime[0]) > Integer.parseInt(Ctime[0]) ){
-           return true;
-       }else{
-           if(Integer.parseInt(Atime[0]) == Integer.parseInt(Ctime[0])){
-               if (Integer.parseInt(Atime[1]) > Integer.parseInt(Ctime[1])){
-                   return true;
-               }else{
-                   return false;
-               }
-
-           }else{
+            } else {
                 return false;
-           }
-       }
+            }
+        }
 
 
     }

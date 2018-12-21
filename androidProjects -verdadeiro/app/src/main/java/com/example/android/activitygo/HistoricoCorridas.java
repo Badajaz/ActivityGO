@@ -100,7 +100,7 @@ public class HistoricoCorridas extends Fragment {
                         args.putLong("TEMPOPACE", tempoPace);
                         args.putString("USERNAME", username);
                         p.setArguments(args);
-                        getFragmentManager().beginTransaction().replace(R.id.fragmentMap, p).commit();
+                        getFragmentManager().beginTransaction().replace(R.id.fragmentMap, p, "RunFragment").commit();
                     }
                 });
 
@@ -112,7 +112,6 @@ public class HistoricoCorridas extends Fragment {
             }
         });
         barChart = (BarChart) v.findViewById(R.id.bargraph);
-
 
         databaseCorrida.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

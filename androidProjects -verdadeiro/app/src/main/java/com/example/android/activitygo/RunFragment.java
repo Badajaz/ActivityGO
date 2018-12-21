@@ -26,6 +26,7 @@ public class RunFragment extends Fragment {
     private Button procurarDatas;
 
     private ArrayList<String> possiveisResultadosDatas = new ArrayList<String>();
+    private static final String TAG = "Run Fragment";
 
     public RunFragment() {
         // Required empty public constructor
@@ -61,9 +62,9 @@ public class RunFragment extends Fragment {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 month = month + 1;
-
                 date = dayOfMonth + "/" + month + "/" + year;
                 dataCorridaTv.setText(date);
+                dataCorridaTv.setTextColor(Color.parseColor("#006aff"));
             }
         };
 
@@ -86,7 +87,7 @@ public class RunFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 HistoricoCorridas hc = new HistoricoCorridas();
-                if(!date.equals("")){
+                if (!date.equals("")) {
                     String resultadosDatas = getResultados(possiveisResultadosDatas, date);
                     String[] resultadosArray = resultadosDatas.split(" ");
                     Bundle args = new Bundle();

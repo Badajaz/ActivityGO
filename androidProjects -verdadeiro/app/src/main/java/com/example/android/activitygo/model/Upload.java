@@ -1,14 +1,11 @@
 package com.example.android.activitygo.model;
 
-import android.widget.Toast;
-
 public class Upload {
     private String mUsername;
     private String mName;
     private String mImageUrl;
 
     public Upload() {
-        //empty constructor needed
     }
 
     public Upload(String username, String name, String imageUrl) {

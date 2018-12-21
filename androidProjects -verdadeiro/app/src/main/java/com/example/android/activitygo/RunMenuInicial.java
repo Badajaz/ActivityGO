@@ -93,7 +93,7 @@ public class RunMenuInicial extends Fragment {
                 Fragment SelectedFragment = new RunFragment();
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(R.id.fragment_container, SelectedFragment, "RunMenuInicial");
+                ft.replace(R.id.fragment_container, SelectedFragment, "historialCorrida");
                 ft.addToBackStack("RunFragment");
                 ft.commit();
             }

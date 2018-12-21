@@ -248,12 +248,15 @@ public class MenuPrincipal extends AppCompatActivity {
                 RankingsFragment myFragment = (RankingsFragment) getFragmentManager().findFragmentByTag("RankingsFragment");
                 TableRankingsFragment myFragment2 = (TableRankingsFragment) getFragmentManager().findFragmentByTag("TableRankingsFragment");
                 MergeGroupFragment mergeGroupFragment = (MergeGroupFragment) getFragmentManager().findFragmentByTag("MergeGroupFragment");
+                RunFragment myRunFragment = (RunFragment) getFragmentManager().findFragmentByTag("historialCorrida");
 
                 if (myFragment != null && myFragment.isVisible()) {
                     getFragmentManager().popBackStack();
                 } else if (myFragment2 != null && myFragment2.isVisible()) {
                     getFragmentManager().popBackStack();
                 } else if (mergeGroupFragment != null && mergeGroupFragment.isVisible()) {
+                    getFragmentManager().popBackStack();
+                } else if (myRunFragment != null && myRunFragment.isVisible()) {
                     getFragmentManager().popBackStack();
                 }
         }
