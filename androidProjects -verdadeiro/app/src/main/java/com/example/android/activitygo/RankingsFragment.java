@@ -94,42 +94,16 @@ public class RankingsFragment extends Fragment {
 
                 Arrays.sort(listForSort);
 
+                ArrayList<String> nomesRepetidos = new ArrayList<>();
+
                 for (int j = 0; j < listForSort.length; j++) {
                     for (int k = 0; k < listForSort.length; k++) {
-                        if (listForSort[j] == listaUsers.get(k).getPontos()) {
+                        if (listForSort[j] == listaUsers.get(k).getPontos() && nomesRepetidos.indexOf(listaUsers.get(k).getUsername())== -1) {
                                 actualizada.add(listaUsers.get(k).getUsername());
+                                nomesRepetidos.add(listaUsers.get(k).getUsername());
                         }
                     }
                 }
-
-
-
-
-
-                /*rankingsNomes = new String[listaUsers.size()];
-
-
-                for (int i = 0; i < listaUsers.size(); i++) {
-
-                    if (i == 0) {
-                        rankingsNomes[0] = listaUsers.get(0).getUsername();
-                    } else {
-                        for (int j = 0; j < i; j++) {
-                            if (listaUsers.get(j).getPontos() < listaUsers.get(i).getPontos()) {
-                                String aux = rankingsNomes[j];
-                                rankingsNomes[j] = listaUsers.get(i).getUsername();
-                                rankingsNomes[i] = aux;
-
-                            } else {
-                                rankingsNomes[i] = listaUsers.get(i).getUsername();
-                            }
-                        }
-                    }
-
-                }
-
-                actualizada = new ArrayList<String>();
-                actualizada.addAll(convertListaToArratList(rankingsNomes));*/
 
 
                 FirebaseDatabase.getInstance().getReference().addListenerForSingleValueEvent(new ValueEventListener() {
