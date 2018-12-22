@@ -12,7 +12,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +33,7 @@ public class RunMenuInicial extends Fragment {
     private static final int STORAGE_PERMISSION_CODE = 1;
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     private static final int REQUEST_CODE = 1;
+    private DatabaseReference mDatabaseRef;
 
     private Button photoActivityButton;
     private ImageView mImageView;
@@ -52,7 +52,7 @@ public class RunMenuInicial extends Fragment {
         if (bundle != null) {
             username = bundle.getString("USERNAME");
             image_path = bundle.getString("URI");
-            if (!TextUtils.isEmpty(image_path)) {
+            if (!TextUtils.isEmpty(image_path)) { // image_path recebido do upload
                 fileUri = Uri.parse(image_path);
             }
         } else {

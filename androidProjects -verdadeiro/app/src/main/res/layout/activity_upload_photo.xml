@@ -26,8 +26,7 @@
         android:textSize="16sp"
         android:typeface="sans"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.033"
+        app:layout_constraintEnd_toStartOf="@+id/blackSeparator1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.538" />
@@ -95,25 +94,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.966"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.697" />
-
-    <Button
-        android:id="@+id/downloadPicture"
-        android:layout_width="177dp"
-        android:layout_height="55dp"
-        android:layout_centerHorizontal="true"
-        android:background="?attr/selectableItemBackground"
-        android:fontFamily="open-sans"
-        android:gravity="center"
-        android:text="Testando"
-        android:textAllCaps="false"
-        android:textSize="16sp"
-        android:typeface="sans"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.033"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/blackSeparator1"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.697" />
 
@@ -152,6 +133,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.966"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/blackSeparator1"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.538" />
 

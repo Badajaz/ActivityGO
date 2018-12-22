@@ -6,11 +6,9 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -34,10 +32,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class UploadPhotoActivity extends AppCompatActivity {
 
@@ -180,27 +174,18 @@ public class UploadPhotoActivity extends AppCompatActivity {
         }).addOnFailureListener(this, new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
-                Log.e("MainActivity", "signFailed****** ", exception);
             }
         });
     }
 
     private void uploadFile3() {
         if (mImageUri != null) {
-            final StorageReference fileReference = mStorageRef.child(username + "." + System.currentTimeMillis()
-                    + "." + getFileExtension(mImageUri));
+            final StorageReference fileReference = mStorageRef.child(username + "." + mImageUri);
 
             mUploadTask = fileReference.putFile(mImageUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Handler handler = new Handler();
-                            handler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                }
-                            }, 500);
-
                             final String ur = mImageUri.toString();
                             Toast.makeText(UploadPhotoActivity.this, "Foto carregada com sucesso!", Toast.LENGTH_SHORT).show();
 
@@ -208,7 +193,7 @@ public class UploadPhotoActivity extends AppCompatActivity {
                                 @Override
                                 public void run() {
                                     try {
-                                        Thread.sleep(Toast.LENGTH_SHORT); // As I am using LENGTH_LONG in Toast
+                                        Thread.sleep(Toast.LENGTH_SHORT);
                                         Intent intent = new Intent(getApplicationContext(), MenuPrincipal.class);
                                         intent.putExtra("USERNAME", username);
                                         intent.putExtra("URI", ur);
@@ -240,7 +225,6 @@ public class UploadPhotoActivity extends AppCompatActivity {
                         }
                     });
         } else {
-            Toast.makeText(this, "Tem de selecionar um ficheiro.", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -257,3 +241,4 @@ public class UploadPhotoActivity extends AppCompatActivity {
         }
     }
 }
+
