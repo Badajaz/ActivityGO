@@ -96,9 +96,10 @@ public class RankingsFragment extends Fragment {
 
                 ArrayList<String> nomesRepetidos = new ArrayList<>();
 
+
                 for (int j = 0; j < listForSort.length; j++) {
                     for (int k = 0; k < listForSort.length; k++) {
-                        if (listForSort[j] == listaUsers.get(k).getPontos() && nomesRepetidos.indexOf(listaUsers.get(k).getUsername())== -1) {
+                        if (listForSort[j] == listaUsers.get(k).getPontos() && nomesRepetidos.indexOf(listaUsers.get(k).getUsername())==-1) {
                                 actualizada.add(listaUsers.get(k).getUsername());
                                 nomesRepetidos.add(listaUsers.get(k).getUsername());
                         }
