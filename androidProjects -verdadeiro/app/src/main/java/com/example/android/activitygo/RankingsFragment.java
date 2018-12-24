@@ -52,7 +52,7 @@ public class RankingsFragment extends Fragment {
     private ArrayList<String> actualizada;
 
 
-    private Map<String,Integer> NomesPontos = new HashMap<>();
+    private HashMap<String,Integer> NomesPontos = new HashMap<>();
 
     public RankingsFragment() {
     }
@@ -69,6 +69,7 @@ public class RankingsFragment extends Fragment {
         databaseCorridas = FirebaseDatabase.getInstance().getReference("corrida");
         databaseUsers = FirebaseDatabase.getInstance().getReference("users");
         classificacaoCorridaGeral = (Button) v.findViewById(R.id.buttonCorridaGeral);
+
 
         databaseUsers.orderByChild("username").addListenerForSingleValueEvent(new ValueEventListener() {
 
@@ -108,6 +109,7 @@ public class RankingsFragment extends Fragment {
                         if (listForSort[j] == listaUsers.get(k).getPontos() && nomesRepetidos.indexOf(listaUsers.get(k).getUsername())==-1) {
                                 actualizada.add(listaUsers.get(k).getUsername());
                                 nomesRepetidos.add(listaUsers.get(k).getUsername());
+                                NomesPontos.put(listaUsers.get(k).getUsername(),listaUsers.get(k).getPontos());
                         }
                     }
                 }
@@ -199,9 +201,14 @@ public class RankingsFragment extends Fragment {
         classificacaoCorridaGeral.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("hashmap",NomesPontos);
+                bundle.putSerializable("listaNomes",actualizada);
                 Fragment SelectedFragment = new TableRankingsFragment();
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
+                SelectedFragment.setArguments(bundle);
                 ft.replace(R.id.fragment_container, SelectedFragment, "RankingsFragment");
                 ft.addToBackStack("RankingsFragment");
                 ft.commit();
