@@ -35,55 +35,13 @@
 
     <TableRow>
 
-        <TextView
-            android:gravity="center"
-            android:padding="10dip"
-            android:text="1º" />
-
-        <TextView
-            android:gravity="center"
-            android:padding="10dip"
-            android:text="Gonçalo" />
-
-        <TextView
-            android:gravity="center"
-            android:padding="10dip"
-            android:text="300" />
     </TableRow>
 
     <TableRow android:background="#FFA500">
 
-        <TextView
-            android:gravity="center"
-            android:padding="10dip"
-            android:text="2º" />
-
-        <TextView
-            android:gravity="center"
-            android:padding="10dip"
-            android:text="Toy" />
-
-        <TextView
-            android:gravity="center"
-            android:padding="10dip"
-            android:text="299" />
     </TableRow>
 
     <TableRow>
 
-        <TextView
-            android:gravity="center"
-            android:padding="10dip"
-            android:text="3º" />
-
-        <TextView
-            android:gravity="center"
-            android:padding="10dip"
-            android:text="Maria Leal" />
-
-        <TextView
-            android:gravity="center"
-            android:padding="10dip"
-            android:text="1" />
     </TableRow>
 </TableLayout>

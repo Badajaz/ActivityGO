@@ -13,8 +13,10 @@ import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.activitygo.model.Ranking;
+import com.example.android.activitygo.model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,6 +32,8 @@ public class TableRankingsFragment extends Fragment {
 
     private DatabaseReference databaseRankings;
     private DatabaseReference databaseUsers;
+    private int i;
+    private int rankPlace;
 
     public TableRankingsFragment() {
         // Required empty public constructor
@@ -53,9 +57,55 @@ public class TableRankingsFragment extends Fragment {
 
                 }
 
+                rankPlace = 1;
+                for ( i = r.getRankings().size()-1; i >= 0;i-- ){
 
 
-                int i = 0;
+                    databaseUsers.orderByChild("username").equalTo(r.getRankings().get(i)).addListenerForSingleValueEvent(new ValueEventListener() {
+                       int points = 0;
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                                    User u = child.getValue(User.class);
+
+
+                                    TableLayout t = getView().findViewById(R.id.TableRanking);
+                                    TableRow tr = new TableRow(getContext());
+                                    TextView tv1 = new TextView(getContext());
+                                    TextView tv2 = new TextView(getContext());
+                                    TextView tv3 = new TextView(getContext());
+                                    tv1.setGravity(Gravity.CENTER);
+                                    tv2.setGravity(Gravity.CENTER);
+                                    tv3.setGravity(Gravity.CENTER);
+                                    tv1.setText(Integer.toString(rankPlace)+"º");
+                                    tv2.setText(r.getRankings().get(i));
+                                    tv3.setText(u.getPontos());
+                                    tr.addView(tv1);
+                                    tr.addView(tv2);
+                                    tr.addView(tv3);
+                                    t.addView(tr);
+
+                                    // String pwd = String.valueOf(child.child("password").getValue());
+                                }
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+
+                    rankPlace ++;
+                }
+
+
+
+
+               /* int i = 0;
                 for (final String username : r.getRankings()) {
 
                     databaseUsers.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -67,21 +117,7 @@ public class TableRankingsFragment extends Fragment {
 
                                 }
 
-                            TableLayout t = getView().findViewById(R.id.TableRanking);
-                            TableRow tr = new TableRow(getContext());
-                            TextView tv1 = new TextView(getContext());
-                            TextView tv2 = new TextView(getContext());
-                            TextView tv3 = new TextView(getContext());
-                            tv1.setGravity(Gravity.CENTER);
-                            tv2.setGravity(Gravity.CENTER);
-                            tv3.setGravity(Gravity.CENTER);
-                            tv1.setText("1");
-                            tv2.setText(username);
-                            tv3.setText(pontos);
-                            tr.addView(tv1);
-                            tr.addView(tv2);
-                            tr.addView(tv3);
-                            t.addView(tr);
+
 
                         }
 
@@ -92,7 +128,7 @@ public class TableRankingsFragment extends Fragment {
                     });
                     i++;
 
-                }
+                }*/
             }
 
                 @Override

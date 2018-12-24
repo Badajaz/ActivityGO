@@ -29,6 +29,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class RankingsFragment extends Fragment {
@@ -48,6 +50,9 @@ public class RankingsFragment extends Fragment {
     private String username;
     private String[] rankingsNomes;
     private ArrayList<String> actualizada;
+
+
+    private Map<String,Integer> NomesPontos = new HashMap<>();
 
     public RankingsFragment() {
     }
@@ -78,6 +83,7 @@ public class RankingsFragment extends Fragment {
                     if (u.getPontos() >= 0) {
                         // lista inversa com os users para obter os pontos de cada
                         listaUsers.add(u);
+
 
 
                         // Collections.reverse(listaUsers);
@@ -127,6 +133,11 @@ public class RankingsFragment extends Fragment {
 
 
                                 }
+
+
+
+
+
 
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError databaseError) {
