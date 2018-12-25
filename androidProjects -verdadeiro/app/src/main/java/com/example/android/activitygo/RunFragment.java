@@ -86,18 +86,19 @@ public class RunFragment extends Fragment {
         procurarDatas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String username = getArguments().getString("USERNAME");
                 HistoricoCorridas hc = new HistoricoCorridas();
-                if (!date.equals("")) {
-                    String resultadosDatas = getResultados(possiveisResultadosDatas, date);
-                    String[] resultadosArray = resultadosDatas.split(" ");
+                TextView dataTextView = getView().findViewById(R.id.DataCorridaProcuraTextView);
+                String data = dataTextView.getText().toString();
+                if (data != "" ){
                     Bundle args = new Bundle();
-                    args.putStringArray("DATAS", resultadosArray);
+                    args.putString("DATA", data);
+                    args.putString("USERNAME", username);
                     hc.setArguments(args);
                     getFragmentManager().beginTransaction().replace(R.id.fragment_container, hc).commit();
-                } else {
-                    Toast.makeText(getContext(), "Tem de selecionar uma data!", Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(getContext(),"INSIRA A DATA",Toast.LENGTH_LONG).show();
                 }
-
             }
         });
         return v;

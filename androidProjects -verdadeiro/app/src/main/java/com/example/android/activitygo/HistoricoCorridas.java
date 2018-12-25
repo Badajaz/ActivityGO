@@ -53,7 +53,7 @@ public class HistoricoCorridas extends Fragment {
     private long tempoPace;
     private String username;
     private String timeS;
-    private ArrayList<String> datasCorridas = new ArrayList<>();
+
     private String melhorkm;
 
     private BarChart barChart;
@@ -73,18 +73,21 @@ public class HistoricoCorridas extends Fragment {
         timeS = getArguments().getString("TEMPO");
         distancia = getArguments().getDouble("DISTANCIA");
         markers = getArguments().getParcelableArrayList("MARKERS");
-        value = getArguments().getString("DATAS");
+        value = getArguments().getString("DATA");
         tempoPace = getArguments().getLong("TEMPOPACE");
         username = getArguments().getString("USERNAME");
 
-        databaseCorrida.orderByChild("data").equalTo(value).addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseCorrida.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
+            private ArrayList<String> datasCorridas = new ArrayList<>();
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    String d = String.valueOf(child.child("data").getValue());
-                    String c = String.valueOf(child.child("distancia").getValue());
-                    datasCorridas.add(d);
+                   Corrida c = child.getValue(Corrida.class);
+                   if (c.getData().equals(value)) {
+                       datasCorridas.add(c.getData());
+                   }
                 }
+
 
                 listViewAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, datasCorridas);
 

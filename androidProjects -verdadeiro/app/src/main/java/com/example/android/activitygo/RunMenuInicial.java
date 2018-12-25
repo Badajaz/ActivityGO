@@ -90,9 +90,12 @@ public class RunMenuInicial extends Fragment {
         historial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle args = new Bundle();
+                args.putString("USERNAME", username);
                 Fragment SelectedFragment = new RunFragment();
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
+                SelectedFragment.setArguments(args);
                 ft.replace(R.id.fragment_container, SelectedFragment, "historialCorrida");
                 ft.addToBackStack("RunFragment");
                 ft.commit();
