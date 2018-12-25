@@ -84,7 +84,7 @@ public class ProcuraGrupos extends Fragment {
                                 //Toast.makeText(getContext(),array.get(position),Toast.LENGTH_LONG).show();
                                 //confirmJoin(array.get(position))
                                 Bundle args = new Bundle();
-                                args.putString("NOMEGRUPO", g.getNome());
+                                args.putString("NOMEGRUPO", trying.get(position).getNome());
                                 args.putString("USERNAME", username);
                                 SelectedFragment = new ListaDeElementosJuntarGrupo();
                                 SelectedFragment.setArguments(args);
