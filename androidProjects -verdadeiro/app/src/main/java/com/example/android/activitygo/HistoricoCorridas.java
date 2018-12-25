@@ -88,10 +88,10 @@ public class HistoricoCorridas extends Fragment {
                    Corrida c = child.getValue(Corrida.class);
                    if (ClassInt == 0) {
                        if (c.getData().equals(value)) {
-                           datasCorridas.add(c.getData());
+                           datasCorridas.add(c.getData()+"   "+Math.round(c.getDistancia())+ "m  "+c.getTempo() + "   " + c.getPace());
                        }
                    }else{
-                       datasCorridas.add(c.getData());
+                       datasCorridas.add(c.getData()+ "   "+Math.round(c.getDistancia())+ "m  "+c.getTempo() + "   " + c.getPace());
                    }
                 }
 
@@ -146,7 +146,7 @@ public class HistoricoCorridas extends Fragment {
                     barEntry.add(new BarEntry((float) s, i));
                     i++;
                 }
-                BarDataSet barDataSet = new BarDataSet(barEntry, "Dates");
+                BarDataSet barDataSet = new BarDataSet(barEntry, "Datas");
 
                 BarData theData = new BarData(datas, barDataSet);
 
@@ -182,7 +182,7 @@ public class HistoricoCorridas extends Fragment {
         return v;
     }
 
-   /* public void createRandomBarGraph(String Date1, String Date2) {
+    /* public void createRandomBarGraph(String Date1, String Date2) {
 
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
