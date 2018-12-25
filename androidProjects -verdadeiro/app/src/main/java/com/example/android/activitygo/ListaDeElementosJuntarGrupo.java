@@ -86,7 +86,7 @@ public class ListaDeElementosJuntarGrupo extends Fragment {
                 join.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        confirmJoin(g.getNome());
+                        confirmJoin(nomeGrupo);
                     }
                 });
             }
@@ -149,6 +149,7 @@ public class ListaDeElementosJuntarGrupo extends Fragment {
                                 arrayGrupoNovo.addAll(g.getElementosGrupo());
                                 arrayGrupoNovo.add(username);
                                 databaseGrupo.child(child.getKey()).child("elementosGrupo").setValue(arrayGrupoNovo);
+
 
                                 ele = "";
                                 for (String str : arrayGrupoNovo) {
