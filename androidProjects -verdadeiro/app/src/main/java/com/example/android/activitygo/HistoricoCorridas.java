@@ -53,6 +53,7 @@ public class HistoricoCorridas extends Fragment {
     private long tempoPace;
     private String username;
     private String timeS;
+    private int ClassInt;
 
     private String melhorkm;
 
@@ -76,6 +77,8 @@ public class HistoricoCorridas extends Fragment {
         value = getArguments().getString("DATA");
         tempoPace = getArguments().getLong("TEMPOPACE");
         username = getArguments().getString("USERNAME");
+        ClassInt = getArguments().getInt("CLASSINT");
+
 
         databaseCorrida.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
             private ArrayList<String> datasCorridas = new ArrayList<>();
@@ -83,7 +86,11 @@ public class HistoricoCorridas extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                    Corrida c = child.getValue(Corrida.class);
-                   if (c.getData().equals(value)) {
+                   if (ClassInt == 0) {
+                       if (c.getData().equals(value)) {
+                           datasCorridas.add(c.getData());
+                       }
+                   }else{
                        datasCorridas.add(c.getData());
                    }
                 }

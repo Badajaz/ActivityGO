@@ -72,11 +72,14 @@ public class RunFragment extends Fragment {
         searchAllCorridas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String username = getArguments().getString("USERNAME");
                 HistoricoCorridas hc = new HistoricoCorridas();
                 Bundle args = new Bundle();
                 String[] array = new String[possiveisResultadosDatas.size()];
                 array = possiveisResultadosDatas.toArray(array);
                 args.putStringArray("DATAS", array);
+                args.putString("USERNAME", username);
+                args.putInt("CLASSINT", 1);
                 hc.setArguments(args);
                 getFragmentManager().beginTransaction().replace(R.id.fragment_container, hc).commit();
             }
@@ -92,6 +95,7 @@ public class RunFragment extends Fragment {
                 String data = dataTextView.getText().toString();
                 if (data != "" ){
                     Bundle args = new Bundle();
+                    args.putInt("CLASSINT", 0);
                     args.putString("DATA", data);
                     args.putString("USERNAME", username);
                     hc.setArguments(args);
