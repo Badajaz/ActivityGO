@@ -106,6 +106,15 @@ public class MergeGroupFragment extends Fragment {
                             //  Toast.makeText(getActivity(), "O grupo " + nomegrupo + " foi criado", Toast.LENGTH_LONG).show();
                             possiveisResultados.add(nomegrupo);
                             grupos.add(nomegrupo);
+                            Toast.makeText(getActivity(), "O grupo " + nomegrupo + " foi criado", Toast.LENGTH_LONG).show();
+                            nomeGrupo.setText("");
+                            descricaoGrupo.setText("");
+                            //TODO falta dar uncheck das boxes
+
+
+
+
+
                         } else {
                             if (!isOnlyOneChecked()) {
                                 corrida.setError("Só pode escolher um desporto!");
