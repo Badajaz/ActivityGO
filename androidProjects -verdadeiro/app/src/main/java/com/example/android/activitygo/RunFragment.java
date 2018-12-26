@@ -101,7 +101,7 @@ public class RunFragment extends Fragment {
                     hc.setArguments(args);
                     getFragmentManager().beginTransaction().replace(R.id.fragment_container, hc).commit();
                 }else{
-                    Toast.makeText(getContext(),"INSIRA A DATA",Toast.LENGTH_LONG).show();
+                    dataTextView.setError("Necessita de inserir a data");
                 }
             }
         });
