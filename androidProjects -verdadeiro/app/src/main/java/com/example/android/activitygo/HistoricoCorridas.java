@@ -1,44 +1,28 @@
 package com.example.android.activitygo;
 
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.android.activitygo.model.Corrida;
-import com.example.android.activitygo.model.Grupo;
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
-import java.security.KeyStore;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Map;
 import java.util.Random;
 
 public class HistoricoCorridas extends Fragment {
@@ -54,19 +38,16 @@ public class HistoricoCorridas extends Fragment {
     private String username;
     private String timeS;
     private int ClassInt;
-
     private String melhorkm;
-
     private BarChart barChart;
     private ArrayList<String> dates;
     private Random random;
     private ArrayList<BarEntry> barEntries;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View v = inflater.inflate(R.layout.fragment_historico_corridas, container, false);
         databaseCorrida = FirebaseDatabase.getInstance().getReference("corrida");
 
@@ -79,22 +60,21 @@ public class HistoricoCorridas extends Fragment {
         username = getArguments().getString("USERNAME");
         ClassInt = getArguments().getInt("CLASSINT");
 
-
         databaseCorrida.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
             private ArrayList<String> datasCorridas = new ArrayList<>();
+
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
-                   Corrida c = child.getValue(Corrida.class);
-                   if (ClassInt == 0) {
-                       if (c.getData().equals(value)) {
-                           datasCorridas.add(c.getData()+"   "+Math.round(c.getDistancia())+ "m  "+c.getTempo() + "   " + c.getPace());
-                       }
-                   }else{
-                       datasCorridas.add(c.getData()+ "   "+Math.round(c.getDistancia())+ "m  "+c.getTempo() + "   " + c.getPace());
-                   }
+                    Corrida c = child.getValue(Corrida.class);
+                    if (ClassInt == 0) {
+                        if (c.getData().equals(value)) {
+                            datasCorridas.add(c.getData() + "   " + Math.round(c.getDistancia()) + "m  " + c.getTempo() + "   " + c.getPace());
+                        }
+                    } else {
+                        datasCorridas.add(c.getData() + "   " + Math.round(c.getDistancia()) + "m  " + c.getTempo() + "   " + c.getPace());
+                    }
                 }
-
 
                 listViewAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, datasCorridas);
 
@@ -121,6 +101,7 @@ public class HistoricoCorridas extends Fragment {
 
             }
         });
+
         barChart = (BarChart) v.findViewById(R.id.bargraph);
 
         databaseCorrida.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -128,7 +109,6 @@ public class HistoricoCorridas extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ArrayList<String> datas = new ArrayList<>();
                 ArrayList<Double> distance = new ArrayList<>();
-
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
                         //String pwd = String.valueOf(child.child("password").getValue());
@@ -136,7 +116,6 @@ public class HistoricoCorridas extends Fragment {
                         datas.add(c.getData());
 //                        Log.d("DATASSSSS",c.getData());
                         distance.add(c.getDistancia());
-
                     }
                 }
 
@@ -154,7 +133,6 @@ public class HistoricoCorridas extends Fragment {
                 barChart.setTouchEnabled(true);
                 barChart.setDragEnabled(true);
                 barChart.setScaleEnabled(true);
-
             }
 
             @Override
@@ -162,20 +140,10 @@ public class HistoricoCorridas extends Fragment {
 
             }
         });
-
-
-
-
-
-
-
        /* BarDataSet barDataSet = new BarDataSet(barEntries, "Dates");
         BarData barData = new BarData(dates, barDataSet);
         barChart.setData(barData);
         barChart.setDescription("My First Bar Graph!");
-
-
-
 
         createRandomBarGraph("2016/05/05","2016/06/01");
 */
@@ -243,6 +211,4 @@ public class HistoricoCorridas extends Fragment {
         }
         return curDate;
     }*/
-
-
 }

@@ -71,6 +71,7 @@ public class MenuPrincipal extends AppCompatActivity {
             }
         } else {
             username = "";
+            image_path = "";
         }
 
         myDialog = new Dialog(this);
@@ -132,6 +133,7 @@ public class MenuPrincipal extends AppCompatActivity {
                             ft.addToBackStack("RunFragment");
                             ft.commit();
                             break;
+
                         case R.id.chalengeItem:
                             //Fragmento Desafios
                             menuItem.setIcon(R.drawable.bicepe_icon23);
@@ -182,16 +184,14 @@ public class MenuPrincipal extends AppCompatActivity {
                             ftransacti.addToBackStack("MergeGroupFragment");
                             ftransacti.commit();
                             break;
-
                     }
+
                     FragmentManager fm = getFragmentManager();
                     FragmentTransaction ft = fm.beginTransaction();
                     ft.replace(R.id.fragment_container, SelectedFragment);
-
                     return true;
                 }
             };
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -29,7 +29,7 @@ public class RunFragment extends Fragment {
     private static final String TAG = "Run Fragment";
 
     public RunFragment() {
-        // Required empty public constructor
+
     }
 
     @Override

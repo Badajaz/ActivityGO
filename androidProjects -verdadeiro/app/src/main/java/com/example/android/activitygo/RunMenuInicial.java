@@ -15,6 +15,8 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,6 +27,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.concurrent.TimeUnit;
 
 public class RunMenuInicial extends Fragment {
 
@@ -45,7 +49,7 @@ public class RunMenuInicial extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View v = inflater.inflate(R.layout.fragment_run_menu_inicial, container, false);
 
         Bundle bundle = this.getArguments();
@@ -57,18 +61,57 @@ public class RunMenuInicial extends Fragment {
             }
         } else {
             username = "";
+            image_path = "";
         }
 
         photoActivityButton = v.findViewById(R.id.uploadActivity);
         mImageView = v.findViewById(R.id.imageView2);
         if (fileUri != null) {
             mImageView.setImageURI(fileUri);
+        } else {
+            mImageView.setImageResource(R.drawable.ola_logo);
+            mImageView.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    final Animation anim_out = AnimationUtils.loadAnimation(getContext(), android.R.anim.fade_out);
+                    final Animation anim_in  = AnimationUtils.loadAnimation(getContext(), android.R.anim.fade_in);
+                    anim_out.setAnimationListener(new Animation.AnimationListener() {
+                        @Override
+                        public void onAnimationStart(Animation animation) {
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+                            mImageView.setImageResource(R.drawable.user_photo_icon);
+                            anim_in.setAnimationListener(new Animation.AnimationListener() {
+                                @Override
+                                public void onAnimationStart(Animation animation) {
+                                }
+
+                                @Override
+                                public void onAnimationEnd(Animation animation) {
+                                }
+
+                                @Override
+                                public void onAnimationRepeat(Animation animation) {
+                                }
+                            });
+                            mImageView.startAnimation(anim_in);
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
+                        }
+                    });
+                    mImageView.startAnimation(anim_out);
+
+                }
+            }, TimeUnit.MINUTES.toSeconds(20));
         }
 
         final Button historial = (Button) v.findViewById(R.id.buttonHistorial);
         Button irCorrida = (Button) v.findViewById(R.id.buttonIrCorrida);
         Button meusGrupos = (Button) v.findViewById(R.id.buttonMeusGrupos);
-        //Button alterar = (Button) v.findViewById(R.id.alterarDesportoPraticado);
         name1 = (TextView) v.findViewById(R.id.namePessoaMenuInicial);
         databaseUsers = FirebaseDatabase.getInstance().getReference("users");
         databaseUsers.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -116,7 +159,6 @@ public class RunMenuInicial extends Fragment {
                 ft.replace(R.id.fragment_container, SelectedFragment, "RunMenuInicial");
                 ft.addToBackStack("RunFragment");
                 ft.commit();
-
             }
         });
 
@@ -135,14 +177,6 @@ public class RunMenuInicial extends Fragment {
 
             }
         });
-
-        /*alterar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        */
 
         photoActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -169,7 +203,6 @@ public class RunMenuInicial extends Fragment {
     private void requestThemStoragePermissions() {
         if (ContextCompat.checkSelfPermission(getContext(),
                 Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-            //Toast.makeText(getContext(), "Já foi dada esta permissão!",Toast.LENGTH_SHORT).show();
         } else {
             requestStoragePermission();
         }
