@@ -110,6 +110,19 @@ public class MergeGroupFragment extends Fragment {
                             nomeGrupo.setText("");
                             descricaoGrupo.setText("");
                             //TODO falta dar uncheck das boxes
+                            if (corrida.isChecked()){
+                                corrida.toggle();
+                            }
+                            if (ciclismo.isChecked()){
+                                ciclismo.toggle();
+                            }
+                            if (caminhada.isChecked()){
+                                caminhada.toggle();
+                            }
+                            if (futebol.isChecked()){
+                                futebol.toggle();
+                            }
+
 
 
 
