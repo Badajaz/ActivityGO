@@ -9,20 +9,20 @@
 
     <TextView
         android:id="@+id/popUpId"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="264dp"
+        android:layout_height="64dp"
         android:gravity="start"
         android:paddingTop="20dp"
         android:text="Tem a certeza?"
         android:textAlignment="center"
+        android:background="@drawable/layout_border_blue"
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.091" />
 
     <TextView
         android:id="@+id/txtClose"
@@ -35,34 +35,43 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/popUpId"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.954"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/popUpId"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/yesButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="400dp"
+        android:background="#FFA500"
+        android:gravity="center"
         android:text="Sim"
+        android:textColor="@color/whiteLetters"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/noButton"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:gravity="center"/>
+        app:layout_constraintTop_toBottomOf="@+id/popUpId"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/noButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="64dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="344dp"
+        android:background="#FFA500"
         android:text="Não"
+        android:textColor="@color/whiteLetters"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.508" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/popUpId"
+        app:layout_constraintVertical_bias="1.0" />
 </android.support.constraint.ConstraintLayout>

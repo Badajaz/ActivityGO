@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -29,7 +30,7 @@
             android:layout_marginBottom="8dp"
             android:fontFamily="sans-serif"
             android:gravity="center"
-            android:text="Corrida"
+            android:text="Corrida:"
             android:textAlignment="center"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -43,13 +44,13 @@
 
         <TextView
 
-            android:layout_width="210dp"
-            android:layout_height="26dp"
+            android:layout_width="207dp"
+            android:layout_height="28dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="68dp"
+            android:layout_marginBottom="60dp"
             android:fontFamily="sans-serif"
             android:gravity="center"
             android:text=""
@@ -58,22 +59,22 @@
             android:typeface="sans"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.943"
+            app:layout_constraintHorizontal_bias="0.866"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ProgressBar
             android:id="@+id/progressBarCorrida"
             style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="201dp"
-            android:layout_height="15dp"
+            android:layout_width="285dp"
+            android:layout_height="22dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.316"
+            app:layout_constraintHorizontal_bias="0.662"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.808">
+            app:layout_constraintVertical_bias="0.703">
 
         </ProgressBar>
 
