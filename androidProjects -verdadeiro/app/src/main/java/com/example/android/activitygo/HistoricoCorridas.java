@@ -70,7 +70,7 @@ public class HistoricoCorridas extends Fragment {
                     Corrida c = child.getValue(Corrida.class);
                     if (ClassInt == 0) {
                         if (c.getData().equals(value)) {
-                            datasCorridas.add(c.getData() + "   " + Math.round(c.getDistancia()) + "m  " + c.getTempo() + "   " + c.getPace());
+                            datasCorridas.add(c.getData() + "   " + Math.round(c.getDistancia()) + "m   " + c.getTempo() + "   " + c.getPace());
                         }
                     } else {
                         datasCorridas.add(c.getData() + "   " + Math.round(c.getDistancia()) + "m  " + c.getTempo() + "   " + c.getPace());
@@ -86,7 +86,9 @@ public class HistoricoCorridas extends Fragment {
                         Fragment p = new RunHistoricStatus();
                         Bundle args = new Bundle();
                         args.putString("RUN_STATISTICS",datasCorridas.get(position));
-                       /* args.putString("TEMPO", timeS);
+
+
+                        /* args.putString("TEMPO", timeS);
                         args.putDouble("DISTANCIA", distancia);
                         args.putParcelableArrayList("Markers", markers);
                         args.putLong("TEMPOPACE", tempoPace);

@@ -1,14 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".RunHistoricStatus">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Run Historic status" />
+        android:id="@+id/PaceHistoric"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="64dp"
+        android:background="@drawable/layout_border"
+        android:gravity="center"
+        android:text=""
+        android:textColor="#000000"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.159"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mapView"
+        app:layout_constraintVertical_bias="0.37" />
 
-</FrameLayout>
+
+    <TextView
+        android:id="@+id/TempoLabel"
+        android:layout_width="140dp"
+        android:layout_height="44dp"
+        android:layout_marginBottom="240dp"
+        android:background="@drawable/layout_border"
+        android:gravity="center"
+        android:text="Tempo"
+        android:textColor="#000000"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.159"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mapView"
+        app:layout_constraintVertical_bias="0.087" />
+
+
+    <TextView
+        android:id="@+id/DistanceLabel"
+        android:layout_width="140dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="120dp"
+        android:background="@drawable/layout_border"
+        android:gravity="center"
+        android:text="Distância"
+        android:textColor="#000000"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.893"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mapView"
+        app:layout_constraintVertical_bias="0.087" />
+
+    <TextView
+        android:id="@+id/DistanceHistoric"
+        android:layout_width="140dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/layout_border"
+        android:gravity="center"
+        android:text=""
+        android:textColor="#000000"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.893"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mapView"
+        app:layout_constraintVertical_bias="0.37" />
+
+    <TextView
+        android:id="@+id/PaceLabel"
+        android:layout_width="140dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="120dp"
+        android:background="@drawable/layout_border"
+        android:gravity="center"
+        android:text="Pace"
+        android:textColor="#000000"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.159"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mapView"
+        app:layout_constraintVertical_bias="0.649" />
+
+
+    <TextView
+        android:id="@+id/TimeHistoric"
+        android:layout_width="140dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="184dp"
+        android:background="@drawable/layout_border"
+        android:gravity="center"
+        android:text=""
+        android:textColor="#000000"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.159"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mapView"
+        app:layout_constraintVertical_bias="0.926" />
+
+
+</android.support.constraint.ConstraintLayout>
