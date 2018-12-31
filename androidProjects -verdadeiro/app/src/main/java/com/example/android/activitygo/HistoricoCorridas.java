@@ -1,6 +1,7 @@
 package com.example.android.activitygo;
 
 import android.app.Fragment;
+import android.content.ClipData;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
@@ -82,15 +83,16 @@ public class HistoricoCorridas extends Fragment {
                 lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Fragment p = new HistoriaStatus();
+                        Fragment p = new RunHistoricStatus();
                         Bundle args = new Bundle();
-                        args.putString("TEMPO", timeS);
+                        args.putString("RUN_STATISTICS",datasCorridas.get(position));
+                       /* args.putString("TEMPO", timeS);
                         args.putDouble("DISTANCIA", distancia);
                         args.putParcelableArrayList("Markers", markers);
                         args.putLong("TEMPOPACE", tempoPace);
-                        args.putString("USERNAME", username);
+                        args.putString("USERNAME", username);*/
                         p.setArguments(args);
-                        getFragmentManager().beginTransaction().replace(R.id.fragmentMap, p, "RunFragment").commit();
+                        getFragmentManager().beginTransaction().replace(R.id.fragment_container, p, "RunFragment").commit();
                     }
                 });
 
