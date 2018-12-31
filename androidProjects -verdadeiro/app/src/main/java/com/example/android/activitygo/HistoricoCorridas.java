@@ -23,7 +23,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class HistoricoCorridas extends Fragment {
@@ -62,6 +65,7 @@ public class HistoricoCorridas extends Fragment {
         ClassInt = getArguments().getInt("CLASSINT");
 
         databaseCorrida.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
+            Map<String, double[]> coordenatesByStatus = new HashMap<>();
             private ArrayList<String> datasCorridas = new ArrayList<>();
 
             @Override
@@ -69,11 +73,14 @@ public class HistoricoCorridas extends Fragment {
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     Corrida c = child.getValue(Corrida.class);
                     if (ClassInt == 0) {
-                        if (c.getData().equals(value)) {
-                            datasCorridas.add(c.getData() + "   " + Math.round(c.getDistancia()) + "m   " + c.getTempo() + "   " + c.getPace());
+                        if (c.getData().equals(value) && c.getCoordenadas() != null) {
+                            String status = c.getData() + "   " + Math.round(c.getDistancia()) + "m   " + c.getTempo() + "   " + c.getPace();
+                            datasCorridas.add(status);
+                            double[] currentCoordinates = ArrayListToArray(c.getCoordenadas());
+                            coordenatesByStatus.put(status, currentCoordinates);
                         }
                     } else {
-                        datasCorridas.add(c.getData() + "   " + Math.round(c.getDistancia()) + "m  " + c.getTempo() + "   " + c.getPace());
+                        datasCorridas.add(c.getData() + "   " + Math.round(c.getDistancia()) + "m   " + c.getTempo() + "   " + c.getPace());
                     }
                 }
 
@@ -85,7 +92,8 @@ public class HistoricoCorridas extends Fragment {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Fragment p = new RunHistoricStatus();
                         Bundle args = new Bundle();
-                        args.putString("RUN_STATISTICS",datasCorridas.get(position));
+                        args.putString("RUN_STATISTICS", datasCorridas.get(position));
+                        //args.putSerializable("COORDINATES", coordenatesByStatus.get(datasCorridas.get(position)));
 
 
                         /* args.putString("TEMPO", timeS);
@@ -153,6 +161,20 @@ public class HistoricoCorridas extends Fragment {
 */
         return v;
     }
+
+
+    private double[] ArrayListToArray(ArrayList<Double> array) {
+        double[] arrayDouble = new double[array.size()];
+        int i = 0;
+        for (double coordenada : array) {
+            arrayDouble[i] = coordenada;
+            i++;
+        }
+
+        return arrayDouble;
+
+    }
+
 
     /* public void createRandomBarGraph(String Date1, String Date2) {
 
