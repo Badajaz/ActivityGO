@@ -93,9 +93,7 @@ public class HistoricoCorridas extends Fragment {
                         Fragment p = new RunHistoricStatus();
                         Bundle args = new Bundle();
                         args.putString("RUN_STATISTICS", datasCorridas.get(position));
-                        //args.putSerializable("COORDINATES", coordenatesByStatus.get(datasCorridas.get(position)));
-
-
+                      //  args.putSerializable("COORDINATES", coordenatesByStatus.get(datasCorridas.get(position)));
                         /* args.putString("TEMPO", timeS);
                         args.putDouble("DISTANCIA", distancia);
                         args.putParcelableArrayList("Markers", markers);
