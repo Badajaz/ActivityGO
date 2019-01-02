@@ -1,7 +1,6 @@
 package com.example.android.activitygo;
 
 import android.app.Fragment;
-import android.content.ClipData;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
@@ -13,8 +12,6 @@ import android.widget.ListView;
 
 import com.example.android.activitygo.model.Corrida;
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DataSnapshot;
@@ -22,9 +19,15 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 
-import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -48,12 +51,15 @@ public class HistoricoCorridas extends Fragment {
     private Random random;
     private ArrayList<BarEntry> barEntries;
 
+    private GraphView graph;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_historico_corridas, container, false);
         databaseCorrida = FirebaseDatabase.getInstance().getReference("corrida");
+        graph = (GraphView) v.findViewById(R.id.graph);
 
         lv1 = (ListView) v.findViewById(R.id.ListaResultadosDatas);
         timeS = getArguments().getString("TEMPO");
@@ -93,7 +99,7 @@ public class HistoricoCorridas extends Fragment {
                         Fragment p = new RunHistoricStatus();
                         Bundle args = new Bundle();
                         args.putString("RUN_STATISTICS", datasCorridas.get(position));
-                      //  args.putSerializable("COORDINATES", coordenatesByStatus.get(datasCorridas.get(position)));
+                        //  args.putSerializable("COORDINATES", coordenatesByStatus.get(datasCorridas.get(position)));
                         /* args.putString("TEMPO", timeS);
                         args.putDouble("DISTANCIA", distancia);
                         args.putParcelableArrayList("Markers", markers);
@@ -112,7 +118,7 @@ public class HistoricoCorridas extends Fragment {
             }
         });
 
-        barChart = (BarChart) v.findViewById(R.id.bargraph);
+        //barChart = (BarChart) v.findViewById(R.id.bargraph);
 
         databaseCorrida.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -121,20 +127,55 @@ public class HistoricoCorridas extends Fragment {
                 ArrayList<Double> distance = new ArrayList<>();
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
-                        //String pwd = String.valueOf(child.child("password").getValue());
                         Corrida c = child.getValue(Corrida.class);
                         datas.add(c.getData());
-//                        Log.d("DATASSSSS",c.getData());
                         distance.add(c.getDistancia());
                     }
                 }
 
+                /*
                 ArrayList<BarEntry> barEntry = new ArrayList<>();
                 int i = 0;
                 for (double s : distance) {
                     barEntry.add(new BarEntry((float) s, i));
                     i++;
+                }*/
+
+                DataPoint dpArray[] = new DataPoint[datas.size()];
+
+                for (int index = 0; index < datas.size(); index++) {
+                    try {
+                        Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(datas.get(index));
+                        DataPoint dp = new DataPoint(date1, distance.get(index));
+                        dpArray[index] = dp;
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                 }
+                LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(dpArray);
+                graph.addSeries(series);
+
+                // set date label formatter
+                graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
+                graph.getGridLabelRenderer().setNumHorizontalLabels(10); // only 4 because of the space
+
+                try {
+                    // ultima data
+                    if (datas.size() > 5) {
+                        Date length = new SimpleDateFormat("dd/MM/yyyy").parse(datas.get(datas.size() - 1));
+                        // ultima data menos 5 dias
+                        Date lengthMenos1 = new SimpleDateFormat("dd/MM/yyyy").parse(datas.get(datas.size() - 5));
+
+                        graph.getViewport().setMinX(lengthMenos1.getTime());
+                        graph.getViewport().setMaxX(length.getTime());
+                        graph.getViewport().setXAxisBoundsManual(true);
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+
+                /*
                 BarDataSet barDataSet = new BarDataSet(barEntry, "Datas");
 
                 BarData theData = new BarData(datas, barDataSet);
@@ -143,6 +184,7 @@ public class HistoricoCorridas extends Fragment {
                 barChart.setTouchEnabled(true);
                 barChart.setDragEnabled(true);
                 barChart.setScaleEnabled(true);
+                */
             }
 
             @Override
