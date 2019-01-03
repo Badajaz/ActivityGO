@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.android.activitygo.model.Corrida;
 import com.google.android.gms.maps.model.LatLng;
@@ -88,6 +89,16 @@ public class HistoricoCorridas extends Fragment {
                         coordenatesByStatus.put(status, currentCoordinates);
                     }
                 }
+
+                if (datasCorridas.size() == 0){
+                    TextView noResults = getView().findViewById(R.id.NoResults);
+                    noResults.setText("Não foram encontrados resultados");
+                    int lime = getResources().getColor(R.color.orange);
+                    noResults.setTextColor(lime);
+                    noResults.setTextSize(20);
+                }
+
+
 
                 listViewAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, datasCorridas);
                 lv1.setAdapter(listViewAdapter);
