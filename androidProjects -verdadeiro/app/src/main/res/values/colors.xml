@@ -10,6 +10,7 @@
     <color name="hintBlackColor">#000000</color>
     <color name="orange">#FFA500</color>
     <color name="black">#000000</color>
+    <color name="BlueSeparator">#006aff</color>
 
     <color name="topOption1">#006E6D</color>
     <color name="topOption2">#33cc33</color>

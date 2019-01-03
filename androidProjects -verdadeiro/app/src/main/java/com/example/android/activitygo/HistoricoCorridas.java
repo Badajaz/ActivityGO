@@ -11,26 +11,24 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.android.activitygo.model.Corrida;
-import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.data.BarEntry;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 public class HistoricoCorridas extends Fragment {
 
@@ -46,10 +44,7 @@ public class HistoricoCorridas extends Fragment {
     private String timeS;
     private int ClassInt;
     private String melhorkm;
-    private BarChart barChart;
     private ArrayList<String> dates;
-    private Random random;
-    private ArrayList<BarEntry> barEntries;
 
     private GraphView graph;
 
@@ -91,7 +86,6 @@ public class HistoricoCorridas extends Fragment {
                 }
 
                 listViewAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, datasCorridas);
-
                 lv1.setAdapter(listViewAdapter);
                 lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -109,7 +103,6 @@ public class HistoricoCorridas extends Fragment {
                         getFragmentManager().beginTransaction().replace(R.id.fragment_container, p, "RunFragment").commit();
                     }
                 });
-
             }
 
             @Override
@@ -117,8 +110,6 @@ public class HistoricoCorridas extends Fragment {
 
             }
         });
-
-        //barChart = (BarChart) v.findViewById(R.id.bargraph);
 
         databaseCorrida.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -133,58 +124,38 @@ public class HistoricoCorridas extends Fragment {
                     }
                 }
 
-                /*
-                ArrayList<BarEntry> barEntry = new ArrayList<>();
-                int i = 0;
-                for (double s : distance) {
-                    barEntry.add(new BarEntry((float) s, i));
-                    i++;
-                }*/
-
                 DataPoint dpArray[] = new DataPoint[datas.size()];
 
                 for (int index = 0; index < datas.size(); index++) {
                     try {
                         Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(datas.get(index));
-                        DataPoint dp = new DataPoint(date1, distance.get(index));
+                        Calendar cal = Calendar.getInstance();
+                        cal.setTime(date1);
+
+                        DataPoint dp = new DataPoint(cal.get(Calendar.DAY_OF_MONTH), distance.get(index));
                         dpArray[index] = dp;
+
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
                 }
-                LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(dpArray);
+
+                LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dpArray);
                 graph.addSeries(series);
+                graph.setTitle("Progresso no último mês");
 
-                // set date label formatter
-                graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
-                graph.getGridLabelRenderer().setNumHorizontalLabels(10); // only 4 because of the space
-
-                try {
-                    // ultima data
-                    if (datas.size() > 5) {
-                        Date length = new SimpleDateFormat("dd/MM/yyyy").parse(datas.get(datas.size() - 1));
-                        // ultima data menos 5 dias
-                        Date lengthMenos1 = new SimpleDateFormat("dd/MM/yyyy").parse(datas.get(datas.size() - 5));
-
-                        graph.getViewport().setMinX(lengthMenos1.getTime());
-                        graph.getViewport().setMaxX(length.getTime());
-                        graph.getViewport().setXAxisBoundsManual(true);
+                graph.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter() {
+                    @Override
+                    public String formatLabel(double value, boolean isValueX) {
+                        if (isValueX) {
+                            // show normal x values
+                            return super.formatLabel(value, isValueX);
+                        } else {
+                            // show currency for y values
+                            return super.formatLabel(value / 1000, isValueX) + " km";
+                        }
                     }
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-
-
-                /*
-                BarDataSet barDataSet = new BarDataSet(barEntry, "Datas");
-
-                BarData theData = new BarData(datas, barDataSet);
-
-                barChart.setData(theData);
-                barChart.setTouchEnabled(true);
-                barChart.setDragEnabled(true);
-                barChart.setScaleEnabled(true);
-                */
+                });
             }
 
             @Override
@@ -192,16 +163,8 @@ public class HistoricoCorridas extends Fragment {
 
             }
         });
-       /* BarDataSet barDataSet = new BarDataSet(barEntries, "Dates");
-        BarData barData = new BarData(dates, barDataSet);
-        barChart.setData(barData);
-        barChart.setDescription("My First Bar Graph!");
-
-        createRandomBarGraph("2016/05/05","2016/06/01");
-*/
         return v;
     }
-
 
     private double[] ArrayListToArray(ArrayList<Double> array) {
         double[] arrayDouble = new double[array.size()];
@@ -214,67 +177,4 @@ public class HistoricoCorridas extends Fragment {
         return arrayDouble;
 
     }
-
-
-    /* public void createRandomBarGraph(String Date1, String Date2) {
-
-
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
-
-        try {
-            Date date1 = simpleDateFormat.parse(Date1);
-            Date date2 = simpleDateFormat.parse(Date2);
-
-            Calendar mDate1 = Calendar.getInstance();
-            Calendar mDate2 = Calendar.getInstance();
-            mDate1.clear();
-            mDate2.clear();
-
-            mDate1.setTime(date1);
-            mDate2.setTime(date2);
-
-            dates = new ArrayList<>();
-            dates = getList(mDate1, mDate2);
-
-            barEntries = new ArrayList<>();
-            float max = 0f;
-            float value = 0f;
-            random = new Random();
-            for (int j = 0; j < dates.size(); j++) {
-                max = 100f;
-                value = random.nextFloat() * max;
-                barEntries.add(new BarEntry(value, j));
-            }
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        BarDataSet barDataSet = new BarDataSet(barEntries, "Dates");
-        BarData barData = new BarData(dates, barDataSet);
-        barChart.setData(barData);
-        barChart.setDescription("My First Bar Graph!");
-
-    }
-
-    public ArrayList<String> getList(Calendar startDate, Calendar endDate) {
-        ArrayList<String> list = new ArrayList<String>();
-        while (startDate.compareTo(endDate) <= 0) {
-            list.add(getDate(startDate));
-            startDate.add(Calendar.DAY_OF_MONTH, 1);
-        }
-        return list;
-    }
-
-    public String getDate(Calendar cld) {
-        String curDate = cld.get(Calendar.YEAR) + "/" + (cld.get(Calendar.MONTH) + 1) + "/"
-                + cld.get(Calendar.DAY_OF_MONTH);
-        try {
-            Date date = new SimpleDateFormat("yyyy/MM/dd").parse(curDate);
-            curDate = new SimpleDateFormat("yyy/MM/dd").format(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return curDate;
-    }*/
 }
