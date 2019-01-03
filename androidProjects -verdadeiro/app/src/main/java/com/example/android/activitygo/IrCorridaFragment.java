@@ -12,6 +12,7 @@ public class IrCorridaFragment extends Fragment {
 
     private String username;
     private static final String TAG = "IrCorridaFragment";
+    private String image_path = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -19,12 +20,14 @@ public class IrCorridaFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_ir_corrida, container, false);
         Button start = (Button) v.findViewById(R.id.buttonStart);
         username = getArguments().getString("USERNAME");
+        image_path = getArguments().getString("URI");
 
         start.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
                 Intent i = new Intent(getContext(), MapsActivity.class);
                 i.putExtra("USERNAME", username);
+                i.putExtra("URI", image_path);
                 startActivity(i);
 
                /*Fragment SelectedFragment = new StartCorridaFragment();

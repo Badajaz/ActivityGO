@@ -1,8 +1,6 @@
 package com.example.android.activitygo;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -25,7 +23,6 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class HistoriaStatus extends Fragment {
@@ -44,13 +41,12 @@ public class HistoriaStatus extends Fragment {
     private String melhorkm;
 
     public HistoriaStatus() {
-        // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View v = inflater.inflate(R.layout.fragment_historia_status, container, false);
         databaseCorrida = FirebaseDatabase.getInstance().getReference("corrida");
         mMapView = (MapView) v.findViewById(R.id.mapView);
@@ -70,7 +66,6 @@ public class HistoriaStatus extends Fragment {
         username = getArguments().getString("USERNAME");
         marcadores = getArguments().getParcelableArrayList("Markers");
         melhorkm = getArguments().getString("MELHORKM");
-        //Toast.makeText(getContext(),"MELHORKM "+melhorkm,Toast.LENGTH_LONG).show();
         double pace = tempoPace / distancia;
         if (distancia == 0) {
             pace = 0;
@@ -98,18 +93,14 @@ public class HistoriaStatus extends Fragment {
         final ArrayList<LatLng> markers = getArguments().getParcelableArrayList("Markers");
         final ArrayList<Double> markersParaInserirNaDB = new ArrayList<>();
 
-        for (LatLng l : markers){
+        for (LatLng l : markers) {
             markersParaInserirNaDB.add(l.latitude);
             markersParaInserirNaDB.add(l.longitude);
         }
 
-
-
-
-
         String id = databaseCorrida.push().getKey();
-        Toast.makeText(getActivity(),melhorkm, Toast.LENGTH_SHORT).show();
-        Corrida corrida = new Corrida(username, data, distancia, chronometerTime, tempoPace, markersParaInserirNaDB,melhorkm);
+        Toast.makeText(getActivity(), melhorkm, Toast.LENGTH_SHORT).show();
+        Corrida corrida = new Corrida(username, data, distancia, chronometerTime, tempoPace, markersParaInserirNaDB, melhorkm);
         databaseCorrida.child(id).setValue(corrida);
 
         TextView tv = v.findViewById(R.id.Tempo);
@@ -131,7 +122,6 @@ public class HistoriaStatus extends Fragment {
                 for (LatLng l : markers) {
                     googleMap.addMarker(new MarkerOptions().position(l).title("FUNCIONA"));
                     options.add(l);
-
                 }
 
                 googleMap.addPolyline(options);

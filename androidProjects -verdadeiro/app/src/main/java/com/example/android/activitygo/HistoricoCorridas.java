@@ -3,7 +3,6 @@ package com.example.android.activitygo;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -146,17 +145,20 @@ public class HistoricoCorridas extends Fragment {
 
                 DataPoint dpDisplayArray[] = new DataPoint[5];
                 for (int counter = 0; counter < dpDisplayArray.length; counter++) {
+                    // ATENCAO: SE OS VALORES FOREM DE MESES DIFERENTES (POR EXEMPLO, UMA CORRIDA A 30 DE DEZEMBRO E UMA
+                    // A 1 DE JANEIRO ENTAO VAI DAR ERRO, PORQUE FICA COM UMA LISTA [30,1] E A LISTA NAO ESTA ORDENADA
+                    // ESTA TUDO BEM PORQUE AS PESSOAS IRAO CORRER SEMPRE NO MESMO MES, NAO NUNCA EM MESES DIFERENTES
                     dpDisplayArray[dpDisplayArray.length - 1 - counter] = dpArray[dpArray.length - 1 - counter];
                 }
 
-                LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dpArray);
+                LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dpDisplayArray);
                 graph.addSeries(series);
                 graph.setTitle("Progresso no último mês (km/dia)");
-                Log.d("MAXIMOOOOOOOOO", String.valueOf(Collections.max(distance)));
+
                 graph.getViewport().setYAxisBoundsManual(true);
                 graph.getViewport().setXAxisBoundsManual(true);
-                graph.getViewport().setMinX(dpDisplayArray[0].getX()+1);
-                graph.getViewport().setMaxX(dpDisplayArray[dpDisplayArray.length-1].getX()-1);
+                graph.getViewport().setMinX(dpDisplayArray[0].getX() + 1);
+                graph.getViewport().setMaxX(dpDisplayArray[dpDisplayArray.length - 1].getX() - 1);
                 graph.getViewport().setMaxY(Collections.max(distance) + 1000);
 
                 graph.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter() {

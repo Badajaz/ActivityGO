@@ -2,6 +2,7 @@ package com.example.android.activitygo;
 
 import android.Manifest;
 import android.app.Fragment;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -10,29 +11,34 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.android.activitygo.model.Corrida;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -40,7 +46,7 @@ import static java.lang.Math.acos;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
 
     private GoogleMap mMap;
@@ -62,18 +68,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private ArrayList<LatLng> arrayMarkers = new ArrayList<LatLng>();
     private DatabaseReference databaseCorrida;
+    private DatabaseReference databaseUsers;
 
     private boolean atingiu = false;
     private String chronoTime;
     private Date date;
+
+    private String firstName = "";
+    private String lastName = "";
+    private String pontos = "";
+    private Toolbar toolbarCima;
+    private String username2 = "";
+    private String image_path = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         final String username = getIntent().getExtras().getString("USERNAME");
+        username2 = username;
+        image_path = getIntent().getExtras().getString("URI");
 
         databaseCorrida = FirebaseDatabase.getInstance().getReference("corrida");
+        databaseUsers = FirebaseDatabase.getInstance().getReference("users");
 
         final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         date = new Date();
@@ -86,6 +103,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             {Manifest.permission.ACCESS_FINE_LOCATION},
                     REQUEST_LOCATION_PERMISSION);
         }
+        databaseUsers = FirebaseDatabase.getInstance().getReference("users");
+
+        databaseUsers.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    firstName = String.valueOf(child.child("firstName").getValue());
+                    lastName = String.valueOf(child.child("lastName").getValue());
+                    pontos = String.valueOf(child.child("pontos").getValue());
+                    toolbarCima = (Toolbar) findViewById(R.id.toolbarMaps);
+                    setSupportActionBar(toolbarCima);
+                    getSupportActionBar().setTitle("ActivityGO");
+
+                    getSupportActionBar().setSubtitle("" + firstName.charAt(0) + lastName.charAt(0) + ":" + " " + pontos);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         locationListener = new LocationListener() {
             private long pauseOff;
@@ -147,9 +186,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             } else {
                                 chronoTime = "" + timeInteiro + ":" + (int) segundos;
                             }
-
-                            Toast.makeText(getApplicationContext(), "CHRONOTIME " + chronoTime, Toast.LENGTH_SHORT).show();
-
                             atingiu = true;
                         }
 
@@ -158,7 +194,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     }
                     Log.d("ARRAY", printArray(posicoes));
 
-                    //get the location name from latitude and longitude
                     Geocoder geocoder = new Geocoder(getApplicationContext());
                     try {
                         List<Address> addresses =
@@ -177,7 +212,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                         TextView tv = (TextView) findViewById(R.id.kmTextViewRun);
                         tv.setText("" + df.format(accKm));
-                        //Toast.makeText(getApplicationContext(), "acc= " + df.format(accKm), Toast.LENGTH_SHORT).show();
 
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -211,7 +245,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 if (!running) {
                     chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
                     chronometer.start();
-                    //Toast.makeText(MapsActivity.this, "Começou a corrida!", Toast.LENGTH_SHORT).show();
                     running = true;
                     isStopped = false;
 
@@ -291,7 +324,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         locationManager.removeUpdates(locationListener);
     }
 
-
     public static double distance(double lat1, double lat2, double lon1,
                                   double lon2, double el1, double el2) {
 
@@ -363,5 +395,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             printArray += coordenada.toString() + " ";
         }
         return printArray;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.maps_menu, menu);
+        return true;
+    }
+
+    private void goToSettings() {
+        Intent i = new Intent(this, SettingsActivity.class);
+        i.putExtra("USERNAME", username2);
+        i.putExtra("URI", image_path);
+        startActivity(i);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.Settings:
+                goToSettings();
+                break;
+        }
+        return true;
     }
 }

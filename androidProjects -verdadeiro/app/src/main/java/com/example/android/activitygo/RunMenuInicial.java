@@ -153,6 +153,7 @@ public class RunMenuInicial extends Fragment {
                 Fragment SelectedFragment = new IrCorridaFragment();
                 Bundle toRunMenuInicial = new Bundle();
                 toRunMenuInicial.putString("USERNAME", username);
+                toRunMenuInicial.putString("URI", image_path);
                 SelectedFragment.setArguments(toRunMenuInicial);
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();

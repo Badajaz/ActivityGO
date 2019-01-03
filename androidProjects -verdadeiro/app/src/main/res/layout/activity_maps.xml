@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".StartCorridaFragment">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarMaps"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFA500"
+        android:minHeight="?attr/actionBarSize" />
+
     <TextView
         android:id="@+id/kmTextViewRun"
         android:layout_width="300dp"
@@ -19,7 +26,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.371" />
+        app:layout_constraintVertical_bias="0.390" />
 
     <Button
         android:id="@+id/StopRun"
@@ -29,10 +36,10 @@
         android:drawableStart="@drawable/pause"
         app:layout_constraintBottom_toBottomOf="@+id/fragmentMap"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.267"
+        app:layout_constraintHorizontal_bias="0.289"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/kmTextViewRun"
-        app:layout_constraintVertical_bias="0.27" />
+        app:layout_constraintVertical_bias="0.33" />
 
     <Button
         android:id="@+id/StartRun"
@@ -42,10 +49,10 @@
         android:drawableStart="@drawable/play"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.393"
+        app:layout_constraintHorizontal_bias="0.411"
         app:layout_constraintStart_toEndOf="@+id/StopRun"
         app:layout_constraintTop_toBottomOf="@+id/kmTextViewRun"
-        app:layout_constraintVertical_bias="0.27" />
+        app:layout_constraintVertical_bias="0.33" />
 
     <Chronometer
         android:id="@+id/chronometer"
@@ -56,12 +63,13 @@
         android:gravity="center"
         android:textSize="60sp"
         android:textStyle="bold"
+        android:layout_marginTop="56dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.062" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/tvTimeText"
@@ -89,7 +97,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@color/orange"
+        android:background="#006aff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -101,7 +109,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="open-sans"
@@ -123,7 +131,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:background="@color/orange"
+        android:background="#006aff"
         app:layout_constraintBottom_toBottomOf="@+id/fragmentMap"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -135,21 +143,22 @@
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:background="@drawable/rectangle_border"
-        android:textSize="15dp"
         android:fontFamily="sans-serif"
         android:text="Finalizar"
         android:textAllCaps="false"
+        android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="@+id/fragmentMap"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.833" />
+        app:layout_constraintVertical_bias="0.850" />
 
     <FrameLayout
         android:id="@+id/fragmentMap"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="56dp"
         android:layout_alignTop="@+id/kmTextViewRun"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
