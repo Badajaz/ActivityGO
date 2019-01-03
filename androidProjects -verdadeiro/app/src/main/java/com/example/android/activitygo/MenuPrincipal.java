@@ -10,6 +10,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
@@ -22,6 +23,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -53,6 +55,7 @@ public class MenuPrincipal extends AppCompatActivity {
     private String firstName = "";
     private String lastName = "";
     private String image_path = "";
+    private String pontos = "";
 
     private static final String TAG = "MenuPrincipal";
 
@@ -85,11 +88,12 @@ public class MenuPrincipal extends AppCompatActivity {
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     firstName = String.valueOf(child.child("firstName").getValue());
                     lastName = String.valueOf(child.child("lastName").getValue());
+                    pontos = String.valueOf(child.child("pontos").getValue());
                     toolbarCima = (Toolbar) findViewById(R.id.toolbar);
                     setSupportActionBar(toolbarCima);
                     getSupportActionBar().setTitle("ActivityGO");
 
-                    getSupportActionBar().setSubtitle("" + firstName.charAt(0) + lastName.charAt(0) + ":");
+                    getSupportActionBar().setSubtitle("" + firstName.charAt(0) + lastName.charAt(0) + ":" + " " + pontos);
                 }
             }
 
@@ -119,8 +123,7 @@ public class MenuPrincipal extends AppCompatActivity {
                 public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                     Fragment SelectedFragment = null;
                     switch (menuItem.getItemId()) {
-                        case R.id.run:
-                            //Fragmento Corrida
+                        case R.id.run: //Fragmento Corrida
 
                             SelectedFragment = new RunMenuInicial();
                             Bundle toRunMenuInicial = new Bundle();
@@ -134,8 +137,8 @@ public class MenuPrincipal extends AppCompatActivity {
                             ft.commit();
                             break;
 
-                        case R.id.chalengeItem:
-                            //Fragmento Desafios
+                        case R.id.chalengeItem: //Fragmento Desafios
+
                             menuItem.setIcon(R.drawable.bicepe_icon23);
                             SelectedFragment = new ChalengeFragment();
                             Bundle toChallengeFragment = new Bundle();
@@ -148,7 +151,8 @@ public class MenuPrincipal extends AppCompatActivity {
                             ftra.commit();
                             break;
 
-                        case R.id.achievementItem:
+                        case R.id.achievementItem: // Fragmento Achievements
+
                             Bundle bundle = new Bundle();
                             bundle.putString("USERNAME", username);
                             SelectedFragment = new AchievementsFragment();
@@ -160,8 +164,8 @@ public class MenuPrincipal extends AppCompatActivity {
                             fte.commit();
                             break;
 
-                        case R.id.RankingItem:
-                            //Fragmento Ranking
+                        case R.id.RankingItem: //Fragmento Ranking
+
                             Bundle b1 = new Bundle();
                             b1.putString("USERNAME", username);
                             SelectedFragment = new RankingsFragment();
@@ -174,7 +178,8 @@ public class MenuPrincipal extends AppCompatActivity {
                             ftransactio.commit();
                             break;
 
-                        case R.id.GroupsItem:
+                        case R.id.GroupsItem: // Fragmento Groups
+
                             Bundle args = new Bundle();
                             args.putString("USERNAME", username);
                             SelectedFragment = new MergeGroupFragment();
@@ -199,6 +204,82 @@ public class MenuPrincipal extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         Fragment currentFragment = getFragmentManager().findFragmentById(R.id.fragment_container);
         // Fragment page = getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":" + ViewPager.getCurrentItem());
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                final View viewRun = findViewById(R.id.run);
+                final View viewChallenge = findViewById(R.id.chalengeItem);
+                final View viewAchievement = findViewById(R.id.achievementItem);
+                final View viewRanking = findViewById(R.id.RankingItem);
+                final View viewGroups = findViewById(R.id.GroupsItem);
+
+                if (viewRun != null) {
+                    viewRun.setOnLongClickListener(new View.OnLongClickListener() {
+                        @Override
+                        public boolean onLongClick(View v) {
+                            Toast toast = Toast.makeText(getApplicationContext(), "Corridas:", Toast.LENGTH_SHORT);
+                            View toastView = toast.getView();
+                            TextView toastMessage = (TextView) toastView.findViewById(android.R.id.message);
+                            toastMessage.setTextColor(getResources().getColor(R.color.BlueSeparator));
+                            toast.show();
+                            return true;
+                        }
+                    });
+                }
+                if (viewChallenge != null) {
+                    viewChallenge.setOnLongClickListener(new View.OnLongClickListener() {
+                        @Override
+                        public boolean onLongClick(View v) {
+                            Toast toast = Toast.makeText(getApplicationContext(), "Desafios:", Toast.LENGTH_SHORT);
+                            View toastView = toast.getView();
+                            TextView toastMessage = (TextView) toastView.findViewById(android.R.id.message);
+                            toastMessage.setTextColor(getResources().getColor(R.color.BlueSeparator));
+                            toast.show();
+                            return true;
+                        }
+                    });
+                }
+                if (viewAchievement != null) {
+                    viewAchievement.setOnLongClickListener(new View.OnLongClickListener() {
+                        @Override
+                        public boolean onLongClick(View v) {
+                            Toast toast = Toast.makeText(getApplicationContext(), "Conquistas:", Toast.LENGTH_SHORT);
+                            View toastView = toast.getView();
+                            TextView toastMessage = (TextView) toastView.findViewById(android.R.id.message);
+                            toastMessage.setTextColor(getResources().getColor(R.color.BlueSeparator));
+                            toast.show();
+                            return true;
+                        }
+                    });
+                }
+                if (viewRanking != null) {
+                    viewRanking.setOnLongClickListener(new View.OnLongClickListener() {
+                        @Override
+                        public boolean onLongClick(View v) {
+                            Toast toast = Toast.makeText(getApplicationContext(), "Rankings:", Toast.LENGTH_SHORT);
+                            View toastView = toast.getView();
+                            TextView toastMessage = (TextView) toastView.findViewById(android.R.id.message);
+                            toastMessage.setTextColor(getResources().getColor(R.color.BlueSeparator));
+                            toast.show();
+                            return true;
+                        }
+                    });
+                }
+                if (viewGroups != null) {
+                    viewGroups.setOnLongClickListener(new View.OnLongClickListener() {
+                        @Override
+                        public boolean onLongClick(View v) {
+                            Toast toast = Toast.makeText(getApplicationContext(), "Grupos:", Toast.LENGTH_SHORT);
+                            View toastView = toast.getView();
+                            TextView toastMessage = (TextView) toastView.findViewById(android.R.id.message);
+                            toastMessage.setTextColor(getResources().getColor(R.color.BlueSeparator));
+                            toast.show();
+                            return true;
+                        }
+                    });
+                }
+            }
+        });
 
         if (currentFragment.isVisible() && (currentFragment instanceof RunMenuInicial)) {
             //MenuItem item = menu.findItem(R.id.BackButton);

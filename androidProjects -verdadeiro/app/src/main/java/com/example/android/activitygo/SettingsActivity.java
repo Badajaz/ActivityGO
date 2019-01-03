@@ -223,6 +223,17 @@ public class SettingsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        buttonAboutUs.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Toast toast = Toast.makeText(getApplicationContext(), "Uma pequena descrição de quem desenvolveu a aplicação", Toast.LENGTH_SHORT);
+                View toastView = toast.getView();
+                TextView toastMessage = (TextView) toastView.findViewById(android.R.id.message);
+                toastMessage.setTextColor(getResources().getColor(R.color.BlueSeparator));
+                toast.show();
+                return true;
+            }
+        });
     }
 
     public void showDesportoFavoritoPopup() {
@@ -550,9 +561,7 @@ public class SettingsActivity extends AppCompatActivity {
                 desportoFavoritoDialog.dismiss();
             }
         });
-        desportoFavoritoDialog.getWindow().
-
-                setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        desportoFavoritoDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         desportoFavoritoDialog.show();
     }
 
