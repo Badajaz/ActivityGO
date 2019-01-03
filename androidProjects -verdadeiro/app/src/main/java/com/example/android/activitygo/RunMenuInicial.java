@@ -74,7 +74,7 @@ public class RunMenuInicial extends Fragment {
                 @Override
                 public void run() {
                     final Animation anim_out = AnimationUtils.loadAnimation(getContext(), android.R.anim.fade_out);
-                    final Animation anim_in  = AnimationUtils.loadAnimation(getContext(), android.R.anim.fade_in);
+                    final Animation anim_in = AnimationUtils.loadAnimation(getContext(), android.R.anim.fade_in);
                     anim_out.setAnimationListener(new Animation.AnimationListener() {
                         @Override
                         public void onAnimationStart(Animation animation) {
@@ -156,8 +156,8 @@ public class RunMenuInicial extends Fragment {
                 SelectedFragment.setArguments(toRunMenuInicial);
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(R.id.fragment_container, SelectedFragment, "RunMenuInicial");
-                ft.addToBackStack("RunFragment");
+                ft.replace(R.id.fragment_container, SelectedFragment, "IrCorridaFragment");
+                ft.addToBackStack("IrCorridaFragment");
                 ft.commit();
             }
         });
@@ -171,8 +171,8 @@ public class RunMenuInicial extends Fragment {
                 SelectedFragmentMeusGrupos.setArguments(args);
                 FragmentManager fmMeusGrupos = getFragmentManager();
                 FragmentTransaction ftMeusGrupos = fmMeusGrupos.beginTransaction();
-                ftMeusGrupos.replace(R.id.fragment_container, SelectedFragmentMeusGrupos, "RunMenuInicial");
-                ftMeusGrupos.addToBackStack("RunFragment");
+                ftMeusGrupos.replace(R.id.fragment_container, SelectedFragmentMeusGrupos, "MergeGroupFragment");
+                ftMeusGrupos.addToBackStack("MergeGroupFragment");
                 ftMeusGrupos.commit();
 
             }

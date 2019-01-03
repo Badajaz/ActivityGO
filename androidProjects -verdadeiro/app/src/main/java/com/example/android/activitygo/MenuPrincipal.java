@@ -106,8 +106,7 @@ public class MenuPrincipal extends AppCompatActivity {
         SelectedFragment.setArguments(toRunMenuInicial);
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.add(R.id.fragment_container, SelectedFragment, "RunFragment");
-        //ft.addToBackStack("RunFragment");
+        ft.add(R.id.fragment_container, SelectedFragment, "RunMenuInicialFragment");
         ft.commit();
 
         BottomNavigationView mMainNav = findViewById(R.id.NavBar);
@@ -122,6 +121,7 @@ public class MenuPrincipal extends AppCompatActivity {
                     switch (menuItem.getItemId()) {
                         case R.id.run:
                             //Fragmento Corrida
+
                             SelectedFragment = new RunMenuInicial();
                             Bundle toRunMenuInicial = new Bundle();
                             toRunMenuInicial.putString("USERNAME", username);
@@ -129,8 +129,8 @@ public class MenuPrincipal extends AppCompatActivity {
                             SelectedFragment.setArguments(toRunMenuInicial);
                             FragmentManager fm = getFragmentManager();
                             FragmentTransaction ft = fm.beginTransaction();
-                            ft.replace(R.id.fragment_container, SelectedFragment);
-                            ft.addToBackStack("RunFragment");
+                            ft.replace(R.id.fragment_container, SelectedFragment, "RunMenuInicialFragment");
+                            ft.addToBackStack("RunMenuInicialFragment");
                             ft.commit();
                             break;
 
@@ -144,6 +144,7 @@ public class MenuPrincipal extends AppCompatActivity {
                             FragmentManager fman = getFragmentManager();
                             FragmentTransaction ftra = fman.beginTransaction();
                             ftra.replace(R.id.fragment_container, SelectedFragment, "ChalengeFragment");
+                            ftra.addToBackStack("ChalengeFragment");
                             ftra.commit();
                             break;
 
@@ -243,12 +244,13 @@ public class MenuPrincipal extends AppCompatActivity {
                 break;
 
             case R.id.BackButton:
-                //getFragmentManager().popBackStack();
-                //RankingsFragment
+                RunMenuInicial runMenuInicialFragment = (RunMenuInicial) getFragmentManager().findFragmentByTag("RunMenuInicialFragment");
                 RankingsFragment myFragment = (RankingsFragment) getFragmentManager().findFragmentByTag("RankingsFragment");
                 TableRankingsFragment myFragment2 = (TableRankingsFragment) getFragmentManager().findFragmentByTag("TableRankingsFragment");
                 MergeGroupFragment mergeGroupFragment = (MergeGroupFragment) getFragmentManager().findFragmentByTag("MergeGroupFragment");
                 RunFragment myRunFragment = (RunFragment) getFragmentManager().findFragmentByTag("historialCorrida");
+                HistoricoCorridas historicoFragment = (HistoricoCorridas) getFragmentManager().findFragmentByTag("historicoCorridas");
+                IrCorridaFragment irCorridaFragment = (IrCorridaFragment) getFragmentManager().findFragmentByTag("IrCorridaFragment");
 
                 if (myFragment != null && myFragment.isVisible()) {
                     getFragmentManager().popBackStack();
@@ -258,6 +260,12 @@ public class MenuPrincipal extends AppCompatActivity {
                     getFragmentManager().popBackStack();
                 } else if (myRunFragment != null && myRunFragment.isVisible()) {
                     getFragmentManager().popBackStack();
+                } else if (historicoFragment != null && historicoFragment.isVisible()) {
+                    getFragmentManager().popBackStack();
+                } else if (irCorridaFragment != null && irCorridaFragment.isVisible()) {
+                    getFragmentManager().popBackStack();
+                } else if (runMenuInicialFragment != null && runMenuInicialFragment.isVisible()) {
+                    showTerminarSessaoPopup();
                 }
         }
         return true;
@@ -273,7 +281,7 @@ public class MenuPrincipal extends AppCompatActivity {
         noButton = (Button) dialogTerminarSessao.findViewById(R.id.noButton);
         close = (TextView) dialogTerminarSessao.findViewById(R.id.txtClose);
         popupId = (TextView) dialogTerminarSessao.findViewById(R.id.popUpId);
-        popupId.setText("Tem a certeza?");
+        popupId.setText("Vai terminar a sessão. Tem a certeza?");
 
         close.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -299,56 +307,6 @@ public class MenuPrincipal extends AppCompatActivity {
         dialogTerminarSessao.show();
     }
 
-    /*
-        public ArrayList<String> getProfile() {
-            return this.profile;
-        }
-    */
-    public void showPopup(@NonNull MenuItem menuItem) {
-        TextView txtclose;
-        TextView txtname;
-        TextView txtusername;
-        Button confirmButton;
-        mi = menuItem;
-
-        myDialog.setContentView(R.layout.popup_inicial);
-        txtclose = (TextView) myDialog.findViewById(R.id.txtclosePopupInicial);
-        txtname = (TextView) myDialog.findViewById(R.id.idName);
-        txtusername = (TextView) myDialog.findViewById(R.id.idUsername);
-        caminhadaCheckBox = (CheckBox) myDialog.findViewById(R.id.opcaoPraticar1);
-        corridaCheckBox = (CheckBox) myDialog.findViewById(R.id.opcaoPraticar2);
-        confirmButton = (Button) myDialog.findViewById(R.id.confirmButton);
-        //txtname.setText(profile.get(0));
-        //txtusername.setText(profile.get(2));
-        txtclose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myDialog.dismiss();
-            }
-        });
-        confirmButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String opcao = getSelectedSport();
-                changePlusOption(opcao);
-                myDialog.dismiss();
-            }
-        });
-        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        myDialog.show();
-    }
-
-    private void changePlusOption(String opcao) {
-        switch (opcao) {
-            case "Corrida":
-                mi.setIcon(R.drawable.outline_directions_run_black_18dp);
-                break;
-            case "Caminhada":
-                mi.setIcon(R.drawable.walk_icon);
-                break;
-        }
-    }
-
     public void getCorridaItemPopup(View v) {
         corridaChecked = 1;
         checkboxesPopup.add(corridaCheckBox);
@@ -367,5 +325,34 @@ public class MenuPrincipal extends AppCompatActivity {
 
     public String getSelectedSport() {
         return this.selectedSport;
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        //YA, MONTES DE CODIGO REPETIDO, SIGA PARA BINGO, SE FUNCIONA, NAO MUDA
+        RunMenuInicial runMenuInicialFragment = (RunMenuInicial) getFragmentManager().findFragmentByTag("RunMenuInicialFragment");
+        RankingsFragment myFragment = (RankingsFragment) getFragmentManager().findFragmentByTag("RankingsFragment");
+        TableRankingsFragment myFragment2 = (TableRankingsFragment) getFragmentManager().findFragmentByTag("TableRankingsFragment");
+        MergeGroupFragment mergeGroupFragment = (MergeGroupFragment) getFragmentManager().findFragmentByTag("MergeGroupFragment");
+        RunFragment myRunFragment = (RunFragment) getFragmentManager().findFragmentByTag("historialCorrida");
+        HistoricoCorridas historicoFragment = (HistoricoCorridas) getFragmentManager().findFragmentByTag("historicoCorridas");
+        IrCorridaFragment irCorridaFragment = (IrCorridaFragment) getFragmentManager().findFragmentByTag("IrCorridaFragment");
+
+        if (myFragment != null && myFragment.isVisible()) {
+            getFragmentManager().popBackStack();
+        } else if (myFragment2 != null && myFragment2.isVisible()) {
+            getFragmentManager().popBackStack();
+        } else if (mergeGroupFragment != null && mergeGroupFragment.isVisible()) {
+            getFragmentManager().popBackStack();
+        } else if (myRunFragment != null && myRunFragment.isVisible()) {
+            getFragmentManager().popBackStack();
+        } else if (historicoFragment != null && historicoFragment.isVisible()) {
+            getFragmentManager().popBackStack();
+        } else if (irCorridaFragment != null && irCorridaFragment.isVisible()) {
+            getFragmentManager().popBackStack();
+        } else if (runMenuInicialFragment != null && runMenuInicialFragment.isVisible()) {
+            showTerminarSessaoPopup();
+        }
     }
 }

@@ -2,17 +2,17 @@ package com.example.android.activitygo;
 
 import android.app.DatePickerDialog;
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -81,7 +81,11 @@ public class RunFragment extends Fragment {
                 args.putString("USERNAME", username);
                 args.putInt("CLASSINT", 1);
                 hc.setArguments(args);
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container, hc).commit();
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.fragment_container, hc, "historicoCorridas");
+                ft.addToBackStack("HistoricoCorridas");
+                ft.commit();
             }
         });
 
@@ -93,15 +97,20 @@ public class RunFragment extends Fragment {
                 HistoricoCorridas hc = new HistoricoCorridas();
                 TextView dataTextView = getView().findViewById(R.id.DataCorridaProcuraTextView);
                 String data = dataTextView.getText().toString();
-                if (data != "" ){
+                if (data != "") {
                     Bundle args = new Bundle();
                     args.putInt("CLASSINT", 0);
                     args.putString("DATA", data);
                     args.putString("USERNAME", username);
                     hc.setArguments(args);
-                    getFragmentManager().beginTransaction().replace(R.id.fragment_container, hc).commit();
-                }else{
-                    dataTextView.setError("Necessita de inserir a data");
+                    FragmentManager fm = getFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
+                    ft.replace(R.id.fragment_container, hc, "historicoCorridas");
+                    ft.addToBackStack("HistoricoCorridas");
+                    ft.commit();
+                    //getFragmentManager().beginTransaction().replace(R.id.fragment_container, hc, "historicoCorridas").commit();
+                } else {
+                    dataTextView.setError("Tem de inserir uma data.");
                 }
             }
         });

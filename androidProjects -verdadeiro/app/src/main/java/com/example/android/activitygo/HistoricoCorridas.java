@@ -144,32 +144,20 @@ public class HistoricoCorridas extends Fragment {
                     }
                 }
 
+                DataPoint dpDisplayArray[] = new DataPoint[5];
+                for (int counter = 0; counter < dpDisplayArray.length; counter++) {
+                    dpDisplayArray[dpDisplayArray.length - 1 - counter] = dpArray[dpArray.length - 1 - counter];
+                }
+
                 LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dpArray);
                 graph.addSeries(series);
                 graph.setTitle("Progresso no último mês (km/dia)");
                 Log.d("MAXIMOOOOOOOOO", String.valueOf(Collections.max(distance)));
                 graph.getViewport().setYAxisBoundsManual(true);
                 graph.getViewport().setXAxisBoundsManual(true);
+                graph.getViewport().setMinX(dpDisplayArray[0].getX()+1);
+                graph.getViewport().setMaxX(dpDisplayArray[dpDisplayArray.length-1].getX()-1);
                 graph.getViewport().setMaxY(Collections.max(distance) + 1000);
-
-
-                try {
-                    firstDate = datas.get(0);
-                    Calendar calFirstDate = Calendar.getInstance();
-                    Date dateFirstDate = new SimpleDateFormat("dd/MM/yyyy").parse(firstDate);
-                    calFirstDate.setTime(dateFirstDate);
-                    graph.getViewport().setMinX(calFirstDate.get(Calendar.DAY_OF_MONTH));
-
-                    lastDate = datas.get(datas.size() - 1);
-                    Calendar calLastDate = Calendar.getInstance();
-                    Date dateLastDate = new SimpleDateFormat("dd/MM/yyyy").parse(lastDate);
-                    calFirstDate.setTime(dateLastDate);
-                    graph.getViewport().setMinX(calLastDate.get(Calendar.DAY_OF_MONTH));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-
-
 
                 graph.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter() {
                     @Override
@@ -202,6 +190,5 @@ public class HistoricoCorridas extends Fragment {
         }
 
         return arrayDouble;
-
     }
 }

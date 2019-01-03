@@ -1,11 +1,14 @@
 package com.example.android.activitygo;
 
+import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -26,6 +29,8 @@ public class SobreNos extends AppCompatActivity {
     private String ln;
     private DatabaseReference databaseUsers;
     private Toolbar toolbarCima;
+    private String image_path = "";
+    private Uri fileUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +40,10 @@ public class SobreNos extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
         if (b != null) {
             usernameReceived = getIntent().getStringExtra("USERNAME");
+            image_path = getIntent().getStringExtra("URI");
+            if (!TextUtils.isEmpty(image_path)) {
+                fileUri = Uri.parse(image_path);
+            }
         } else {
             usernameReceived = "";
         }
@@ -72,5 +81,33 @@ public class SobreNos extends AppCompatActivity {
         descricao2 = (TextView) findViewById(R.id.IMVDescricao2);
         descricao2.setText("Gonçalo Lobo.\nEstudante da FCUL");
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.BackButton:
+                goToSettings();
+                break;
+        }
+        return true;
+    }
+
+    private void goToSettings() {
+        Intent i = new Intent(this, SettingsActivity.class);
+        i.putExtra("USERNAME", usernameReceived);
+        i.putExtra("URI", image_path);
+        startActivity(i);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.aboutus_main, menu);
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        goToSettings();
     }
 }

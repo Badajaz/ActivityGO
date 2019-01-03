@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -159,13 +160,26 @@ public class SettingsActivity extends AppCompatActivity {
                 showCalendarioPopup();
             }
         });
+        buttonCalendario.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                showCalendarioPopup();
+                return true;
+            }
+        });
 
         Button terminarSessao = (Button) findViewById(R.id.buttonTerminarSessao);
         terminarSessao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showTerminarSessaoPopup();
-                //showChallengePopup();
+            }
+        });
+        terminarSessao.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                showTerminarSessaoPopup();
+                return true;
             }
         });
 
@@ -176,12 +190,26 @@ public class SettingsActivity extends AppCompatActivity {
                 showEliminarContaPopup();
             }
         });
+        eliminarContaButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                showEliminarContaPopup();
+                return true;
+            }
+        });
 
         alterarDesportoFavorito = (Button) findViewById(R.id.buttonAlterarDesportoFavorito);
         alterarDesportoFavorito.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDesportoFavoritoPopup();
+            }
+        });
+        alterarDesportoFavorito.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                showDesportoFavoritoPopup();
+                return true;
             }
         });
 
@@ -191,27 +219,11 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), SobreNos.class);
                 intent.putExtra("USERNAME", usernameReceived);
+                intent.putExtra("URI", image_path);
                 startActivity(intent);
             }
         });
     }
-    /*
-
-    public void showChallengePopup() {
-        final Button receive;
-        challengePopup.setContentView(R.layout.popup_challenge_completed);
-        receive = (Button) challengePopup.findViewById(R.id.receiveButton);
-        receive.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                challengePopup.dismiss();
-            }
-        });
-        challengePopup.getWindow().getAttributes().windowAnimations = R.style.FadeDialog;
-        challengePopup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-        challengePopup.show();
-    }*/
 
     public void showDesportoFavoritoPopup() {
         TextView close, popupId;
@@ -768,12 +780,31 @@ public class SettingsActivity extends AppCompatActivity {
         dialogCalendario.show();
     }
 
+    private void goToMainMenu() {
+        Intent i = new Intent(this, MenuPrincipal.class);
+        i.putExtra("USERNAME", usernameReceived);
+        i.putExtra("URI", image_path);
+        startActivity(i);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.BackButton:
-                //getFragmentManager().popBackStack();
+                goToMainMenu();
+                break;
         }
         return true;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.settings_main, menu);
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        goToMainMenu();
     }
 }

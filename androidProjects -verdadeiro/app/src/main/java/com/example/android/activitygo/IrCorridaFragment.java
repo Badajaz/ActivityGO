@@ -11,6 +11,7 @@ import android.widget.Button;
 public class IrCorridaFragment extends Fragment {
 
     private String username;
+    private static final String TAG = "IrCorridaFragment";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -23,7 +24,7 @@ public class IrCorridaFragment extends Fragment {
 
             public void onClick(View v) {
                 Intent i = new Intent(getContext(), MapsActivity.class);
-                i.putExtra("USERNAME",username);
+                i.putExtra("USERNAME", username);
                 startActivity(i);
 
                /*Fragment SelectedFragment = new StartCorridaFragment();
