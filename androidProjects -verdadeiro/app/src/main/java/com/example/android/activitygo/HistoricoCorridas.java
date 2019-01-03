@@ -82,7 +82,10 @@ public class HistoricoCorridas extends Fragment {
                             coordenatesByStatus.put(status, currentCoordinates);
                         }
                     } else {
-                        datasCorridas.add(c.getData() + "   " + Math.round(c.getDistancia()) + "m   " + c.getTempo() + "   " + c.getPace());
+                        String status = c.getData() + "   " + Math.round(c.getDistancia()) + "m   " + c.getTempo() + "   " + c.getPace();
+                        datasCorridas.add(status);
+                        double[] currentCoordinates = ArrayListToArray(c.getCoordenadas());
+                        coordenatesByStatus.put(status, currentCoordinates);
                     }
                 }
 
@@ -94,7 +97,7 @@ public class HistoricoCorridas extends Fragment {
                         Fragment p = new RunHistoricStatus();
                         Bundle args = new Bundle();
                         args.putString("RUN_STATISTICS", datasCorridas.get(position));
-                        //  args.putSerializable("COORDINATES", coordenatesByStatus.get(datasCorridas.get(position)));
+                        args.putDoubleArray("COORDINATES", coordenatesByStatus.get(datasCorridas.get(position)));
                         /* args.putString("TEMPO", timeS);
                         args.putDouble("DISTANCIA", distancia);
                         args.putParcelableArrayList("Markers", markers);
