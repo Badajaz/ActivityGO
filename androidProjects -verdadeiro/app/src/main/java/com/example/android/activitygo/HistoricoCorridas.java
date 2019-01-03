@@ -3,6 +3,7 @@ package com.example.android.activitygo;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -116,6 +118,9 @@ public class HistoricoCorridas extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ArrayList<String> datas = new ArrayList<>();
                 ArrayList<Double> distance = new ArrayList<>();
+                String firstDate = ""; // primeira data de uma corrida
+                String lastDate = ""; // ultima data
+
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
                         Corrida c = child.getValue(Corrida.class);
@@ -131,7 +136,6 @@ public class HistoricoCorridas extends Fragment {
                         Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(datas.get(index));
                         Calendar cal = Calendar.getInstance();
                         cal.setTime(date1);
-
                         DataPoint dp = new DataPoint(cal.get(Calendar.DAY_OF_MONTH), distance.get(index));
                         dpArray[index] = dp;
 
@@ -142,7 +146,30 @@ public class HistoricoCorridas extends Fragment {
 
                 LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dpArray);
                 graph.addSeries(series);
-                graph.setTitle("Progresso no último mês");
+                graph.setTitle("Progresso no último mês (km/dia)");
+                Log.d("MAXIMOOOOOOOOO", String.valueOf(Collections.max(distance)));
+                graph.getViewport().setYAxisBoundsManual(true);
+                graph.getViewport().setXAxisBoundsManual(true);
+                graph.getViewport().setMaxY(Collections.max(distance) + 1000);
+
+
+                try {
+                    firstDate = datas.get(0);
+                    Calendar calFirstDate = Calendar.getInstance();
+                    Date dateFirstDate = new SimpleDateFormat("dd/MM/yyyy").parse(firstDate);
+                    calFirstDate.setTime(dateFirstDate);
+                    graph.getViewport().setMinX(calFirstDate.get(Calendar.DAY_OF_MONTH));
+
+                    lastDate = datas.get(datas.size() - 1);
+                    Calendar calLastDate = Calendar.getInstance();
+                    Date dateLastDate = new SimpleDateFormat("dd/MM/yyyy").parse(lastDate);
+                    calFirstDate.setTime(dateLastDate);
+                    graph.getViewport().setMinX(calLastDate.get(Calendar.DAY_OF_MONTH));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+
 
                 graph.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter() {
                     @Override
