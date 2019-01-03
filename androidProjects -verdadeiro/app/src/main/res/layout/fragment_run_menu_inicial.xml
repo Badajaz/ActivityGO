@@ -130,6 +130,7 @@
             android:layout_height="55dp"
             android:layout_centerHorizontal="true"
             android:background="?attr/selectableItemBackground"
+            android:drawableLeft="@drawable/historyicon"
             android:fontFamily="open-sans"
             android:text="@string/HistoricoCorridas"
             android:textAllCaps="false"
