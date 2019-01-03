@@ -150,6 +150,11 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showChangeProfilePopup();
+                Toast toast = Toast.makeText(getApplicationContext(), "Altere as definições do seu perfil:", Toast.LENGTH_SHORT);
+                View toastView = toast.getView();
+                TextView toastMessage = (TextView) toastView.findViewById(android.R.id.message);
+                toastMessage.setTextColor(getResources().getColor(R.color.BlueSeparator));
+                toast.show();
             }
         });
 
