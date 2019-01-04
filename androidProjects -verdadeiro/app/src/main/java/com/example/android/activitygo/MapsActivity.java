@@ -11,6 +11,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -41,6 +42,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import static java.lang.Math.acos;
 import static java.lang.Math.cos;
@@ -80,6 +82,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private Toolbar toolbarCima;
     private String username2 = "";
     private String image_path = "";
+    private TextToSpeech t1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -239,6 +242,18 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         final Button Start = (Button) findViewById(R.id.StartRun);
         chronometer = findViewById(R.id.chronometer);
 
+        t1=new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if(status != TextToSpeech.ERROR) {
+                    t1.setLanguage(Locale.US);
+                }
+            }
+        });
+
+
+
+
         Start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -247,6 +262,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     chronometer.start();
                     running = true;
                     isStopped = false;
+                    t1.speak("Begining workout", TextToSpeech.QUEUE_FLUSH, null);
+
 
                 }
             }
@@ -261,6 +278,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     chronometer.stop();
                     running = false;
                     isStopped = true;
+                    t1.speak("Stopping workout", TextToSpeech.QUEUE_FLUSH, null);
+
+
                 }
 
                 /*SelectedFragment = new RunFragment();
