@@ -74,8 +74,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private boolean atingiu = false;
     private boolean atingiuTwo = false;
+    private boolean atingiuFive = false;
     private String chronoTime;
     private String chronoTimeTwo;
+    private String chronoTimeFive;
     private Date date;
 
     private String firstName = "";
@@ -217,6 +219,28 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
 
+                        if (accKm > 4999 && atingiuFive == false) {
+                            double timeSconverted = Double.valueOf((int) pauseOff / 1000);
+                            double time = timeSconverted / 60;
+                            int timeInteiro = (int) time;
+                            double minutos = time - timeInteiro;
+                            double segundos = minutos * 60;
+
+                            if (timeInteiro < 10) {
+                                if (segundos < 10) {
+                                    chronoTimeFive = "0" + timeInteiro + ":" + "0" + (int) segundos;
+                                } else {
+                                    chronoTimeFive = "0" + timeInteiro + ":" + (int) segundos;
+                                }
+                            } else {
+                                chronoTimeTwo = "" + timeInteiro + ":" + (int) segundos;
+                            }
+                            atingiuFive = true;
+                        }
+
+
+
+
 
 
 
@@ -336,6 +360,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     args.putString("USERNAME", username);
                     args.putString("MELHORKM", chronoTime);
                     args.putString("MELHORSEGUNDOKM", chronoTimeTwo);
+                    args.putString("MELHORQUINTOKM", chronoTimeFive);
                     p.setArguments(args);
                     getFragmentManager().beginTransaction().replace(R.id.fragmentMap, p).commit();
                     Start.setVisibility(View.GONE);

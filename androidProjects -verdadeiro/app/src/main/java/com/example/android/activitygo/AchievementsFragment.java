@@ -27,16 +27,20 @@ public class AchievementsFragment extends Fragment {
     private TextView tvdata;
     private String melhorKm = "00:00";
     private String melhor2Km = "00:00";
+    private String melhor5Km = "00:00";
     private TextView melhorKmTv;
     private String dataDistancia;
     private String melhorKmData;
     private String melhor2KmData;
+    private String melhor5KmData;
     private TextView melhorkmDataTv;
     private int count = 0;
     private double accKm = 0.0;
     private TextView Totalkm;
     private TextView melhor2KmTv;
     private TextView melhor2kmDataTv;
+    private TextView melhor5KmTv;
+    private TextView melhor5kmDataTv;
 
     public AchievementsFragment() {
         // Required empty public constructor
@@ -58,6 +62,9 @@ public class AchievementsFragment extends Fragment {
         melhor2KmTv = v.findViewById(R.id.melhorKmTempo2);
         melhor2kmDataTv = v.findViewById(R.id.melhorKmData2);
 
+        melhor5KmTv = v.findViewById(R.id.melhorKmTempo5);
+        melhor5kmDataTv = v.findViewById(R.id.melhorKmData5);
+
 
         final String username = getArguments().getString("USERNAME");
 
@@ -72,6 +79,7 @@ public class AchievementsFragment extends Fragment {
                 String valores = "";
                 boolean first = false;
                 boolean second = false;
+                boolean fifth = false;
 
                 for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                     Corrida c = userSnapshot.getValue(Corrida.class);
@@ -106,7 +114,6 @@ public class AchievementsFragment extends Fragment {
                     }
 
 
-
                     if (c.getDistancia() >= 2000 && c.getUsername().equals(username)) {
                         if (second == false) {
                             melhor2Km = c.getMelhorSegundokm();
@@ -128,7 +135,25 @@ public class AchievementsFragment extends Fragment {
                     }
 
 
+                    if (c.getDistancia() >= 5000 && c.getUsername().equals(username)) {
+                        if (fifth == false) {
+                            melhor5Km = c.getMelhorQuintokm();
+                            melhor5KmData = c.getData();
+                            fifth = true;
+                        } else {
 
+
+                            if (isLower(melhor5Km, c.getMelhorSegundokm())) {
+                                melhor5Km = c.getMelhorQuintokm();
+                                melhor5KmData = c.getData();
+                            }
+
+                        }
+
+
+                        //count ++;
+
+                    }
 
 
                 }
@@ -141,6 +166,8 @@ public class AchievementsFragment extends Fragment {
                 Totalkm.setText("" + accKm);
                 melhor2KmTv.setText(melhor2Km);
                 melhor2kmDataTv.setText(melhor2KmData);
+                melhor5KmTv.setText(melhor5Km);
+                melhor5kmDataTv.setText(melhor5KmData);
 
 
             }
