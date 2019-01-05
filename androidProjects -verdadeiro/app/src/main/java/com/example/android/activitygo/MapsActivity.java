@@ -88,6 +88,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private String image_path = "";
     private TextToSpeech t1;
 
+    private String desporto;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,6 +97,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         final String username = getIntent().getExtras().getString("USERNAME");
         username2 = username;
         image_path = getIntent().getExtras().getString("URI");
+        desporto = getIntent().getExtras().getString("Desporto");
+
+
 
         databaseCorrida = FirebaseDatabase.getInstance().getReference("corrida");
         databaseUsers = FirebaseDatabase.getInstance().getReference("users");

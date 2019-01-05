@@ -13,7 +13,7 @@
         android:layout_height="60dp"
         android:fontFamily="open-sans"
         android:gravity="center"
-        android:text="Escolha a dificuldade"
+        android:text="Escolha o desporto que deseja praticar:"
         android:textAlignment="center"
         android:textColor="#FFA500"
         android:textSize="25sp"
@@ -23,84 +23,71 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.01" />
 
-    <ToggleButton
-        android:id="@+id/toggleButton3"
-        android:layout_width="140dp"
+    <Button
+        android:id="@+id/CiclismoChoose"
+        android:layout_width="144dp"
         android:layout_height="50dp"
-        android:layout_below="@+id/toggleButton2"
+        android:layout_below="@+id/CorridaChoose"
+        android:layout_marginTop="8dp"
         android:background="#FFA500"
         android:textAllCaps="false"
         android:textColor="#ffffff"
-        android:textOff="Média: 5 Km"
-        android:textOn="Letting go off easy! 200 Points!"
+        android:text="Ciclismo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.933"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toggleButton2"
-        app:layout_constraintVertical_bias="0.058" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.159" />
 
-    <TextView
-        android:id="@+id/blackSeparator2IrCorrida"
-        android:layout_width="130dp"
-        android:layout_height="0.1dp"
-        android:layout_gravity="center_horizontal"
+    <Button
+        android:id="@+id/futebolChoose"
+        android:layout_width="144dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/CorridaChoose"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="#006aff"
+        android:background="#FFA500"
+        android:text="futebol"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toggleButton3"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintHorizontal_bias="0.789"
+        app:layout_constraintStart_toEndOf="@+id/CaminhadaChoose"
+        app:layout_constraintTop_toBottomOf="@+id/CiclismoChoose"
+        app:layout_constraintVertical_bias="0.021" />
 
-    <ToggleButton
-        android:id="@+id/toggleButton4"
+    <Button
+        android:id="@+id/CaminhadaChoose"
         android:layout_width="140dp"
         android:layout_height="50dp"
-        android:layout_below="@+id/toggleButton3"
+        android:layout_below="@+id/CiclismoChoose"
         android:background="#FFA500"
         android:textAllCaps="false"
         android:textColor="#ffffff"
-        android:textOff="Díficil: 7 Km"
-        android:textOn="It's a Hard day's life! 500 Points!"
+        android:text="Caminhada"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.065"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toggleButton3"
-        app:layout_constraintVertical_bias="0.08" />
+        app:layout_constraintTop_toBottomOf="@+id/CiclismoChoose"
+        app:layout_constraintVertical_bias="0.045" />
 
-    <ToggleButton
-        android:id="@+id/toggleButton2"
+    <Button
+        android:id="@+id/CorridaChoose"
         android:layout_width="140dp"
-        android:layout_height="50dp"
+        android:layout_height="52dp"
         android:background="#FFA500"
         android:textAllCaps="false"
         android:textColor="#ffffff"
-        android:textOff="Fácil: 2 Km"
-        android:textOn="Let's Go Easy! 100 Points!"
+        android:text="Corrida"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.065"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.173" />
-
-    <TextView
-        android:id="@+id/blackSeparator1IrCorrida"
-        android:layout_width="130dp"
-        android:layout_height="0.1dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="#006aff"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toggleButton2"
-        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/buttonStart"
@@ -117,7 +104,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toggleButton4"
+        app:layout_constraintTop_toBottomOf="@+id/CaminhadaChoose"
         app:layout_constraintVertical_bias="0.32" />
 
     <TextView
@@ -131,7 +118,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toggleButton4"
+        app:layout_constraintTop_toBottomOf="@+id/CaminhadaChoose"
         app:layout_constraintVertical_bias="0.055" />
 
 </android.support.constraint.ConstraintLayout>
