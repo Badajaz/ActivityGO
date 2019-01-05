@@ -20,7 +20,7 @@
 
         <EditText
             android:id="@+id/NomeCriarGrupo"
-            android:layout_width="302dp"
+            android:layout_width="300dp"
             android:layout_height="55dp"
             android:layout_marginStart="20dp"
             android:backgroundTint="#006aff"
@@ -36,7 +36,7 @@
 
         <EditText
             android:id="@+id/DescricaoGrupo"
-            android:layout_width="309dp"
+            android:layout_width="300dp"
             android:layout_height="55dp"
             android:layout_marginStart="20dp"
             android:backgroundTint="#006aff"
@@ -151,9 +151,10 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/NomeGrupo"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="35dp"
         android:layout_marginTop="200dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginBottom="0dp"
         android:background="#FFA500"
         android:text="Procurar"
         android:textAllCaps="false"

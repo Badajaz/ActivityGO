@@ -73,7 +73,7 @@
         android:background="?attr/selectableItemBackground"
         android:fontFamily="open-sans"
         android:gravity="center"
-        android:text="Tirar uma fotografia"
+        android:text="Tirar uma fotografia\nde perfil"
         android:textAllCaps="false"
         android:textSize="16sp"
         android:typeface="sans"

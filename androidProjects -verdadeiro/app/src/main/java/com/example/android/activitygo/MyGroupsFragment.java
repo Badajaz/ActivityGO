@@ -51,11 +51,13 @@ public class MyGroupsFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String valores = "";
                 ArrayList<String> array = new ArrayList<>();
+                final ArrayList<Grupo> trying = new ArrayList<>();
                 for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                     Grupo g = userSnapshot.getValue(Grupo.class);
                     for (String nomeElemento : g.getElementosGrupo()) {
                         if (nomeElemento.equals(username)) {
                             myGroups.add(g.getNome());
+                            trying.add(g);
                         }
                     }
                 }
@@ -63,9 +65,8 @@ public class MyGroupsFragment extends Fragment {
                 if (!myGroups.isEmpty()) {
 
                     listView = (ListView) getView().findViewById(R.id.ListViewMeusGrupos);
-                    listViewAdapter = new ArrayAdapter<String>(
-                            getActivity(), android.R.layout.simple_list_item_1, myGroups);
-                    listView.setAdapter(listViewAdapter);
+                    GrupoListAdapter adapter = new GrupoListAdapter(getContext(), R.layout.adapter_view_layout, trying);
+                    listView.setAdapter(adapter);
 
                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -80,7 +81,8 @@ public class MyGroupsFragment extends Fragment {
                             SelectedFragment.setArguments(args);
                             FragmentManager fmana = getFragmentManager();
                             FragmentTransaction ftransacti = fmana.beginTransaction();
-                            ftransacti.replace(R.id.fragment_container, SelectedFragment, "GroupFragment");
+                            ftransacti.replace(R.id.fragment_container, SelectedFragment, "MyGroupsFragment");
+                            ftransacti.addToBackStack("MyGroupsFragment");
                             ftransacti.commit();
                         }
                     });
@@ -120,7 +122,8 @@ public class MyGroupsFragment extends Fragment {
                 SelectedFragment.setArguments(args);
                 FragmentManager fmana = getFragmentManager();
                 FragmentTransaction ftransacti = fmana.beginTransaction();
-                ftransacti.replace(R.id.fragment_container, SelectedFragment, "GroupFragment");
+                ftransacti.replace(R.id.fragment_container, SelectedFragment, "MyGroupsFragment");
+                ftransacti.addToBackStack("MyGroupsFragment");
                 ftransacti.commit();
             }
         });

@@ -104,6 +104,7 @@ public class ListaDeElementosJuntarGrupo extends Fragment {
         TextView close;
         TextView popupId;
         dialogConfirmJoin.setContentView(R.layout.popupjuntargrupo);
+        dialogConfirmJoin.getWindow().getAttributes().windowAnimations = R.style.FadeAnimation;
         okButton = (Button) dialogConfirmJoin.findViewById(R.id.okButton);
         Button cancelButton = (Button) dialogConfirmJoin.findViewById(R.id.cancelButton);
         close = (TextView) dialogConfirmJoin.findViewById(R.id.txtClose);

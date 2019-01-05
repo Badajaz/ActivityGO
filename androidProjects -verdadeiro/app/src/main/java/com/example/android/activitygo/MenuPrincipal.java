@@ -332,6 +332,9 @@ public class MenuPrincipal extends AppCompatActivity {
                 RunFragment myRunFragment = (RunFragment) getFragmentManager().findFragmentByTag("historialCorrida");
                 HistoricoCorridas historicoFragment = (HistoricoCorridas) getFragmentManager().findFragmentByTag("historicoCorridas");
                 IrCorridaFragment irCorridaFragment = (IrCorridaFragment) getFragmentManager().findFragmentByTag("IrCorridaFragment");
+                MyGroupsFragment myGroupsFragment = (MyGroupsFragment) getFragmentManager().findFragmentByTag("MyGroupsFragment");
+                ProcuraGrupos myProcuraGrupos = (ProcuraGrupos) getFragmentManager().findFragmentByTag("ProcuraGrupos");
+                ListaDeElementosJuntarGrupo myListaDeElementosJuntarGrupo = (ListaDeElementosJuntarGrupo) getFragmentManager().findFragmentByTag("ListaDeElementosJuntarGrupo");
 
                 if (myFragment != null && myFragment.isVisible()) {
                     getFragmentManager().popBackStack();
@@ -347,6 +350,12 @@ public class MenuPrincipal extends AppCompatActivity {
                     getFragmentManager().popBackStack();
                 } else if (runMenuInicialFragment != null && runMenuInicialFragment.isVisible()) {
                     showTerminarSessaoPopup();
+                } else if (myGroupsFragment != null && myGroupsFragment.isVisible()) {
+                    getFragmentManager().popBackStack();
+                } else if (myProcuraGrupos != null && myProcuraGrupos.isVisible()) {
+                    getFragmentManager().popBackStack();
+                } else if (myListaDeElementosJuntarGrupo != null && myListaDeElementosJuntarGrupo.isVisible()) {
+                    getFragmentManager().popBackStack();
                 }
         }
         return true;
@@ -419,6 +428,9 @@ public class MenuPrincipal extends AppCompatActivity {
         RunFragment myRunFragment = (RunFragment) getFragmentManager().findFragmentByTag("historialCorrida");
         HistoricoCorridas historicoFragment = (HistoricoCorridas) getFragmentManager().findFragmentByTag("historicoCorridas");
         IrCorridaFragment irCorridaFragment = (IrCorridaFragment) getFragmentManager().findFragmentByTag("IrCorridaFragment");
+        MyGroupsFragment myGroupsFragment = (MyGroupsFragment) getFragmentManager().findFragmentByTag("MyGroupsFragment");
+        ProcuraGrupos myProcuraGrupos = (ProcuraGrupos) getFragmentManager().findFragmentByTag("ProcuraGrupos");
+        ListaDeElementosJuntarGrupo myListaDeElementosJuntarGrupo = (ListaDeElementosJuntarGrupo) getFragmentManager().findFragmentByTag("ListaDeElementosJuntarGrupo");
 
         if (myFragment != null && myFragment.isVisible()) {
             getFragmentManager().popBackStack();
@@ -434,6 +446,12 @@ public class MenuPrincipal extends AppCompatActivity {
             getFragmentManager().popBackStack();
         } else if (runMenuInicialFragment != null && runMenuInicialFragment.isVisible()) {
             showTerminarSessaoPopup();
+        } else if (myGroupsFragment != null && myGroupsFragment.isVisible()) {
+            getFragmentManager().popBackStack();
+        } else if (myProcuraGrupos != null && myProcuraGrupos.isVisible()) {
+            getFragmentManager().popBackStack();
+        } else if (myListaDeElementosJuntarGrupo != null && myListaDeElementosJuntarGrupo.isVisible()) {
+            getFragmentManager().popBackStack();
         }
     }
 }

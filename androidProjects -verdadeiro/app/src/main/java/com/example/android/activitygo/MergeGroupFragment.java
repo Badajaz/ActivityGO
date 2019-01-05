@@ -1,6 +1,8 @@
 package com.example.android.activitygo;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
@@ -100,13 +102,13 @@ public class MergeGroupFragment extends Fragment {
                             g.addElementToList(username);
                             databaseGrupo.child(id).setValue(g);
 
-                            //  Toast.makeText(getActivity(), "O grupo " + nomegrupo + " foi criado", Toast.LENGTH_LONG).show();
                             possiveisResultados.add(nomegrupo);
                             grupos.add(nomegrupo);
                             Toast.makeText(getActivity(), "O grupo " + nomegrupo + " foi criado", Toast.LENGTH_LONG).show();
                             nomeGrupo.setText("");
                             descricaoGrupo.setText("");
                             //TODO falta dar uncheck das boxes
+
                             if (corrida.isChecked()) {
                                 corrida.toggle();
                             }
@@ -119,7 +121,6 @@ public class MergeGroupFragment extends Fragment {
                             if (futebol.isChecked()) {
                                 futebol.toggle();
                             }
-
 
                         } else {
                             if (!isOnlyOneChecked()) {
@@ -160,13 +161,17 @@ public class MergeGroupFragment extends Fragment {
                 searchGrupo = SearchGroup.getText().toString();
                 String resultados = getResultados(possiveisResultados, searchGrupo);
                 String[] resultadosArray = resultados.split(" ");
+
                 ProcuraGrupos p = new ProcuraGrupos();
+                FragmentManager fmProcuraGrupos = getFragmentManager();
+                FragmentTransaction ftProcuraGrupos = fmProcuraGrupos.beginTransaction();
                 Bundle args = new Bundle();
                 args.putString("PESQUISA", searchGrupo);
                 args.putString("USERNAME", username);
                 //args.putStringArray("PROCURA", resultadosArray);
                 p.setArguments(args);
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container, p).commit();
+                ftProcuraGrupos.replace(R.id.fragment_container, p,"ProcuraGrupos").commit();
+                ftProcuraGrupos.addToBackStack("ProcuraGrupos");
             }
         });
 
@@ -175,11 +180,14 @@ public class MergeGroupFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 MyGroupsFragment ldf = new MyGroupsFragment();
+                FragmentManager fmMyGroupsFragment = getFragmentManager();
+                FragmentTransaction ftMyGroupsFragment = fmMyGroupsFragment.beginTransaction();
                 Bundle args = new Bundle();
                 //args.putStringArrayList("GRUPO", grupos);
                 args.putString("USERNAME", username);
                 ldf.setArguments(args);
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container, ldf).commit();
+                ftMyGroupsFragment.replace(R.id.fragment_container, ldf,"MyGroupsFragment").commit();
+                ftMyGroupsFragment.addToBackStack("MyGroupsFragment");
             }
         });
 

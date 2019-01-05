@@ -16,7 +16,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.android.activitygo.model.Grupo;
 import com.google.firebase.database.DataSnapshot;
@@ -90,7 +89,8 @@ public class ProcuraGrupos extends Fragment {
                                 SelectedFragment.setArguments(args);
                                 FragmentManager fmana = getFragmentManager();
                                 FragmentTransaction ftransacti = fmana.beginTransaction();
-                                ftransacti.replace(R.id.fragment_container, SelectedFragment, "GroupFragment");
+                                ftransacti.replace(R.id.fragment_container, SelectedFragment, "ListaDeElementosJuntarGrupo");
+                                ftransacti.addToBackStack("ListaDeElementosJuntarGrupo");
                                 ftransacti.commit();
                             }
 
@@ -141,7 +141,8 @@ public class ProcuraGrupos extends Fragment {
                 SelectedFragment.setArguments(args);
                 FragmentManager fmana = getFragmentManager();
                 FragmentTransaction ftransacti = fmana.beginTransaction();
-                ftransacti.replace(R.id.fragment_container, SelectedFragment, "GroupFragment");
+                ftransacti.replace(R.id.fragment_container, SelectedFragment, "MergeGroupFragment");
+                ftransacti.addToBackStack("MergeGroupFragment");
                 ftransacti.commit();
             }
         });
@@ -187,7 +188,6 @@ public class ProcuraGrupos extends Fragment {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot child : dataSnapshot.getChildren()) {
-                            Toast.makeText(getContext(), "OLEOEOEOEOELEL", Toast.LENGTH_SHORT).show();
                             GenericTypeIndicator<Map<String, Object>> t = new GenericTypeIndicator<Map<String, Object>>() {
                             };
                             Map<String, Object> map = dataSnapshot.getValue(t);
@@ -209,14 +209,14 @@ public class ProcuraGrupos extends Fragment {
                     }
                 });
 
-                Toast.makeText(getContext(), "OOIOIOIOIOIOI", Toast.LENGTH_SHORT).show();
                 Bundle args = new Bundle();
                 args.putString("NOMEGRUPO", group);
                 SelectedFragment = new ListaDeElementosJuntarGrupo();
                 SelectedFragment.setArguments(args);
                 FragmentManager fmana = getFragmentManager();
                 FragmentTransaction ftransacti = fmana.beginTransaction();
-                ftransacti.replace(R.id.fragment_container, SelectedFragment, "GroupFragment");
+                ftransacti.replace(R.id.fragment_container, SelectedFragment, "ListaDeElementosJuntarGrupo");
+                ftransacti.addToBackStack("ListaDeElementosJuntarGrupo");
                 ftransacti.commit();
                 dialogWrongPassword.dismiss();
             }
