@@ -39,6 +39,7 @@ public class HistoriaStatus extends Fragment {
     private String timeS;
     private ArrayList<LatLng> marcadores = new ArrayList<>();
     private String melhorkm;
+    private String melhorSegundokm;
 
     public HistoriaStatus() {
     }
@@ -66,6 +67,7 @@ public class HistoriaStatus extends Fragment {
         username = getArguments().getString("USERNAME");
         marcadores = getArguments().getParcelableArrayList("Markers");
         melhorkm = getArguments().getString("MELHORKM");
+        melhorSegundokm = getArguments().getString("MELHORSEGUNDOKM");
         double pace = tempoPace / distancia;
         if (distancia == 0) {
             pace = 0;
@@ -100,7 +102,7 @@ public class HistoriaStatus extends Fragment {
 
         String id = databaseCorrida.push().getKey();
         Toast.makeText(getActivity(), melhorkm, Toast.LENGTH_SHORT).show();
-        Corrida corrida = new Corrida(username, data, distancia, chronometerTime, tempoPace, markersParaInserirNaDB, melhorkm);
+        Corrida corrida = new Corrida(username, data, distancia, chronometerTime, tempoPace, markersParaInserirNaDB, melhorkm,melhorSegundokm);
         databaseCorrida.child(id).setValue(corrida);
 
         TextView tv = v.findViewById(R.id.Tempo);

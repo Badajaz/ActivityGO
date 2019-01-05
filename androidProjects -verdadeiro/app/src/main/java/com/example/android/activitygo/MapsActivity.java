@@ -73,7 +73,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private DatabaseReference databaseUsers;
 
     private boolean atingiu = false;
+    private boolean atingiuTwo = false;
     private String chronoTime;
+    private String chronoTimeTwo;
     private Date date;
 
     private String firstName = "";
@@ -193,6 +195,31 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         }
 
 
+                        if (accKm > 1999 && atingiuTwo == false) {
+                            double timeSconverted = Double.valueOf((int) pauseOff / 1000);
+                            double time = timeSconverted / 60;
+                            int timeInteiro = (int) time;
+                            double minutos = time - timeInteiro;
+                            double segundos = minutos * 60;
+
+                            if (timeInteiro < 10) {
+                                if (segundos < 10) {
+                                    chronoTimeTwo = "0" + timeInteiro + ":" + "0" + (int) segundos;
+                                } else {
+                                    chronoTimeTwo = "0" + timeInteiro + ":" + (int) segundos;
+                                }
+                            } else {
+                                chronoTimeTwo = "" + timeInteiro + ":" + (int) segundos;
+                            }
+                            atingiuTwo = true;
+                        }
+
+
+
+
+
+
+
                         //   posicoes.remove(0);
                     }
                     Log.d("ARRAY", printArray(posicoes));
@@ -308,6 +335,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     args.putDouble("DISTANCIA", accKm);
                     args.putString("USERNAME", username);
                     args.putString("MELHORKM", chronoTime);
+                    args.putString("MELHORSEGUNDOKM", chronoTimeTwo);
                     p.setArguments(args);
                     getFragmentManager().beginTransaction().replace(R.id.fragmentMap, p).commit();
                     Start.setVisibility(View.GONE);

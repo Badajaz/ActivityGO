@@ -26,13 +26,17 @@ public class AchievementsFragment extends Fragment {
     private double maiorDistancia = 0.0;
     private TextView tvdata;
     private String melhorKm = "00:00";
+    private String melhor2Km = "00:00";
     private TextView melhorKmTv;
     private String dataDistancia;
     private String melhorKmData;
+    private String melhor2KmData;
     private TextView melhorkmDataTv;
     private int count = 0;
     private double accKm = 0.0;
     private TextView Totalkm;
+    private TextView melhor2KmTv;
+    private TextView melhor2kmDataTv;
 
     public AchievementsFragment() {
         // Required empty public constructor
@@ -51,6 +55,10 @@ public class AchievementsFragment extends Fragment {
         Totalkm = v.findViewById(R.id.TotalKmPercorridosValor);
 
 
+        melhor2KmTv = v.findViewById(R.id.melhorKmTempo2);
+        melhor2kmDataTv = v.findViewById(R.id.melhorKmData2);
+
+
         final String username = getArguments().getString("USERNAME");
 
 
@@ -63,6 +71,7 @@ public class AchievementsFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String valores = "";
                 boolean first = false;
+                boolean second = false;
 
                 for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                     Corrida c = userSnapshot.getValue(Corrida.class);
@@ -79,6 +88,7 @@ public class AchievementsFragment extends Fragment {
                     if (c.getDistancia() >= 1000 && c.getUsername().equals(username)) {
                         if (first == false) {
                             melhorKm = c.getMelhorkm();
+                            melhorKmData = c.getData();
                             first = true;
                         } else {
 
@@ -96,6 +106,31 @@ public class AchievementsFragment extends Fragment {
                     }
 
 
+
+                    if (c.getDistancia() >= 2000 && c.getUsername().equals(username)) {
+                        if (second == false) {
+                            melhor2Km = c.getMelhorSegundokm();
+                            melhor2KmData = c.getData();
+                            second = true;
+                        } else {
+
+
+                            if (isLower(melhor2Km, c.getMelhorSegundokm())) {
+                                melhor2Km = c.getMelhorSegundokm();
+                                melhor2KmData = c.getData();
+                            }
+
+                        }
+
+
+                        //count ++;
+
+                    }
+
+
+
+
+
                 }
 
 
@@ -104,6 +139,9 @@ public class AchievementsFragment extends Fragment {
                 melhorKmTv.setText(melhorKm);
                 melhorkmDataTv.setText(melhorKmData);
                 Totalkm.setText("" + accKm);
+                melhor2KmTv.setText(melhor2Km);
+                melhor2kmDataTv.setText(melhor2KmData);
+
 
             }
 

@@ -13,11 +13,12 @@ public class Corrida {
     private ArrayList<Double> coordenadas;
     private String username;
     private String melhorkm;
+    private String melhorSegundokm;
 
     public Corrida() {
     }
 
-    public Corrida(String username, String data, double distancia, String tempo, double pace, ArrayList<Double> coordenadas, String melhorkm) {
+    public Corrida(String username, String data, double distancia, String tempo, double pace, ArrayList<Double> coordenadas, String melhorkm,String melhorSegundokm) {
         this.data = data;
         this.distancia = distancia;
         this.tempo = tempo;
@@ -25,6 +26,12 @@ public class Corrida {
         this.coordenadas = coordenadas;
         this.username = username;
         this.melhorkm = melhorkm;
+        this.melhorSegundokm = melhorSegundokm;
+    }
+
+
+    public String getMelhorSegundokm() {
+        return melhorSegundokm;
     }
 
     public String getMelhorkm() {
