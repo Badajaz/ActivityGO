@@ -96,7 +96,7 @@ public class MergeGroupFragment extends Fragment {
                         if (isOnlyOneChecked() && !nomegrupo.equals("") && !descricaoGrupo.equals("") && !sport.equals("") && !grupo.equals(nomegrupo)) {
 
                             String id = databaseGrupo.push().getKey();
-                            Grupo g = new Grupo(username, nomegrupo, descricaogrupo, sport, 0, "");
+                            Grupo g = new Grupo(username, nomegrupo, descricaogrupo, sport);
                             Toast.makeText(getContext(), grupo, Toast.LENGTH_LONG).show();
 
                             g.addElementToList(username);

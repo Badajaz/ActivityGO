@@ -31,10 +31,8 @@ class GrupoListAdapter extends ArrayAdapter<Grupo> {
         String nome = getItem(position).getNome();
         String descricao = getItem(position).getDescricao();
         String desporto = getItem(position).getDesporto();
-        int querEntrar = getItem(position).getQuerEntrar();
-        String quemQuer = getItem(position).getQuemQuer();
 
-        Grupo g = new Grupo(criador, nome, descricao, desporto, querEntrar, quemQuer);
+        Grupo g = new Grupo(criador, nome, descricao, desporto);
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mResource, parent, false);

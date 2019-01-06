@@ -10,13 +10,11 @@ public class Grupo {
     private String desporto;
     private ArrayList<String> elementosGrupo;
     private String criador;
-    private int querEntrar;
-    private String quemQuer;
 
     public Grupo() {
     }
 
-    public Grupo(String criador, String nome, String descricao, String desporto, int querEntrar, String quemQuer) {
+    public Grupo(String criador, String nome, String descricao, String desporto) {
         this.nome = nome;
         this.descricao = descricao;
         this.pontosTotais = 0;
@@ -24,16 +22,6 @@ public class Grupo {
         this.elementosGrupo = elementosGrupo;
         elementosGrupo = new ArrayList<>();
         this.criador = criador;
-        this.querEntrar = querEntrar;
-        this.quemQuer = quemQuer;
-    }
-
-    public String getQuemQuer() {
-        return quemQuer;
-    }
-
-    public int getQuerEntrar() {
-        return querEntrar;
     }
 
     public String getCriador() {

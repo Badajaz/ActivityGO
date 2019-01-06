@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.app.Notification;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -14,10 +13,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.activitygo.model.Grupo;
+import com.example.android.activitygo.model.PedidoGrupo;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -46,6 +46,7 @@ public class RunMenuInicial extends Fragment {
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     private static final int REQUEST_CODE = 1;
     private DatabaseReference mDatabaseRef;
+    private DatabaseReference databasePedidosGrupo;
     private DatabaseReference databaseGrupo;
     private NotificationManagerCompat notificationManager;
     public static final String CHANNEL_1_ID = "channel1";
@@ -123,27 +124,17 @@ public class RunMenuInicial extends Fragment {
         }
 
         databaseGrupo = FirebaseDatabase.getInstance().getReference("grupos");
-        databaseGrupo.orderByChild("criador").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
+
+        // Buscar pedidos para entrar nos grupos do username corrente (criador)
+        databasePedidosGrupo = FirebaseDatabase.getInstance().getReference("pedidosGrupo");
+        databasePedidosGrupo.orderByChild("criador").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                boolean encontrou = false;
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    Grupo g = child.getValue(Grupo.class);
-                    if (g.getQuemQuer() != null && g.getQuerEntrar() != 0) {
-                        // cria notificação apenas para o criador do grupo
-                        notificationManager = NotificationManagerCompat.from(getActivity());
-                        Notification notification = new NotificationCompat.Builder(getActivity(), CHANNEL_1_ID)
-                                .setSmallIcon(R.drawable.notification_icon)
-                                .setContentTitle("O " + username + " entrou no seu grupo de " + g.getDesporto() + "!")
-                                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-                                .build();
-
-                        notificationManager.notify(1, notification);
-
-                        showPopUpPermissaoGrupos(g.getQuemQuer(), g.getNome(), g.getDesporto(), child);
-                    }
-
+                    Log.d("KEYYYYYY", child.getKey());
+                    PedidoGrupo pg = child.getValue(PedidoGrupo.class);
+                    showPopUpPermissaoGrupos(pg.getUseQueQuerEntrar(), pg.getNomeGrupo(), child);
                 }
             }
 
@@ -235,7 +226,7 @@ public class RunMenuInicial extends Fragment {
         return v;
     }
 
-    private void showPopUpPermissaoGrupos(final String pessoaQueQuerEntrar, String nomeDoGrupo, String desporto, final DataSnapshot child) {
+    private void showPopUpPermissaoGrupos(final String pessoaQueQuerEntrar, final String nomeDoGrupo, final DataSnapshot childPedidosGrupo) {
         Button yesButton;
         Button noButton;
         TextView close;
@@ -245,7 +236,7 @@ public class RunMenuInicial extends Fragment {
         noButton = (Button) dialogPermissaoGrupo.findViewById(R.id.noButton);
         close = (TextView) dialogPermissaoGrupo.findViewById(R.id.txtClose);
         popupId = (TextView) dialogPermissaoGrupo.findViewById(R.id.popUpId);
-        popupId.setText("O " + pessoaQueQuerEntrar + " quer entrar no seu grupo " + nomeDoGrupo + " de " + desporto + ".\n Quer aceitar ou rejeitar o pedido?");
+        popupId.setText("O " + pessoaQueQuerEntrar + " quer entrar no seu grupo " + nomeDoGrupo + ".\n Quer aceitar ou rejeitar o pedido?");
 
         close.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -257,7 +248,28 @@ public class RunMenuInicial extends Fragment {
         yesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // FAZER PERMISSÕES
+
+                databaseGrupo.orderByChild("nome").equalTo(nomeDoGrupo).addListenerForSingleValueEvent(new ValueEventListener() {
+                    ArrayList<String> arrayGrupoNovo = new ArrayList<>();
+
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot child : dataSnapshot.getChildren()) {
+                            Grupo g = child.getValue(Grupo.class);
+                            arrayGrupoNovo.addAll(g.getElementosGrupo());
+                            arrayGrupoNovo.add(pessoaQueQuerEntrar);
+                            databaseGrupo.child(child.getKey()).child("elementosGrupo").setValue(arrayGrupoNovo);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+                databasePedidosGrupo.child(childPedidosGrupo.getKey()).removeValue();
+                dialogPermissaoGrupo.dismiss();
+                /*
                 databaseGrupo.child(child.getKey()).child("quemQuer").setValue("");
                 databaseGrupo.child(child.getKey()).child("querEntrar").setValue(0);
                 ArrayList<String> arrayGrupoNovo = new ArrayList<>();
@@ -265,17 +277,20 @@ public class RunMenuInicial extends Fragment {
                 arrayGrupoNovo.addAll(g.getElementosGrupo());
                 arrayGrupoNovo.add(pessoaQueQuerEntrar);
                 databaseGrupo.child(child.getKey()).child("elementosGrupo").setValue(arrayGrupoNovo);
-                dialogPermissaoGrupo.dismiss();
+
+                */
             }
         });
 
         noButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /*
                 // faz reset dos valores e não mete no grupo
                 databaseGrupo.child(child.getKey()).child("quemQuer").setValue("");
                 databaseGrupo.child(child.getKey()).child("querEntrar").setValue(0);
                 dialogPermissaoGrupo.dismiss();
+                */
             }
         });
         dialogPermissaoGrupo.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));

@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.activitygo.model.Grupo;
+import com.example.android.activitygo.model.PedidoGrupo;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,7 +31,9 @@ public class ListaDeElementosJuntarGrupo extends Fragment {
     private String nomeGrupo;
     private DatabaseReference databaseGrupo;
     private DatabaseReference databaseUsers;
+    private DatabaseReference databasePedidosGrupo;
     private Dialog dialogConfirmJoin;
+    private Dialog dialogEsperarConfirmacao;
     private NotificationManagerCompat notificationManager;
 
     private String username;
@@ -43,12 +46,14 @@ public class ListaDeElementosJuntarGrupo extends Fragment {
 
         elementosGrupo = (TextView) v.findViewById(R.id.ElementosGrupo);
         dialogConfirmJoin = new Dialog(getContext());
+        dialogEsperarConfirmacao = new Dialog(getContext());
         final Button join = (Button) v.findViewById(R.id.juntarPopup);
 
         nomeGrupo = getArguments().getString("NOMEGRUPO");
         username = getArguments().getString("USERNAME");
         databaseGrupo = FirebaseDatabase.getInstance().getReference("grupos");
         databaseUsers = FirebaseDatabase.getInstance().getReference("users");
+        databasePedidosGrupo = FirebaseDatabase.getInstance().getReference("pedidosGrupo");
 
         databaseGrupo.addValueEventListener(new ValueEventListener() {
             private String valores = "";
@@ -102,6 +107,34 @@ public class ListaDeElementosJuntarGrupo extends Fragment {
         return v;
     }
 
+    private void esperarConfirmacao() {
+        Button okButton;
+        TextView close;
+        TextView popupId;
+        dialogEsperarConfirmacao.setContentView(R.layout.popup_esperar_confirmacao);
+        dialogEsperarConfirmacao.getWindow().getAttributes().windowAnimations = R.style.FadeAnimation;
+        okButton = (Button) dialogEsperarConfirmacao.findViewById(R.id.okButtonEsperar);
+        close = (TextView) dialogEsperarConfirmacao.findViewById(R.id.txtCloseEsperar);
+        popupId = (TextView) dialogEsperarConfirmacao.findViewById(R.id.popUpIdEsperar);
+        popupId.setText("Receberá uma confirmação de quando entrar no grupo.");
+
+        okButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                dialogEsperarConfirmacao.dismiss();
+            }
+        });
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogEsperarConfirmacao.dismiss();
+            }
+        });
+        dialogEsperarConfirmacao.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialogEsperarConfirmacao.show();
+    }
+
     public void confirmJoin(String grupo) {
         Button okButton;
         TextView close;
@@ -130,7 +163,6 @@ public class ListaDeElementosJuntarGrupo extends Fragment {
                 databaseGrupo.orderByChild("nome").equalTo(group).addListenerForSingleValueEvent(new ValueEventListener() {
                     private String displayElem;
                     private String quemQuer = "";
-                    private int querEntrar;
 
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -150,18 +182,11 @@ public class ListaDeElementosJuntarGrupo extends Fragment {
                             }
 
                             if (encontrou == true) {
-                                querEntrar = 1;
                                 quemQuer = username;
-                                /*
-                                ArrayList<String> arrayGrupoNovo = new ArrayList<>();
-                                arrayGrupoNovo.addAll(g.getElementosGrupo());
-                                arrayGrupoNovo.add(username);
-
-                                databaseGrupo.child(child.getKey()).child("elementosGrupo").setValue(arrayGrupoNovo);
-                                */
-                                databaseGrupo.child(child.getKey()).child("quemQuer").setValue(username);
-                                databaseGrupo.child(child.getKey()).child("querEntrar").setValue(querEntrar);
-
+                                PedidoGrupo pg = new PedidoGrupo(quemQuer, g.getNome(), g.getCriador());
+                                String id = databasePedidosGrupo.push().getKey();
+                                databasePedidosGrupo.child(id).setValue(pg);
+                                esperarConfirmacao();
                                 /*
                                 ele = "";
                                 for (String str : arrayGrupoNovo) {
