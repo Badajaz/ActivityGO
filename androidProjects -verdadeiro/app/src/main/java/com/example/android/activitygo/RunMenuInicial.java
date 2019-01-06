@@ -1,12 +1,15 @@
 package com.example.android.activitygo;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.Notification;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -49,6 +52,7 @@ public class RunMenuInicial extends Fragment {
     private Button photoActivityButton;
     private ImageView mImageView;
     private DatabaseReference databaseUsers;
+    private Dialog dialogPermissaoGrupo;
 
     private String image_path = "";
     private Uri fileUri;
@@ -71,6 +75,7 @@ public class RunMenuInicial extends Fragment {
             image_path = "";
         }
 
+        dialogPermissaoGrupo = new Dialog(getActivity());
         photoActivityButton = v.findViewById(R.id.uploadActivity);
         mImageView = v.findViewById(R.id.imageView2);
         if (fileUri != null) {
@@ -123,7 +128,7 @@ public class RunMenuInicial extends Fragment {
                 boolean encontrou = false;
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     Grupo g = child.getValue(Grupo.class);
-                    if(g.getQuemQuer() != null && g.getQuerEntrar() != 0){
+                    if (g.getQuemQuer() != null && g.getQuerEntrar() != 0) {
                         // cria notificação apenas para o criador do grupo
                         notificationManager = NotificationManagerCompat.from(getActivity());
                         Notification notification = new NotificationCompat.Builder(getActivity(), CHANNEL_1_ID)
@@ -134,9 +139,8 @@ public class RunMenuInicial extends Fragment {
                                 .build();
 
                         notificationManager.notify(1, notification);
-                        // FAZER PERMISSÕES
-                        databaseGrupo.child(child.getKey()).child("quemQuer").setValue("");
-                        databaseGrupo.child(child.getKey()).child("querEntrar").setValue(0);
+
+                        showPopUpPermissaoGrupos(g.getQuemQuer(), g.getNome(), g.getDesporto(), child);
                     }
 
                 }
@@ -228,6 +232,44 @@ public class RunMenuInicial extends Fragment {
         });
 
         return v;
+    }
+
+    private void showPopUpPermissaoGrupos(String pessoaQueQuerEntrar, String nomeDoGrupo, String desporto, final DataSnapshot child) {
+        Button yesButton;
+        Button noButton;
+        TextView close;
+        TextView popupId;
+        dialogPermissaoGrupo.setContentView(R.layout.popup_permissao_grupos);
+        yesButton = (Button) dialogPermissaoGrupo.findViewById(R.id.yesButton);
+        noButton = (Button) dialogPermissaoGrupo.findViewById(R.id.noButton);
+        close = (TextView) dialogPermissaoGrupo.findViewById(R.id.txtClose);
+        popupId = (TextView) dialogPermissaoGrupo.findViewById(R.id.popUpId);
+        popupId.setText("O " + pessoaQueQuerEntrar + "quer entrar no seu grupo " + nomeDoGrupo + " de " + desporto + ".\n Quer aceitar ou rejeitar o pedido?");
+
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogPermissaoGrupo.dismiss();
+            }
+        });
+
+        yesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // FAZER PERMISSÕES
+                databaseGrupo.child(child.getKey()).child("quemQuer").setValue("");
+                databaseGrupo.child(child.getKey()).child("querEntrar").setValue(0);
+            }
+        });
+
+        noButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogPermissaoGrupo.dismiss();
+            }
+        });
+        dialogPermissaoGrupo.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialogPermissaoGrupo.show();
     }
 
     private void requestThemLocationPermissions() {
