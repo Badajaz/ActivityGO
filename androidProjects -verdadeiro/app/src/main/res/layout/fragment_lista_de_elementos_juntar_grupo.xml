@@ -32,7 +32,7 @@
     <TextView
         android:id="@+id/ElementosGrupo"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="200dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:textColor="#000000"
