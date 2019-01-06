@@ -2,10 +2,13 @@ package com.example.android.activitygo;
 
 import android.app.Dialog;
 import android.app.Fragment;
+import android.app.Notification;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,10 +28,12 @@ import java.util.ArrayList;
 public class ListaDeElementosJuntarGrupo extends Fragment {
 
     private TextView elementosGrupo;
+    public static final String CHANNEL_1_ID = "channel1";
     private String nomeGrupo;
     private DatabaseReference databaseGrupo;
     private DatabaseReference databaseUsers;
     private Dialog dialogConfirmJoin;
+    private NotificationManagerCompat notificationManager;
 
     private String username;
     private String ele;
@@ -78,7 +83,7 @@ public class ListaDeElementosJuntarGrupo extends Fragment {
                 }*/
 
                 String displayElem = "";
-                for (String elem: membros) {
+                for (String elem : membros) {
                     displayElem += elem + "\n";
                     elementosGrupo.setText(displayElem);
                 }
@@ -127,6 +132,8 @@ public class ListaDeElementosJuntarGrupo extends Fragment {
                 //elementosGrupo.setText("");
                 databaseGrupo.orderByChild("nome").equalTo(group).addListenerForSingleValueEvent(new ValueEventListener() {
                     private String displayElem;
+                    private String quemQuer = "";
+                    private int querEntrar;
 
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -135,22 +142,38 @@ public class ListaDeElementosJuntarGrupo extends Fragment {
                             Grupo g = child.getValue(Grupo.class);
                             if (g.getNome().equals(group)) {
                                 for (String elem : g.getElementosGrupo()) {
-                                    if (elem.equals(username)) {
+                                    if (elem.equals(username)) { // estou a tentar entrar no meu proprio grupo
                                         encontrou = false;
                                         Toast.makeText(getContext(), "Já pertence a este grupo", Toast.LENGTH_SHORT).show();
                                         break;
-                                    } else {
+                                    } else { // outra pessoa a tentar entrar no grupo criado pelo criador
                                         encontrou = true;
+                                        /*
+                                        if (username.equals(g.getCriador())) {
+                                            // cria notificação apenas para o criador do grupo
+                                            notificationManager = NotificationManagerCompat.from(getActivity());
+                                            Notification notification = new NotificationCompat.Builder(getActivity(), CHANNEL_1_ID)
+                                                    .setSmallIcon(R.drawable.notification_icon)
+                                                    .setContentTitle("O " + username + " entrou no seu grupo de " + g.getDesporto() + "!")
+                                                    .setPriority(NotificationCompat.PRIORITY_HIGH)
+                                                    .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                                                    .build();
+
+                                            notificationManager.notify(1, notification);
+                                        }*/
                                     }
                                 }
                             }
 
                             if (encontrou == true) {
+                                querEntrar = 1;
+                                quemQuer = username;
                                 ArrayList<String> arrayGrupoNovo = new ArrayList<>();
                                 arrayGrupoNovo.addAll(g.getElementosGrupo());
                                 arrayGrupoNovo.add(username);
                                 databaseGrupo.child(child.getKey()).child("elementosGrupo").setValue(arrayGrupoNovo);
-
+                                databaseGrupo.child(child.getKey()).child("quemQuer").setValue(username);
+                                databaseGrupo.child(child.getKey()).child("querEntrar").setValue(querEntrar);
 
                                 ele = "";
                                 for (String str : arrayGrupoNovo) {

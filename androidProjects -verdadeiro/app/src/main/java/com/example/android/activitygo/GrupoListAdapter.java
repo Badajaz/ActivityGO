@@ -27,19 +27,24 @@ class GrupoListAdapter extends ArrayAdapter<Grupo> {
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        String criador = getItem(position).getCriador();
         String nome = getItem(position).getNome();
         String descricao = getItem(position).getDescricao();
         String desporto = getItem(position).getDesporto();
+        int querEntrar = getItem(position).getQuerEntrar();
+        String quemQuer = getItem(position).getQuemQuer();
 
-        Grupo g = new Grupo(nome, descricao, desporto);
+        Grupo g = new Grupo(criador, nome, descricao, desporto, querEntrar, quemQuer);
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mResource, parent, false);
 
+        TextView tvCriador = (TextView) convertView.findViewById(R.id.tvCriador);
         TextView tvName = (TextView) convertView.findViewById(R.id.textView1);
         TextView tvDescricao = (TextView) convertView.findViewById(R.id.textView2);
         TextView tvDesporto = (TextView) convertView.findViewById(R.id.textView3);
 
+        tvCriador.setText(criador);
         tvName.setText(nome);
         tvDescricao.setText(descricao);
         tvDesporto.setText(desporto.charAt(0) + desporto.substring(1, desporto.length()).toLowerCase());

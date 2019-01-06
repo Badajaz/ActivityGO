@@ -4,12 +4,15 @@ import android.Manifest;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.Notification;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -22,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.activitygo.model.Grupo;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,6 +42,9 @@ public class RunMenuInicial extends Fragment {
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     private static final int REQUEST_CODE = 1;
     private DatabaseReference mDatabaseRef;
+    private DatabaseReference databaseGrupo;
+    private NotificationManagerCompat notificationManager;
+    public static final String CHANNEL_1_ID = "channel1";
 
     private Button photoActivityButton;
     private ImageView mImageView;
@@ -108,6 +115,38 @@ public class RunMenuInicial extends Fragment {
                 }
             }, TimeUnit.MINUTES.toSeconds(20));
         }
+
+        databaseGrupo = FirebaseDatabase.getInstance().getReference("grupos");
+        databaseGrupo.orderByChild("criador").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                boolean encontrou = false;
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    Grupo g = child.getValue(Grupo.class);
+                    if(g.getQuemQuer() != null && g.getQuerEntrar() != 0){
+                        // cria notificação apenas para o criador do grupo
+                        notificationManager = NotificationManagerCompat.from(getActivity());
+                        Notification notification = new NotificationCompat.Builder(getActivity(), CHANNEL_1_ID)
+                                .setSmallIcon(R.drawable.notification_icon)
+                                .setContentTitle("O " + username + " entrou no seu grupo de " + g.getDesporto() + "!")
+                                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                                .build();
+
+                        notificationManager.notify(1, notification);
+                        // FAZER PERMISSÕES
+                        databaseGrupo.child(child.getKey()).child("quemQuer").setValue("");
+                        databaseGrupo.child(child.getKey()).child("querEntrar").setValue(0);
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         final Button historial = (Button) v.findViewById(R.id.buttonHistorial);
         Button irCorrida = (Button) v.findViewById(R.id.buttonIrCorrida);

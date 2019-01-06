@@ -1,50 +1,30 @@
 package com.example.android.activitygo;
 
-import android.app.Notification;
-import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.app.Fragment;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
-import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.android.activitygo.model.Challenge;
 import com.example.android.activitygo.model.Corrida;
-import com.example.android.activitygo.model.Desafio;
-import com.example.android.activitygo.model.Grupo;
 import com.example.android.activitygo.model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.GenericTypeIndicator;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 public class ChalengeFragment extends Fragment {
@@ -115,13 +95,10 @@ public class ChalengeFragment extends Fragment {
 
                 int[] points = {100, 200, 300, 500, 700, 50, 200, 400, 300, 500};
 
-
                 int index = randomChallenge.nextInt(chalenges.length);
                 String id = databaseChallenges.push().getKey();
                 Challenge c = new Challenge(username, "corrida", chalenges[index], dateFormat.format(date), points[index], 0);
                 databaseChallenges.child(id).setValue(c);
-
-
             }
 
         });
@@ -140,22 +117,18 @@ public class ChalengeFragment extends Fragment {
 
                         if (count == 0) {
                             primeiratv.setText(c.getDescricao());
-
                         }
+
                         if (count == 1) {
                             segundatv.setText(c.getDescricao());
-
                         }
+
                         if (count == 2) {
                             terceiratv.setText(c.getDescricao());
                             obterChallenge.setVisibility(View.GONE);
-
-
                         }
                         count++;
                     }
-
-
                 }
 
                 for (String s : challengeDesricao) {
@@ -175,8 +148,6 @@ public class ChalengeFragment extends Fragment {
                                     Corrida c = userSnapshot.getValue(Corrida.class);
                                     if (c.getUsername().equals(username) && c.getData().equals(d)) {
                                         distanciaFeita += c.getDistancia();
-
-
                                     }
                                 }
 
@@ -191,21 +162,17 @@ public class ChalengeFragment extends Fragment {
                                                 if (c.getDescricao().equals("Faça 2 km")) {
                                                     databaseChallenges.child(child.getKey()).child("completed").setValue(1);
                                                 }
-
                                             }
                                         }
 
                                         @Override
                                         public void onCancelled(@NonNull DatabaseError databaseError) {
-
                                         }
                                     });
 
                                     if (primeiratv.getText().equals("Faça 2 km")) {
                                         ConstraintLayout c = getView().findViewById(R.id.firstConstrainte);
                                         c.setBackgroundColor(lime);
-
-
                                     }
 
                                     if (segundatv.getText().equals("Faça 2 km")) {
@@ -216,17 +183,12 @@ public class ChalengeFragment extends Fragment {
                                     if (terceiratv.getText().equals("Faça 2 km")) {
                                         ConstraintLayout c = getView().findViewById(R.id.ThirdConstrainte);
                                         c.setBackgroundColor(lime);
-
                                     }
-
                                 }
-
                             }
-
 
                             @Override
                             public void onCancelled(@NonNull DatabaseError databaseError) {
-
                             }
                         });
                     }
@@ -247,8 +209,6 @@ public class ChalengeFragment extends Fragment {
                                     Corrida c = userSnapshot.getValue(Corrida.class);
                                     if (c.getUsername().equals(username) && c.getData().equals(d)) {
                                         distanciaFeita += c.getDistancia();
-
-
                                     }
                                 }
 
@@ -263,7 +223,6 @@ public class ChalengeFragment extends Fragment {
                                                 if (c.getDescricao().equals("Faça 3 km")) {
                                                     databaseChallenges.child(child.getKey()).child("completed").setValue(1);
                                                 }
-
                                             }
                                         }
 
@@ -276,7 +235,6 @@ public class ChalengeFragment extends Fragment {
                                     if (primeiratv.getText().equals("Faça 3 km")) {
                                         ConstraintLayout c = getView().findViewById(R.id.firstConstrainte);
                                         c.setBackgroundColor(lime);
-
                                     }
 
                                     if (segundatv.getText().equals("Faça 3 km")) {
@@ -287,16 +245,12 @@ public class ChalengeFragment extends Fragment {
                                     if (terceiratv.getText().equals("Faça 3 km")) {
                                         ConstraintLayout c = getView().findViewById(R.id.ThirdConstrainte);
                                         c.setBackgroundColor(lime);
-
                                     }
-
                                 }
-
                             }
 
                             @Override
                             public void onCancelled(@NonNull DatabaseError databaseError) {
-
                             }
                         });
                     }
@@ -305,13 +259,11 @@ public class ChalengeFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
 
 
         final ConstraintLayout conn = (ConstraintLayout) v.findViewById(R.id.ThirdConstrainte);
-
 
         conn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -354,15 +306,12 @@ public class ChalengeFragment extends Fragment {
 
                                 int[] points = {100, 200, 300, 500, 700, 50, 200, 400, 300, 500};
 
-
                                 int index = randomChallenge.nextInt(chalenges.length);
                                 String id3 = databaseChallenges.push().getKey();
                                 Challenge c3 = new Challenge(username, "corrida", chalenges[index], dateFormat.format(date), points[index], 0);
                                 databaseChallenges.child(id3).setValue(c3);
                                 conn.setBackgroundDrawable(background);
-
                             }
-
                         }
                     }
 
@@ -374,7 +323,6 @@ public class ChalengeFragment extends Fragment {
             }
 
         });
-
 
         final ConstraintLayout con = (ConstraintLayout) v.findViewById(R.id.firstConstrainte);
 
@@ -400,7 +348,6 @@ public class ChalengeFragment extends Fragment {
                                             User u = child.getValue(User.class);
                                             int pontos = u.getPontos() + c.getPontos();
                                             databaseUsers.child(child.getKey()).child("pontos").setValue(pontos);
-
                                         }
                                     }
 
@@ -417,14 +364,12 @@ public class ChalengeFragment extends Fragment {
 
                                 int[] points = {100, 200, 300, 500, 700, 50, 200, 400, 300, 500};
 
-
                                 int index = randomChallenge.nextInt(chalenges.length);
                                 String id2 = databaseChallenges.push().getKey();
                                 Challenge ca = new Challenge(username, "corrida", chalenges[index], dateFormat.format(date), points[index], 0);
                                 databaseChallenges.child(id2).setValue(ca);
                                 con.setBackgroundDrawable(background);
                             }
-
                         }
                     }
 
@@ -433,8 +378,6 @@ public class ChalengeFragment extends Fragment {
 
                     }
                 });
-
-
             }
         });
 
@@ -462,7 +405,6 @@ public class ChalengeFragment extends Fragment {
                                             User u = child.getValue(User.class);
                                             int pontos = u.getPontos() + c.getPontos();
                                             databaseUsers.child(child.getKey()).child("pontos").setValue(pontos);
-
                                         }
                                     }
 
@@ -472,7 +414,6 @@ public class ChalengeFragment extends Fragment {
                                     }
                                 });
 
-
                                 Random randomChallenge = new Random();
                                 DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                                 Date date = new Date();
@@ -480,14 +421,12 @@ public class ChalengeFragment extends Fragment {
 
                                 int[] points = {100, 200, 300, 500, 700, 50, 200, 400, 300, 500};
 
-
                                 int index = randomChallenge.nextInt(chalenges.length);
                                 String id1 = databaseChallenges.push().getKey();
                                 Challenge ch = new Challenge(username, "corrida", chalenges[index], dateFormat.format(date), points[index], 0);
                                 databaseChallenges.child(id1).setValue(ch);
                                 co.setBackgroundDrawable(background);
                             }
-
                         }
                     }
 
@@ -496,11 +435,8 @@ public class ChalengeFragment extends Fragment {
 
                     }
                 });
-
             }
         });
-
-
         return v;
     }
 }

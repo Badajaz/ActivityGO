@@ -96,7 +96,7 @@ public class MergeGroupFragment extends Fragment {
                         if (isOnlyOneChecked() && !nomegrupo.equals("") && !descricaoGrupo.equals("") && !sport.equals("") && !grupo.equals(nomegrupo)) {
 
                             String id = databaseGrupo.push().getKey();
-                            Grupo g = new Grupo(nomegrupo, descricaogrupo, sport);
+                            Grupo g = new Grupo(username, nomegrupo, descricaogrupo, sport, 0, "");
                             Toast.makeText(getContext(), grupo, Toast.LENGTH_LONG).show();
 
                             g.addElementToList(username);
@@ -170,8 +170,9 @@ public class MergeGroupFragment extends Fragment {
                 args.putString("USERNAME", username);
                 //args.putStringArray("PROCURA", resultadosArray);
                 p.setArguments(args);
-                ftProcuraGrupos.replace(R.id.fragment_container, p,"ProcuraGrupos").commit();
+                ftProcuraGrupos.replace(R.id.fragment_container, p, "ProcuraGrupos");
                 ftProcuraGrupos.addToBackStack("ProcuraGrupos");
+                ftProcuraGrupos.commit();
             }
         });
 
@@ -186,8 +187,9 @@ public class MergeGroupFragment extends Fragment {
                 //args.putStringArrayList("GRUPO", grupos);
                 args.putString("USERNAME", username);
                 ldf.setArguments(args);
-                ftMyGroupsFragment.replace(R.id.fragment_container, ldf,"MyGroupsFragment").commit();
+                ftMyGroupsFragment.replace(R.id.fragment_container, ldf, "MyGroupsFragment");
                 ftMyGroupsFragment.addToBackStack("MyGroupsFragment");
+                ftMyGroupsFragment.commit();
             }
         });
 
