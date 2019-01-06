@@ -128,8 +128,7 @@ public class ListaDeElementosJuntarGrupo extends Fragment {
 
             @Override
             public void onClick(View v) {
-                // dialogWrongPassword.dismiss();
-                //elementosGrupo.setText("");
+
                 databaseGrupo.orderByChild("nome").equalTo(group).addListenerForSingleValueEvent(new ValueEventListener() {
                     private String displayElem;
                     private String quemQuer = "";
@@ -148,19 +147,6 @@ public class ListaDeElementosJuntarGrupo extends Fragment {
                                         break;
                                     } else { // outra pessoa a tentar entrar no grupo criado pelo criador
                                         encontrou = true;
-                                        /*
-                                        if (username.equals(g.getCriador())) {
-                                            // cria notificação apenas para o criador do grupo
-                                            notificationManager = NotificationManagerCompat.from(getActivity());
-                                            Notification notification = new NotificationCompat.Builder(getActivity(), CHANNEL_1_ID)
-                                                    .setSmallIcon(R.drawable.notification_icon)
-                                                    .setContentTitle("O " + username + " entrou no seu grupo de " + g.getDesporto() + "!")
-                                                    .setPriority(NotificationCompat.PRIORITY_HIGH)
-                                                    .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-                                                    .build();
-
-                                            notificationManager.notify(1, notification);
-                                        }*/
                                     }
                                 }
                             }
@@ -168,18 +154,23 @@ public class ListaDeElementosJuntarGrupo extends Fragment {
                             if (encontrou == true) {
                                 querEntrar = 1;
                                 quemQuer = username;
+                                /*
                                 ArrayList<String> arrayGrupoNovo = new ArrayList<>();
                                 arrayGrupoNovo.addAll(g.getElementosGrupo());
                                 arrayGrupoNovo.add(username);
+
                                 databaseGrupo.child(child.getKey()).child("elementosGrupo").setValue(arrayGrupoNovo);
+                                */
                                 databaseGrupo.child(child.getKey()).child("quemQuer").setValue(username);
                                 databaseGrupo.child(child.getKey()).child("querEntrar").setValue(querEntrar);
 
+                                /*
                                 ele = "";
                                 for (String str : arrayGrupoNovo) {
                                     ele += str + "\n";
                                 }
                                 elementosGrupo.setText(ele);
+                                */
                             }
                         }
                         // elementosGrupo.setText("");
@@ -192,42 +183,6 @@ public class ListaDeElementosJuntarGrupo extends Fragment {
                     }
                 });
 
-               /* databaseGrupo.orderByChild("elementosGrupo").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for (DataSnapshot child : dataSnapshot.getChildren()) {
-                            Toast.makeText(getContext(), "OLEOEOEOEOELEL", Toast.LENGTH_SHORT).show();
-                            GenericTypeIndicator<Map<String, Object>> t = new GenericTypeIndicator<Map<String, Object>>() {
-                            };
-                            Map<String, Object> map = dataSnapshot.getValue(t);
-
-                            /*Iterator myVeryOwnIterator = map.keySet().iterator();
-                            while(myVeryOwnIterator.hasNext()) {
-                                String key=(String)myVeryOwnIterator.next();
-                                String value=map.get(key).toString();
-                                Toast.makeText(getContext(), "Key: "+key+" Value: "+value, Toast.LENGTH_LONG).show();
-                            }*/
-
-                //databaseGrupo.child(child.getKey()).child("elementosGrupo").setValue(listaPessoas);
-                     /*  }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });*/
-
-                //Toast.makeText(getContext(), "OOIOIOIOIOIOI", Toast.LENGTH_SHORT).show();
-                //Bundle args = new Bundle();
-                //args.putString("NOMEGRUPO", group);
-                /*SelectedFragment = new ListaDeElementosJuntarGrupo();
-                //SelectedFragment.setArguments(args);
-                FragmentManager fmana = getFragmentManager();
-                FragmentTransaction ftransacti = fmana.beginTransaction();
-                ftransacti.replace(R.id.fragment_container, SelectedFragment, "GroupFragment");
-                ftransacti.commit();
-                dialogWrongPassword.dismiss();*/
             }
         });
         close.setOnClickListener(new View.OnClickListener() {

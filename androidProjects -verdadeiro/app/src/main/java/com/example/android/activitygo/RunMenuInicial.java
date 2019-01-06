@@ -35,6 +35,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class RunMenuInicial extends Fragment {
@@ -234,7 +235,7 @@ public class RunMenuInicial extends Fragment {
         return v;
     }
 
-    private void showPopUpPermissaoGrupos(String pessoaQueQuerEntrar, String nomeDoGrupo, String desporto, final DataSnapshot child) {
+    private void showPopUpPermissaoGrupos(final String pessoaQueQuerEntrar, String nomeDoGrupo, String desporto, final DataSnapshot child) {
         Button yesButton;
         Button noButton;
         TextView close;
@@ -244,7 +245,7 @@ public class RunMenuInicial extends Fragment {
         noButton = (Button) dialogPermissaoGrupo.findViewById(R.id.noButton);
         close = (TextView) dialogPermissaoGrupo.findViewById(R.id.txtClose);
         popupId = (TextView) dialogPermissaoGrupo.findViewById(R.id.popUpId);
-        popupId.setText("O " + pessoaQueQuerEntrar + "quer entrar no seu grupo " + nomeDoGrupo + " de " + desporto + ".\n Quer aceitar ou rejeitar o pedido?");
+        popupId.setText("O " + pessoaQueQuerEntrar + " quer entrar no seu grupo " + nomeDoGrupo + " de " + desporto + ".\n Quer aceitar ou rejeitar o pedido?");
 
         close.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -259,12 +260,21 @@ public class RunMenuInicial extends Fragment {
                 // FAZER PERMISSÕES
                 databaseGrupo.child(child.getKey()).child("quemQuer").setValue("");
                 databaseGrupo.child(child.getKey()).child("querEntrar").setValue(0);
+                ArrayList<String> arrayGrupoNovo = new ArrayList<>();
+                Grupo g = child.getValue(Grupo.class);
+                arrayGrupoNovo.addAll(g.getElementosGrupo());
+                arrayGrupoNovo.add(pessoaQueQuerEntrar);
+                databaseGrupo.child(child.getKey()).child("elementosGrupo").setValue(arrayGrupoNovo);
+                dialogPermissaoGrupo.dismiss();
             }
         });
 
         noButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // faz reset dos valores e não mete no grupo
+                databaseGrupo.child(child.getKey()).child("quemQuer").setValue("");
+                databaseGrupo.child(child.getKey()).child("querEntrar").setValue(0);
                 dialogPermissaoGrupo.dismiss();
             }
         });
