@@ -40,6 +40,7 @@ import java.util.concurrent.TimeUnit;
 
 public class RunMenuInicial extends Fragment {
 
+    private int num_pedidos;
     private boolean pedidos;
     private String username;
     private String userQueQuerEntrar;
@@ -146,6 +147,7 @@ public class RunMenuInicial extends Fragment {
                     userQueQuerEntrar = pg.getUseQueQuerEntrar();
                     nomeDoGrupo = pg.getNomeGrupo();
                     if ((int) dataSnapshot.getChildrenCount() == 1) {
+                        num_pedidos = 1;
                         meusGrupos.setCompoundDrawablesWithIntrinsicBounds(null, null, drawableNotifyOne, null);
                     }
                 }
@@ -214,8 +216,8 @@ public class RunMenuInicial extends Fragment {
         meusGrupos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (pedidos) {
-                    showPopUpPermissaoGrupos(userQueQuerEntrar, nomeDoGrupo, childdd);
+                if (pedidos) { // se tiver pedidos (1, 2 ou mais)
+                    showPopUpPermissaoGrupos(userQueQuerEntrar, nomeDoGrupo, childdd, num_pedidos);
                 }
 
                 Bundle args = new Bundle();
@@ -243,7 +245,7 @@ public class RunMenuInicial extends Fragment {
         return v;
     }
 
-    private void showPopUpPermissaoGrupos(final String pessoaQueQuerEntrar, final String nomeDoGrupo, final DataSnapshot childPedidosGrupo) {
+    private void showPopUpPermissaoGrupos(final String pessoaQueQuerEntrar, final String nomeDoGrupo, final DataSnapshot childPedidosGrupo, final int numero_pedidos) {
         Button yesButton;
         Button noButton;
         TextView close;
@@ -272,7 +274,6 @@ public class RunMenuInicial extends Fragment {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot child : dataSnapshot.getChildren()) {
-                            int s = (int) dataSnapshot.getChildrenCount();
                             Grupo g = child.getValue(Grupo.class);
                             arrayGrupoNovo.addAll(g.getElementosGrupo());
                             arrayGrupoNovo.add(pessoaQueQuerEntrar);
@@ -286,7 +287,9 @@ public class RunMenuInicial extends Fragment {
                     }
                 });
                 databasePedidosGrupo.child(childPedidosGrupo.getKey()).removeValue();
-                meusGrupos.setCompoundDrawablesWithIntrinsicBounds(null, null, drawableDefault, null);
+                if (numero_pedidos == 1) {
+                    meusGrupos.setCompoundDrawablesWithIntrinsicBounds(null, null, drawableDefault, null);
+                }
                 dialogPermissaoGrupo.dismiss();
             }
         });
@@ -294,12 +297,12 @@ public class RunMenuInicial extends Fragment {
         noButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*
                 // faz reset dos valores e não mete no grupo
-                databaseGrupo.child(child.getKey()).child("quemQuer").setValue("");
-                databaseGrupo.child(child.getKey()).child("querEntrar").setValue(0);
+                databasePedidosGrupo.child(childPedidosGrupo.getKey()).removeValue();
+                if (numero_pedidos == 1) {
+                    meusGrupos.setCompoundDrawablesWithIntrinsicBounds(null, null, drawableDefault, null);
+                }
                 dialogPermissaoGrupo.dismiss();
-                */
             }
         });
         dialogPermissaoGrupo.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
