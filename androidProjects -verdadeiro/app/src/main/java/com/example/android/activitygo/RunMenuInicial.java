@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.Notification;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -14,6 +15,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
@@ -148,9 +150,21 @@ public class RunMenuInicial extends Fragment {
                     PedidoGrupo pg = child.getValue(PedidoGrupo.class);
                     userQueQuerEntrar = pg.getUseQueQuerEntrar();
                     nomeDoGrupo = pg.getNomeGrupo();
-                    if ((int) dataSnapshot.getChildrenCount() == 1) {
+                    if ((int) dataSnapshot.getChildrenCount() > 0) {
                         num_pedidos = 1;
                         meusGrupos.setCompoundDrawablesWithIntrinsicBounds(null, null, drawableNotifyOne, null);
+                        // cria notificação apenas para o criador do grupo
+                        notificationManager = NotificationManagerCompat.from(getActivity());
+                        Notification notification = new NotificationCompat.Builder(getActivity(), CHANNEL_1_ID)
+                                .setSmallIcon(R.drawable.notification_icon)
+                                .setContentTitle("Pedido Grupo:")
+                                .setContentText("O utilizador " + username + " quer entrar no grupo " + nomeDoGrupo + "!")
+                                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                                .setStyle(new NotificationCompat.BigTextStyle()
+                                        .bigText("Much longer text that cannot fit one line..."))
+                                .build();
+
+                        notificationManager.notify(1, notification);
                     }
                 }
             }
@@ -317,7 +331,7 @@ public class RunMenuInicial extends Fragment {
                     }
                 });
                 databasePedidosGrupo.child(childPedidosGrupo.getKey()).removeValue();
-                if (numero_pedidos == 1) {
+                if (numero_pedidos - 1 == 0) {
                     meusGrupos.setCompoundDrawablesWithIntrinsicBounds(null, null, drawableDefault, null);
                 }
                 dialogPermissaoGrupo.dismiss();
@@ -331,7 +345,7 @@ public class RunMenuInicial extends Fragment {
 
                 // faz reset dos valores e não mete no grupo
                 databasePedidosGrupo.child(childPedidosGrupo.getKey()).removeValue();
-                if (numero_pedidos == 1) {
+                if (numero_pedidos - 1 == 1) {
                     meusGrupos.setCompoundDrawablesWithIntrinsicBounds(null, null, drawableDefault, null);
                 }
                 dialogPermissaoGrupo.dismiss();
