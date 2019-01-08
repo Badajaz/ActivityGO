@@ -61,6 +61,7 @@ public class RunMenuInicial extends Fragment {
     private ImageView mImageView;
     private DatabaseReference databaseUsers;
     private Dialog dialogPermissaoGrupo;
+    private Dialog dialogUtilizadorNovoNoGrupo;
     private Drawable drawableDefault = null;
 
     private String image_path = "";
@@ -85,6 +86,7 @@ public class RunMenuInicial extends Fragment {
         }
 
         dialogPermissaoGrupo = new Dialog(getActivity());
+        dialogUtilizadorNovoNoGrupo = new Dialog(getActivity());
         photoActivityButton = v.findViewById(R.id.uploadActivity);
         mImageView = v.findViewById(R.id.imageView2);
         if (fileUri != null) {
@@ -245,6 +247,34 @@ public class RunMenuInicial extends Fragment {
         return v;
     }
 
+    private void showNovoUtilizadorNoGrupo(String username, String nomeDoGrupo) {
+        Button okButton;
+        TextView close;
+        TextView popupId;
+        dialogUtilizadorNovoNoGrupo.setContentView(R.layout.popup_utilizador_novo_no_grupo);
+        dialogUtilizadorNovoNoGrupo.getWindow().getAttributes().windowAnimations = R.style.FadeAnimation;
+        okButton = (Button) dialogUtilizadorNovoNoGrupo.findViewById(R.id.okButtonNovoUtilizador);
+        close = (TextView) dialogUtilizadorNovoNoGrupo.findViewById(R.id.txtCloseNovoUtilizador);
+        popupId = (TextView) dialogUtilizadorNovoNoGrupo.findViewById(R.id.popUpIdNovoUtilizador);
+        popupId.setText("O utilizador " + username + " faz parte do seu grupo " + nomeDoGrupo + ".");
+
+        okButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                dialogUtilizadorNovoNoGrupo.dismiss();
+            }
+        });
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogUtilizadorNovoNoGrupo.dismiss();
+            }
+        });
+        dialogUtilizadorNovoNoGrupo.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialogUtilizadorNovoNoGrupo.show();
+    }
+
     private void showPopUpPermissaoGrupos(final String pessoaQueQuerEntrar, final String nomeDoGrupo, final DataSnapshot childPedidosGrupo, final int numero_pedidos) {
         Button yesButton;
         Button noButton;
@@ -291,12 +321,14 @@ public class RunMenuInicial extends Fragment {
                     meusGrupos.setCompoundDrawablesWithIntrinsicBounds(null, null, drawableDefault, null);
                 }
                 dialogPermissaoGrupo.dismiss();
+                showNovoUtilizadorNoGrupo(pessoaQueQuerEntrar, nomeDoGrupo);
             }
         });
 
         noButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 // faz reset dos valores e não mete no grupo
                 databasePedidosGrupo.child(childPedidosGrupo.getKey()).removeValue();
                 if (numero_pedidos == 1) {
