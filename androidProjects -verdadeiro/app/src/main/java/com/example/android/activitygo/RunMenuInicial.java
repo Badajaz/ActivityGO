@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,7 +17,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +40,11 @@ import java.util.concurrent.TimeUnit;
 
 public class RunMenuInicial extends Fragment {
 
+    private boolean pedidos;
     private String username;
+    private String userQueQuerEntrar;
+    private String nomeDoGrupo;
+    private DataSnapshot childdd;
     private TextView name1;
     private static final int STORAGE_PERMISSION_CODE = 1;
     private static final int REQUEST_LOCATION_PERMISSION = 1;
@@ -52,9 +56,11 @@ public class RunMenuInicial extends Fragment {
     public static final String CHANNEL_1_ID = "channel1";
 
     private Button photoActivityButton;
+    private Button meusGrupos;
     private ImageView mImageView;
     private DatabaseReference databaseUsers;
     private Dialog dialogPermissaoGrupo;
+    private Drawable drawableDefault = null;
 
     private String image_path = "";
     private Uri fileUri;
@@ -122,19 +128,26 @@ public class RunMenuInicial extends Fragment {
                 }
             }, TimeUnit.MINUTES.toSeconds(20));
         }
+        meusGrupos = (Button) v.findViewById(R.id.buttonMeusGrupos);
+        final Drawable drawableNotifyOne = ContextCompat.getDrawable(getContext(), R.drawable.notify_one);
+        drawableDefault = ContextCompat.getDrawable(getContext(), R.drawable.icon_groups);
 
         databaseGrupo = FirebaseDatabase.getInstance().getReference("grupos");
 
         // Buscar pedidos para entrar nos grupos do username corrente (criador)
         databasePedidosGrupo = FirebaseDatabase.getInstance().getReference("pedidosGrupo");
         databasePedidosGrupo.orderByChild("criador").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
-
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    Log.d("KEYYYYYY", child.getKey());
+                    pedidos = true;
+                    childdd = child;
                     PedidoGrupo pg = child.getValue(PedidoGrupo.class);
-                    showPopUpPermissaoGrupos(pg.getUseQueQuerEntrar(), pg.getNomeGrupo(), child);
+                    userQueQuerEntrar = pg.getUseQueQuerEntrar();
+                    nomeDoGrupo = pg.getNomeGrupo();
+                    if ((int) dataSnapshot.getChildrenCount() == 1) {
+                        meusGrupos.setCompoundDrawablesWithIntrinsicBounds(null, null, drawableNotifyOne, null);
+                    }
                 }
             }
 
@@ -146,7 +159,7 @@ public class RunMenuInicial extends Fragment {
 
         final Button historial = (Button) v.findViewById(R.id.buttonHistorial);
         Button irCorrida = (Button) v.findViewById(R.id.buttonIrCorrida);
-        Button meusGrupos = (Button) v.findViewById(R.id.buttonMeusGrupos);
+
         name1 = (TextView) v.findViewById(R.id.namePessoaMenuInicial);
         databaseUsers = FirebaseDatabase.getInstance().getReference("users");
         databaseUsers.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -201,6 +214,10 @@ public class RunMenuInicial extends Fragment {
         meusGrupos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (pedidos) {
+                    showPopUpPermissaoGrupos(userQueQuerEntrar, nomeDoGrupo, childdd);
+                }
+
                 Bundle args = new Bundle();
                 args.putString("USERNAME", username);
                 Fragment SelectedFragmentMeusGrupos = new MergeGroupFragment();
@@ -255,6 +272,7 @@ public class RunMenuInicial extends Fragment {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot child : dataSnapshot.getChildren()) {
+                            int s = (int) dataSnapshot.getChildrenCount();
                             Grupo g = child.getValue(Grupo.class);
                             arrayGrupoNovo.addAll(g.getElementosGrupo());
                             arrayGrupoNovo.add(pessoaQueQuerEntrar);
@@ -268,17 +286,8 @@ public class RunMenuInicial extends Fragment {
                     }
                 });
                 databasePedidosGrupo.child(childPedidosGrupo.getKey()).removeValue();
+                meusGrupos.setCompoundDrawablesWithIntrinsicBounds(null, null, drawableDefault, null);
                 dialogPermissaoGrupo.dismiss();
-                /*
-                databaseGrupo.child(child.getKey()).child("quemQuer").setValue("");
-                databaseGrupo.child(child.getKey()).child("querEntrar").setValue(0);
-                ArrayList<String> arrayGrupoNovo = new ArrayList<>();
-                Grupo g = child.getValue(Grupo.class);
-                arrayGrupoNovo.addAll(g.getElementosGrupo());
-                arrayGrupoNovo.add(pessoaQueQuerEntrar);
-                databaseGrupo.child(child.getKey()).child("elementosGrupo").setValue(arrayGrupoNovo);
-
-                */
             }
         });
 
