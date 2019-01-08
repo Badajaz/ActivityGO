@@ -7,6 +7,8 @@ public class Ranking {
     private String desporto;
     //private String nome;
     private ArrayList<String> rankings;
+    private int pontuacaoTotal;
+
 
     public Ranking() {
 
@@ -30,4 +32,5 @@ public class Ranking {
     public ArrayList<String> getRankings() {
         return this.rankings;
     }
+
 }

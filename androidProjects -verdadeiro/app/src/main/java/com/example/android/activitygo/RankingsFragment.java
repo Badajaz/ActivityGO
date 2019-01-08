@@ -2,24 +2,20 @@ package com.example.android.activitygo;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.service.notification.NotificationListenerService;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
-import com.example.android.activitygo.model.Challenge;
 import com.example.android.activitygo.model.Corrida;
 import com.example.android.activitygo.model.Grupo;
 import com.example.android.activitygo.model.Ranking;
+import com.example.android.activitygo.model.TableRankingsGroups;
 import com.example.android.activitygo.model.User;
+import com.example.android.activitygo.model.RankingGroups;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,7 +27,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 public class RankingsFragment extends Fragment {
 
@@ -52,7 +47,9 @@ public class RankingsFragment extends Fragment {
     private ArrayList<String> actualizada;
 
 
-    private HashMap<String,Integer> NomesPontos = new HashMap<>();
+    private HashMap<String, Integer> NomesPontos = new HashMap<>();
+    private DatabaseReference databaseGrupo;
+    private DatabaseReference databaseRankingsGrupos;
 
     public RankingsFragment() {
     }
@@ -62,13 +59,17 @@ public class RankingsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_rankings, container, false);
 
-        ((MenuPrincipal) getActivity()).getSupportActionBar().setTitle("Rankings:");
+       // ((MenuPrincipal) getActivity()).getSupportActionBar().setTitle("Rankings:");
         username = getArguments().getString("USERNAME");
 
         databaseRankings = FirebaseDatabase.getInstance().getReference("rankings");
         databaseCorridas = FirebaseDatabase.getInstance().getReference("corrida");
+        databaseRankingsGrupos = FirebaseDatabase.getInstance().getReference("rankingGrupos");
         databaseUsers = FirebaseDatabase.getInstance().getReference("users");
         classificacaoCorridaGeral = (Button) v.findViewById(R.id.buttonCorridaGeral);
+        classificacaoCorridaGrupo = (Button) v.findViewById(R.id.buttonCorridaParaGrupos);
+
+        databaseGrupo = FirebaseDatabase.getInstance().getReference("grupos");
 
 
         databaseUsers.orderByChild("username").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -84,7 +85,6 @@ public class RankingsFragment extends Fragment {
                     if (u.getPontos() >= 0) {
                         // lista inversa com os users para obter os pontos de cada
                         listaUsers.add(u);
-
 
 
                         // Collections.reverse(listaUsers);
@@ -106,10 +106,10 @@ public class RankingsFragment extends Fragment {
 
                 for (int j = 0; j < listForSort.length; j++) {
                     for (int k = 0; k < listForSort.length; k++) {
-                        if (listForSort[j] == listaUsers.get(k).getPontos() && nomesRepetidos.indexOf(listaUsers.get(k).getUsername())==-1) {
-                                actualizada.add(listaUsers.get(k).getUsername());
-                                nomesRepetidos.add(listaUsers.get(k).getUsername());
-                                NomesPontos.put(listaUsers.get(k).getUsername(),listaUsers.get(k).getPontos());
+                        if (listForSort[j] == listaUsers.get(k).getPontos() && nomesRepetidos.indexOf(listaUsers.get(k).getUsername()) == -1) {
+                            actualizada.add(listaUsers.get(k).getUsername());
+                            nomesRepetidos.add(listaUsers.get(k).getUsername());
+                            NomesPontos.put(listaUsers.get(k).getUsername(), listaUsers.get(k).getPontos());
                         }
                     }
                 }
@@ -135,10 +135,6 @@ public class RankingsFragment extends Fragment {
 
 
                                 }
-
-
-
-
 
 
                                 @Override
@@ -198,13 +194,67 @@ public class RankingsFragment extends Fragment {
             }
         });
 
+        databaseGrupo.orderByChild("nome").addValueEventListener(new ValueEventListener() {
+            private Map<String, Integer> rankingGruposPontos = new HashMap<>();
+            private Grupo g;
+            private int pontucaototal = 0;
+
+
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                     g = child.getValue(Grupo.class);
+
+
+                    databaseUsers.orderByChild("username").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot child : dataSnapshot.getChildren()) {
+                                User u = child.getValue(User.class);
+
+                                if (g.getElementosGrupo().indexOf(u)!= -1){
+                                    pontucaototal += u.getPontos();
+                                }
+                            }
+
+
+
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+
+                rankingGruposPontos.put(g.getNome(),pontucaototal);
+                String id = databaseRankingsGrupos.push().getKey();
+                RankingGroups rank = new RankingGroups(rankingGruposPontos);
+                databaseRankingsGrupos.child(id).setValue(rank);
+                pontucaototal = 0;
+                //rankingGruposPontos.put(g.getNome(),)
+
+
+            }
+
+
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+
+            }
+        });
+
+
         classificacaoCorridaGeral.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("hashmap",NomesPontos);
-                bundle.putSerializable("listaNomes",actualizada);
+                bundle.putSerializable("hashmap", NomesPontos);
+                bundle.putSerializable("listaNomes", actualizada);
                 Fragment SelectedFragment = new TableRankingsFragment();
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
@@ -214,7 +264,28 @@ public class RankingsFragment extends Fragment {
                 ft.commit();
             }
         });
+
+
+        classificacaoCorridaGrupo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                //bundle.putSerializable("hashmap",NomesPontos);
+                //bundle.putSerializable("listaNomes",actualizada);
+                Fragment SelectedFragment = new TableRankingsGroups();
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                SelectedFragment.setArguments(bundle);
+                ft.replace(R.id.fragment_container, SelectedFragment, "RankingsFragment");
+                ft.addToBackStack("RankingsFragment");
+                ft.commit();
+            }
+        });
+
+
         return v;
+
+
     }
 
 
@@ -229,15 +300,18 @@ public class RankingsFragment extends Fragment {
 
 
     private int getRankingUser(String username, ArrayList<String> rank) {
-        int user = -1 ;
+        int user = -1;
         for (int i = 0; i < rank.size(); i++) {
             if (rank.get(i).equals(username)) {
-                user = i+1;
+                user = i + 1;
             }
         }
 
-       return  user;
+        return user;
     }
+
+
+
 
 
 }

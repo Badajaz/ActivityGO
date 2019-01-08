@@ -98,7 +98,7 @@
                 app:layout_constraintVertical_bias="0.442" />
 
             <Button
-                android:id="@+id/buttonCiclismoGeral"
+                android:id="@+id/buttonCorridaParaGrupos"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_marginStart="20dp"

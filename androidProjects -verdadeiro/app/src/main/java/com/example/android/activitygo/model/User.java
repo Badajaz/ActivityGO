@@ -89,4 +89,56 @@ public class User {
     public String getPassword() {
         return password;
     }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
+    }
+
+    public void setHight(String hight) {
+        this.hight = hight;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setSports(ArrayList<String> sports) {
+        this.sports = sports;
+    }
+
+    public void setPhotoPath(String photoPath) {
+        this.photoPath = photoPath;
+    }
+
+    public void setPontos(int pontos) {
+        this.pontos = pontos;
+    }
 }
