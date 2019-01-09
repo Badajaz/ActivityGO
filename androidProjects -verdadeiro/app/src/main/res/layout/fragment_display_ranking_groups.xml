@@ -1,15 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DisplayRankingGroups">
+    tools:context=".DisplayRankingGroups"
+    android:stretchColumns="0,1,2"
+    android:id="@+id/TableRankingGroups">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/TESTE"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <TableRow>
 
-</FrameLayout>
+        <TextView
+            android:background="#FFA500"
+            android:gravity="center"
+            android:padding="10dip"
+            android:text="Classificações"
+            android:textColor="@color/whiteLetters"
+            android:textStyle="bold" />
+
+        <TextView
+            android:background="#FFA500"
+            android:gravity="center"
+            android:padding="10dip"
+            android:text="Nome"
+            android:textColor="@color/whiteLetters"
+            android:textStyle="bold" />
+
+        <TextView
+            android:background="#FFA500"
+            android:gravity="center"
+            android:padding="10dip"
+            android:text="Pontos"
+            android:textColor="@color/whiteLetters"
+            android:textStyle="bold" />
+    </TableRow>
+
+    <TableRow>
+
+    </TableRow>
+
+    <TableRow android:background="#FFA500">
+
+    </TableRow>
+
+    <TableRow>
+
+    </TableRow>
+</TableLayout>

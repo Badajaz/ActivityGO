@@ -4,9 +4,12 @@ package com.example.android.activitygo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,8 +50,26 @@ public class DisplayRankingGroups extends Fragment {
                     r = child.getValue(RankingGroups.class);
                 }
 
-                TextView tv =getActivity().findViewById(R.id.TESTE);
-                tv.setText(""+r.getGruposRanking().get("Teste"));
+
+                TableLayout t = getView().findViewById(R.id.TableRankingGroups);
+                TableRow tr = new TableRow(getContext());
+                TextView tv1 = new TextView(getContext());
+                TextView tv2 = new TextView(getContext());
+                TextView tv3 = new TextView(getContext());
+                tv1.setGravity(Gravity.CENTER);
+                tv2.setGravity(Gravity.CENTER);
+                tv3.setGravity(Gravity.CENTER);
+                tv1.setText("1º");
+                tv2.setText("Teste");
+                tv3.setText(""+r.getGruposRanking().get("Teste"));
+                tr.addView(tv1);
+                tr.addView(tv2);
+                tr.addView(tv3);
+                t.addView(tr);
+
+
+                //TextView tv =getActivity().findViewById(R.id.TESTE);
+                //tv.setText(""+r.getGruposRanking().get("Teste"));
                 Toast.makeText(getContext(),""+r.getGruposRanking().get("Teste"),Toast.LENGTH_LONG).show();
 
             }
