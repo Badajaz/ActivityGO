@@ -132,10 +132,31 @@ public class RankingsFragment extends Fragment {
                                 }
                             }
 
-                            rankingGruposPontos.put(g.getNome(),pontucaototal);
-                            RankingGroups rank = new RankingGroups(rankingGruposPontos);
-                            String id = databaseRankingsGrupos.push().getKey();
-                            databaseRankingsGrupos.child(id).setValue(rank);
+                            if (FirebaseDatabase.getInstance().getReference().child("rankingGrupos") == null) {
+
+                                rankingGruposPontos.put(g.getNome(), pontucaototal);
+                                RankingGroups rank = new RankingGroups(rankingGruposPontos);
+                                String id = databaseRankingsGrupos.push().getKey();
+                                databaseRankingsGrupos.child(id).setValue(rank);
+
+                            }else{
+
+                                rankingGruposPontos.put(g.getNome(), pontucaototal);
+                                RankingGroups rank = new RankingGroups(rankingGruposPontos);
+                                databaseRankingsGrupos.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        for (DataSnapshot child : dataSnapshot.getChildren())
+                                        databaseRankingsGrupos.child(child.getKey()).child("gruposRanking").setValue(rankingGruposPontos);
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+
+                            }
 
                             //
 
@@ -299,10 +320,10 @@ public class RankingsFragment extends Fragment {
                 Bundle bundle = new Bundle();
                 //bundle.putSerializable("hashmap",NomesPontos);
                 //bundle.putSerializable("listaNomes",actualizada);
-                Fragment SelectedFragment = new TableRankingsGroups();
+                Fragment SelectedFragment = new DisplayRankingGroups();
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
-                SelectedFragment.setArguments(bundle);
+                //SelectedFragment.setArguments(bundle);
                 ft.replace(R.id.fragment_container, SelectedFragment, "RankingsFragment");
                 ft.addToBackStack("RankingsFragment");
                 ft.commit();
