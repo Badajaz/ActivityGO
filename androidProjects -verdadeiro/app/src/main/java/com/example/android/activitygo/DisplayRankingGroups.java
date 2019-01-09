@@ -20,6 +20,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Map;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -50,22 +52,29 @@ public class DisplayRankingGroups extends Fragment {
                     r = child.getValue(RankingGroups.class);
                 }
 
-                
-                TableLayout t = getView().findViewById(R.id.TableRankingGroups);
-                TableRow tr = new TableRow(getContext());
-                TextView tv1 = new TextView(getContext());
-                TextView tv2 = new TextView(getContext());
-                TextView tv3 = new TextView(getContext());
-                tv1.setGravity(Gravity.CENTER);
-                tv2.setGravity(Gravity.CENTER);
-                tv3.setGravity(Gravity.CENTER);
-                tv1.setText("1º");
-                tv2.setText("Teste");
-                tv3.setText(""+r.getGruposRanking().get("Teste"));
-                tr.addView(tv1);
-                tr.addView(tv2);
-                tr.addView(tv3);
-                t.addView(tr);
+                r.getGruposRanking().entrySet().stream()
+                        .sorted(Map.Entry.<String, Integer>comparingByValue().reversed());
+                int index = 1;
+                for ( String grupo :r.getGruposRanking().keySet()) {
+
+
+                    TableLayout t = getView().findViewById(R.id.TableRankingGroups);
+                    TableRow tr = new TableRow(getContext());
+                    TextView tv1 = new TextView(getContext());
+                    TextView tv2 = new TextView(getContext());
+                    TextView tv3 = new TextView(getContext());
+                    tv1.setGravity(Gravity.CENTER);
+                    tv2.setGravity(Gravity.CENTER);
+                    tv3.setGravity(Gravity.CENTER);
+                    tv1.setText(Integer.toString(index)+"º");
+                    tv2.setText(grupo);
+                    tv3.setText("" + r.getGruposRanking().get(grupo));
+                    tr.addView(tv1);
+                    tr.addView(tv2);
+                    tr.addView(tv3);
+                    t.addView(tr);
+                    index++;
+                }
 
 
                 //TextView tv =getActivity().findViewById(R.id.TESTE);
