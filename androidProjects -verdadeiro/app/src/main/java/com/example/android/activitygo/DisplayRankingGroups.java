@@ -50,7 +50,7 @@ public class DisplayRankingGroups extends Fragment {
                     r = child.getValue(RankingGroups.class);
                 }
 
-
+                
                 TableLayout t = getView().findViewById(R.id.TableRankingGroups);
                 TableRow tr = new TableRow(getContext());
                 TextView tv1 = new TextView(getContext());
