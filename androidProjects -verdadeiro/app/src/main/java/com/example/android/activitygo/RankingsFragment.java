@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.android.activitygo.model.Corrida;
 import com.example.android.activitygo.model.Grupo;
@@ -59,7 +60,7 @@ public class RankingsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_rankings, container, false);
 
-       // ((MenuPrincipal) getActivity()).getSupportActionBar().setTitle("Rankings:");
+        // ((MenuPrincipal) getActivity()).getSupportActionBar().setTitle("Rankings:");
         username = getArguments().getString("USERNAME");
 
         databaseRankings = FirebaseDatabase.getInstance().getReference("rankings");
@@ -115,6 +116,81 @@ public class RankingsFragment extends Fragment {
                 }
 
 
+                databaseGrupo.addValueEventListener(new ValueEventListener() {
+                    Map<String, Integer> rankingGruposPontos = new HashMap<String, Integer>();
+                    ArrayList<Grupo> grupos = new ArrayList<>();
+                    Grupo g;
+                    int pontucaototal = 0;
+
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot child : dataSnapshot.getChildren()) {
+                            g = child.getValue(Grupo.class);
+                            for (User u :listaUsers){
+                                if (g.getElementosGrupo().indexOf(u.getUsername())!= -1){
+                                    pontucaototal+=u.getPontos();
+                                }
+                            }
+
+                            rankingGruposPontos.put(g.getNome(),pontucaototal);
+                            RankingGroups rank = new RankingGroups(rankingGruposPontos);
+                            String id = databaseRankingsGrupos.push().getKey();
+                            databaseRankingsGrupos.child(id).setValue(rank);
+
+                            //
+
+
+                            pontucaototal = 0;
+
+
+                        }
+
+
+
+
+                /*databaseUsers.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot child : dataSnapshot.getChildren()) {
+                            User u = child.getValue(User.class);
+                            Toast.makeText(getContext(), u.getUsername(), Toast.LENGTH_LONG).show();
+
+
+                            if (g.getElementosGrupo().indexOf(u.getUsername()) != -1) {
+                                pontucaototal += u.getPontos();
+                            }
+                        }
+
+                        databaseGrupo.child(dataSnapshot.getKey()).child("pontosTotais").setValue(pontucaototal);
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });*/
+
+
+                    }
+
+
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+
+                    }
+                });
+
+
+
+
+
+
+
+
+
+
                 FirebaseDatabase.getInstance().getReference().addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -149,6 +225,9 @@ public class RankingsFragment extends Fragment {
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
                     }
+
+
+
                 });
 
 
@@ -194,58 +273,6 @@ public class RankingsFragment extends Fragment {
             }
         });
 
-        databaseGrupo.orderByChild("nome").addValueEventListener(new ValueEventListener() {
-            private Map<String, Integer> rankingGruposPontos = new HashMap<>();
-            private Grupo g;
-            private int pontucaototal = 0;
-
-
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot child : dataSnapshot.getChildren()) {
-                     g = child.getValue(Grupo.class);
-
-
-                    databaseUsers.orderByChild("username").addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            for (DataSnapshot child : dataSnapshot.getChildren()) {
-                                User u = child.getValue(User.class);
-
-                                if (g.getElementosGrupo().indexOf(u)!= -1){
-                                    pontucaototal += u.getPontos();
-                                }
-                            }
-
-
-
-
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
-                }
-
-                rankingGruposPontos.put(g.getNome(),pontucaototal);
-                String id = databaseRankingsGrupos.push().getKey();
-                RankingGroups rank = new RankingGroups(rankingGruposPontos);
-                databaseRankingsGrupos.child(id).setValue(rank);
-                pontucaototal = 0;
-                //rankingGruposPontos.put(g.getNome(),)
-
-
-            }
-
-
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-
-            }
-        });
 
 
         classificacaoCorridaGeral.setOnClickListener(new View.OnClickListener() {
@@ -309,9 +336,6 @@ public class RankingsFragment extends Fragment {
 
         return user;
     }
-
-
-
 
 
 }

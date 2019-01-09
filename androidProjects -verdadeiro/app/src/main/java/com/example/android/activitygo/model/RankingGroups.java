@@ -12,7 +12,7 @@ public class RankingGroups {
     }
 
     public RankingGroups(Map<String, Integer> gruposRanking) {
-        this.gruposRanking = new HashMap<>();
+        this.gruposRanking = gruposRanking;
     }
 
     public Map<String, Integer> getGruposRanking() {
