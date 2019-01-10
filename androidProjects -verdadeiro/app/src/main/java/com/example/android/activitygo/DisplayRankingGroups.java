@@ -57,7 +57,6 @@ public class DisplayRankingGroups extends Fragment {
                 int index = 1;
                 for ( String grupo :r.getGruposRanking().keySet()) {
 
-
                     TableLayout t = getView().findViewById(R.id.TableRankingGroups);
                     TableRow tr = new TableRow(getContext());
                     TextView tv1 = new TextView(getContext());
@@ -73,6 +72,29 @@ public class DisplayRankingGroups extends Fragment {
                     tr.addView(tv2);
                     tr.addView(tv3);
                     t.addView(tr);
+                    int lime = getResources().getColor(R.color.orange);
+                    if (index%2 != 0){
+
+                        int white = getResources().getColor(R.color.whiteLetters);
+                        tv1.setBackgroundColor(lime);
+                        tv2.setBackgroundColor(lime);
+                        tv3.setBackgroundColor(lime);
+                        tv1.setTextColor(white);
+                        tv2.setTextColor(white);
+                        tv3.setTextColor(white);
+
+                    }else{
+                        tv1.setTextColor(lime);
+                        tv2.setTextColor(lime);
+                        tv3.setTextColor(lime);
+                    }
+                    tv1.setTextSize(30);
+                    tv2.setTextSize(30);
+                    tv3.setTextSize(30);
+
+
+
+
                     index++;
                 }
 
