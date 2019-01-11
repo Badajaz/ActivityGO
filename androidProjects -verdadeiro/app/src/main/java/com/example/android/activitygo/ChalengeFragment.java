@@ -899,8 +899,7 @@ public class ChalengeFragment extends Fragment {
                             c = child.getValue(Challenge.class);
                             if (c.getDescricao().equals(terceiratv.getText().toString()) && c.getCompleted() == 1) {
                                 String id = child.getKey();
-                                databaseChallenges.child(id).removeValue();
-                                terceiratv.setText("");
+
 
                                 databaseUsers.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
@@ -917,6 +916,9 @@ public class ChalengeFragment extends Fragment {
 
                                     }
                                 });
+
+                                databaseChallenges.child(id).removeValue();
+                                terceiratv.setText("");
 
 
                                 Random randomChallenge = new Random();
@@ -959,8 +961,7 @@ public class ChalengeFragment extends Fragment {
                             c = child.getValue(Challenge.class);
                             if (c.getDescricao().equals(primeiratv.getText().toString()) && c.getCompleted() == 1) {
                                 String id = child.getKey();
-                                databaseChallenges.child(id).removeValue();
-                                primeiratv.setText("");
+
                                 databaseUsers.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -976,6 +977,9 @@ public class ChalengeFragment extends Fragment {
 
                                     }
                                 });
+
+                                databaseChallenges.child(id).removeValue();
+                                primeiratv.setText("");
 
                                 Random randomChallenge = new Random();
                                 DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -1015,8 +1019,7 @@ public class ChalengeFragment extends Fragment {
                             c = child.getValue(Challenge.class);
                             if (c.getDescricao().equals(segundatv.getText().toString()) && c.getCompleted() == 1) {
                                 String id = child.getKey();
-                                databaseChallenges.child(id).removeValue();
-                                segundatv.setText("");
+
 
                                 databaseUsers.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
@@ -1033,6 +1036,9 @@ public class ChalengeFragment extends Fragment {
 
                                     }
                                 });
+
+                                databaseChallenges.child(id).removeValue();
+                                segundatv.setText("");
 
                                 Random randomChallenge = new Random();
                                 DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
