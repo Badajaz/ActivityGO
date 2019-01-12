@@ -102,21 +102,18 @@ public class HistoricoCorridas extends Fragment {
 
                 listViewAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, datasCorridas);
                 lv1.setAdapter(listViewAdapter);
-                lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Fragment p = new RunHistoricStatus();
-                        Bundle args = new Bundle();
-                        args.putString("RUN_STATISTICS", datasCorridas.get(position));
-                        args.putDoubleArray("COORDINATES", coordenatesByStatus.get(datasCorridas.get(position)));
-                        /* args.putString("TEMPO", timeS);
-                        args.putDouble("DISTANCIA", distancia);
-                        args.putParcelableArrayList("Markers", markers);
-                        args.putLong("TEMPOPACE", tempoPace);
-                        args.putString("USERNAME", username);*/
-                        p.setArguments(args);
-                        getFragmentManager().beginTransaction().replace(R.id.fragment_container, p, "RunFragment").commit();
-                    }
+                lv1.setOnItemClickListener((parent, view, position, id) -> {
+                    Fragment p = new RunHistoricStatus();
+                    Bundle args = new Bundle();
+                    args.putString("RUN_STATISTICS", datasCorridas.get(position));
+                    args.putDoubleArray("COORDINATES", coordenatesByStatus.get(datasCorridas.get(position)));
+                    /* args.putString("TEMPO", timeS);
+                    args.putDouble("DISTANCIA", distancia);
+                    args.putParcelableArrayList("Markers", markers);
+                    args.putLong("TEMPOPACE", tempoPace);
+                    args.putString("USERNAME", username);*/
+                    p.setArguments(args);
+                    getFragmentManager().beginTransaction().replace(R.id.fragment_container, p, "RunFragment").commit();
                 });
             }
 
