@@ -1,16 +1,20 @@
 package com.example.android.activitygo;
 
 import android.app.Fragment;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.NotificationManagerCompat;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.activitygo.model.Challenge;
 import com.example.android.activitygo.model.Corrida;
@@ -263,6 +267,7 @@ public class ChalengeFragment extends Fragment {
                             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                             Date date = new Date();
                             String d = dateFormat.format(date);
+
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 double distanciaFeita = 0.0;
@@ -298,19 +303,18 @@ public class ChalengeFragment extends Fragment {
                                     });
 
 
-
-                                    if (primeiratv.getText().equals("Faça 5 km")){
+                                    if (primeiratv.getText().equals("Faça 5 km")) {
                                         ConstraintLayout c = getView().findViewById(R.id.firstConstrainte);
                                         c.setBackgroundColor(lime);
 
                                     }
 
-                                    if (segundatv.getText().equals("Faça 5 km")){
+                                    if (segundatv.getText().equals("Faça 5 km")) {
                                         ConstraintLayout c = getView().findViewById(R.id.secondConstrainte);
                                         c.setBackgroundColor(lime);
                                     }
 
-                                    if (terceiratv.getText().equals("Faça 5 km")){
+                                    if (terceiratv.getText().equals("Faça 5 km")) {
                                         ConstraintLayout c = getView().findViewById(R.id.ThirdConstrainte);
                                         c.setBackgroundColor(lime);
 
@@ -328,7 +332,6 @@ public class ChalengeFragment extends Fragment {
                     }
 
 
-
                     if (s.equals("Faça 7 km")) {
 
                         databaseCorrida.addValueEventListener(new ValueEventListener() {
@@ -336,6 +339,7 @@ public class ChalengeFragment extends Fragment {
                             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                             Date date = new Date();
                             String d = dateFormat.format(date);
+
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 double distanciaFeita = 0.0;
@@ -371,20 +375,18 @@ public class ChalengeFragment extends Fragment {
                                     });
 
 
-
-
-                                    if (primeiratv.getText().equals("Faça 7 km")){
+                                    if (primeiratv.getText().equals("Faça 7 km")) {
                                         ConstraintLayout c = getView().findViewById(R.id.firstConstrainte);
                                         c.setBackgroundColor(lime);
 
                                     }
 
-                                    if (segundatv.getText().equals("Faça 7 km")){
+                                    if (segundatv.getText().equals("Faça 7 km")) {
                                         ConstraintLayout c = getView().findViewById(R.id.secondConstrainte);
                                         c.setBackgroundColor(lime);
                                     }
 
-                                    if (terceiratv.getText().equals("Faça 7 km")){
+                                    if (terceiratv.getText().equals("Faça 7 km")) {
                                         ConstraintLayout c = getView().findViewById(R.id.ThirdConstrainte);
                                         c.setBackgroundColor(lime);
 
@@ -409,6 +411,7 @@ public class ChalengeFragment extends Fragment {
                             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                             Date date = new Date();
                             String d = dateFormat.format(date);
+
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 double distanciaFeita = 0.0;
@@ -443,18 +446,18 @@ public class ChalengeFragment extends Fragment {
                                         }
                                     });
 
-                                    if (primeiratv.getText().equals("Faça 10 km")){
+                                    if (primeiratv.getText().equals("Faça 10 km")) {
                                         ConstraintLayout c = getView().findViewById(R.id.firstConstrainte);
                                         c.setBackgroundColor(lime);
 
                                     }
 
-                                    if (segundatv.getText().equals("Faça 10 km")){
+                                    if (segundatv.getText().equals("Faça 10 km")) {
                                         ConstraintLayout c = getView().findViewById(R.id.secondConstrainte);
                                         c.setBackgroundColor(lime);
                                     }
 
-                                    if (terceiratv.getText().equals("Faça 10 km")){
+                                    if (terceiratv.getText().equals("Faça 10 km")) {
                                         ConstraintLayout c = getView().findViewById(R.id.ThirdConstrainte);
                                         c.setBackgroundColor(lime);
 
@@ -472,7 +475,6 @@ public class ChalengeFragment extends Fragment {
                     }
 
 
-
                     if (s.equals("Corra 10 minutos")) {
 
                         databaseCorrida.addValueEventListener(new ValueEventListener() {
@@ -480,6 +482,7 @@ public class ChalengeFragment extends Fragment {
                             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                             Date date = new Date();
                             String d = dateFormat.format(date);
+
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 String valores = "";
@@ -487,15 +490,14 @@ public class ChalengeFragment extends Fragment {
                                 for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                                     Corrida c = userSnapshot.getValue(Corrida.class);
                                     if (c.getUsername().equals(username) && c.getData().equals(d)) {
-                                        String time = c.getTempo().substring(0,2);
-                                        if (Integer.parseInt(time) >= 10 && c.getDistancia() >= 1000){
+                                        String time = c.getTempo().substring(0, 2);
+                                        if (Integer.parseInt(time) >= 10 && c.getDistancia() >= 1000) {
                                             ehMaior = true;
                                         }
 
 
                                     }
                                 }
-
 
 
                                 if (ehMaior == true) {
@@ -520,19 +522,18 @@ public class ChalengeFragment extends Fragment {
                                     });
 
 
-
-                                    if (primeiratv.getText().equals("Corra 10 minutos")){
+                                    if (primeiratv.getText().equals("Corra 10 minutos")) {
                                         ConstraintLayout c = getView().findViewById(R.id.firstConstrainte);
                                         c.setBackgroundColor(lime);
 
                                     }
 
-                                    if (segundatv.getText().equals("Corra 10 minutos")){
+                                    if (segundatv.getText().equals("Corra 10 minutos")) {
                                         ConstraintLayout c = getView().findViewById(R.id.secondConstrainte);
                                         c.setBackgroundColor(lime);
                                     }
 
-                                    if (terceiratv.getText().equals("Corra 10 minutos")){
+                                    if (terceiratv.getText().equals("Corra 10 minutos")) {
                                         ConstraintLayout c = getView().findViewById(R.id.ThirdConstrainte);
                                         c.setBackgroundColor(lime);
 
@@ -550,7 +551,6 @@ public class ChalengeFragment extends Fragment {
                     }
 
 
-
                     if (s.equals("Corra 20 minutos")) {
 
                         databaseCorrida.addValueEventListener(new ValueEventListener() {
@@ -558,6 +558,7 @@ public class ChalengeFragment extends Fragment {
                             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                             Date date = new Date();
                             String d = dateFormat.format(date);
+
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 String valores = "";
@@ -565,16 +566,14 @@ public class ChalengeFragment extends Fragment {
                                 for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                                     Corrida c = userSnapshot.getValue(Corrida.class);
                                     if (c.getUsername().equals(username) && c.getData().equals(d)) {
-                                        String time = c.getTempo().substring(0,2);
-                                        if (Integer.parseInt(time) >= 20 && c.getDistancia() >= 2000){
+                                        String time = c.getTempo().substring(0, 2);
+                                        if (Integer.parseInt(time) >= 20 && c.getDistancia() >= 2000) {
                                             ehMaior = true;
                                         }
 
 
                                     }
                                 }
-
-
 
 
                                 if (ehMaior == true) {
@@ -598,19 +597,18 @@ public class ChalengeFragment extends Fragment {
                                     });
 
 
-
-                                    if (primeiratv.getText().equals("Corra 20 minutos")){
+                                    if (primeiratv.getText().equals("Corra 20 minutos")) {
                                         ConstraintLayout c = getView().findViewById(R.id.firstConstrainte);
                                         c.setBackgroundColor(lime);
 
                                     }
 
-                                    if (segundatv.getText().equals("Corra 20 minutos")){
+                                    if (segundatv.getText().equals("Corra 20 minutos")) {
                                         ConstraintLayout c = getView().findViewById(R.id.secondConstrainte);
                                         c.setBackgroundColor(lime);
                                     }
 
-                                    if (terceiratv.getText().equals("Corra 20 minutos")){
+                                    if (terceiratv.getText().equals("Corra 20 minutos")) {
                                         ConstraintLayout c = getView().findViewById(R.id.ThirdConstrainte);
                                         c.setBackgroundColor(lime);
 
@@ -628,12 +626,6 @@ public class ChalengeFragment extends Fragment {
                     }
 
 
-
-
-
-
-
-
                     if (s.equals("Corra 30 minutos")) {
 
                         databaseCorrida.addValueEventListener(new ValueEventListener() {
@@ -641,6 +633,7 @@ public class ChalengeFragment extends Fragment {
                             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                             Date date = new Date();
                             String d = dateFormat.format(date);
+
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 String valores = "";
@@ -648,8 +641,8 @@ public class ChalengeFragment extends Fragment {
                                 for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                                     Corrida c = userSnapshot.getValue(Corrida.class);
                                     if (c.getUsername().equals(username) && c.getData().equals(d)) {
-                                        String time = c.getTempo().substring(0,2);
-                                        if (Integer.parseInt(time) >= 30 && c.getDistancia() >= 3000){
+                                        String time = c.getTempo().substring(0, 2);
+                                        if (Integer.parseInt(time) >= 30 && c.getDistancia() >= 3000) {
                                             ehMaior = true;
 
 
@@ -658,8 +651,6 @@ public class ChalengeFragment extends Fragment {
 
                                     }
                                 }
-
-
 
 
                                 if (ehMaior == true) {
@@ -683,18 +674,18 @@ public class ChalengeFragment extends Fragment {
                                         }
                                     });
 
-                                    if (primeiratv.getText().equals("Corra 30 minutos")){
+                                    if (primeiratv.getText().equals("Corra 30 minutos")) {
                                         ConstraintLayout c = getView().findViewById(R.id.firstConstrainte);
                                         c.setBackgroundColor(lime);
 
                                     }
 
-                                    if (segundatv.getText().equals("Corra 30 minutos")){
+                                    if (segundatv.getText().equals("Corra 30 minutos")) {
                                         ConstraintLayout c = getView().findViewById(R.id.secondConstrainte);
                                         c.setBackgroundColor(lime);
                                     }
 
-                                    if (terceiratv.getText().equals("Corra 30 minutos")){
+                                    if (terceiratv.getText().equals("Corra 30 minutos")) {
                                         ConstraintLayout c = getView().findViewById(R.id.ThirdConstrainte);
                                         c.setBackgroundColor(lime);
 
@@ -712,8 +703,6 @@ public class ChalengeFragment extends Fragment {
                     }
 
 
-
-
                     if (s.equals("Faça 100m em menos de 9 segundos")) {
 
                         databaseCorrida.addValueEventListener(new ValueEventListener() {
@@ -721,6 +710,7 @@ public class ChalengeFragment extends Fragment {
                             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                             Date date = new Date();
                             String d = dateFormat.format(date);
+
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 String valores = "";
@@ -728,10 +718,10 @@ public class ChalengeFragment extends Fragment {
                                 for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                                     Corrida c = userSnapshot.getValue(Corrida.class);
                                     if (c.getUsername().equals(username) && c.getData().equals(d)) {
-                                        String timesec = c.getTempo().substring(3,5);
-                                        String timemin = c.getTempo().substring(0,2);
+                                        String timesec = c.getTempo().substring(3, 5);
+                                        String timemin = c.getTempo().substring(0, 2);
                                         //Toast.makeText(getContext(),"TIME "+time,Toast.LENGTH_SHORT).show();
-                                        if (Integer.parseInt(timemin) == 0 && Integer.parseInt(timesec) < 9 && c.getDistancia() >= 100 ){
+                                        if (Integer.parseInt(timemin) == 0 && Integer.parseInt(timesec) < 9 && c.getDistancia() >= 100) {
                                             ehMaior = true;
                                         }
 
@@ -760,20 +750,18 @@ public class ChalengeFragment extends Fragment {
                                     });
 
 
-
-
-                                    if (primeiratv.getText().equals("Faça 100m em menos de 9 segundos")){
+                                    if (primeiratv.getText().equals("Faça 100m em menos de 9 segundos")) {
                                         ConstraintLayout c = getView().findViewById(R.id.firstConstrainte);
                                         c.setBackgroundColor(lime);
 
                                     }
 
-                                    if (segundatv.getText().equals("Faça 100m em menos de 9 segundos")){
+                                    if (segundatv.getText().equals("Faça 100m em menos de 9 segundos")) {
                                         ConstraintLayout c = getView().findViewById(R.id.secondConstrainte);
                                         c.setBackgroundColor(lime);
                                     }
 
-                                    if (terceiratv.getText().equals("Faça 100m em menos de 9 segundos")){
+                                    if (terceiratv.getText().equals("Faça 100m em menos de 9 segundos")) {
                                         ConstraintLayout c = getView().findViewById(R.id.ThirdConstrainte);
                                         c.setBackgroundColor(lime);
 
@@ -791,8 +779,6 @@ public class ChalengeFragment extends Fragment {
                     }
 
 
-
-
                     if (s.equals("Faça 200m em menos de 18 segundos")) {
 
                         databaseCorrida.addValueEventListener(new ValueEventListener() {
@@ -800,6 +786,7 @@ public class ChalengeFragment extends Fragment {
                             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                             Date date = new Date();
                             String d = dateFormat.format(date);
+
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 String valores = "";
@@ -807,10 +794,10 @@ public class ChalengeFragment extends Fragment {
                                 for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                                     Corrida c = userSnapshot.getValue(Corrida.class);
                                     if (c.getUsername().equals(username) && c.getData().equals(d)) {
-                                        String timesec = c.getTempo().substring(3,5);
-                                        String timemin = c.getTempo().substring(0,2);
+                                        String timesec = c.getTempo().substring(3, 5);
+                                        String timemin = c.getTempo().substring(0, 2);
                                         //Toast.makeText(getContext(),"TIME "+timemin+":"+timesec,Toast.LENGTH_SHORT).show();
-                                        if (Integer.parseInt(timemin) == 0 && Integer.parseInt(timesec) < 18 && c.getDistancia() >= 200 ){
+                                        if (Integer.parseInt(timemin) == 0 && Integer.parseInt(timesec) < 18 && c.getDistancia() >= 200) {
                                             ehMaior = true;
                                         }
 
@@ -840,19 +827,18 @@ public class ChalengeFragment extends Fragment {
                                     });
 
 
-
-                                    if (primeiratv.getText().equals("Faça 200m em menos de 18 segundos")){
+                                    if (primeiratv.getText().equals("Faça 200m em menos de 18 segundos")) {
                                         ConstraintLayout c = getView().findViewById(R.id.firstConstrainte);
                                         c.setBackgroundColor(lime);
 
                                     }
 
-                                    if (segundatv.getText().equals("Faça 200m em menos de 18 segundos")){
+                                    if (segundatv.getText().equals("Faça 200m em menos de 18 segundos")) {
                                         ConstraintLayout c = getView().findViewById(R.id.secondConstrainte);
                                         c.setBackgroundColor(lime);
                                     }
 
-                                    if (terceiratv.getText().equals("Faça 200m em menos de 18 segundos")){
+                                    if (terceiratv.getText().equals("Faça 200m em menos de 18 segundos")) {
                                         ConstraintLayout c = getView().findViewById(R.id.ThirdConstrainte);
                                         c.setBackgroundColor(lime);
 
@@ -868,10 +854,6 @@ public class ChalengeFragment extends Fragment {
                             }
                         });
                     }
-
-
-
-
 
 
                 }
@@ -900,7 +882,6 @@ public class ChalengeFragment extends Fragment {
                             if (c.getDescricao().equals(terceiratv.getText().toString()) && c.getCompleted() == 1) {
                                 String id = child.getKey();
 
-
                                 databaseUsers.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -917,6 +898,11 @@ public class ChalengeFragment extends Fragment {
                                     }
                                 });
 
+                                Toast t = Toast.makeText(getContext(), "+" + c.getPontos() + " pontos", Toast.LENGTH_SHORT);
+                                View viewToast = t.getView();
+                                viewToast.getBackground().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+                                t.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 400, 1400);
+                                t.show();
                                 databaseChallenges.child(id).removeValue();
                                 terceiratv.setText("");
 
@@ -977,7 +963,11 @@ public class ChalengeFragment extends Fragment {
 
                                     }
                                 });
-
+                                Toast t = Toast.makeText(getContext(), "+" + c.getPontos() + " pontos", Toast.LENGTH_SHORT);
+                                View viewToast = t.getView();
+                                viewToast.getBackground().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+                                t.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 400, 400);
+                                t.show();
                                 databaseChallenges.child(id).removeValue();
                                 primeiratv.setText("");
 
@@ -1036,7 +1026,11 @@ public class ChalengeFragment extends Fragment {
 
                                     }
                                 });
-
+                                Toast t = Toast.makeText(getContext(), "+" + c.getPontos() + " pontos", Toast.LENGTH_SHORT);
+                                View viewToast = t.getView();
+                                viewToast.getBackground().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+                                t.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 400, 950);
+                                t.show();
                                 databaseChallenges.child(id).removeValue();
                                 segundatv.setText("");
 
