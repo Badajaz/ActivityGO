@@ -216,16 +216,11 @@ public class RunMenuInicial extends Fragment {
             public void onClick(View v) {
                 requestThemStoragePermissions();
                 requestThemLocationPermissions();
-                Fragment SelectedFragment = new IrCorridaFragment();
-                Bundle toRunMenuInicial = new Bundle();
-                toRunMenuInicial.putString("USERNAME", username);
-                toRunMenuInicial.putString("URI", image_path);
-                SelectedFragment.setArguments(toRunMenuInicial);
-                FragmentManager fm = getFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(R.id.fragment_container, SelectedFragment, "IrCorridaFragment");
-                ft.addToBackStack("IrCorridaFragment");
-                ft.commit();
+                Intent i = new Intent(getContext(), MapsActivity.class);
+                i.putExtra("USERNAME", username);
+                i.putExtra("URI", image_path);
+                startActivity(i);
+
             }
         });
 
