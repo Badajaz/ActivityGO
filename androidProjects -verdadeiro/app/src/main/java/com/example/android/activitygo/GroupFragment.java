@@ -16,6 +16,9 @@ import android.widget.Button;
 public class GroupFragment extends Fragment {
 
     private int page;
+
+    private String username;
+
     public GroupFragment() {
         // Required empty public constructor
     }
@@ -30,48 +33,63 @@ public class GroupFragment extends Fragment {
         Button criargrupo = (Button) v.findViewById(R.id.buttonCriarGrupo);
         Button juntargrupo = (Button) v.findViewById(R.id.buttonJuntarGrupo);
         Button myGroups = (Button) v.findViewById(R.id.buttonMyGroups);
+        username = getArguments().getString("USERNAME");
 
         juntargrupo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                page = 2;
-                Intent intent = new Intent(v.getContext(), GroupTab.class);
+                /*Intent intent = new Intent(v.getContext(), GroupTab.class);
                 intent.putExtra("One", page);
-                startActivity(intent);
-               /* Fragment SelectedFragment = new JuntarGrupoFragment();
+                startActivity(intent);*/
+                Fragment SelectedFragment = new JoinGroup();
+                Bundle args = new Bundle();
+                args.putString("USERNAME", username);
+                SelectedFragment.setArguments(args);
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(R.id.fragment_container,  SelectedFragment,"JuntarGrupoFragment");
+                ft.replace(R.id.fragment_container,  SelectedFragment,"CriarGrupoFragment");
                 ft.addToBackStack("GroupFragment");
-                ft.commit();*/
+                ft.commit();
+
+
+
+
             }
         });
 
         criargrupo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                page = 1;
+                /*page = 1;
                 Intent intent = new Intent(v.getContext(), GroupTab.class);
                 intent.putExtra("Two", page);
-                startActivity(intent);
-                /*Fragment SelectedFragment = new CriarGrupoFragment();
+                startActivity(intent);*/
+
+                Fragment SelectedFragment = new CreateGroup();
+                Bundle args = new Bundle();
+                args.putString("USERNAME", username);
+                SelectedFragment.setArguments(args);
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 ft.replace(R.id.fragment_container,  SelectedFragment,"CriarGrupoFragment");
                 ft.addToBackStack("GroupFragment");
-                ft.commit();*/
+                ft.commit();
             }
         });
 
         myGroups.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment myGroupsSelectedFragment = new MyGroupsFragment();
-                FragmentManager fmMyGroups = getFragmentManager();
-                FragmentTransaction ftMyGroups = fmMyGroups.beginTransaction();
-                ftMyGroups.replace(R.id.fragment_container, myGroupsSelectedFragment, "CriarGrupoFragment");
-                ftMyGroups.addToBackStack("GroupFragment");
-                ftMyGroups.commit();
+                MyGroupsFragment ldf = new MyGroupsFragment();
+                FragmentManager fmMyGroupsFragment = getFragmentManager();
+                FragmentTransaction ftMyGroupsFragment = fmMyGroupsFragment.beginTransaction();
+                Bundle args = new Bundle();
+                //args.putStringArrayList("GRUPO", grupos);
+                args.putString("USERNAME", username);
+                ldf.setArguments(args);
+                ftMyGroupsFragment.replace(R.id.fragment_container, ldf, "MyGroupsFragment");
+                ftMyGroupsFragment.addToBackStack("MyGroupsFragment");
+                ftMyGroupsFragment.commit();
             }
         });
 

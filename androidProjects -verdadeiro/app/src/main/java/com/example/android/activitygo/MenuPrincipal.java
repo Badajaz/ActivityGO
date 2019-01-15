@@ -182,6 +182,16 @@ public class MenuPrincipal extends AppCompatActivity {
 
                             Bundle args = new Bundle();
                             args.putString("USERNAME", username);
+                            SelectedFragment = new GroupFragment();
+                            FragmentManager fmana = getFragmentManager();
+                            SelectedFragment.setArguments(args);
+                            FragmentTransaction ftransacti = fmana.beginTransaction();
+                            ftransacti.replace(R.id.fragment_container, SelectedFragment, "MergeGroupFragment");
+                            ftransacti.addToBackStack("MergeGroupFragment");
+                            ftransacti.commit();
+                            /*
+                            Bundle args = new Bundle();
+                            args.putString("USERNAME", username);
                             SelectedFragment = new MergeGroupFragment();
                             FragmentManager fmana = getFragmentManager();
                             SelectedFragment.setArguments(args);
@@ -189,7 +199,7 @@ public class MenuPrincipal extends AppCompatActivity {
                             ftransacti.replace(R.id.fragment_container, SelectedFragment, "MergeGroupFragment");
                             ftransacti.addToBackStack("MergeGroupFragment");
                             ftransacti.commit();
-                            break;
+                            break;*/
                     }
 
                     FragmentManager fm = getFragmentManager();
