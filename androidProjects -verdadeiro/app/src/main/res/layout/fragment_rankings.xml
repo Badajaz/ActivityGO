@@ -43,20 +43,20 @@
 
             <Button
                 android:id="@+id/buttonCorridaGeral"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_width="340dp"
+                android:layout_height="128dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
                 android:background="@drawable/edit_text_shape"
                 android:backgroundTint="#FFA500"
                 android:drawableRight="@drawable/run_black"
-                android:text="Classificação Corrida: "
                 android:gravity="center"
+                android:text="Classificação Corrida: "
                 android:textAllCaps="false"
                 android:textSize="18sp" />
 
-            <Button
+           <!-- <Button
                 android:id="@+id/buttonCorridaGrupo"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
@@ -75,7 +75,7 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.843" />
+                app:layout_constraintVertical_bias="0.843" /> -->
 
             <TextView
                 android:id="@+id/classificacoesGrupo"
@@ -99,11 +99,11 @@
 
             <Button
                 android:id="@+id/buttonCorridaParaGrupos"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_width="346dp"
+                android:layout_height="150dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
                 android:background="@drawable/edit_text_shape"
                 android:backgroundTint="#FFA500"
                 android:drawableRight="@drawable/group_black"
@@ -118,7 +118,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.324" />
 
-            <Button
+           <!-- <Button
                 android:id="@+id/buttonCiclismoGrupo"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
@@ -137,7 +137,7 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.648" />
+                app:layout_constraintVertical_bias="0.648" />-->
         </LinearLayout>
     </ScrollView>
 
