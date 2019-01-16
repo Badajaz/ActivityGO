@@ -47,7 +47,7 @@ public class GroupFragment extends Fragment {
                 SelectedFragment.setArguments(args);
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(R.id.fragment_container,  SelectedFragment,"CriarGrupoFragment");
+                ft.replace(R.id.fragment_container,  SelectedFragment,"GroupFragment");
                 ft.addToBackStack("GroupFragment");
                 ft.commit();
 

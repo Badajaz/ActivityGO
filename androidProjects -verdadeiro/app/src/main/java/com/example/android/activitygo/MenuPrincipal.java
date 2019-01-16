@@ -92,6 +92,8 @@ public class MenuPrincipal extends AppCompatActivity {
                     toolbarCima = (Toolbar) findViewById(R.id.toolbar);
                     setSupportActionBar(toolbarCima);
                     getSupportActionBar().setTitle("ActivityGO");
+                    toolbarCima.setNavigationIcon(R.drawable.backbutton);
+
 
                     getSupportActionBar().setSubtitle("" + firstName.charAt(0) + lastName.charAt(0) + ":" + " " + pontos);
                 }
@@ -131,6 +133,9 @@ public class MenuPrincipal extends AppCompatActivity {
                             toRunMenuInicial.putString("URI", image_path);
                             SelectedFragment.setArguments(toRunMenuInicial);
                             FragmentManager fm = getFragmentManager();
+                            /*while (fm.getBackStackEntryCount() > 0){
+                                fm.popBackStackImmediate();
+                            }*/
                             FragmentTransaction ft = fm.beginTransaction();
                             ft.replace(R.id.fragment_container, SelectedFragment, "RunMenuInicialFragment");
                             ft.addToBackStack("RunMenuInicialFragment");
@@ -145,9 +150,12 @@ public class MenuPrincipal extends AppCompatActivity {
                             toChallengeFragment.putString("USERNAME", username);
                             SelectedFragment.setArguments(toChallengeFragment);
                             FragmentManager fman = getFragmentManager();
+                          /*  while (fman.getBackStackEntryCount() > 0){
+                                fman.popBackStackImmediate();
+                            }*/
                             FragmentTransaction ftra = fman.beginTransaction();
                             ftra.replace(R.id.fragment_container, SelectedFragment, "ChalengeFragment");
-                            ftra.addToBackStack("ChalengeFragment");
+                            //ftra.addToBackStack("ChalengeFragment");
                             ftra.commit();
                             break;
 
@@ -158,9 +166,13 @@ public class MenuPrincipal extends AppCompatActivity {
                             SelectedFragment = new AchievementsFragment();
                             SelectedFragment.setArguments(bundle);
                             FragmentManager f = getFragmentManager();
+                            /*while (f.getBackStackEntryCount() > 0){
+                                f.popBackStackImmediate();
+                            }*/
+
                             FragmentTransaction fte = f.beginTransaction();
                             fte.replace(R.id.fragment_container, SelectedFragment, "AchievementFragment");
-                            fte.addToBackStack("AchievementFragment");
+                            //fte.addToBackStack("AchievementFragment");
                             fte.commit();
                             break;
 
@@ -171,10 +183,13 @@ public class MenuPrincipal extends AppCompatActivity {
                             SelectedFragment = new RankingsFragment();
                             SelectedFragment.setArguments(b1);
                             FragmentManager fmanag = getFragmentManager();
+                           /* while (fmanag.getBackStackEntryCount() > 0){
+                                fmanag.popBackStackImmediate();
+                            }*/
                             menuItem.setIcon(R.drawable.trophy_icon333);
                             FragmentTransaction ftransactio = fmanag.beginTransaction();
                             ftransactio.replace(R.id.fragment_container, SelectedFragment, "RankingsFragment");
-                            ftransactio.addToBackStack("RankingsFragment");
+                            //ftransactio.addToBackStack("RankingsFragment");
                             ftransactio.commit();
                             break;
 
@@ -184,10 +199,13 @@ public class MenuPrincipal extends AppCompatActivity {
                             args.putString("USERNAME", username);
                             SelectedFragment = new GroupFragment();
                             FragmentManager fmana = getFragmentManager();
+                            /*while (fmana.getBackStackEntryCount() > 0){
+                                fmana.popBackStackImmediate();
+                            }*/
                             SelectedFragment.setArguments(args);
                             FragmentTransaction ftransacti = fmana.beginTransaction();
-                            ftransacti.replace(R.id.fragment_container, SelectedFragment, "MergeGroupFragment");
-                            ftransacti.addToBackStack("MergeGroupFragment");
+                            ftransacti.replace(R.id.fragment_container, SelectedFragment, "GroupFragment");
+                            ftransacti.addToBackStack("GroupFragment");
                             ftransacti.commit();
                             /*
                             Bundle args = new Bundle();
@@ -346,6 +364,15 @@ public class MenuPrincipal extends AppCompatActivity {
                 ProcuraGrupos myProcuraGrupos = (ProcuraGrupos) getFragmentManager().findFragmentByTag("ProcuraGrupos");
                 ListaDeElementosJuntarGrupo myListaDeElementosJuntarGrupo = (ListaDeElementosJuntarGrupo) getFragmentManager().findFragmentByTag("ListaDeElementosJuntarGrupo");
 
+
+
+
+
+
+
+
+
+
                 if (myFragment != null && myFragment.isVisible()) {
                     getFragmentManager().popBackStack();
                 } else if (myFragment2 != null && myFragment2.isVisible()) {
@@ -426,7 +453,7 @@ public class MenuPrincipal extends AppCompatActivity {
     public String getSelectedSport() {
         return this.selectedSport;
     }
-
+/*
     @Override
     public void onBackPressed() {
 
@@ -463,5 +490,5 @@ public class MenuPrincipal extends AppCompatActivity {
         } else if (myListaDeElementosJuntarGrupo != null && myListaDeElementosJuntarGrupo.isVisible()) {
             getFragmentManager().popBackStack();
         }
-    }
+    }*/
 }
