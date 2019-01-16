@@ -95,6 +95,7 @@ public class MenuPrincipal extends AppCompatActivity {
                     toolbarCima.setNavigationIcon(R.drawable.backbutton);
 
 
+
                     getSupportActionBar().setSubtitle("" + firstName.charAt(0) + lastName.charAt(0) + ":" + " " + pontos);
                 }
             }
@@ -155,7 +156,7 @@ public class MenuPrincipal extends AppCompatActivity {
                             }*/
                             FragmentTransaction ftra = fman.beginTransaction();
                             ftra.replace(R.id.fragment_container, SelectedFragment, "ChalengeFragment");
-                            //ftra.addToBackStack("ChalengeFragment");
+                            ftra.addToBackStack("ChalengeFragment");
                             ftra.commit();
                             break;
 
@@ -172,7 +173,7 @@ public class MenuPrincipal extends AppCompatActivity {
 
                             FragmentTransaction fte = f.beginTransaction();
                             fte.replace(R.id.fragment_container, SelectedFragment, "AchievementFragment");
-                            //fte.addToBackStack("AchievementFragment");
+                            fte.addToBackStack("AchievementFragment");
                             fte.commit();
                             break;
 
@@ -189,7 +190,7 @@ public class MenuPrincipal extends AppCompatActivity {
                             menuItem.setIcon(R.drawable.trophy_icon333);
                             FragmentTransaction ftransactio = fmanag.beginTransaction();
                             ftransactio.replace(R.id.fragment_container, SelectedFragment, "RankingsFragment");
-                            //ftransactio.addToBackStack("RankingsFragment");
+                            ftransactio.addToBackStack("RankingsFragment");
                             ftransactio.commit();
                             break;
 
@@ -365,14 +366,6 @@ public class MenuPrincipal extends AppCompatActivity {
                 ListaDeElementosJuntarGrupo myListaDeElementosJuntarGrupo = (ListaDeElementosJuntarGrupo) getFragmentManager().findFragmentByTag("ListaDeElementosJuntarGrupo");
 
 
-
-
-
-
-
-
-
-
                 if (myFragment != null && myFragment.isVisible()) {
                     getFragmentManager().popBackStack();
                 } else if (myFragment2 != null && myFragment2.isVisible()) {
@@ -453,7 +446,7 @@ public class MenuPrincipal extends AppCompatActivity {
     public String getSelectedSport() {
         return this.selectedSport;
     }
-/*
+
     @Override
     public void onBackPressed() {
 
@@ -468,6 +461,7 @@ public class MenuPrincipal extends AppCompatActivity {
         MyGroupsFragment myGroupsFragment = (MyGroupsFragment) getFragmentManager().findFragmentByTag("MyGroupsFragment");
         ProcuraGrupos myProcuraGrupos = (ProcuraGrupos) getFragmentManager().findFragmentByTag("ProcuraGrupos");
         ListaDeElementosJuntarGrupo myListaDeElementosJuntarGrupo = (ListaDeElementosJuntarGrupo) getFragmentManager().findFragmentByTag("ListaDeElementosJuntarGrupo");
+
 
         if (myFragment != null && myFragment.isVisible()) {
             getFragmentManager().popBackStack();
@@ -490,5 +484,5 @@ public class MenuPrincipal extends AppCompatActivity {
         } else if (myListaDeElementosJuntarGrupo != null && myListaDeElementosJuntarGrupo.isVisible()) {
             getFragmentManager().popBackStack();
         }
-    }*/
+    }
 }

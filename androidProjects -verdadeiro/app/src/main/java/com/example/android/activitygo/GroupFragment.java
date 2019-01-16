@@ -47,8 +47,8 @@ public class GroupFragment extends Fragment {
                 SelectedFragment.setArguments(args);
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(R.id.fragment_container,  SelectedFragment,"GroupFragment");
-                ft.addToBackStack("GroupFragment");
+                ft.replace(R.id.fragment_container,  SelectedFragment,"juntargrupo");
+                ft.addToBackStack("juntargrupo");
                 ft.commit();
 
 
@@ -72,7 +72,7 @@ public class GroupFragment extends Fragment {
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 ft.replace(R.id.fragment_container,  SelectedFragment,"CriarGrupoFragment");
-                ft.addToBackStack("GroupFragment");
+                ft.addToBackStack("CriarGrupoFragment");
                 ft.commit();
             }
         });

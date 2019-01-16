@@ -81,8 +81,8 @@ public class MyGroupsFragment extends Fragment {
                             SelectedFragment.setArguments(args);
                             FragmentManager fmana = getFragmentManager();
                             FragmentTransaction ftransacti = fmana.beginTransaction();
-                            ftransacti.replace(R.id.fragment_container, SelectedFragment, "MyGroupsFragment");
-                            ftransacti.addToBackStack("MyGroupsFragment");
+                            ftransacti.replace(R.id.fragment_container, SelectedFragment, "MyGroupFragmentElements");
+                            ftransacti.addToBackStack("MyGroupFragmentElements");
                             ftransacti.commit();
                         }
                     });
