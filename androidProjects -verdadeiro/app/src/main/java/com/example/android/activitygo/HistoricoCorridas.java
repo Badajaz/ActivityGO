@@ -90,14 +90,13 @@ public class HistoricoCorridas extends Fragment {
                     }
                 }
 
-                if (datasCorridas.size() == 0){
+                if (datasCorridas.size() == 0) {
                     TextView noResults = getView().findViewById(R.id.NoResults);
                     noResults.setText("Não foram encontrados resultados");
                     int lime = getResources().getColor(R.color.orange);
                     noResults.setTextColor(lime);
                     noResults.setTextSize(20);
                 }
-
 
 
                 listViewAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, datasCorridas);
@@ -134,8 +133,19 @@ public class HistoricoCorridas extends Fragment {
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
                         Corrida c = child.getValue(Corrida.class);
-                        datas.add(c.getData());
-                        distance.add(c.getDistancia());
+                        int raceMonth = Integer.parseInt(c.getData().split("/")[1]);
+                        int currentMonth = Calendar.getInstance().get(Calendar.MONTH) + 1;
+                        if (raceMonth == currentMonth) {
+                            if (datas.indexOf(c.getData()) == -1){
+                                datas.add(c.getData());
+                                distance.add(c.getDistancia());
+                            }else{
+                                int index = datas.indexOf(c.getData());
+                                distance.set(index,c.getDistancia()+distance.get(index));
+                            }
+
+                        }
+
                     }
                 }
 
@@ -154,7 +164,7 @@ public class HistoricoCorridas extends Fragment {
                     }
                 }
 
-                DataPoint dpDisplayArray[] = new DataPoint[5];
+                DataPoint dpDisplayArray[] = new DataPoint[dpArray.length];
                 for (int counter = 0; counter < dpDisplayArray.length; counter++) {
                     // ATENCAO: SE OS VALORES FOREM DE MESES DIFERENTES (POR EXEMPLO, UMA CORRIDA A 30 DE DEZEMBRO E UMA
                     // A 1 DE JANEIRO ENTAO VAI DAR ERRO, PORQUE FICA COM UMA LISTA [30,1] E A LISTA NAO ESTA ORDENADA
@@ -162,15 +172,17 @@ public class HistoricoCorridas extends Fragment {
                     dpDisplayArray[dpDisplayArray.length - 1 - counter] = dpArray[dpArray.length - 1 - counter];
                 }
 
-                LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dpDisplayArray);
+               LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dpDisplayArray);
                 graph.addSeries(series);
                 graph.setTitle("Progresso no último mês (km/dia)");
 
                 graph.getViewport().setYAxisBoundsManual(true);
                 graph.getViewport().setXAxisBoundsManual(true);
-                graph.getViewport().setMinX(dpDisplayArray[0].getX() + 1);
-                graph.getViewport().setMaxX(dpDisplayArray[dpDisplayArray.length - 1].getX() - 1);
+                graph.getViewport().setMinX(getMinDistance(dpDisplayArray));
+                graph.getViewport().setMaxX(getMaxDistance(dpDisplayArray));
                 graph.getViewport().setMaxY(Collections.max(distance) + 1000);
+                double a = Collections.max(distance) + 1000;
+                graph.getViewport().setMinY(0);
 
                 graph.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter() {
                     @Override
@@ -180,7 +192,7 @@ public class HistoricoCorridas extends Fragment {
                             return super.formatLabel(value, isValueX);
                         } else {
                             // show currency for y values
-                            return super.formatLabel(value / 1000, isValueX) + " km";
+                            return super.formatLabel(value, isValueX) + " m";
                         }
                     }
                 });
@@ -191,6 +203,39 @@ public class HistoricoCorridas extends Fragment {
 
             }
         });
+
+       /* LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
+                new DataPoint(0, 1),
+                new DataPoint(1, 5),
+                new DataPoint(2, 3),
+                new DataPoint(3, 2),
+                new DataPoint(4, 6)});
+        graph.addSeries(series);
+        graph.setTitle("Progresso no último mês (km/dia)");
+
+        graph.getViewport().setYAxisBoundsManual(true);
+        graph.getViewport().setXAxisBoundsManual(true);
+        //graph.getViewport().setMinX(dpDisplayArray[0].getX() + 1);
+       // graph.getViewport().setMaxX(dpDisplayArray[dpDisplayArray.length - 1].getX() - 1);
+       // graph.getViewport().setMaxY(Collections.max(distance) + 1000);
+
+        graph.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter() {
+            @Override
+            public String formatLabel(double value, boolean isValueX) {
+                if (isValueX) {
+                    // show normal x values
+                    return super.formatLabel(value, isValueX);
+                } else {
+                    // show currency for y values
+                    return super.formatLabel(value / 1000, isValueX) + " km";
+                }
+            }
+        });*/
+
+
+
+
+
         return v;
     }
 
@@ -204,4 +249,28 @@ public class HistoricoCorridas extends Fragment {
 
         return arrayDouble;
     }
+
+    private Double getMaxDistance(DataPoint[] array){
+        double max = 0;
+        for (DataPoint d : array){
+            if (max < d.getX()){
+                max = d.getX();
+            }
+        }
+        return  max;
+    }
+
+
+    private Double getMinDistance(DataPoint[] array){
+        double min = array[0].getX();
+        for (DataPoint d : array){
+            if (min > d.getX()){
+                min = d.getX();
+            }
+        }
+        return  min;
+    }
+
+
+
 }
