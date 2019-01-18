@@ -225,6 +225,8 @@ public class RunMenuInicial extends Fragment {
         });
 
         meusGrupos.setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View v) {
                 if (pedidos) { // se tiver pedidos (1, 2 ou mais)
@@ -233,13 +235,16 @@ public class RunMenuInicial extends Fragment {
 
                 Bundle args = new Bundle();
                 args.putString("USERNAME", username);
-                Fragment SelectedFragmentMeusGrupos = new MergeGroupFragment();
-                SelectedFragmentMeusGrupos.setArguments(args);
-                FragmentManager fmMeusGrupos = getFragmentManager();
-                FragmentTransaction ftMeusGrupos = fmMeusGrupos.beginTransaction();
-                ftMeusGrupos.replace(R.id.fragment_container, SelectedFragmentMeusGrupos, "MergeGroupFragment");
-                ftMeusGrupos.addToBackStack("MergeGroupFragment");
-                ftMeusGrupos.commit();
+                Fragment SelectedFragment = new GroupFragment();
+                FragmentManager fmana = getFragmentManager();
+                            /*while (fmana.getBackStackEntryCount() > 0){
+                                fmana.popBackStackImmediate();
+                            }*/
+                SelectedFragment.setArguments(args);
+                FragmentTransaction ftransacti = fmana.beginTransaction();
+                ftransacti.replace(R.id.fragment_container, SelectedFragment, "GroupFragment");
+                ftransacti.addToBackStack("GroupFragment");
+                ftransacti.commit();
 
             }
         });

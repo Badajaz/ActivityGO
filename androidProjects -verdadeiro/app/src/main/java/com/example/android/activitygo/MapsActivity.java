@@ -353,24 +353,28 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onClick(View v) {
                 if (isStopped == true) {
-                    Toast.makeText(MapsActivity.this, "Terminou a corrida!", Toast.LENGTH_SHORT).show();
+                    if (accKm > 0 ) {
+                        Toast.makeText(MapsActivity.this, "Terminou a corrida!", Toast.LENGTH_SHORT).show();
 
-                    Fragment p = new HistoriaStatus();
-                    Bundle args = new Bundle();
-                    args.putParcelableArrayList("Markers", arrayMarkers);
-                    args.putString("DATAS", dateFormat.format(date));
-                    args.putLong("TEMPOPACE", (int) pauseOffset / 1000);
-                    args.putString("TEMPO", "" + (int) pauseOffset / 1000);
-                    args.putDouble("DISTANCIA", accKm);
-                    args.putString("USERNAME", username);
-                    args.putString("MELHORKM", chronoTime);
-                    args.putString("MELHORSEGUNDOKM", chronoTimeTwo);
-                    args.putString("MELHORQUINTOKM", chronoTimeFive);
-                    p.setArguments(args);
-                    getFragmentManager().beginTransaction().replace(R.id.fragmentMap, p).commit();
-                    Start.setVisibility(View.GONE);
-                    Stop.setVisibility(View.GONE);
-                    finalizar.setVisibility(View.GONE);
+                        Fragment p = new HistoriaStatus();
+                        Bundle args = new Bundle();
+                        args.putParcelableArrayList("Markers", arrayMarkers);
+                        args.putString("DATAS", dateFormat.format(date));
+                        args.putLong("TEMPOPACE", (int) pauseOffset / 1000);
+                        args.putString("TEMPO", "" + (int) pauseOffset / 1000);
+                        args.putDouble("DISTANCIA", accKm);
+                        args.putString("USERNAME", username);
+                        args.putString("MELHORKM", chronoTime);
+                        args.putString("MELHORSEGUNDOKM", chronoTimeTwo);
+                        args.putString("MELHORQUINTOKM", chronoTimeFive);
+                        p.setArguments(args);
+                        getFragmentManager().beginTransaction().replace(R.id.fragmentMap, p).commit();
+                        Start.setVisibility(View.GONE);
+                        Stop.setVisibility(View.GONE);
+                        finalizar.setVisibility(View.GONE);
+                    }else{
+                        Toast.makeText(MapsActivity.this, "Não pode terminar uma corrida sem percorrer distancia", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     Toast.makeText(getApplicationContext(), "Tem que carregar primeiro que colocar a actividade em pausa", Toast.LENGTH_SHORT).show();
                 }
