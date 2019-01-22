@@ -20,6 +20,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Map;
 
 
@@ -49,10 +52,33 @@ public class DisplayRankingGroups extends Fragment {
                     r = child.getValue(RankingGroups.class);
                 }
 
-                r.getGruposRanking().entrySet().stream()
-                        .sorted(Map.Entry.<String, Integer>comparingByValue().reversed());
+                //r.getGruposRanking().entrySet().stream()
+                  //      .sorted(Map.Entry.<String, Integer>comparingByValue().reversed());
+
+                ArrayList<String> nomes = new ArrayList<>();
+                ArrayList<Integer> valores = new ArrayList<>();
+                for ( String nome:r.getGruposRanking().keySet()){
+                    nomes.add(nome);
+                    valores.add(r.getGruposRanking().get(nome));
+                }
+
+
+                Collections.sort(valores);
+                ArrayList<String> ListaNomesOrdenada = new ArrayList<>();
+
+                for (int pontuacao : valores){
+                    for (String nome :r.getGruposRanking().keySet()){
+                        if (pontuacao == r.getGruposRanking().get(nome) && ListaNomesOrdenada.indexOf(nome)==-1){
+                            ListaNomesOrdenada.add(nome);
+                        }
+                    }
+                }
+                Collections.reverse(ListaNomesOrdenada);
+                //
+
+
                 int index = 1;
-                for ( String grupo :r.getGruposRanking().keySet()) {
+                for ( String grupo :ListaNomesOrdenada) {
 
                     TableLayout t = getView().findViewById(R.id.TableRankingGroups);
                     TableRow tr = new TableRow(getContext());
@@ -99,7 +125,7 @@ public class DisplayRankingGroups extends Fragment {
 
                 //TextView tv =getActivity().findViewById(R.id.TESTE);
                 //tv.setText(""+r.getGruposRanking().get("Teste"));
-                Toast.makeText(getContext(),""+r.getGruposRanking().get("Teste"),Toast.LENGTH_LONG).show();
+                //Toast.makeText(getContext(),""+r.getGruposRanking().get("Teste"),Toast.LENGTH_LONG).show();
 
             }
 
