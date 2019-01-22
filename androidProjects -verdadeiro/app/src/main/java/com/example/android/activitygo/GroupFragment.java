@@ -3,24 +3,18 @@ package com.example.android.activitygo;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class GroupFragment extends Fragment {
 
     private int page;
-
     private String username;
 
     public GroupFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -47,13 +41,9 @@ public class GroupFragment extends Fragment {
                 SelectedFragment.setArguments(args);
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(R.id.fragment_container,  SelectedFragment,"juntargrupo");
-                ft.addToBackStack("juntargrupo");
+                ft.replace(R.id.fragment_container, SelectedFragment, "JoinGroup");
+                ft.addToBackStack("GroupFragment");
                 ft.commit();
-
-
-
-
             }
         });
 
@@ -71,8 +61,8 @@ public class GroupFragment extends Fragment {
                 SelectedFragment.setArguments(args);
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(R.id.fragment_container,  SelectedFragment,"CriarGrupoFragment");
-                ft.addToBackStack("CriarGrupoFragment");
+                ft.replace(R.id.fragment_container, SelectedFragment, "CreateGroup");
+                ft.addToBackStack("GroupFragment");
                 ft.commit();
             }
         });
@@ -88,7 +78,7 @@ public class GroupFragment extends Fragment {
                 args.putString("USERNAME", username);
                 ldf.setArguments(args);
                 ftMyGroupsFragment.replace(R.id.fragment_container, ldf, "MyGroupsFragment");
-                ftMyGroupsFragment.addToBackStack("MyGroupsFragment");
+                ftMyGroupsFragment.addToBackStack("GroupFragment");
                 ftMyGroupsFragment.commit();
             }
         });

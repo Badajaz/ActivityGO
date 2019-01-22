@@ -2,12 +2,12 @@ package com.example.android.activitygo;
 
 
 import android.app.Dialog;
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,7 +45,7 @@ public class JoinGroup extends Fragment {
     private View v;
     private ValueEventListener grupos;
 
-    private final static String TAG = "ProcuraGrupo";
+    private final static String TAG = "JoinGroup";
     private EditText SearchGroup;
 
     @Override
@@ -56,7 +56,6 @@ public class JoinGroup extends Fragment {
         databaseGrupo = FirebaseDatabase.getInstance().getReference("grupos");
         dialogResultadoInexistente = new Dialog(getContext());
         dialogWrongPassword = new Dialog(getContext());
-
 
         //final String pesquisa = getArguments().getString("PESQUISA");
         username = getArguments().getString("USERNAME");
@@ -129,21 +128,16 @@ public class JoinGroup extends Fragment {
 
             }
         });
-
-
-
-
-
-
-
-
         return v;
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        databaseGrupo.removeEventListener(grupos);
+        if(!(grupos == null)){
+            databaseGrupo.removeEventListener(grupos);
+        }
+
     }
 
     public void resultadosInexistentesPopup() {
@@ -268,7 +262,6 @@ public class JoinGroup extends Fragment {
         }
         return resultados;
     }
-
 
 
 }

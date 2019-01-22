@@ -95,7 +95,6 @@ public class MenuPrincipal extends AppCompatActivity {
                     toolbarCima.setNavigationIcon(R.drawable.backbutton);
 
 
-
                     getSupportActionBar().setSubtitle("" + firstName.charAt(0) + lastName.charAt(0) + ":" + " " + pontos);
                 }
             }
@@ -362,9 +361,11 @@ public class MenuPrincipal extends AppCompatActivity {
                 HistoricoCorridas historicoFragment = (HistoricoCorridas) getFragmentManager().findFragmentByTag("historicoCorridas");
                 IrCorridaFragment irCorridaFragment = (IrCorridaFragment) getFragmentManager().findFragmentByTag("IrCorridaFragment");
                 MyGroupsFragment myGroupsFragment = (MyGroupsFragment) getFragmentManager().findFragmentByTag("MyGroupsFragment");
+                GroupFragment myGroupFragment = (GroupFragment) getFragmentManager().findFragmentByTag("GroupFragment");
                 ProcuraGrupos myProcuraGrupos = (ProcuraGrupos) getFragmentManager().findFragmentByTag("ProcuraGrupos");
+                CreateGroup myCreateGroup = (CreateGroup) getFragmentManager().findFragmentByTag("CreateGroup");
+                JoinGroup myJoinGroup = (JoinGroup) getFragmentManager().findFragmentByTag("JoinGroup");
                 ListaDeElementosJuntarGrupo myListaDeElementosJuntarGrupo = (ListaDeElementosJuntarGrupo) getFragmentManager().findFragmentByTag("ListaDeElementosJuntarGrupo");
-
 
                 if (myFragment != null && myFragment.isVisible()) {
                     getFragmentManager().popBackStack();
@@ -385,6 +386,12 @@ public class MenuPrincipal extends AppCompatActivity {
                 } else if (myProcuraGrupos != null && myProcuraGrupos.isVisible()) {
                     getFragmentManager().popBackStack();
                 } else if (myListaDeElementosJuntarGrupo != null && myListaDeElementosJuntarGrupo.isVisible()) {
+                    getFragmentManager().popBackStack();
+                } else if (myGroupFragment != null && myGroupFragment.isVisible()) {
+                    getFragmentManager().popBackStack();
+                } else if (myCreateGroup != null && myCreateGroup.isVisible()) {
+                    getFragmentManager().popBackStack();
+                } else if (myJoinGroup != null && myJoinGroup.isVisible()) {
                     getFragmentManager().popBackStack();
                 }
         }
