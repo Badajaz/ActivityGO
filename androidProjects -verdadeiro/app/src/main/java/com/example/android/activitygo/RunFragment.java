@@ -62,7 +62,11 @@ public class RunFragment extends Fragment {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 month = month + 1;
-                date = dayOfMonth + "/" + month + "/" + year;
+                if(month < 10){
+                    date = dayOfMonth + "/" + "0" + month + "/" + year;
+                } else {
+                    date = dayOfMonth + "/" + month + "/" + year;
+                }
                 dataCorridaTv.setText(date);
                 dataCorridaTv.setTextColor(Color.parseColor("#006aff"));
             }

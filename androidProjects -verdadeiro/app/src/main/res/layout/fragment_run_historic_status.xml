@@ -1,160 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#ffffff"
     tools:context=".RunHistoricStatus">
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/MapHistoric"
-        android:layout_width="376dp"
-        android:layout_height="296dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="310dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/PaceHistoric"
         android:layout_width="140dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="72dp"
+        android:layout_height="40dp"
         android:background="@drawable/layout_border"
         android:gravity="center"
         android:text=""
-        android:textColor="#000000"
-        android:textSize="28sp"
+        android:textColor="#006aff"
+        android:textSize="26sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.159"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mapView"
-        app:layout_constraintVertical_bias="0.37" />
+        app:layout_constraintTop_toBottomOf="@+id/MapHistoric"
+        app:layout_constraintVertical_bias="0.926" />
 
 
     <TextView
         android:id="@+id/TempoLabel"
         android:layout_width="140dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginBottom="8dp"
+        android:layout_height="40dp"
         android:background="@drawable/layout_border"
         android:gravity="center"
         android:text="Tempo"
         android:textColor="#000000"
-        android:textSize="28sp"
-        app:layout_constraintBottom_toTopOf="@+id/TimeHistoric"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.159"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.945" />
+        app:layout_constraintTop_toBottomOf="@+id/MapHistoric"
+        app:layout_constraintVertical_bias="0.087" />
 
 
     <TextView
         android:id="@+id/dateLabel"
         android:layout_width="140dp"
-        android:layout_height="44dp"
-        android:layout_marginBottom="260dp"
+        android:layout_height="40dp"
         android:background="@drawable/layout_border"
         android:gravity="center"
-        android:text="Data"
+        android:text="Date"
         android:textColor="#000000"
-        android:textSize="28sp"
+        android:textSize="26sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.893"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mapView"
-        app:layout_constraintVertical_bias="0.087" />
+        app:layout_constraintTop_toBottomOf="@+id/MapHistoric"
+        app:layout_constraintVertical_bias="0.649" />
 
     <TextView
         android:id="@+id/DistanceLabel"
         android:layout_width="140dp"
         android:layout_height="40dp"
-        android:layout_marginBottom="136dp"
         android:background="@drawable/layout_border"
         android:gravity="center"
         android:text="Distância"
         android:textColor="#000000"
-        android:textSize="28sp"
+        android:textSize="26sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.893"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mapView"
+        app:layout_constraintTop_toBottomOf="@+id/MapHistoric"
         app:layout_constraintVertical_bias="0.087" />
 
     <TextView
         android:id="@+id/DistanceHistoric"
         android:layout_width="140dp"
         android:layout_height="40dp"
-        android:layout_marginBottom="76dp"
         android:background="@drawable/layout_border"
         android:gravity="center"
         android:text=""
-        android:textColor="#000000"
-        android:textSize="30sp"
+        android:textColor="#006aff"
+        android:textSize="26sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.893"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mapView"
+        app:layout_constraintTop_toBottomOf="@+id/MapHistoric"
         app:layout_constraintVertical_bias="0.37" />
 
     <TextView
         android:id="@+id/PaceLabel"
         android:layout_width="140dp"
         android:layout_height="40dp"
-        android:layout_marginBottom="136dp"
         android:background="@drawable/layout_border"
         android:gravity="center"
         android:text="Pace"
         android:textColor="#000000"
-        android:textSize="28sp"
+        android:textSize="26sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.159"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mapView"
+        app:layout_constraintTop_toBottomOf="@+id/MapHistoric"
         app:layout_constraintVertical_bias="0.649" />
 
 
     <TextView
         android:id="@+id/TimeHistoric"
         android:layout_width="140dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="200dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/layout_border"
         android:gravity="center"
         android:text=""
-        android:textColor="#000000"
-        android:textSize="28sp"
+        android:textColor="#006aff"
+        android:textSize="26sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.159"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mapView"
-        app:layout_constraintVertical_bias="0.926" />
+        app:layout_constraintTop_toBottomOf="@+id/MapHistoric"
+        app:layout_constraintVertical_bias="0.37" />
 
     <TextView
         android:id="@+id/dateHistoric"
         android:layout_width="140dp"
         android:layout_height="40dp"
-        android:layout_marginBottom="196dp"
         android:background="@drawable/layout_border"
         android:gravity="center"
         android:text=""
-        android:textColor="#000000"
-        android:textSize="25sp"
+        android:textColor="#006aff"
+        android:textSize="26sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.893"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mapView"
+        app:layout_constraintTop_toBottomOf="@+id/MapHistoric"
         app:layout_constraintVertical_bias="0.926" />
-
 
 </android.support.constraint.ConstraintLayout>
