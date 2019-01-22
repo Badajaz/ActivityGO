@@ -20,7 +20,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import java.util.ArrayList;
 
 public class RunHistoricStatus extends Fragment {
-
+    private static final String TAG = "RunHistoricStatus";
     private MapView mMapView;
     private GoogleMap googleMap;
 

@@ -87,7 +87,7 @@ public class RunFragment extends Fragment {
                 hc.setArguments(args);
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(R.id.fragment_container, hc, "historicoCorridas");
+                ft.replace(R.id.fragment_container, hc, "HistoricoCorridas");
                 ft.addToBackStack("HistoricoCorridas");
                 ft.commit();
             }
@@ -109,7 +109,7 @@ public class RunFragment extends Fragment {
                     hc.setArguments(args);
                     FragmentManager fm = getFragmentManager();
                     FragmentTransaction ft = fm.beginTransaction();
-                    ft.replace(R.id.fragment_container, hc, "historicoCorridas");
+                    ft.replace(R.id.fragment_container, hc, "HistoricoCorridas");
                     ft.addToBackStack("HistoricoCorridas");
                     ft.commit();
                     //getFragmentManager().beginTransaction().replace(R.id.fragment_container, hc, "historicoCorridas").commit();

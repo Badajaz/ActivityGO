@@ -368,6 +368,8 @@ public class MenuPrincipal extends AppCompatActivity {
                 DisplayRankingGroups myDisplayRankingGroupsFragment = (DisplayRankingGroups) getFragmentManager().findFragmentByTag("DisplayRankingGroupsFragment");
                 ListaDeElementosJuntarGrupo myListaDeElementosJuntarGrupo = (ListaDeElementosJuntarGrupo) getFragmentManager().findFragmentByTag("ListaDeElementosJuntarGrupo");
                 MyGroupFragmentElements myGroupFragmentElements = (MyGroupFragmentElements) getFragmentManager().findFragmentByTag("MyGroupFragmentElements");
+                HistoricoCorridas myHistorico = (HistoricoCorridas) getFragmentManager().findFragmentByTag("HistoricoCorridas");
+                RunHistoricStatus myRunHistoricStatus = (RunHistoricStatus) getFragmentManager().findFragmentByTag("RunHistoricStatus");
 
                 if (myFragment != null && myFragment.isVisible()) {
                     getFragmentManager().popBackStack();
@@ -398,6 +400,10 @@ public class MenuPrincipal extends AppCompatActivity {
                 } else if (myDisplayRankingGroupsFragment != null && myDisplayRankingGroupsFragment.isVisible()) {
                     getFragmentManager().popBackStack();
                 } else if (myGroupFragmentElements != null && myGroupFragmentElements.isVisible()) {
+                    getFragmentManager().popBackStack();
+                } else if (myHistorico != null && myHistorico.isVisible()) {
+                    getFragmentManager().popBackStack();
+                } else if (myRunHistoricStatus != null && myRunHistoricStatus.isVisible()) {
                     getFragmentManager().popBackStack();
                 }
         }
@@ -476,6 +482,8 @@ public class MenuPrincipal extends AppCompatActivity {
         GroupFragment myGroupFragment = (GroupFragment) getFragmentManager().findFragmentByTag("GroupFragment");
         CreateGroup myCreateGroup = (CreateGroup) getFragmentManager().findFragmentByTag("CreateGroup");
         JoinGroup myJoinGroup = (JoinGroup) getFragmentManager().findFragmentByTag("JoinGroup");
+        HistoricoCorridas myHistorico = (HistoricoCorridas) getFragmentManager().findFragmentByTag("HistoricoCorridas");
+        RunHistoricStatus myRunHistoricStatus = (RunHistoricStatus) getFragmentManager().findFragmentByTag("RunHistoricStatus");
         DisplayRankingGroups myDisplayRankingGroupsFragment = (DisplayRankingGroups) getFragmentManager().findFragmentByTag("DisplayRankingGroupsFragment");
         ListaDeElementosJuntarGrupo myListaDeElementosJuntarGrupo = (ListaDeElementosJuntarGrupo) getFragmentManager().findFragmentByTag("ListaDeElementosJuntarGrupo");
         MyGroupFragmentElements myGroupFragmentElements = (MyGroupFragmentElements) getFragmentManager().findFragmentByTag("MyGroupFragmentElements");
@@ -510,6 +518,10 @@ public class MenuPrincipal extends AppCompatActivity {
         } else if (myDisplayRankingGroupsFragment != null && myDisplayRankingGroupsFragment.isVisible()) {
             getFragmentManager().popBackStack();
         } else if (myGroupFragmentElements != null && myGroupFragmentElements.isVisible()) {
+            getFragmentManager().popBackStack();
+        } else if (myHistorico != null && myHistorico.isVisible()) {
+            getFragmentManager().popBackStack();
+        } else if (myRunHistoricStatus != null && myRunHistoricStatus.isVisible()) {
             getFragmentManager().popBackStack();
         }
     }

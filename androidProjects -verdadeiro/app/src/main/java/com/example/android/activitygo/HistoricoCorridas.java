@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -47,6 +46,7 @@ public class HistoricoCorridas extends Fragment {
     private int ClassInt;
     private String melhorkm;
     private ArrayList<String> dates;
+    private static final String TAG = "HistoricoCorridas";
 
     private GraphView graph;
 
@@ -112,7 +112,7 @@ public class HistoricoCorridas extends Fragment {
                     args.putLong("TEMPOPACE", tempoPace);
                     args.putString("USERNAME", username);*/
                     p.setArguments(args);
-                    getFragmentManager().beginTransaction().replace(R.id.fragment_container, p, "RunFragment").commit();
+                    getFragmentManager().beginTransaction().replace(R.id.fragment_container, p, "RunHistoricStatus").commit();
                 });
             }
 
@@ -136,16 +136,14 @@ public class HistoricoCorridas extends Fragment {
                         int raceMonth = Integer.parseInt(c.getData().split("/")[1]);
                         int currentMonth = Calendar.getInstance().get(Calendar.MONTH) + 1;
                         if (raceMonth == currentMonth) {
-                            if (datas.indexOf(c.getData()) == -1){
+                            if (datas.indexOf(c.getData()) == -1) {
                                 datas.add(c.getData());
                                 distance.add(c.getDistancia());
-                            }else{
+                            } else {
                                 int index = datas.indexOf(c.getData());
-                                distance.set(index,c.getDistancia()+distance.get(index));
+                                distance.set(index, c.getDistancia() + distance.get(index));
                             }
-
                         }
-
                     }
                 }
 
@@ -172,7 +170,7 @@ public class HistoricoCorridas extends Fragment {
                     dpDisplayArray[dpDisplayArray.length - 1 - counter] = dpArray[dpArray.length - 1 - counter];
                 }
 
-               LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dpDisplayArray);
+                LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dpDisplayArray);
                 graph.addSeries(series);
                 graph.setTitle("Progresso no último mês (km/dia)");
 
@@ -231,11 +229,6 @@ public class HistoricoCorridas extends Fragment {
                 }
             }
         });*/
-
-
-
-
-
         return v;
     }
 
@@ -246,31 +239,27 @@ public class HistoricoCorridas extends Fragment {
             arrayDouble[i] = coordenada;
             i++;
         }
-
         return arrayDouble;
     }
 
-    private Double getMaxDistance(DataPoint[] array){
+    private Double getMaxDistance(DataPoint[] array) {
         double max = 0;
-        for (DataPoint d : array){
-            if (max < d.getX()){
+        for (DataPoint d : array) {
+            if (max < d.getX()) {
                 max = d.getX();
             }
         }
-        return  max;
+        return max;
     }
 
-
-    private Double getMinDistance(DataPoint[] array){
+    private Double getMinDistance(DataPoint[] array) {
         double min = array[0].getX();
-        for (DataPoint d : array){
-            if (min > d.getX()){
+        for (DataPoint d : array) {
+            if (min > d.getX()) {
                 min = d.getX();
             }
         }
-        return  min;
+        return min;
     }
-
-
 
 }

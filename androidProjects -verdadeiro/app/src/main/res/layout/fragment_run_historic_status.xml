@@ -32,10 +32,10 @@
         android:textSize="26sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.159"
+        app:layout_constraintHorizontal_bias="0.158"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/MapHistoric"
-        app:layout_constraintVertical_bias="0.926" />
+        app:layout_constraintVertical_bias="0.68" />
 
 
     <TextView
@@ -69,7 +69,7 @@
         app:layout_constraintHorizontal_bias="0.893"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/MapHistoric"
-        app:layout_constraintVertical_bias="0.649" />
+        app:layout_constraintVertical_bias="0.5" />
 
     <TextView
         android:id="@+id/DistanceLabel"
@@ -101,7 +101,7 @@
         app:layout_constraintHorizontal_bias="0.893"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/MapHistoric"
-        app:layout_constraintVertical_bias="0.37" />
+        app:layout_constraintVertical_bias="0.25" />
 
     <TextView
         android:id="@+id/PaceLabel"
@@ -117,13 +117,13 @@
         app:layout_constraintHorizontal_bias="0.159"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/MapHistoric"
-        app:layout_constraintVertical_bias="0.649" />
+        app:layout_constraintVertical_bias="0.5" />
 
 
     <TextView
         android:id="@+id/TimeHistoric"
         android:layout_width="140dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:background="@drawable/layout_border"
         android:gravity="center"
         android:text=""
@@ -134,7 +134,7 @@
         app:layout_constraintHorizontal_bias="0.159"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/MapHistoric"
-        app:layout_constraintVertical_bias="0.37" />
+        app:layout_constraintVertical_bias="0.25" />
 
     <TextView
         android:id="@+id/dateHistoric"
@@ -147,9 +147,9 @@
         android:textSize="26sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.893"
+        app:layout_constraintHorizontal_bias="0.892"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/MapHistoric"
-        app:layout_constraintVertical_bias="0.926" />
+        app:layout_constraintVertical_bias="0.68" />
 
 </android.support.constraint.ConstraintLayout>
