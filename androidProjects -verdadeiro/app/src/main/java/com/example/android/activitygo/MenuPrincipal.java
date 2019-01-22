@@ -92,7 +92,7 @@ public class MenuPrincipal extends AppCompatActivity {
                     toolbarCima = (Toolbar) findViewById(R.id.toolbar);
                     setSupportActionBar(toolbarCima);
                     getSupportActionBar().setTitle("ActivityGO");
-                    toolbarCima.setNavigationIcon(R.drawable.backbutton);
+                    //toolbarCima.setNavigationIcon(R.drawable.backbutton);
 
 
                     getSupportActionBar().setSubtitle("" + firstName.charAt(0) + lastName.charAt(0) + ":" + " " + pontos);
