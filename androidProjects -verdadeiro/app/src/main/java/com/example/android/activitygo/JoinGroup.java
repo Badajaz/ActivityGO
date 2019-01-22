@@ -1,6 +1,5 @@
 package com.example.android.activitygo;
 
-
 import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -30,10 +29,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Map;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class JoinGroup extends Fragment {
     private ArrayAdapter<String> listViewAdapter;
     private DatabaseReference databaseGrupo;
@@ -44,7 +39,6 @@ public class JoinGroup extends Fragment {
     private Grupo g;
     private View v;
     private ValueEventListener grupos;
-
     private final static String TAG = "JoinGroup";
     private EditText SearchGroup;
 
@@ -62,7 +56,6 @@ public class JoinGroup extends Fragment {
 
         SearchGroup = (EditText) v.findViewById(R.id.NomeGrupo);
         Button procurar = (Button) v.findViewById(R.id.procurarGrupos);
-
         procurar.setOnClickListener(new View.OnClickListener() {
             private String searchGrupo;
 
@@ -124,8 +117,6 @@ public class JoinGroup extends Fragment {
                     }
 
                 });
-
-
             }
         });
         return v;
@@ -134,10 +125,9 @@ public class JoinGroup extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(!(grupos == null)){
+        if (!(grupos == null)) {
             databaseGrupo.removeEventListener(grupos);
         }
-
     }
 
     public void resultadosInexistentesPopup() {
@@ -176,7 +166,6 @@ public class JoinGroup extends Fragment {
         dialogResultadoInexistente.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialogResultadoInexistente.show();
     }
-
 
     public void confirmJoin(String grupo) {
         Button okButton;
@@ -252,7 +241,6 @@ public class JoinGroup extends Fragment {
         dialogWrongPassword.show();
     }
 
-
     public String getResultados(ArrayList<String> possiveisResultados, String pesquisa) {
         String resultados = "";
         for (String resultado : possiveisResultados) {
@@ -262,6 +250,4 @@ public class JoinGroup extends Fragment {
         }
         return resultados;
     }
-
-
 }

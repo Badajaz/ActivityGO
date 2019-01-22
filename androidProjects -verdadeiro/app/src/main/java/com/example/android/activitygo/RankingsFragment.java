@@ -1,22 +1,20 @@
 package com.example.android.activitygo;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.android.activitygo.model.Corrida;
 import com.example.android.activitygo.model.Grupo;
 import com.example.android.activitygo.model.Ranking;
-import com.example.android.activitygo.model.TableRankingsGroups;
-import com.example.android.activitygo.model.User;
 import com.example.android.activitygo.model.RankingGroups;
+import com.example.android.activitygo.model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,7 +28,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RankingsFragment extends Fragment {
-
 
     private static final String TAG = "RankingsFragment";
     private Button classificacaoCorridaGeral;
@@ -47,7 +44,6 @@ public class RankingsFragment extends Fragment {
     private String[] rankingsNomes;
     private ArrayList<String> actualizada;
 
-
     private HashMap<String, Integer> NomesPontos = new HashMap<>();
     private DatabaseReference databaseGrupo;
     private DatabaseReference databaseRankingsGrupos;
@@ -60,9 +56,7 @@ public class RankingsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_rankings, container, false);
 
-        // ((MenuPrincipal) getActivity()).getSupportActionBar().setTitle("Rankings:");
         username = getArguments().getString("USERNAME");
-
         databaseRankings = FirebaseDatabase.getInstance().getReference("rankings");
         databaseCorridas = FirebaseDatabase.getInstance().getReference("corrida");
         databaseRankingsGrupos = FirebaseDatabase.getInstance().getReference("rankingGrupos");
@@ -72,11 +66,9 @@ public class RankingsFragment extends Fragment {
 
         databaseGrupo = FirebaseDatabase.getInstance().getReference("grupos");
 
-
         databaseUsers.orderByChild("username").addListenerForSingleValueEvent(new ValueEventListener() {
 
             ArrayList<User> listaUsers = new ArrayList<User>();
-
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -104,7 +96,6 @@ public class RankingsFragment extends Fragment {
 
                 ArrayList<String> nomesRepetidos = new ArrayList<>();
 
-
                 for (int j = 0; j < listForSort.length; j++) {
                     for (int k = 0; k < listForSort.length; k++) {
                         if (listForSort[j] == listaUsers.get(k).getPontos() && nomesRepetidos.indexOf(listaUsers.get(k).getUsername()) == -1) {
@@ -114,7 +105,6 @@ public class RankingsFragment extends Fragment {
                         }
                     }
                 }
-
 
                 databaseGrupo.addValueEventListener(new ValueEventListener() {
                     Map<String, Integer> rankingGruposPontos = new HashMap<String, Integer>();
@@ -126,9 +116,9 @@ public class RankingsFragment extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot child : dataSnapshot.getChildren()) {
                             g = child.getValue(Grupo.class);
-                            for (User u :listaUsers){
-                                if (g.getElementosGrupo().indexOf(u.getUsername())!= -1){
-                                    pontucaototal+=u.getPontos();
+                            for (User u : listaUsers) {
+                                if (g.getElementosGrupo().indexOf(u.getUsername()) != -1) {
+                                    pontucaototal += u.getPontos();
                                 }
                             }
 
@@ -139,7 +129,7 @@ public class RankingsFragment extends Fragment {
                                 String id = databaseRankingsGrupos.push().getKey();
                                 databaseRankingsGrupos.child(id).setValue(rank);
 
-                            }else{
+                            } else {
 
                                 rankingGruposPontos.put(g.getNome(), pontucaototal);
                                 RankingGroups rank = new RankingGroups(rankingGruposPontos);
@@ -147,7 +137,7 @@ public class RankingsFragment extends Fragment {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                         for (DataSnapshot child : dataSnapshot.getChildren())
-                                        databaseRankingsGrupos.child(child.getKey()).child("gruposRanking").setValue(rankingGruposPontos);
+                                            databaseRankingsGrupos.child(child.getKey()).child("gruposRanking").setValue(rankingGruposPontos);
                                     }
 
                                     @Override
@@ -155,19 +145,9 @@ public class RankingsFragment extends Fragment {
 
                                     }
                                 });
-
                             }
-
-                            //
-
-
                             pontucaototal = 0;
-
-
                         }
-
-
-
 
                 /*databaseUsers.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -196,21 +176,9 @@ public class RankingsFragment extends Fragment {
 
                     }
 
-
                     public void onCancelled(@NonNull DatabaseError databaseError) {
-
-
                     }
                 });
-
-
-
-
-
-
-
-
-
 
                 FirebaseDatabase.getInstance().getReference().addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -229,10 +197,7 @@ public class RankingsFragment extends Fragment {
                                     }
                                     Collections.reverse(actualizada);
                                     classificacaoCorridaGeral.setText("Classificacao: " + getRankingUser(username, actualizada) + "/" + actualizada.size());
-
-
                                 }
-
 
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -246,8 +211,6 @@ public class RankingsFragment extends Fragment {
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
                     }
-
-
 
                 });
 
@@ -295,11 +258,9 @@ public class RankingsFragment extends Fragment {
         });
 
 
-
         classificacaoCorridaGeral.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("hashmap", NomesPontos);
                 bundle.putSerializable("listaNomes", actualizada);
@@ -307,7 +268,7 @@ public class RankingsFragment extends Fragment {
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 SelectedFragment.setArguments(bundle);
-                ft.replace(R.id.fragment_container, SelectedFragment, "RankingsFragment");
+                ft.replace(R.id.fragment_container, SelectedFragment, "TableRankingsFragment");
                 ft.addToBackStack("RankingsFragment");
                 ft.commit();
             }
@@ -324,28 +285,21 @@ public class RankingsFragment extends Fragment {
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 //SelectedFragment.setArguments(bundle);
-                ft.replace(R.id.fragment_container, SelectedFragment, "RankingsFragment");
+                ft.replace(R.id.fragment_container, SelectedFragment, "DisplayRankingGroupsFragment");
                 ft.addToBackStack("RankingsFragment");
                 ft.commit();
             }
         });
-
-
         return v;
-
-
     }
-
 
     private ArrayList convertListaToArratList(String[] array) {
         ArrayList<String> novo = new ArrayList<>();
         for (String s : array) {
             novo.add(s);
         }
-
         return novo;
     }
-
 
     private int getRankingUser(String username, ArrayList<String> rank) {
         int user = -1;
@@ -354,9 +308,6 @@ public class RankingsFragment extends Fragment {
                 user = i + 1;
             }
         }
-
         return user;
     }
-
-
 }

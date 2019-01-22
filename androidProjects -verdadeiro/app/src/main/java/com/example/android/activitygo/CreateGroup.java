@@ -1,9 +1,8 @@
 package com.example.android.activitygo;
 
-
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,46 +22,35 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class CreateGroup extends Fragment {
 
     private CheckBox corrida;
     private CheckBox caminhada;
     private CheckBox ciclismo;
     private CheckBox futebol;
-
     private String nomegrupo;
     private String descricaogrupo;
-
     private EditText nomeGrupo;
     private EditText SearchGroup;
     private EditText descricaoGrupo;
     private String searchGrupo;
     private ArrayList<String> possiveisResultados = new ArrayList<String>();
     private ArrayList<String> grupos = new ArrayList<String>();
-
     private ArrayAdapter<String> listViewAdapter;
     private ListView listView;
     private DatabaseReference databaseGrupo;
     private String grupo = "";
     private String sport;
-
     private String username;
     private static final String TAG = "MergeGroupFragment";
 
-
     public CreateGroup() {
-        // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View v = inflater.inflate(R.layout.fragment_create_group, container, false);
         username = getArguments().getString("USERNAME");
 
@@ -70,7 +58,6 @@ public class CreateGroup extends Fragment {
 
         nomeGrupo = (EditText) v.findViewById(R.id.NomeCriarGrupo);
         descricaoGrupo = (EditText) v.findViewById(R.id.DescricaoGrupo);
-
         Button criar = (Button) v.findViewById(R.id.buttonCriar);
         corrida = v.findViewById(R.id.corridaCheck);
         ciclismo = v.findViewById(R.id.CiclismoCheck);
@@ -155,8 +142,6 @@ public class CreateGroup extends Fragment {
         });
 
 
-
-
         return v;
     }
 
@@ -210,19 +195,6 @@ public class CreateGroup extends Fragment {
         }
         return resultados;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

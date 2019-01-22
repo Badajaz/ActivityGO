@@ -32,18 +32,15 @@ public class DisplayRankingGroups extends Fragment {
     private DatabaseReference databaseRankingsGrupos;
 
     public DisplayRankingGroups() {
-        // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View v =  inflater.inflate(R.layout.fragment_display_ranking_groups, container, false);
 
         databaseRankingsGrupos = FirebaseDatabase.getInstance().getReference("rankingGrupos");
-
         databaseRankingsGrupos.addListenerForSingleValueEvent(new ValueEventListener() {
             RankingGroups r;
             @Override
@@ -73,6 +70,7 @@ public class DisplayRankingGroups extends Fragment {
                     tr.addView(tv3);
                     t.addView(tr);
                     int lime = getResources().getColor(R.color.orange);
+                    int blue = getResources().getColor(R.color.BlueSeparator);
                     if (index%2 != 0){
 
                         int white = getResources().getColor(R.color.whiteLetters);
@@ -84,13 +82,13 @@ public class DisplayRankingGroups extends Fragment {
                         tv3.setTextColor(white);
 
                     }else{
-                        tv1.setTextColor(lime);
-                        tv2.setTextColor(lime);
-                        tv3.setTextColor(lime);
+                        tv1.setTextColor(blue);
+                        tv2.setTextColor(blue);
+                        tv3.setTextColor(blue);
                     }
-                    tv1.setTextSize(30);
-                    tv2.setTextSize(30);
-                    tv3.setTextSize(30);
+                    tv1.setTextSize(20);
+                    tv2.setTextSize(20);
+                    tv3.setTextSize(20);
 
 
 

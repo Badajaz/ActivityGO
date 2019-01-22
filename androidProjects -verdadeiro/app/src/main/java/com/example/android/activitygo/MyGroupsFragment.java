@@ -38,7 +38,7 @@ public class MyGroupsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View v = inflater.inflate(R.layout.fragment_my_groups, container, false);
         ((MenuPrincipal) getActivity()).getSupportActionBar().setTitle("Os meus grupos:");
         databaseGrupo = FirebaseDatabase.getInstance().getReference("grupos");

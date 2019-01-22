@@ -365,7 +365,9 @@ public class MenuPrincipal extends AppCompatActivity {
                 ProcuraGrupos myProcuraGrupos = (ProcuraGrupos) getFragmentManager().findFragmentByTag("ProcuraGrupos");
                 CreateGroup myCreateGroup = (CreateGroup) getFragmentManager().findFragmentByTag("CreateGroup");
                 JoinGroup myJoinGroup = (JoinGroup) getFragmentManager().findFragmentByTag("JoinGroup");
+                DisplayRankingGroups myDisplayRankingGroupsFragment = (DisplayRankingGroups) getFragmentManager().findFragmentByTag("DisplayRankingGroupsFragment");
                 ListaDeElementosJuntarGrupo myListaDeElementosJuntarGrupo = (ListaDeElementosJuntarGrupo) getFragmentManager().findFragmentByTag("ListaDeElementosJuntarGrupo");
+                MyGroupFragmentElements myGroupFragmentElements = (MyGroupFragmentElements) getFragmentManager().findFragmentByTag("MyGroupFragmentElements");
 
                 if (myFragment != null && myFragment.isVisible()) {
                     getFragmentManager().popBackStack();
@@ -392,6 +394,10 @@ public class MenuPrincipal extends AppCompatActivity {
                 } else if (myCreateGroup != null && myCreateGroup.isVisible()) {
                     getFragmentManager().popBackStack();
                 } else if (myJoinGroup != null && myJoinGroup.isVisible()) {
+                    getFragmentManager().popBackStack();
+                } else if (myDisplayRankingGroupsFragment != null && myDisplayRankingGroupsFragment.isVisible()) {
+                    getFragmentManager().popBackStack();
+                } else if (myGroupFragmentElements != null && myGroupFragmentElements.isVisible()) {
                     getFragmentManager().popBackStack();
                 }
         }
@@ -467,7 +473,12 @@ public class MenuPrincipal extends AppCompatActivity {
         IrCorridaFragment irCorridaFragment = (IrCorridaFragment) getFragmentManager().findFragmentByTag("IrCorridaFragment");
         MyGroupsFragment myGroupsFragment = (MyGroupsFragment) getFragmentManager().findFragmentByTag("MyGroupsFragment");
         ProcuraGrupos myProcuraGrupos = (ProcuraGrupos) getFragmentManager().findFragmentByTag("ProcuraGrupos");
+        GroupFragment myGroupFragment = (GroupFragment) getFragmentManager().findFragmentByTag("GroupFragment");
+        CreateGroup myCreateGroup = (CreateGroup) getFragmentManager().findFragmentByTag("CreateGroup");
+        JoinGroup myJoinGroup = (JoinGroup) getFragmentManager().findFragmentByTag("JoinGroup");
+        DisplayRankingGroups myDisplayRankingGroupsFragment = (DisplayRankingGroups) getFragmentManager().findFragmentByTag("DisplayRankingGroupsFragment");
         ListaDeElementosJuntarGrupo myListaDeElementosJuntarGrupo = (ListaDeElementosJuntarGrupo) getFragmentManager().findFragmentByTag("ListaDeElementosJuntarGrupo");
+        MyGroupFragmentElements myGroupFragmentElements = (MyGroupFragmentElements) getFragmentManager().findFragmentByTag("MyGroupFragmentElements");
 
 
         if (myFragment != null && myFragment.isVisible()) {
@@ -489,6 +500,16 @@ public class MenuPrincipal extends AppCompatActivity {
         } else if (myProcuraGrupos != null && myProcuraGrupos.isVisible()) {
             getFragmentManager().popBackStack();
         } else if (myListaDeElementosJuntarGrupo != null && myListaDeElementosJuntarGrupo.isVisible()) {
+            getFragmentManager().popBackStack();
+        } else if (myGroupFragment != null && myGroupFragment.isVisible()) {
+            getFragmentManager().popBackStack();
+        } else if (myCreateGroup != null && myCreateGroup.isVisible()) {
+            getFragmentManager().popBackStack();
+        } else if (myJoinGroup != null && myJoinGroup.isVisible()) {
+            getFragmentManager().popBackStack();
+        } else if (myDisplayRankingGroupsFragment != null && myDisplayRankingGroupsFragment.isVisible()) {
+            getFragmentManager().popBackStack();
+        } else if (myGroupFragmentElements != null && myGroupFragmentElements.isVisible()) {
             getFragmentManager().popBackStack();
         }
     }

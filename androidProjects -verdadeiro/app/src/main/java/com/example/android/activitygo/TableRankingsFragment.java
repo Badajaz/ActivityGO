@@ -1,37 +1,23 @@
 package com.example.android.activitygo;
 
-import android.content.Intent;
+import android.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.app.Fragment;
-import android.support.annotation.NonNull;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.android.activitygo.model.Ranking;
-import com.example.android.activitygo.model.User;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class TableRankingsFragment extends Fragment {
 
     private DatabaseReference databaseRankings;
@@ -39,34 +25,30 @@ public class TableRankingsFragment extends Fragment {
     private int i;
     private int rankPlace;
     private String aux = "";
+    private static final String TAG = "TableRankingsFragment";
 
     public TableRankingsFragment() {
-        // Required empty public constructor
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View v = inflater.inflate(R.layout.fragment_table_rankings, container, false);
         databaseUsers = FirebaseDatabase.getInstance().getReference("users");
-
         databaseRankings = FirebaseDatabase.getInstance().getReference("rankings");
 
-
-        HashMap<String,Integer> mMap = new HashMap<String,Integer>();
+        HashMap<String, Integer> mMap = new HashMap<String, Integer>();
         Bundle b = this.getArguments();
-        if(b.getSerializable("hashmap") != null)
-            mMap = (HashMap<String ,Integer>)b.getSerializable("hashmap");
+        if (b.getSerializable("hashmap") != null)
+            mMap = (HashMap<String, Integer>) b.getSerializable("hashmap");
 
         ArrayList<String> listaNomes = b.getStringArrayList("listaNomes");
-
-        Toast.makeText(getContext(),""+mMap.get("antonio"),Toast.LENGTH_LONG).show();
-
+        //Toast.makeText(getContext(), "" + mMap.get("antonio"), Toast.LENGTH_LONG).show();
 
         int rank = 1;
-        for (int i = 0;i < listaNomes.size();i++){
-
+        for (int i = 0; i < listaNomes.size(); i++) {
 
             TableLayout t = v.findViewById(R.id.TableRanking);
             TableRow tr = new TableRow(getContext());
@@ -78,15 +60,17 @@ public class TableRankingsFragment extends Fragment {
             tv3.setGravity(Gravity.CENTER);
             tv1.setText(Integer.toString(rank) + "º");
             tv2.setText(listaNomes.get(i));
-            tv3.setText(""+mMap.get(listaNomes.get(i)));
+            tv3.setText("" + mMap.get(listaNomes.get(i)));
             tr.addView(tv1);
             tr.addView(tv2);
             tr.addView(tv3);
             t.addView(tr);
             int lime = getResources().getColor(R.color.orange);
-            if (i%2 != 0){
+            int blue = getResources().getColor(R.color.BlueSeparator);
+            if (i % 2 != 0) {
 
                 int white = getResources().getColor(R.color.whiteLetters);
+
                 tv1.setBackgroundColor(lime);
                 tv2.setBackgroundColor(lime);
                 tv3.setBackgroundColor(lime);
@@ -94,25 +78,17 @@ public class TableRankingsFragment extends Fragment {
                 tv2.setTextColor(white);
                 tv3.setTextColor(white);
 
-            }else{
-                tv1.setTextColor(lime);
-                tv2.setTextColor(lime);
-                tv3.setTextColor(lime);
+            } else {
+                tv1.setTextColor(blue);
+                tv2.setTextColor(blue);
+                tv3.setTextColor(blue);
             }
-            tv1.setTextSize(30);
-            tv2.setTextSize(30);
-            tv3.setTextSize(30);
-
-
-
+            tv1.setTextSize(20);
+            tv2.setTextSize(20);
+            tv3.setTextSize(20);
 
             rank++;
         }
-
-
-
-
-
 
         /* databaseRankings.orderByChild("desporto").equalTo("corrida").addListenerForSingleValueEvent(new ValueEventListener() {
             private Ranking r;
@@ -169,20 +145,14 @@ public class TableRankingsFragment extends Fragment {
 
             }
         });*/
-
-
         return v;
     }
-
 
     private int[] convertArrayListToArray(ArrayList<String> list) {
         int[] array = new int[list.size()];
         for (int i = 0; i < list.size(); i++) {
             array[i] = Integer.parseInt(list.get(i));
         }
-
         return array;
     }
-
-
 }
