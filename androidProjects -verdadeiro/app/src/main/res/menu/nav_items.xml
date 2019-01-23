@@ -3,23 +3,23 @@
 
     <item
         android:id="@+id/run"
-        android:icon="@drawable/outline_directions_run_black_18dp"
+        android:icon="@drawable/ic_running"
         android:title="Escolher"></item>
     <item
         android:id="@+id/chalengeItem"
-        android:icon="@drawable/bicepe_icon2"
+        android:icon="@drawable/ic_check"
         android:title="@string/nav_bicepe" />
     <item
         android:id="@+id/achievementItem"
-        android:icon="@drawable/flag"
+        android:icon="@drawable/ic_flag"
         android:title="@string/nav_achievements" />
     <item
         android:id="@+id/RankingItem"
-        android:icon="@drawable/trophy_icon222"
+        android:icon="@drawable/ic_trophy"
         android:title="@string/nav_rankings" />
     <item
         android:id="@+id/GroupsItem"
-        android:icon="@drawable/icon_groups"
+        android:icon="@drawable/ic_multiple_users_silhouette"
         android:title="@string/nav_groups" />
 
 </menu>
